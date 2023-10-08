@@ -17,10 +17,7 @@
   },
   "ignorePatterns": ["node_modules/", "tsconfig.json", "dist"],
   "rules": {
-    /**
-          console을 사용할 수 있게 해주는 기능
-          배포할 때는 error로 바꿔 console.log를 없애주자
-      */
+    "@typescript-eslint/no-empty-function": "off",
     "no-console": "off",
     "prettier/prettier": [
       "error",
@@ -38,16 +35,12 @@
         "tsx": "never"
       }
     ],
-    /*
-          class member(변수, 함수)는 무조건 한 줄 씩 띄워져야 한다.
-          exceptAfterSingleLine => 한 줄은 허용 (memeber variable 때문에)
-      */
+
     "lines-between-class-members": [
       "error",
       "always",
       { "exceptAfterSingleLine": true }
-    ],
-    "no-explicit-any": false
+    ]
   },
   "settings": {
     "import/parsers": {
