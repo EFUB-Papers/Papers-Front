@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   padding: 0px 8px;
@@ -9,7 +10,10 @@ const Wrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.COLOR.lightGrey};
 `;
 
-const TitleWrapper = styled.div`
+const LogoWrapper = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
   margin-right: 8px;
 `;
 
@@ -22,4 +26,16 @@ const BasicButtonText = styled.div`
   margin-right: 4px;
 `;
 
-export const S = { Wrapper, BasicButtonWrapper, TitleWrapper, BasicButtonText };
+const ProfileImgWrapper = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const S = {
+  Wrapper,
+  BasicButtonWrapper,
+  BasicButtonText,
+  ProfileImgWrapper,
+  LogoWrapper
+};

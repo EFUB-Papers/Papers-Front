@@ -2,18 +2,19 @@ import React from 'react';
 import BasicButton from '../BasicButton';
 import { ReactComponent as PencilIcon } from 'asset/_common/pencil.svg';
 import { ReactComponent as Logo } from 'asset/_common/logo.svg';
-import { ReactComponent as Title } from 'asset/_common/title.svg';
 import Profile from 'asset/mock/profile.png';
 import { S } from './style';
 import CircleIcon from '../CircleBox';
+import { useNavigate } from 'react-router';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper>
-      <Logo />
-      <S.TitleWrapper>
-        <Title />
-      </S.TitleWrapper>
+      <S.LogoWrapper>
+        <Logo />
+      </S.LogoWrapper>
       <S.BasicButtonWrapper>
         <BasicButton
           width={100}
@@ -26,7 +27,9 @@ const Header = () => {
           <PencilIcon />
         </BasicButton>
       </S.BasicButtonWrapper>
-      <CircleIcon size="small" imgurl={Profile} />
+      <S.ProfileImgWrapper onClick={() => navigate('myPage')}>
+        <CircleIcon size="small" imgurl={Profile} />
+      </S.ProfileImgWrapper>
     </S.Wrapper>
   );
 };
