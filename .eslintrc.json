@@ -3,9 +3,9 @@
   "plugins": ["import", "@typescript-eslint", "prettier"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
     "eslint:recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:prettier/recommended", //prettier와 충돌 방지
+    "prettier" //eslint에서 prettier를 규칙 취급
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -17,29 +17,12 @@
   },
   "ignorePatterns": ["node_modules/", "tsconfig.json", "dist"],
   "rules": {
-    "@typescript-eslint/no-empty-function": "off",
     "no-console": "off",
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-
-    "lines-between-class-members": [
-      "error",
-      "always",
-      { "exceptAfterSingleLine": true }
     ]
   },
   "settings": {

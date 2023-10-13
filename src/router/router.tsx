@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import NavbarLayout from '../layout/navbarLayout';
+import NavbarLayout from 'layout/navbarLayout/NavbarLayout';
 import MyPage from '../pages/myPage';
 
 const router = createBrowserRouter([

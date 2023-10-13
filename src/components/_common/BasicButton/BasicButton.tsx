@@ -4,6 +4,7 @@ import React from 'react';
 
 //positive는 파란 버튼, negative는 회색 버튼
 type ButtonType = 'positive' | 'negative';
+
 export type BasicButtonProps = {
   color: ButtonType;
   padding?: number;
@@ -11,7 +12,6 @@ export type BasicButtonProps = {
   width: number;
   height: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
 };
 
 const BasicButton = ({
@@ -26,5 +26,4 @@ const BasicButton = ({
     </S.ButtonWrapper>
   );
 };
-
 export default BasicButton;

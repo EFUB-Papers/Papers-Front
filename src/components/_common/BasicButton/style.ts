@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { flexCenter } from 'style/common';
-import type { BasicButtonProps } from './index';
+import type { BasicButtonProps } from './BasicButton';
 
 //비활성화시 색상
 const ButtonWrapper = styled.button<BasicButtonProps>`
