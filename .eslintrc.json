@@ -23,7 +23,8 @@
       {
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "@typescript-eslint/no-empty-interface": "off"
   },
   "settings": {
     "import/parsers": {
