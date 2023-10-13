@@ -1,4 +1,4 @@
-import MoreBoxTest from 'components/_common/MoreBox/MoreBoxTest';
+import ConfirmTest from 'components/_common/Confirm/ConfirmTest';
 import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from '../layout/navbarLayout';
 import MyPage from '../pages/myPage';
@@ -6,7 +6,7 @@ import MyPage from '../pages/myPage';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MoreBoxTest />
+    element: <ConfirmTest />
   },
   {
     element: <NavbarLayout />,
