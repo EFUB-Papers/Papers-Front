@@ -5,6 +5,7 @@ import BasicButton from 'components/_common/BasicButton/BasicButton';
 import CircleIcon from 'components/_common/CircleBox/CircleBox';
 import Profile from 'asset/mock/profile.png';
 import { S } from './style';
+import MyPage from 'pages/myPage';
 
 import MyMenu from './MyMenu';
 const NavbarLayout = () => {
