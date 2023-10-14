@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicButton from '../BasicButton';
+import BasicButton from '../BasicButton/BasicButton';
 import { S } from './style';
 
 type ConfirmProps = {

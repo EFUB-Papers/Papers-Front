@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Confirm from './Confirm';
 
 // Confirm 컴포넌트 사용 예시입니다.
