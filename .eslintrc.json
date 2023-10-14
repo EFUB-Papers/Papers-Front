@@ -1,11 +1,11 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["import", "@typescript-eslint", "prettier"],
+  "plugins": ["import", "@typescript-eslint", "prettier", "unused-imports"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
     "eslint:recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:prettier/recommended", //prettier와 충돌 방지
+    "prettier" //eslint에서 prettier를 규칙 취급
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -17,10 +17,9 @@
   },
   "ignorePatterns": ["node_modules/", "tsconfig.json", "dist"],
   "rules": {
-    /**
-          console을 사용할 수 있게 해주는 기능
-          배포할 때는 error로 바꿔 console.log를 없애주자
-      */
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "unused-imports/no-unused-imports": "error",
     "no-console": "off",
     "prettier/prettier": [
       "error",
@@ -28,26 +27,16 @@
         "endOfLine": "auto"
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
+    "@typescript-eslint/no-empty-interface": "off",
+    "unused-imports/no-unused-vars": [
+      "warn",
       {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
       }
-    ],
-    /*
-          class member(변수, 함수)는 무조건 한 줄 씩 띄워져야 한다.
-          exceptAfterSingleLine => 한 줄은 허용 (memeber variable 때문에)
-      */
-    "lines-between-class-members": [
-      "error",
-      "always",
-      { "exceptAfterSingleLine": true }
-    ],
-    "no-explicit-any": false
+    ]
   },
   "settings": {
     "import/parsers": {
