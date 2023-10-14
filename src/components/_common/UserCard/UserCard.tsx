@@ -1,7 +1,7 @@
 import React from 'react';
 import { S } from './style';
-import CircleIcon from '../CircleBox';
-import BasicButton from '../BasicButton';
+import CircleIcon from '../CircleBox/CircleBox';
+import BasicButton from '../BasicButton/BasicButton';
 
 export type UserCardProps = {
   width: number;

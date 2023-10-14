@@ -1,5 +1,4 @@
 import S from './style';
-
 type CircleSize = 'big' | 'medium' | 'small';
 
 export type CircleIconType = {

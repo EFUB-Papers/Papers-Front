@@ -3,9 +3,7 @@ import { ReactComponent as Logo } from 'asset/_common/logoAndTitle.svg';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import CircleIcon from 'components/_common/CircleBox/CircleBox';
-import Profile from 'asset/mock/profile.png';
 import { S } from './style';
-import MyPage from 'pages/myPage';
 
 import MyMenu from './MyMenu';
 const NavbarLayout = () => {
@@ -15,7 +13,7 @@ const NavbarLayout = () => {
         <Logo style={{ position: 'absolute', left: 0 }} />
         {/*프로필 소개글*/}
         <S.ProfileWrapper>
-          <CircleIcon size="big" imgurl={Profile} />
+          <CircleIcon size="big" imgurl="" />
           <S.UserText>
             <S.UserName>나는 고양이다</S.UserName>
             <S.UserDetail>
