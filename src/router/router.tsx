@@ -1,7 +1,7 @@
 import ConfirmTest from 'components/_common/Confirm/ConfirmTest';
 import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from 'layout/navbarLayout/NavbarLayout';
-import MyPage from '../pages/myPage';
+import MyFolderPage from 'pages/myFolderPage/MyFolderPage';
 
 const router = createBrowserRouter([
   {
@@ -12,9 +12,10 @@ const router = createBrowserRouter([
     element: <NavbarLayout />,
     children: [
       {
-        element: <MyPage />,
-        path: '/myPage'
-      }
+        element: <MyFolderPage />,
+        path: '/myPage/:userId'
+      },
+      {}
     ]
   }
 ]);

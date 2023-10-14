@@ -2,6 +2,7 @@ const theme = {
   COLOR: {
     mint: '#4DD3DB',
     backgroundGrey: '#F2F2F2', //메인 페이지의 포인트 배경 색상
+    lineGrey: '#C9C9C9',
     lightGrey: '#9A9A9A', //원본 링크 글자, 선택되지 않은 옵션
     darkGrey: '#ADADAD' //언팔로우 버튼, 취소 버튼 색상
   },

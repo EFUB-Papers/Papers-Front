@@ -2,26 +2,23 @@ import { Outlet } from 'react-router-dom';
 import { ReactComponent as Logo } from 'asset/_common/logoAndTitle.svg';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
-import CircleIcon from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
-
+import ProfileBox from 'components/_common/ProfileBox/ProfileBox';
 import MyMenu from './MyMenu';
+import { UserMock } from 'mock/userMock';
+
 const NavbarLayout = () => {
+  const { userName, userDetail, imgUrl } = UserMock;
   return (
     <S.Wrapper>
       <S.NavBarWrapper>
-        <Logo style={{ position: 'absolute', left: 0 }} />
+        <Logo style={{ position: 'absolute', left: 10 }} />
         {/*프로필 소개글*/}
-        <S.ProfileWrapper>
-          <CircleIcon size="big" imgurl="" />
-          <S.UserText>
-            <S.UserName>나는 고양이다</S.UserName>
-            <S.UserDetail>
-              이것은 소개글입니다.
-              <br /> 이것은 소개글입니다.
-            </S.UserDetail>
-          </S.UserText>
-        </S.ProfileWrapper>
+        <ProfileBox
+          userName={userName}
+          userDetail={userDetail}
+          imgUrl={imgUrl}
+        />
         <MyMenu />
         <S.ScrapButtonWrapper>
           <BasicButton width={150} height={50} color="positive" fontSize={22}>
@@ -32,7 +29,9 @@ const NavbarLayout = () => {
           </BasicButton>
         </S.ScrapButtonWrapper>
       </S.NavBarWrapper>
-      <Outlet />
+      <S.ContentWrapper>
+        <Outlet />
+      </S.ContentWrapper>
     </S.Wrapper>
   );
 };

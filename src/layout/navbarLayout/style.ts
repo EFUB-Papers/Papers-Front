@@ -3,48 +3,24 @@ import { flexCenter } from 'style/common';
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
 `;
 
 const NavBarWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 364px;
+  width: 300px;
   height: 100vh;
   position: fixed;
-  border: 1px solid grey;
+  border: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
 `;
 
 const ButtonTextWrapper = styled.div`
   width: 55%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ProfileWrapper = styled.div`
-  margin-top: 6rem;
-  width: 187px;
-  height: 240px;
-  color: black;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
   ${flexCenter}
-  flex-direction: column;
-  gap: 5px;
-  padding-top: 1.8rem;
-`;
-
-const UserText = styled.div`
-  margin-top: 1.5rem;
-`;
-
-const UserName = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
-  font-weight: 700;
-  padding-bottom: 10px;
-`;
-
-const UserDetail = styled.div`
-  color: ${({ theme }) => theme.COLOR.darkGrey};
-  line-height: 1.5;
+  justify-content: space-between;
 `;
 
 const ScrapButtonWrapper = styled.div`
@@ -77,15 +53,21 @@ const MenuText = styled.div`
   align-items: center;
 `;
 
+const ContentWrapper = styled.div`
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+`;
 export const S = {
   Wrapper,
   NavBarWrapper,
   ButtonTextWrapper,
-  ProfileWrapper,
-  ScrapButtonWrapper,
-  UserText,
-  UserName,
-  UserDetail
+  ContentWrapper,
+  ScrapButtonWrapper
 };
 
 export const M = {
