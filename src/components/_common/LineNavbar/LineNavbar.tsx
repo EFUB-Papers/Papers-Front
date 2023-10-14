@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { S } from './style';
 import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
 import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
-import { useRef } from 'react';
 
 type NavbarProps = {
   title?: string;
