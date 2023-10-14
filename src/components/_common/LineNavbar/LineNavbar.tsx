@@ -71,7 +71,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
               display: 'flex',
               position: 'absolute'
             }}
-            ref={sliderRef}
+            // ref={sliderRef}
           ></div>
           {menuList.map((menu, index) => {
             return (
