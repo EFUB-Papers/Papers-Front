@@ -31,7 +31,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [currentFolderGroup, setCurrentFolderGroup] = useState(1);
 
-  const sliderRef = useRef<React.MutableRefObject<any>>();
+  // const sliderRef = useRef<React.MutableRefObject<any>>();
 
   const menuWidth = 900;
 
