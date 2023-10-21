@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   height: 50px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR.lightGrey};
   background: white;
+  z-index: 1;
 `;
 
 const LogoWrapper = styled.div`
