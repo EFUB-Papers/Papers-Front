@@ -1,7 +1,7 @@
-import { S } from './style';
-import { ReactComponent as MoreDotsIcon } from 'asset/_common/moreDots.svg';
-import { ReactComponent as HeartIcon } from 'asset/_common/heart.svg';
-import { ReactComponent as CommentIcon } from 'asset/_common/comment.svg';
+import { S } from "./style";
+import { ReactComponent as MoreDotsIcon } from "asset/_common/moreDots.svg";
+import { ReactComponent as HeartIcon } from "asset/_common/heart.svg";
+import { ReactComponent as CommentIcon } from "asset/_common/comment.svg";
 
 type BasicCardProps = {
   imgUrl: string;
@@ -17,7 +17,7 @@ const BasicContentCard = (props: BasicCardProps) => {
   console.log(props);
   return (
     <S.Wrapper isBorderBottom={true}>
-      <MoreDotsIcon style={{ position: 'absolute', right: 0, top: 0 }} />
+      <MoreDotsIcon style={{ position: "absolute", right: 0, top: 0 }} />
       <S.PostImg imgUrl={imgUrl} />
 
       <S.PostContentWrapper>

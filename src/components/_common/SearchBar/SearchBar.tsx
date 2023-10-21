@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { S } from './style';
-import { ReactComponent as SearchIcon } from 'asset/searchBar/searchIcon.svg';
+import React, { useState } from "react";
+import { S } from "./style";
+import { ReactComponent as SearchIcon } from "asset/searchBar/searchIcon.svg";
 
 const SearchBar = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   return (
     <S.Wrapper>

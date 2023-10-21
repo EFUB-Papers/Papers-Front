@@ -1,5 +1,5 @@
-import { styled } from 'styled-components';
-import { flexCenter, boxShadow } from 'style/common';
+import { styled } from "styled-components";
+import { flexCenter, boxShadow } from "style/common";
 
 const ConfirmContainer = styled.div``;
 

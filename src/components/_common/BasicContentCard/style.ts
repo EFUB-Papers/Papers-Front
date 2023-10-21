@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { omitText } from 'style/common';
+import styled from "styled-components";
+import { omitText } from "style/common";
 
 const Wrapper = styled.div<{ isBorderBottom: boolean }>`
   width: 900px;
@@ -31,19 +31,19 @@ const PostImg = styled.div<{ imgUrl: string }>`
 
 const PostTitle = styled.div`
   color: black;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-16"]};
   font-weight: 500;
 `;
 
 const PostDetail = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-14"]};
   ${omitText}
 
   height: 34px;
 `;
 
 const OriginalTitle = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-14"]};
   color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
