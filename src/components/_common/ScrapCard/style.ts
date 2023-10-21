@@ -20,6 +20,7 @@ const LinkBox = styled(Link)`
     cursor: pointer;
   }
   overflow: hidden;
+  color: black;
 `;
 
 const LinkTitle = styled.div`
