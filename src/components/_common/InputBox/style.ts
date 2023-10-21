@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IInputWrapper {
   width: number;
@@ -15,14 +15,13 @@ const InputWrapper = styled.div<IInputWrapper>`
   border-radius: 10px;
   padding: 1rem;
   display: flex;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
 `;
 
 interface IInput {
   paddingLeft?: number;
   hasIcon: boolean;
   readOnly: boolean;
-  autocomplete: 'on' | 'off';
+  autocomplete: "on" | "off";
   paddingTop?: number;
 }
 
@@ -32,15 +31,15 @@ const Input = styled.input<IInput>`
       ? `calc(100% - 24px)`
       : hasIcon && paddingLeft
       ? `calc(100% - ${paddingLeft}px)`
-      : '100%'};
+      : "100%"};
   height: 100%;
   background-color: inherit;
   color: white;
 
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-18"]};
+  cursor: ${({ readOnly }) => (readOnly ? "pointer" : "auto")};
   &:hover {
-    cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+    cursor: ${({ readOnly }) => (readOnly ? "pointer" : "auto")};
   }
   padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : 0)}px;
 `;

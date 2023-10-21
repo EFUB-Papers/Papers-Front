@@ -1,5 +1,5 @@
-import S from './style';
-type CircleSize = 'big' | 'medium' | 'small';
+import S from "./style";
+type CircleSize = "big" | "medium" | "small";
 
 export type CircleIconType = {
   imgurl: string;

@@ -1,5 +1,5 @@
-import { flexCenter } from 'style/common';
-import styled from 'styled-components';
+import { flexCenter } from "style/common";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 900px;
@@ -15,7 +15,7 @@ const FlexWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-22']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-22"]};
   font-weight: 600;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -34,6 +34,8 @@ const OneMenu = styled.div<{
 }>`
   width: 150px;
   height: 100%;
+  font-weight: ${({ currentIdx, index }) =>
+    currentIdx === index ? "600" : "400"};
   padding-top: 10px;
   border-top: ${({ currentIdx, index, theme }) =>
     currentIdx === index

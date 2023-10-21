@@ -1,16 +1,22 @@
-import { ReactComponent as FolderIcon } from 'asset/navBar/folder.svg';
-import { ReactComponent as FollowingIcon } from 'asset/navBar/following.svg';
-import { ReactComponent as HeartIcon } from 'asset/navBar/heart.svg';
-import { ReactComponent as LogoutIcon } from 'asset/navBar/logout.svg';
-import { M } from './style';
+import { ReactComponent as FolderIcon } from "asset/navBar/folder.svg";
+import { ReactComponent as FollowingIcon } from "asset/navBar/following.svg";
+import { ReactComponent as HeartIcon } from "asset/navBar/heart.svg";
+import { ReactComponent as LogoutIcon } from "asset/navBar/logout.svg";
+import { M } from "./style";
+import { useNavigate } from "react-router-dom";
+
 const MyMenu = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <M.MenuWrapper>
+      <M.MenuWrapper
+        onClick={() => {
+          navigate("/myfolder");
+        }}
+      >
         <M.MenuIcon>
           <FolderIcon />
         </M.MenuIcon>
-
         <M.MenuText>내 폴더</M.MenuText>
 
         <M.MenuIcon>

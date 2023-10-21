@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { flexCenter } from 'style/common';
+import styled from "styled-components";
+import { flexCenter } from "style/common";
 
 const ProfileWrapper = styled.div`
   margin-top: 6rem;
@@ -11,16 +11,17 @@ const ProfileWrapper = styled.div`
   padding-top: 1.8rem;
 `;
 
-const UserText = styled.div`
-  margin-top: 1.5rem;
+const UserInfo = styled.div`
+  margin-top: 1rem;
   ${flexCenter}
   flex-direction: column;
 `;
 
 const UserName = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-22']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE["text-22"]};
   font-weight: 700;
   padding-bottom: 10px;
+  padding-top: 15px;
 `;
 
 const UserDetail = styled.div`
@@ -29,9 +30,15 @@ const UserDetail = styled.div`
   text-align: center;
 `;
 
+const NameWrapper = styled.div`
+  gap: 10px;
+  ${flexCenter}
+`;
+
 export const S = {
   ProfileWrapper,
-  UserText,
+  UserInfo,
   UserName,
-  UserDetail
+  UserDetail,
+  NameWrapper
 };

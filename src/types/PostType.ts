@@ -1,4 +1,4 @@
-import { UserType } from './UserType';
+import { UserType } from "./UserType";
 
 export type OnePostType = {
   imgUrl: string;
@@ -19,5 +19,5 @@ export type OriginPostType = {
 //원본링크의 제목과 링크만 있는 타입
 export type SimpleOriginPostType = Omit<
   OriginPostType,
-  'originPostContent' | 'originImgUrl'
+  "originPostContent" | "originImgUrl"
 >;
