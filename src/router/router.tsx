@@ -1,12 +1,18 @@
-import ConfirmTest from 'components/_common/Confirm/ConfirmTest';
 import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from 'layout/navbarLayout/NavbarLayout';
 import MyPage from '../pages/myPage';
+import MainPage from 'pages/MainPage/MainPage';
+import HeaderLayout from 'layout/headerLayout/HeaderLayout';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <ConfirmTest />
+    element: <HeaderLayout />,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      }
+    ]
   },
   {
     element: <NavbarLayout />,

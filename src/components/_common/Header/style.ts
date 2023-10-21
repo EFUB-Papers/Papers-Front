@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 50px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR.lightGrey};
+  background: white;
 `;
 
 const LogoWrapper = styled.div`
