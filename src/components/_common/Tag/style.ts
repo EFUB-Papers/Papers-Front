@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   padding: 6px 12px;
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const S = { Wrapper };
