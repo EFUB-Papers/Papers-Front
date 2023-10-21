@@ -4,7 +4,7 @@ import CircleIcon from '../CircleBox/CircleBox';
 import BasicButton from '../BasicButton/BasicButton';
 
 export type UserCardProps = {
-  width: number;
+  width: string;
   userId: number;
   imgurl: string;
   nickname: string;
