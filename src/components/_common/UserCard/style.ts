@@ -2,8 +2,8 @@ import { boxShadow, omitText } from "style/common";
 import { styled } from "styled-components";
 import { flexCenter } from "./../../../style/common";
 
-const Wrapper = styled.div<{ $width: number }>`
-  width: ${({ $width }) => $width + "px"};
+const Wrapper = styled.div<{ $width: string }>`
+  width: ${({ $width }) => $width};
   aspect-ratio: 1 / 1.15;
   ${flexCenter}
   flex-direction: column;

@@ -1,4 +1,4 @@
-//import ConfirmTest from "components/_common/Confirm/ConfirmTest";
+
 import { createBrowserRouter } from "react-router-dom";
 import NavbarLayout from "layout/navbarLayout/NavbarLayout";
 import FolderPage from "pages/folderPage/FolderPage";
@@ -14,10 +14,19 @@ const router = createBrowserRouter([
       }
     ]
   },
+                                   {
+    element: <HeaderLayout />,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      }
+    ]
+  },
   {
     element: <MainLayout />,
     children: [
-      { element: <CategoryPage />, path: "/" },
+      { element: <CategoryPage />, path: "/category" },
       { element: <FolderPage isMine={false} />, path: "/user/:userId" }
     ]
   }
