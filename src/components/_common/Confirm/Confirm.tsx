@@ -1,6 +1,6 @@
-import React from 'react';
-import BasicButton from '../BasicButton';
-import { S } from './style';
+import React from "react";
+import BasicButton from "../BasicButton/BasicButton";
+import { S } from "./style";
 
 type ConfirmProps = {
   isModalOpen: boolean;
@@ -29,7 +29,7 @@ const Confirm = (props: ConfirmProps) => {
             <S.ButtonWrapper>
               {/* 취소 버튼 */}
               <BasicButton
-                color={'negative'}
+                color={"negative"}
                 fontSize={16}
                 width={90}
                 height={30}
@@ -42,7 +42,7 @@ const Confirm = (props: ConfirmProps) => {
               </BasicButton>
               {/* 확인 버튼 */}
               <BasicButton
-                color={'positive'}
+                color={"positive"}
                 fontSize={16}
                 width={90}
                 height={30}

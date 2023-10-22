@@ -1,11 +1,11 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["import", "@typescript-eslint", "prettier"],
+  "plugins": ["import", "@typescript-eslint", "prettier", "unused-imports"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
     "eslint:recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:prettier/recommended", //prettier와 충돌 방지
+    "prettier" //eslint에서 prettier를 규칙 취급
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -17,31 +17,25 @@
   },
   "ignorePatterns": ["node_modules/", "tsconfig.json", "dist"],
   "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-empty-function": "off",
     "no-console": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
+    "@typescript-eslint/no-empty-interface": "off",
+    "unused-imports/no-unused-vars": [
+      "warn",
       {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
       }
-    ],
-
-    "lines-between-class-members": [
-      "error",
-      "always",
-      { "exceptAfterSingleLine": true }
     ]
   },
   "settings": {

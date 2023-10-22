@@ -15,6 +15,6 @@
     "outDir": "dist",
     "baseUrl": "src"
   },
-  "include": ["src"],
+  "include": ["src", "src/components", "src/custom.d.ts"],
   "exclude": ["node_modules"]
 }

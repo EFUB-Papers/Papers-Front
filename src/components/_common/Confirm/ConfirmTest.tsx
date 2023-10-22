@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Confirm from './Confirm';
+import { useState } from "react";
+import Confirm from "./Confirm";
 
 // Confirm 컴포넌트 사용 예시입니다.
 
@@ -16,8 +16,8 @@ const ConfirmTest = () => {
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         text="정말로 삭제하시겠습니까?"
-        onCancel={() => console.log('취소되었습니다.')}
-        onConfirm={() => console.log('삭제되었습니다.')}
+        onCancel={() => console.log("취소되었습니다.")}
+        onConfirm={() => console.log("삭제되었습니다.")}
       />
     </div>
   );

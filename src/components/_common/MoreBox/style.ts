@@ -1,5 +1,5 @@
-import { styled } from 'styled-components';
-import { boxShadow, omitText } from './../../../style/common';
+import { styled } from "styled-components";
+import { boxShadow, omitText } from "./../../../style/common";
 
 const ModalContainer = styled.div``;
 

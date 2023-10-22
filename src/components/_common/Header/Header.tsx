@@ -1,11 +1,9 @@
-import React from 'react';
-import BasicButton from '../BasicButton';
-import { ReactComponent as PencilIcon } from 'asset/_common/pencil.svg';
-import { ReactComponent as Logo } from 'asset/_common/logo.svg';
-import Profile from 'asset/mock/profile.png';
-import { S } from './style';
-import CircleIcon from '../CircleBox';
-import { useNavigate } from 'react-router';
+import BasicButton from "../BasicButton/BasicButton";
+import { ReactComponent as PencilIcon } from "asset/_common/pencil.svg";
+import { ReactComponent as Logo } from "asset/_common/logo.svg";
+import { S } from "./style";
+import CircleIcon from "../CircleBox/CircleBox";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -27,8 +25,8 @@ const Header = () => {
           <PencilIcon />
         </BasicButton>
       </S.BasicButtonWrapper>
-      <S.ProfileImgWrapper onClick={() => navigate('myPage')}>
-        <CircleIcon size="small" imgurl={Profile} />
+      <S.ProfileImgWrapper onClick={() => navigate("myPage")}>
+        <CircleIcon size="small" imgurl="" />
       </S.ProfileImgWrapper>
     </S.Wrapper>
   );
