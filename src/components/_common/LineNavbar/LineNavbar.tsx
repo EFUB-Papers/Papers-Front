@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { S } from "./style";
-import { ReactComponent as NextIcon } from "asset/navBar/nextArrow.svg";
-import { ReactComponent as PrevIcon } from "asset/navBar/prevArrow.svg";
-import { arraySlice } from "utils/arrayHelper";
-import { MyFolderMock } from "../../../mock/userMock";
-import { MyFolderType } from "../../../types/FolderType";
+import React, { useState } from 'react';
+import { S } from './style';
+import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
+import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
+import { arraySlice } from 'utils/arrayHelper';
+import { MyFolderMock } from '../../../mock/userMock';
+import { MyFolderType } from '../../../types/FolderType';
 
 type NavbarProps = {
   title?: string;
@@ -29,7 +29,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
 
   const onMoveNextGroup = () => {
     setCurrentFolderGroup(currentFolderGroup + 1);
-    console.log("current", currentFolderGroup);
+    console.log('current', currentFolderGroup);
     setCurrentIdx((currentIdx) => currentIdx - 1);
   };
 
@@ -43,15 +43,15 @@ const LineNavbar = ({ title }: NavbarProps) => {
       <S.FlexWrapper>
         {currentFolderGroup !== 0 && (
           <PrevIcon
-            style={{ cursor: "pointer", marginTop: "20px" }}
+            style={{ cursor: 'pointer', marginTop: '20px' }}
             onClick={onMovePrevGroup}
           />
         )}
         <S.ListWrapper>
           <div
             style={{
-              display: "flex",
-              position: "absolute"
+              display: 'flex',
+              position: 'absolute'
             }}
           ></div>
           {slicedMenu[currentFolderGroup]?.map((folder, index) => {
@@ -72,7 +72,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
         </S.ListWrapper>
         {currentFolderGroup !== lastGroup && (
           <NextIcon
-            style={{ cursor: "pointer", marginTop: "20px" }}
+            style={{ cursor: 'pointer', marginTop: '20px' }}
             onClick={onMoveNextGroup}
           />
         )}

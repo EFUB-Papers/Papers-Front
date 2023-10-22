@@ -4,7 +4,8 @@ const Wrapper = styled.div``;
 
 const ContentWrapper = styled.div`
   padding-top: 50px;
-  height: calc(100vh);
+  display: flex;
+  justify-content: center;
 `;
 
 export const S = { Wrapper, ContentWrapper };

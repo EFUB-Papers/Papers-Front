@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { S } from "./style";
+import React, { useEffect, useRef } from 'react';
+import { S } from './style';
 
 type Button = {
   name: string;
@@ -27,9 +27,9 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
       }
     };
 
-    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener('mousedown', onClickOutside);
     return () => {
-      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener('mousedown', onClickOutside);
     };
   }, [isModalOpen, closeModal]);
 

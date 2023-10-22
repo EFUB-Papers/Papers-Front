@@ -1,6 +1,6 @@
-import React from "react";
-import { S } from "./style";
-import { ReactComponent as HeartIcon } from "asset/scrapCard/heart.svg";
+import React from 'react';
+import { S } from './style';
+import { ReactComponent as HeartIcon } from 'asset/scrapCard/heart.svg';
 
 export type ScrapCardProps = {
   width: string;

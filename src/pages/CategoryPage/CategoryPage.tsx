@@ -1,9 +1,8 @@
-import CategoryBar from "components/_common/CategoryBar/CategoryBar";
-import ScrapCard from "components/_common/ScrapCard/ScrapCard";
-import { PostListMock } from "mock/postMock";
-import { OnePostType } from "types/PostType";
-import styled from "styled-components";
-import { flexCenter } from "style/common";
+import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
+import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
+import { PostListMock } from 'mock/postMock';
+import { OnePostType } from 'types/PostType';
+import { S } from './style';
 
 const CategoryPage = () => {
   return (
@@ -22,7 +21,7 @@ const CategoryPage = () => {
           } = post;
           return (
             <ScrapCard
-              width={280}
+              width={'280px'}
               scrapId={postId}
               link={originPost.originLink}
               linkTitle={originPost.originTitle}
@@ -40,28 +39,3 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
-
-const Wrapper = styled.div`
-  ${flexCenter}
-  flex-direction: column;
-`;
-
-const Category = styled.div`
-  margin-top: 20px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE["text-32"]};
-  font-weight: 700;
-`;
-const ContentWrapper = styled.div`
-  margin-top: 30px;
-  width: 1000px;
-  height: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-`;
-
-const S = {
-  Wrapper,
-  Category,
-  ContentWrapper
-};

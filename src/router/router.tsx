@@ -1,33 +1,29 @@
-
-import { createBrowserRouter } from "react-router-dom";
-import NavbarLayout from "layout/navbarLayout/NavbarLayout";
-import FolderPage from "pages/folderPage/FolderPage";
-import MainLayout from "../layout/mainLayout /mainLayout";
-import CategoryPage from "../pages/categoryPage/CategoryPage";
+import { createBrowserRouter } from 'react-router-dom';
+import NavbarLayout from 'layout/NavbarLayout/NavbarLayout';
+import FolderPage from 'pages/FolderPage/FolderPage';
+import CategoryPage from '../pages/CategoryPage/CategoryPage';
+import HeaderLayout from 'layout/HeaderLayout/HeaderLayout';
+import MainPage from 'pages/MainPage/MainPage';
 const router = createBrowserRouter([
   {
     element: <NavbarLayout />,
     children: [
       {
         element: <FolderPage isMine={true} />,
-        path: "/myPage"
-      }
+        path: '/myPage'
+      },
+      { element: <FolderPage isMine={false} />, path: '/user/:userId' }
     ]
   },
-                                   {
+  {
     element: <HeaderLayout />,
     children: [
       {
         path: '/',
         element: <MainPage />
-      }
-    ]
-  },
-  {
-    element: <MainLayout />,
-    children: [
-      { element: <CategoryPage />, path: "/category" },
-      { element: <FolderPage isMine={false} />, path: "/user/:userId" }
+      },
+
+      { element: <CategoryPage />, path: '/category' }
     ]
   }
 ]);

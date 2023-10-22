@@ -1,19 +1,20 @@
-import { Outlet } from "react-router-dom";
-import { ReactComponent as Logo } from "asset/_common/logoAndTitle.svg";
-import { ReactComponent as WriteIcon } from "asset/_common/write.svg";
-import BasicButton from "components/_common/BasicButton/BasicButton";
-import { S } from "./style";
-import ProfileBox from "components/_common/ProfileBox/ProfileBox";
-import MyMenu from "./MyMenu";
-import { UserMock } from "mock/userMock";
-
+import { Outlet } from 'react-router-dom';
+import { ReactComponent as Logo } from 'asset/_common/logoAndTitle.svg';
+import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
+import BasicButton from 'components/_common/BasicButton/BasicButton';
+import { S } from './style';
+import ProfileBox from 'components/_common/ProfileBox/ProfileBox';
+import MyMenu from 'components/myPage/MyMenu';
+import { UserMock } from 'mock/userMock';
+import Header from 'components/_common/Header/Header';
 const NavbarLayout = () => {
-  const isMine = false;
   const { userName, userDetail, imgUrl } = UserMock;
+  const isMine = false;
   return (
     <S.Wrapper>
+      {!isMine && <Header />}
       <S.NavBarWrapper>
-        <Logo style={{ position: "absolute", left: 10 }} />
+        <Logo style={{ position: 'absolute', left: 10 }} />
         {/*프로필 소개글*/}
         <ProfileBox
           userName={userName}

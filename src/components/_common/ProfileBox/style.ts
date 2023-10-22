@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { flexCenter } from "style/common";
+import styled from 'styled-components';
+import { flexCenter } from 'style/common';
 
 const ProfileWrapper = styled.div`
   margin-top: 6rem;
@@ -18,7 +18,7 @@ const UserInfo = styled.div`
 `;
 
 const UserName = styled.div`
-  font-size: ${({ theme }) => theme.TEXT_SIZE["text-22"]};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-22']};
   font-weight: 700;
   padding-bottom: 10px;
   padding-top: 15px;

@@ -1,10 +1,10 @@
-import { S } from "./style";
-import CircleIcon from "../CircleBox/CircleBox";
-import useInputs from "hooks/useInputs";
-import { useState } from "react";
-import InputBox from "../InputBox";
-import theme from "style/theme";
-import { ReactComponent as WriteIcon } from "asset/_common/greyPencil.svg";
+import { S } from './style';
+import CircleIcon from '../CircleBox/CircleBox';
+import useInputs from 'hooks/useInputs';
+import { useState } from 'react';
+import InputBox from '../InputBox';
+import theme from 'style/theme';
+import { ReactComponent as WriteIcon } from 'asset/_common/greyPencil.svg';
 
 type ProfileProps = {
   userName: string;
@@ -20,8 +20,8 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
   };
 
   const { values, onChange } = useInputs({
-    name: " ",
-    detail: ""
+    name: ' ',
+    detail: ''
   });
 
   return (

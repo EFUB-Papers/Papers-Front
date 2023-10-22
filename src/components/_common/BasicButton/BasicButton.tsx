@@ -1,9 +1,9 @@
-import S from "components/_common/BasicButton/style";
-import { PropsWithChildren } from "react";
-import React from "react";
+import S from 'components/_common/BasicButton/style';
+import { PropsWithChildren } from 'react';
+import React from 'react';
 
 //positive는 파란 버튼, negative는 회색 버튼
-type ButtonType = "positive" | "negative";
+type ButtonType = 'positive' | 'negative';
 
 export type BasicButtonProps = {
   color: ButtonType;

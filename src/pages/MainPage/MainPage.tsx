@@ -7,6 +7,7 @@ import Tag, { TagProps } from 'components/_common/Tag/Tag';
 import UserCard, { UserCardProps } from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
+import BasicButton from 'components/_common/BasicButton/BasicButton';
 
 const MainPage = () => {
   // 더미데이터
