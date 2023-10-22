@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ListWrapper = styled.div`
+const ListWrapper = styled.div<{ isScrollAble: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 20px;

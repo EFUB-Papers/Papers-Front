@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   height: 60px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
   background: rgba(256, 256, 256, 0.7);
-  z-index: 10;
+  z-index: initial;
 `;
 
 const DWrapper = styled.div`

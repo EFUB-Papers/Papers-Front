@@ -4,13 +4,17 @@ import { PostListMock } from 'mock/postMock';
 import { OnePostType } from 'types/PostType';
 import S from './style';
 import { UserMock } from 'mock/userMock';
-
-type FolderPropsType = {
+import FolderEditModal from 'components/Modal/FolderEditModal/FolderEditModal';
+import { useState } from 'react';
+type PropsType = {
   isMine: boolean;
 };
-const FolderPage = ({ isMine }: FolderPropsType) => {
+const FolderPage = ({ isMine }: PropsType) => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   return (
-    <S.ListWrapper>
+    <S.ListWrapper isScrollAble={!isModalOpen}>
+      <FolderEditModal isModalOpen={isModalOpen} />
       <LineNavbar
         title={isMine ? '내 폴더' : `${UserMock.userName}님의 폴더`}
       />

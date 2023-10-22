@@ -4,7 +4,7 @@ import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
 import ProfileBox from 'components/_common/ProfileBox/ProfileBox';
-import MyMenu from 'components/myPage/MyMenu';
+import MyMenu from 'components/MyPage/MyMenu/MyMenu';
 import { UserMock } from 'mock/userMock';
 import Header from 'components/_common/Header/Header';
 const NavbarLayout = () => {
