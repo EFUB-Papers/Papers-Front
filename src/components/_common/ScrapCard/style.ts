@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
-import { boxShadow, flexCenter, omitText } from 'style/common';
-import { styled } from 'styled-components';
+import { Link } from "react-router-dom";
+import { boxShadow, flexCenter, omitText } from "style/common";
+import { styled } from "styled-components";
 
 const Wrapper = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 const LinkBox = styled(Link)`
