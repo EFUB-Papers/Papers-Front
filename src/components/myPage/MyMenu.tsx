@@ -1,9 +1,9 @@
-import { ReactComponent as FolderIcon } from "asset/navBar/folder.svg";
-import { ReactComponent as FollowingIcon } from "asset/navBar/following.svg";
-import { ReactComponent as HeartIcon } from "asset/navBar/heart.svg";
-import { ReactComponent as LogoutIcon } from "asset/navBar/logout.svg";
-import { M } from "./style";
-import { useNavigate } from "react-router-dom";
+import { ReactComponent as FolderIcon } from 'asset/navBar/folder.svg';
+import { ReactComponent as FollowingIcon } from 'asset/navBar/following.svg';
+import { ReactComponent as HeartIcon } from 'asset/navBar/heart.svg';
+import { ReactComponent as LogoutIcon } from 'asset/navBar/logout.svg';
+import { M } from './style';
+import { useNavigate } from 'react-router-dom';
 
 const MyMenu = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const MyMenu = () => {
     <>
       <M.MenuWrapper
         onClick={() => {
-          navigate("/myfolder");
+          navigate('/myfolder');
         }}
       >
         <M.MenuIcon>

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import React from "react";
+import { useState } from 'react';
+import React from 'react';
 
 const useInputs = <T extends object>(initialValue: T) => {
   const [values, setValues] = useState(initialValue);

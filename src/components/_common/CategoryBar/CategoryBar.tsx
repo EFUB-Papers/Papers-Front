@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { S } from "./style";
-import { Category } from "../../../constants/Category";
+import React, { useState } from 'react';
+import { S } from './style';
+import { Category } from '../../../constants/Category';
 
 const CategoryBar = () => {
   const [category, setCategory] = useState<Category>(Category.CURRENT);

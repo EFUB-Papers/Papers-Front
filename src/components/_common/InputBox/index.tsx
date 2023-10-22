@@ -1,12 +1,12 @@
-import S from "./style";
-import { ReactElement } from "react";
-import React from "react";
+import S from './style';
+import { ReactElement } from 'react';
+import React from 'react';
 
 type InputBoxProps = {
   width: number;
   height: number;
   placeholder?: string;
-  type: "text" | "button" | "password";
+  type: 'text' | 'button' | 'password';
   backgroundColor: string;
   maxLength?: number;
   disabled?: boolean;
@@ -34,7 +34,7 @@ const InputBox = ({
   return (
     <S.InputWrapper {...rest}>
       <S.Input
-        autocomplete={"off"}
+        autocomplete={'off'}
         type={type}
         placeholder={placeholder}
         maxLength={maxLength}
