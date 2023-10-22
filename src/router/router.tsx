@@ -4,6 +4,7 @@ import FolderPage from 'pages/folderPage/FolderPage';
 import CategoryPage from '../pages/CategoryPage/CategoryPage';
 import HeaderLayout from 'layout/headerLayout/HeaderLayout';
 import MainPage from 'pages/MainPage/MainPage';
+import TagCreator from 'components/_common/TagCreator/TagCreator';
 const router = createBrowserRouter([
   {
     element: <NavbarLayout />,
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
         element: <MainPage />
       },
 
-      { element: <CategoryPage />, path: '/category' }
+      { element: <CategoryPage />, path: '/category' },
+      { element: <TagCreator />, path: '/tag-creator' }
     ]
   }
 ]);
