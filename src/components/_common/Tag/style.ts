@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { flexCenter } from 'style/common';
+import { TagProps } from './Tag';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<Partial<TagProps>>`
+  ${flexCenter}
   height: 32px;
   font-size: 14px;
   font-weight: bold;
@@ -9,8 +12,12 @@ const Wrapper = styled.div`
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
   &:hover {
-    cursor: pointer;
+    cursor: ${({ onDelete }) => !onDelete && 'pointer'};
   }
 `;
 
-export const S = { Wrapper };
+const DeleteButton = styled.button`
+  margin-left: 6px;
+`;
+
+export const S = { Wrapper, DeleteButton };
