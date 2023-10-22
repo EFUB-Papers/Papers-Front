@@ -9,6 +9,7 @@ const Wrapper = styled.div<Partial<TagProps>>`
   font-weight: bold;
   color: white;
   padding: 6px 12px;
+  margin: 0px 6px;
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
   &:hover {

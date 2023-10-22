@@ -22,10 +22,6 @@ const TagList = styled.div`
   ${flexCenter}
 `;
 
-const TagWrapper = styled.div`
-  margin: 0px 10px;
-`;
-
 const ContentWrapper = styled.div`
   width: 700px;
 `;
@@ -49,7 +45,6 @@ export const S = {
   Header,
   CategoryBarWrapper,
   TagList,
-  TagWrapper,
   ContentWrapper,
   Section,
   Text,

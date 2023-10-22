@@ -66,9 +66,7 @@ const MainPage = () => {
         {/* 태그 리스트 */}
         <S.TagList>
           {tagList.map((tag) => (
-            <S.TagWrapper>
-              <Tag text={tag.text} />
-            </S.TagWrapper>
+            <Tag text={tag.text} />
           ))}
         </S.TagList>
       </S.Header>
