@@ -1,19 +1,20 @@
 import React from 'react';
 import { S } from './style';
 import { ReactComponent as DeleteIcon } from 'asset/_common/delete.svg';
+import { TagType } from 'types/TagType';
 
 export type TagProps = {
-  text: string;
-  onDelete?: () => void; //TagCreator에서 x 클릭 시 이벤트 핸들러
+  tag: TagType;
+  onDelete?: (id: string) => void; //TagCreator에서 X 클릭 시 이벤트 핸들러
 };
 
-const Tag = ({ text, onDelete }: TagProps) => {
+const Tag = ({ tag, onDelete }: TagProps) => {
   return (
-    <S.Wrapper onDelete={onDelete}>
-      {text}
-      {onDelete && (
+    <S.Wrapper onClick={() => !!onDelete && onDelete(tag.id as string)}>
+      {tag.content}
+      {!!onDelete && (
         // X 버튼
-        <S.DeleteButton onClick={onDelete}>
+        <S.DeleteButton>
           <DeleteIcon />
         </S.DeleteButton>
       )}

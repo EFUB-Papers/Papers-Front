@@ -8,6 +8,7 @@ import UserCard, { UserCardProps } from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
+import { TagType } from 'types/TagType';
 
 const MainPage = () => {
   // 더미데이터
@@ -45,13 +46,13 @@ const MainPage = () => {
     userCardProps
   ];
 
-  const tagList: TagProps[] = [
-    { text: '프론트엔드' },
-    { text: '백엔드' },
-    { text: '디자인' },
-    { text: '리액트' },
-    { text: '스프링' },
-    { text: '자바' }
+  const tagList: TagType[] = [
+    { content: '프론트엔드' },
+    { content: '백엔드' },
+    { content: '디자인' },
+    { content: '리액트' },
+    { content: '스프링' },
+    { content: '자바' }
   ];
 
   return (
@@ -66,7 +67,7 @@ const MainPage = () => {
         {/* 태그 리스트 */}
         <S.TagList>
           {tagList.map((tag) => (
-            <Tag text={tag.text} />
+            <Tag tag={tag} />
           ))}
         </S.TagList>
       </S.Header>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from 'style/common';
 import { TagProps } from './Tag';
 
-const Wrapper = styled.div<Partial<TagProps>>`
+const Wrapper = styled.div`
   ${flexCenter}
   height: 32px;
   font-size: 14px;
@@ -13,7 +13,7 @@ const Wrapper = styled.div<Partial<TagProps>>`
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
   &:hover {
-    cursor: ${({ onDelete }) => !onDelete && 'pointer'};
+    cursor: pointer;
   }
 `;
 
