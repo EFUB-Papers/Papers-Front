@@ -7,11 +7,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 100px;
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const FlexWrapper = styled.div`
-  ${flexCenter}
-  overflow: 'hidden',
+  ${flexCenter};
 `;
 
 const Title = styled.div`

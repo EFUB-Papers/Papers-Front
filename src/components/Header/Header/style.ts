@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { flexCenter } from '../../../style/common';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -8,8 +9,8 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 60px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
-  background: rgba(256, 256, 256, 0.7);
-  z-index: initial;
+  background: ${({ theme }) => theme.header};
+  z-index: 10;
 `;
 
 const DWrapper = styled.div`
@@ -29,12 +30,16 @@ const LogoWrapper = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  ${flexCenter};
   margin-right: 8px;
 `;
 
 const BasicButtonWrapper = styled.div`
   margin-left: auto;
   margin-right: 12px;
+  display: flex;
+  gap: 10px;
 `;
 
 const BasicButtonText = styled.div`
@@ -45,6 +50,7 @@ const ProfileImgWrapper = styled.div`
   &:hover {
     cursor: pointer;
   }
+
   margin-right: 2cqmin;
 `;
 export const D = {

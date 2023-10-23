@@ -1,4 +1,4 @@
-import { boxShadow, omitText } from 'style/common';
+import { omitText } from 'style/common';
 import { styled } from 'styled-components';
 import { flexCenter } from './../../../style/common';
 
@@ -7,10 +7,12 @@ const Wrapper = styled.div<{ $width: string }>`
   aspect-ratio: 1 / 1.15;
   ${flexCenter}
   flex-direction: column;
-  ${boxShadow}
+  box-shadow: ${({ theme }) => theme.boxShadow};
+
   &:hover {
     cursor: pointer;
   }
+
   border-radius: 15px;
   padding: 15px;
   overflow: hidden;

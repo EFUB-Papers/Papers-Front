@@ -10,11 +10,7 @@ export const omitText = css`
   overflow: hidden;
   word-break: break-all;
   text-overflow: ellipsis;
-  white-space: wrap;
-`;
-
-export const boxShadow = css`
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  ${({ theme }) => theme.background}-space: wrap;
 `;
 
 export const modalBackGround = css`

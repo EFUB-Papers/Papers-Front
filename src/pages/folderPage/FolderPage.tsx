@@ -4,8 +4,9 @@ import { PostListMock } from 'mock/postMock';
 import { OnePostType } from 'types/PostType';
 import S from './style';
 import { UserMock } from 'mock/userMock';
-import FolderEditModal from 'components/Modal/FolderEditModal/FolderEditModal';
+// import FolderEditModal from 'components/Modal/FolderEditModal/FolderEditModal';
 import { useState } from 'react';
+
 type PropsType = {
   isMine: boolean;
 };
@@ -14,23 +15,25 @@ const FolderPage = ({ isMine }: PropsType) => {
 
   return (
     <S.ListWrapper isScrollAble={!isModalOpen}>
-      <FolderEditModal isModalOpen={isModalOpen} />
+      {/* <FolderEditModal isModalOpen={isModalOpen} /> */}
       <LineNavbar
         title={isMine ? '내 폴더' : `${UserMock.userName}님의 폴더`}
       />
-      {PostListMock.map((post: OnePostType) => {
-        const { imgUrl, postTitle, originPost, postDetail } = post;
-        const { originLink, originTitle } = originPost;
-        return (
-          <BasicContentCard
-            imgUrl={imgUrl}
-            postDetail={postDetail}
-            postTitle={postTitle}
-            originTitle={originTitle}
-            originLink={originLink}
-          />
-        );
-      })}
+      <S.ContentWrapper>
+        {PostListMock.map((post: OnePostType) => {
+          const { imgUrl, postTitle, originPost, postDetail } = post;
+          const { originLink, originTitle } = originPost;
+          return (
+            <BasicContentCard
+              imgUrl={imgUrl}
+              postDetail={postDetail}
+              postTitle={postTitle}
+              originTitle={originTitle}
+              originLink={originLink}
+            />
+          );
+        })}
+      </S.ContentWrapper>
     </S.ListWrapper>
   );
 };

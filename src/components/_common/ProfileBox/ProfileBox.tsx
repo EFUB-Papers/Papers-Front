@@ -3,7 +3,6 @@ import CircleIcon from '../CircleBox/CircleBox';
 import useInputs from 'hooks/useInputs';
 import { useState } from 'react';
 import InputBox from '../InputBox';
-import theme from 'style/theme';
 import { ReactComponent as WriteIcon } from 'asset/_common/greyPencil.svg';
 
 type ProfileProps = {
@@ -33,7 +32,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             type="text"
             width={130}
             height={20}
-            backgroundColor={theme.COLOR.lineGrey}
+            backgroundColor="blue"
             onChange={onChange}
             name="name"
             value={values.name}
@@ -61,7 +60,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             type="text"
             width={50}
             height={20}
-            backgroundColor={theme.COLOR.lightGrey}
+            backgroundColor="blue"
             onChange={() => {}}
             name="name"
             value={values.detail}

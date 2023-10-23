@@ -4,7 +4,7 @@ const Title = styled.div`
   width: 90%;
   position: fixed;
   top: 20px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   height: 50px;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@ const ModalCloseIcon = styled.div`
   top: 10px;
   right: 10px;
   background-color: pink;
-  width: 100px;
+  width: 20px;
   height: 100px;
 `;
 

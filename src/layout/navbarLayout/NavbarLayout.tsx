@@ -6,7 +6,8 @@ import { S } from './style';
 import ProfileBox from 'components/_common/ProfileBox/ProfileBox';
 import MyMenu from 'components/MyPage/MyMenu/MyMenu';
 import { UserMock } from 'mock/userMock';
-import Header from 'components/_common/Header/Header';
+import Header from 'components/Header/Header/Header';
+
 const NavbarLayout = () => {
   const { userName, userDetail, imgUrl } = UserMock;
   const isMine = false;

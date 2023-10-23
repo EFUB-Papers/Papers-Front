@@ -34,13 +34,15 @@ const Input = styled.input<IInput>`
       : '100%'};
   height: 100%;
   background-color: inherit;
-  color: white;
+  color: ${({ theme }) => theme.background};
 
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+
   &:hover {
     cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
   }
+
   padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : 0)}px;
 `;
 

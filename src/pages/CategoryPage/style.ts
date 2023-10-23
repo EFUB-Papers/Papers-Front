@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from 'style/common';
 
 const Wrapper = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   margin-top: 50px;
 `;
@@ -13,11 +13,11 @@ const Category = styled.div`
 `;
 const ContentWrapper = styled.div`
   margin-top: 30px;
-  width: 900px;
-  height: 500px;
+  width: 1000px;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  margin-bottom: 100px;
 `;
 
 export const S = {

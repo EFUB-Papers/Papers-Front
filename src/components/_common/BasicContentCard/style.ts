@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { omitText } from 'style/common';
 
-const Wrapper = styled.div<{ isBorderBottom: boolean }>`
+const Wrapper = styled.div<{
+  isBorderBottom: boolean;
+}>`
   width: 900px;
   height: 120px;
   left: 0;
@@ -10,6 +12,8 @@ const Wrapper = styled.div<{ isBorderBottom: boolean }>`
   padding-bottom: 5px;
   border-bottom: ${({ isBorderBottom, theme }) =>
     isBorderBottom && `1px solid ${theme.COLOR.lineGrey}`};
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const PostContentWrapper = styled.div`
@@ -22,7 +26,9 @@ const PostContentWrapper = styled.div`
   margin-top: 5px;
 `;
 
-const PostImg = styled.div<{ imgUrl: string }>`
+const PostImg = styled.div<{
+  imgUrl: string;
+}>`
   background-image: url(${({ imgUrl }) => imgUrl});
   height: 100px;
   width: 200px;

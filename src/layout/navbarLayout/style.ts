@@ -4,6 +4,10 @@ import { flexCenter } from 'style/common';
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  min-height: 100vh;
+  height: auto;
 `;
 
 const NavBarWrapper = styled.div`
@@ -15,13 +19,13 @@ const NavBarWrapper = styled.div`
   position: fixed;
   border: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
   z-index: 10;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const ButtonTextWrapper = styled.div`
   width: 55%;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
-  ${flexCenter}
+  ${flexCenter};
   justify-content: space-between;
 `;
 
@@ -31,14 +35,13 @@ const ScrapButtonWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: calc(100vw - 300px);
-  left: 300px;
-  min-height: 100vh;
-  position: absolute;
-  right: 0;
+  width: calc(100% - 300px);
   display: flex;
   justify-content: center;
+  margin-left: 300px;
+  border: 3px solid blue;
 `;
+
 export const S = {
   Wrapper,
   NavBarWrapper,

@@ -9,6 +9,7 @@ const ProfileWrapper = styled.div`
   ${flexCenter}
   flex-direction: column;
   padding-top: 1.8rem;
+  color: ${({ theme }) => theme.text};
 `;
 
 const UserInfo = styled.div`
