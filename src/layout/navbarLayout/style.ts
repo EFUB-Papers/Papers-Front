@@ -3,7 +3,6 @@ import { flexCenter } from 'style/common';
 
 const Wrapper = styled.div`
   width: 100%;
-  display: flex;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
   min-height: 100vh;
@@ -12,14 +11,17 @@ const Wrapper = styled.div`
 
 const NavBarWrapper = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  width: 300px;
   height: 100vh;
+  width: 300px;
   position: fixed;
-  border: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
+  border-right: 1px solid ${({ theme }) => theme.line};
   z-index: 10;
   background-color: ${({ theme }) => theme.background};
+`;
+
+const FlexWrapper = styled.div`
+  ${flexCenter};
 `;
 
 const ButtonTextWrapper = styled.div`
@@ -35,11 +37,19 @@ const ScrapButtonWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: calc(100% - 300px);
   display: flex;
   justify-content: center;
+  width: calc(100% - 300px);
   margin-left: 300px;
-  border: 3px solid blue;
+`;
+
+const LogoWrapper = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+
+  display: flex;
+  align-items: center;
 `;
 
 export const S = {
@@ -47,5 +57,7 @@ export const S = {
   NavBarWrapper,
   ButtonTextWrapper,
   ContentWrapper,
-  ScrapButtonWrapper
+  ScrapButtonWrapper,
+  LogoWrapper,
+  FlexWrapper
 };

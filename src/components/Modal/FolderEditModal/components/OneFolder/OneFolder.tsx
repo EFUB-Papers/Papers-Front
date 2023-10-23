@@ -22,7 +22,7 @@ export default OneFolder;
 const Wrapper = styled.div`
   width: 360px;
   height: 43px;
-  border-bottom: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
+  border-bottom: 1px solid ${({ theme }) => theme.line};
   display: flex;
   align-items: center;
   gap: 10px;

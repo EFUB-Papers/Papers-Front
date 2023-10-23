@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const ListWrapper = styled.div<{
   isScrollAble: boolean;
 }>`
-  height: 100px;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
 `;
@@ -11,7 +10,7 @@ const ListWrapper = styled.div<{
 const ContentWrapper = styled.div`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
-
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;

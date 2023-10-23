@@ -4,7 +4,7 @@ const Wrppaer = styled.div`
   width: 420px;
   display: flex;
   margin: 4px;
-  border-top: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
+  border-top: 1px solid ${({ theme }) => theme.line};
   height: 40px;
 `;
 
@@ -13,9 +13,11 @@ const CategoryItem = styled.div<{ $isSelected: boolean }>`
   text-align: center;
   ${({ $isSelected, theme }) =>
     $isSelected && `border-top: 3px solid ${theme.COLOR.mint}`};
+
   &:hover {
     cursor: pointer;
   }
+
   padding-top: 10px;
 `;
 

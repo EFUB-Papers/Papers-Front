@@ -15,6 +15,11 @@ const FlexWrapper = styled.div`
   ${flexCenter};
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Title = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-22']};
   font-weight: 600;
@@ -41,7 +46,7 @@ const OneMenu = styled.div<{
   border-top: ${({ currentIdx, index, theme }) =>
     currentIdx === index
       ? `3px solid ${theme.COLOR.mint}`
-      : `2px solid ${theme.COLOR.lineGrey}`};
+      : `2px solid ${theme.line}`};
 `;
 
 const Name = styled.div<{
@@ -53,7 +58,12 @@ const Name = styled.div<{
   color: ${({ currentIdx, index, theme }) =>
     currentIdx === index
       ? `3px solid ${theme.COLOR.mint}`
-      : `2px solid ${theme.COLOR.lineGrey}`};
+      : `2px solid ${theme.line}`};
+`;
+
+const EditModalButton = styled.div`
+  color: ${({ theme }) => theme.COLOR.mint};
+  font-size: 15px;
 `;
 
 export const S = {
@@ -62,5 +72,7 @@ export const S = {
   Name,
   Title,
   ListWrapper,
-  FlexWrapper
+  FlexWrapper,
+  EditModalButton,
+  TitleWrapper
 };

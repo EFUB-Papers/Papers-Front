@@ -17,15 +17,6 @@ const FlexBox = styled.div`
   gap: 5px;
 `;
 
-const ModalCloseIcon = styled.div`
-  display: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: pink;
-  width: 20px;
-  height: 100px;
-`;
-
 const ContentWrapper = styled.div`
   overflow: scroll;
   width: 400px;
@@ -36,6 +27,5 @@ const ContentWrapper = styled.div`
 export const S = {
   ContentWrapper,
   Title,
-  FlexBox,
-  ModalCloseIcon
+  FlexBox
 };

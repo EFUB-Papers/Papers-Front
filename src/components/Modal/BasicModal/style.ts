@@ -14,6 +14,7 @@ const Form = styled.form<{
   width: number;
   height: number;
 }>`
+  border: 1px solid ${({ theme }) => theme.line};
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   position: absolute;
@@ -27,14 +28,14 @@ const Form = styled.form<{
 `;
 
 const ModalCloseIcon = styled.div`
-  display: absolute;
-  top: 0;
-  right: 0;
-  background-color: pink;
+  position: absolute;
+  top: 20px;
+  right: 20px;
   z-index: 100;
 `;
 
 export const S = {
   Wrapper,
-  Form
+  Form,
+  ModalCloseIcon
 };

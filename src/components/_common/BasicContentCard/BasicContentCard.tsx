@@ -14,7 +14,6 @@ type BasicCardProps = {
 
 const BasicContentCard = (props: BasicCardProps) => {
   const { imgUrl, postDetail, postTitle, originTitle } = props;
-  console.log(props);
   return (
     <S.Wrapper isBorderBottom={true}>
       <MoreDotsIcon style={{ position: 'absolute', right: 0, top: 0 }} />
