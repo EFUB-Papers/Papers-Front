@@ -1,20 +1,22 @@
 import S from './style';
-import { ReactElement } from 'react';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 type InputBoxProps = {
   width: number;
-  height: number;
+  height?: number;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
-  backgroundColor: string;
+  backgroundColor?: string;
   maxLength?: number;
+  textSize?: number;
   disabled?: boolean;
   children?: ReactElement;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;
   value: string;
   readonly: boolean;
+  border?: string;
+  borderRadius?: number;
 };
 
 const InputBox = ({
@@ -27,13 +29,15 @@ const InputBox = ({
   name,
   readonly,
   value,
+  textSize,
   ...rest
 }: InputBoxProps) => {
-  const hasIcon = children ? true : false;
+  const hasIcon = !!children;
 
   return (
     <S.InputWrapper {...rest}>
       <S.Input
+        textSize={textSize}
         autocomplete={'off'}
         type={type}
         placeholder={placeholder}

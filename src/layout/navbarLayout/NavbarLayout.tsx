@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
@@ -17,13 +17,27 @@ const NavbarLayout = () => {
   const { userName, userDetail, imgUrl } = UserMock;
   const isMine = false;
   const mode = useRecoilValue(modeState);
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper>
       {!isMine && <Header />}
       <S.NavBarWrapper>
         <S.LogoWrapper>
           <LogoImg />
-          {mode == 'day' ? <BlackLogo /> : <WhiteLogo />}
+          {mode == 'day' ? (
+            <BlackLogo
+              onClick={() => {
+                navigate('/');
+              }}
+            />
+          ) : (
+            <WhiteLogo
+              onClick={() => {
+                navigate('/');
+              }}
+            />
+          )}
         </S.LogoWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}

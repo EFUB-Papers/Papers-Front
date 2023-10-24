@@ -4,7 +4,7 @@ import { PostListMock } from 'mock/postMock';
 import { OnePostType } from 'types/PostType';
 import S from './style';
 import { UserMock } from 'mock/userMock';
-import FolderEditModal from 'components/Modal/FolderEditModal/FolderEditModal';
+import FolderModal from '../../components/Modal/FolderModal/FolderModal';
 import { useRecoilValue } from 'recoil';
 import { folderEditModal } from '../../atom/modal';
 import { useEffect } from 'react';
@@ -29,7 +29,7 @@ const FolderPage = ({ isMine }: PropsType) => {
 
   return (
     <S.ListWrapper isScrollAble={!isFolderEditModalOpen}>
-      {isFolderEditModalOpen && <FolderEditModal />}
+      {isFolderEditModalOpen && <FolderModal option={'edit'} />}
       <LineNavbar
         title={isMine ? '내 폴더' : `${UserMock.userName}님의 폴더`}
       />

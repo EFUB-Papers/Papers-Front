@@ -4,6 +4,7 @@ import FolderPage from 'pages/FolderPage/FolderPage';
 import CategoryPage from '../pages/CategoryPage/CategoryPage';
 import HeaderLayout from 'layout/HeaderLayout/HeaderLayout';
 import MainPage from 'pages/MainPage/MainPage';
+
 const router = createBrowserRouter([
   {
     element: <NavbarLayout />,
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         element: <MainPage />
       },
 
-      { element: <CategoryPage />, path: '/category' }
+      { element: <CategoryPage />, path: '/category/:categoryId' }
     ]
   }
 ]);

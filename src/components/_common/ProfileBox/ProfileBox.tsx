@@ -4,6 +4,7 @@ import useInputs from 'hooks/useInputs';
 import { useState } from 'react';
 import InputBox from '../InputBox';
 import { ReactComponent as WriteIcon } from 'asset/_common/greyPencil.svg';
+import { ReactComponent as ActiveWriteIcon } from 'asset/_common/activePencil.svg';
 
 type ProfileProps = {
   userName: string;
@@ -12,6 +13,7 @@ type ProfileProps = {
 };
 
 const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
+  //첫번쨰는 이름 변경, 두번쨰는 한줄 소개 변경
   const [isEditMode, setIsEditMode] = useState([false, false]);
 
   const onClickNameEdit = () => {
@@ -28,32 +30,34 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
       <CircleIcon size="big" imgurl={imgUrl} />
       <S.UserInfo>
         {isEditMode[0] ? (
-          <InputBox
-            type="text"
-            width={130}
-            height={20}
-            backgroundColor="blue"
-            onChange={onChange}
-            name="name"
-            value={values.name}
-            readonly={false}
-            children={
-              <WriteIcon
-                onClick={() => {
-                  onClickNameEdit();
-                }}
-              />
-            }
-          />
+          <S.FlexWrapper>
+            <InputBox
+              type="text"
+              width={180}
+              height={45}
+              onChange={onChange}
+              borderRadius={10}
+              name="name"
+              value={values.name}
+              readonly={false}
+              children={
+                <ActiveWriteIcon
+                  onClick={() => {
+                    setIsEditMode([false, false]);
+                  }}
+                />
+              }
+            />
+          </S.FlexWrapper>
         ) : (
-          <S.NameWrapper>
+          <S.FlexWrapper>
             <S.UserName>{userName}</S.UserName>
             <WriteIcon
               onClick={() => {
                 onClickNameEdit();
               }}
             />
-          </S.NameWrapper>
+          </S.FlexWrapper>
         )}
         {isEditMode[1] ? (
           <InputBox
@@ -67,7 +71,14 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             readonly={false}
           />
         ) : (
-          <S.UserDetail>{userDetail}</S.UserDetail>
+          <S.FlexWrapper>
+            <S.UserDetail>{userDetail}</S.UserDetail>
+            <WriteIcon
+              onClick={() => {
+                onClickNameEdit();
+              }}
+            />
+          </S.FlexWrapper>
         )}
       </S.UserInfo>
     </S.ProfileWrapper>

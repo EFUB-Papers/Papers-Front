@@ -31,15 +31,19 @@ const UserDetail = styled.div`
   text-align: center;
 `;
 
-const NameWrapper = styled.div`
+const FlexWrapper = styled.div`
   gap: 10px;
-  ${flexCenter}
+  ${flexCenter};
+  height: 50px;
 `;
+
+const DetailFlexWrapper = styled.div;
 
 export const S = {
   ProfileWrapper,
   UserInfo,
   UserName,
   UserDetail,
-  NameWrapper
+
+  FlexWrapper
 };
