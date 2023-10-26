@@ -5,6 +5,7 @@ import CategoryPage from '../pages/CategoryPage/CategoryPage';
 import HeaderLayout from 'layout/HeaderLayout/HeaderLayout';
 import MainPage from 'pages/MainPage/MainPage';
 import SearchPage from '../pages/SearchPage/SearchPage';
+import DetailPage from '../pages/DetailPage/DetailPage';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
       },
 
       { element: <CategoryPage />, path: '/category/:categoryId' },
-      { element: <SearchPage />, path: '/search' }
+      { element: <SearchPage />, path: '/search' },
+      { element: <DetailPage />, path: '/detail' }
     ]
   }
 ]);

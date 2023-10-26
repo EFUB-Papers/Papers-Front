@@ -11,6 +11,7 @@ interface IInputWrapper {
 
 const InputWrapper = styled.div<IInputWrapper>`
   background-color: ${({ theme }) => theme.input};
+  color: ${({ theme }) => theme.text};
   width: ${({ width }) => width}px;
   height: ${({ height }) => (height ? `${height}px` : '100%')};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 20)}px;
@@ -38,9 +39,8 @@ const Input = styled.input<IInput>`
       : '100%'};
   height: 100%;
   display: flex;
-
   background-color: inherit;
-  color: black;
+  color: ${({ theme }) => theme.text};
   font-size: ${({ textSize }) => (textSize ? textSize : 16)}px;
   cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
 

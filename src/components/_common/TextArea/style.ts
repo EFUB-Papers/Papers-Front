@@ -43,6 +43,7 @@ const TextArea = styled.textarea<TextAreaProps>`
   color: black;
   font-size: ${({ textSize }) => (textSize ? textSize : 16)}px;
   cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+  color: ${({ theme }) => theme.text};
 
   &:hover {
     cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};

@@ -34,7 +34,7 @@ export const LIGHT = {
 export const DARK = {
   background: 'black',
   selectBox: '#595959',
-  input: '#949494',
+  input: '#595959',
   header: 'rgba(0, 0, 0, 0.6)',
   line: '#555',
   boxShadow: ' 0 0 0 1.7px #666',
