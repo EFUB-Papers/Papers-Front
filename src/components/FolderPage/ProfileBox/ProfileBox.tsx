@@ -34,9 +34,9 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
 
   return (
     <S.ProfileWrapper>
-      <S.UserInfo>
-        {isEditMode ? (
-          <S.FlexColumnWrapper>
+      {isEditMode ? (
+        <S.FlexColumnWrapper>
+          <S.UserProfile>
             <FlipCard
               handleClickArr={onClicka}
               content={[
@@ -46,10 +46,12 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
                 <CircleIcon imgUrl={Cat} size={'big'} />
               ]}
             />
+          </S.UserProfile>
+          <S.UserInfo>
             <InputBox
               type="text"
-              width={180}
-              height={42}
+              width={200}
+              height={35}
               textSize={14}
               onChange={onChange}
               borderRadius={10}
@@ -58,10 +60,11 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
               value={name}
               readonly={false}
             />
+
             <TextArea
               type={'text'}
               textSize={14}
-              width={180}
+              width={200}
               maxLength={20}
               height={70}
               onChange={onChange}
@@ -70,6 +73,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
               value={detail}
               readonly={false}
             />
+
             <BasicButton
               color={'transparent'}
               fontSize={16}
@@ -78,33 +82,39 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
               }}
               width={70}
               height={30}
+              borderRadius={5}
               children={<div>완료</div>}
             />
-          </S.FlexColumnWrapper>
-        ) : (
-          <>
-            <S.FlexColumnWrapper>
+          </S.UserInfo>
+        </S.FlexColumnWrapper>
+      ) : (
+        <>
+          <S.FlexColumnWrapper>
+            <S.UserProfile>
               <CircleIcon size="big" imgUrl={imgUrl} />
-              <S.UserName>{}</S.UserName>
+            </S.UserProfile>
+            <S.UserInfo>
+              <S.UserName>{userName}</S.UserName>
               <S.UserDetail>{userDetail}</S.UserDetail>
               <BasicButton
                 color={'transparent'}
-                fontSize={16}
+                fontSize={14}
                 onClick={() => {
                   setIsEditMode(true);
                 }}
-                width={70}
+                width={100}
+                borderRadius={5}
                 height={30}
                 children={
                   <>
-                    <div>수정</div>
+                    <div>프로필 수정</div>
                   </>
                 }
               />
-            </S.FlexColumnWrapper>
-          </>
-        )}
-      </S.UserInfo>
+            </S.UserInfo>
+          </S.FlexColumnWrapper>
+        </>
+      )}
     </S.ProfileWrapper>
   );
 };

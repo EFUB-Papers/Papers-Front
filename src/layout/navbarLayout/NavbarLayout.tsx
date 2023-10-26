@@ -9,9 +9,6 @@ import Header from 'components/Header/Header/Header';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../atom/mode';
-import { ReactComponent as BlackLogo } from 'asset/_common/logoBlack.svg';
-import { ReactComponent as WhiteLogo } from 'asset/_common/logoWhite.svg';
-import { ReactComponent as LogoImg } from 'asset/_common/logoImg.svg';
 
 const NavbarLayout = () => {
   const { userName, userDetail, imgUrl } = UserMock;
@@ -23,22 +20,6 @@ const NavbarLayout = () => {
     <S.Wrapper>
       {!isMine && <Header />}
       <S.NavBarWrapper>
-        <S.LogoWrapper>
-          <LogoImg />
-          {mode == 'day' ? (
-            <BlackLogo
-              onClick={() => {
-                navigate('/');
-              }}
-            />
-          ) : (
-            <WhiteLogo
-              onClick={() => {
-                navigate('/');
-              }}
-            />
-          )}
-        </S.LogoWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}
           <ProfileBox

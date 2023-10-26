@@ -13,9 +13,10 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
       ? theme.COLOR.blue
       : theme.COLOR.darkGrey};
   color: white;
-  border-radius: ${({ width }) => width / 2}px;
+  border-radius: ${({ borderRadius, width }) =>
+    borderRadius ? borderRadius : width / 2}px;
   font-size: ${({ fontSize }) => fontSize}px;
-  ${flexCenter}
+  ${flexCenter};
 `;
 
 const S = {

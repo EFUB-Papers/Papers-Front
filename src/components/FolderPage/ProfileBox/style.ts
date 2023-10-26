@@ -2,19 +2,19 @@ import styled from 'styled-components';
 import { flexCenter } from 'style/common';
 
 const ProfileWrapper = styled.div`
-  margin-top: 6rem;
+  margin-top: 7rem;
   width: 187px;
-  height: 240px;
-  color: black;
-  ${flexCenter};
+  height: 300px;
   flex-direction: column;
-  padding-top: 1.8rem;
+  position: relative;
   color: ${({ theme }) => theme.text};
 `;
 
 const UserInfo = styled.div`
-  margin-top: 1rem;
-  ${flexCenter}
+  position: absolute;
+  bottom: 0;
+  gap: 10px;
+  ${flexCenter};
   flex-direction: column;
 `;
 
@@ -22,7 +22,6 @@ const UserName = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-22']};
   font-weight: 700;
   padding-bottom: 10px;
-  padding-top: 15px;
 `;
 
 const UserDetail = styled.div`
@@ -33,15 +32,30 @@ const UserDetail = styled.div`
 `;
 
 const FlexColumnWrapper = styled.div`
-  ${flexCenter};
+  display: flex;
   flex-direction: column;
-  gap: 10px;
 `;
 
+const FlexWrapper = styled.div`
+  ${flexCenter};
+`;
+const UserProfile = styled.div`
+  position: absolute;
+  width: 100%;
+  ${flexCenter};
+  top: 20px;
+`;
+
+const Label = styled.span`
+  font-size: 12px;
+`;
 export const S = {
   ProfileWrapper,
   UserInfo,
   UserName,
   UserDetail,
+  FlexWrapper,
+  UserProfile,
+  Label,
   FlexColumnWrapper
 };

@@ -11,6 +11,7 @@ export type BasicButtonProps = {
   fontSize: number;
   width: number;
   height: number;
+  borderRadius?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
