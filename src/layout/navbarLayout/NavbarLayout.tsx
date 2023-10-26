@@ -1,36 +1,44 @@
-import { Outlet } from 'react-router-dom';
-import { ReactComponent as Logo } from 'asset/_common/logoAndTitle.svg';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
-import ProfileBox from 'components/_common/ProfileBox/ProfileBox';
-import MyMenu from 'components/myPage/MyMenu';
+import ProfileBox from 'components/FolderPage/ProfileBox/ProfileBox';
+import MyMenu from 'components/FolderPage/MyMenu/MyMenu';
 import { UserMock } from 'mock/userMock';
-import Header from 'components/_common/Header/Header';
+import Header from 'components/Header/Header/Header';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { modeState } from '../../atom/mode';
+
 const NavbarLayout = () => {
   const { userName, userDetail, imgUrl } = UserMock;
   const isMine = false;
+  const mode = useRecoilValue(modeState);
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper>
       {!isMine && <Header />}
       <S.NavBarWrapper>
-        <Logo style={{ position: 'absolute', left: 10 }} />
-        {/*프로필 소개글*/}
-        <ProfileBox
-          userName={userName}
-          userDetail={userDetail}
-          imgUrl={imgUrl}
-        />
-        {isMine && <MyMenu />}
-        <S.ScrapButtonWrapper>
-          <BasicButton width={150} height={50} color="positive" fontSize={22}>
-            <S.ButtonTextWrapper>
-              <div>스크랩</div>
-              <WriteIcon />
-            </S.ButtonTextWrapper>
-          </BasicButton>
-        </S.ScrapButtonWrapper>
+        <S.FlexWrapper>
+          {/*프로필 소개글*/}
+          <ProfileBox
+            userName={userName}
+            userDetail={userDetail}
+            imgUrl={imgUrl}
+          />
+          {isMine && <MyMenu />}
+          <S.ScrapButtonWrapper>
+            <BasicButton width={150} height={50} color="positive" fontSize={22}>
+              <S.ButtonTextWrapper>
+                <div>스크랩</div>
+                <WriteIcon />
+              </S.ButtonTextWrapper>
+            </BasicButton>
+          </S.ScrapButtonWrapper>
+        </S.FlexWrapper>
       </S.NavBarWrapper>
+
       <S.ContentWrapper>
         <Outlet />
       </S.ContentWrapper>

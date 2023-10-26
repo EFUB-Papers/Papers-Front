@@ -7,7 +7,7 @@ export type ScrapCardProps = {
   scrapId: number;
   link: string;
   linkTitle: string;
-  imgurl: string;
+  imgUrl: string;
   title: string;
   content: string;
   heartCnt: number;
@@ -22,7 +22,7 @@ const ScrapCard = (props: ScrapCardProps) => {
       </S.LinkBox>
       <S.ScrapBox>
         <S.ImageBox>
-          <S.Img src={props.imgurl} />
+          <S.Img src={props.imgUrl} />
         </S.ImageBox>
         <S.Title>{props.title}</S.Title>
         <S.Content>{props.content}</S.Content>

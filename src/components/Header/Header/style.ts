@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { flexCenter } from '../../../style/common';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -7,9 +8,9 @@ const Wrapper = styled.div`
   padding: 0px 8px;
   width: 100vw;
   height: 60px;
-  border-bottom: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
-  background: rgba(256, 256, 256, 0.7);
-  z-index: 10;
+  border-bottom: 1px solid ${({ theme }) => theme.line};
+  background: ${({ theme }) => theme.header};
+  z-index: 100;
 `;
 
 const DWrapper = styled.div`
@@ -22,19 +23,23 @@ const DWrapper = styled.div`
   align-items: center;
   background: rgba(256, 256, 256, 0.8);
   position: fixed;
-  border-bottom: 1px solid ${({ theme }) => theme.COLOR.lineGrey};
+  border-bottom: 1px solid ${({ theme }) => theme.line};
 `;
 
 const LogoWrapper = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  ${flexCenter};
   margin-right: 8px;
 `;
 
 const BasicButtonWrapper = styled.div`
   margin-left: auto;
   margin-right: 12px;
+  display: flex;
+  gap: 10px;
 `;
 
 const BasicButtonText = styled.div`
@@ -45,7 +50,8 @@ const ProfileImgWrapper = styled.div`
   &:hover {
     cursor: pointer;
   }
-  margin-right: 2cqmin;
+
+  margin-right: 2px;
 `;
 export const D = {
   DWrapper

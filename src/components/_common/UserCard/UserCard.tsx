@@ -14,7 +14,7 @@ export type UserCardProps = {
 const UserCard = (props: UserCardProps) => {
   return (
     <S.Wrapper $width={props.width}>
-      <CircleIcon imgurl={props.imgurl} size="medium" />
+      <CircleIcon imgUrl={props.imgurl} size="medium" />
       <S.Nickname>{props.nickname}</S.Nickname>
       <S.Introduction>{props.introduction}</S.Introduction>
       <BasicButton color="positive" fontSize={16} width={100} height={35}>

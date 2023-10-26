@@ -17,5 +17,8 @@ export const MyFolderMock: MyFolderType[] = [
   { id: 6, title: '파리 여행 일기' },
   { id: 7, title: '글쓰기 노트' },
   { id: 8, title: '떡볶이 부시기' },
-  { id: 9, title: '고양이 좋아' }
+  { id: 9, title: '고양이 좋아' },
+  { id: 1, title: '기본 폴더' },
+  { id: 2, title: '전국 맛집 탐방' },
+  { id: 3, title: '프론트엔드 노트' }
 ];

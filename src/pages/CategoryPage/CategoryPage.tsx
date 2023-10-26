@@ -21,11 +21,11 @@ const CategoryPage = () => {
           } = post;
           return (
             <ScrapCard
-              width={'280px'}
+              width={'300px'}
               scrapId={postId}
               link={originPost.originLink}
               linkTitle={originPost.originTitle}
-              imgurl={imgUrl}
+              imgUrl={imgUrl}
               author={writerInfo.userName}
               title={postTitle}
               content={postDetail}

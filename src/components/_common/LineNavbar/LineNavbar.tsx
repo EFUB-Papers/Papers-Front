@@ -3,8 +3,10 @@ import { S } from './style';
 import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
 import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
 import { arraySlice } from 'utils/arrayHelper';
-import { MyFolderMock } from '../../../mock/userMock';
-import { MyFolderType } from '../../../types/FolderType';
+import { MyFolderMock } from 'mock/userMock';
+import { MyFolderType } from 'types/FolderType';
+import { useRecoilState } from 'recoil';
+import { folderEditModal } from 'atom/modal';
 
 type NavbarProps = {
   title?: string;
@@ -19,7 +21,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
 
   const totalFolderLength = MyFolderMock.length;
 
-  const lastGroup = Math.ceil(totalFolderLength / pagePerGroup);
+  const lastGroup = Math.ceil(totalFolderLength / pagePerGroup) - 1;
   const slicedMenu: MyFolderType[][] = arraySlice(MyFolderMock);
 
   const onMovePrevGroup = () => {
@@ -37,9 +39,19 @@ const LineNavbar = ({ title }: NavbarProps) => {
     setCurrentIdx(index);
   };
 
+  const [isEditModalOpen, setIsEditModalOpen] = useRecoilState(folderEditModal);
   return (
     <S.Wrapper>
-      {title && <S.Title>{title}</S.Title>}
+      <S.TitleWrapper>
+        {title && <S.Title>{title}</S.Title>}
+        <S.EditModalButton
+          onClick={() => {
+            setIsEditModalOpen(true);
+          }}
+        >
+          폴더 편집
+        </S.EditModalButton>
+      </S.TitleWrapper>
       <S.FlexWrapper>
         {currentFolderGroup !== 0 && (
           <PrevIcon

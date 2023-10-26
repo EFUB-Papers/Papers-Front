@@ -7,6 +7,8 @@ export type OnePostType = {
   postDetail: string;
   originPost: SimpleOriginPostType; //원본 포스트 정보
   writerInfo: UserType; //작성자 정보
+  CreatedAt: Date; //작성 날짜
+  tagList: OneTagType[];
 };
 
 export type OriginPostType = {
@@ -21,3 +23,8 @@ export type SimpleOriginPostType = Omit<
   OriginPostType,
   'originPostContent' | 'originImgUrl'
 >;
+
+export type OneTagType = {
+  tagId: number;
+  tagName: string;
+};

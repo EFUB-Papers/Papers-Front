@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
-const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  height: 100px;
+const ListWrapper = styled.div<{
+  isScrollAble: boolean;
+}>`
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 `;
 
 const ContentWrapper = styled.div`
-  background-color: pink;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const S = {

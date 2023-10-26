@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import { boxShadow, flexCenter, omitText } from 'style/common';
+import { flexCenter, omitText } from 'style/common';
 import { styled } from 'styled-components';
 
 const Wrapper = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 `;
 
 const LinkBox = styled(Link)`
@@ -15,11 +14,15 @@ const LinkBox = styled(Link)`
   border-radius: 15px;
   padding: 10px 15px;
   font-size: 17px;
-  ${boxShadow}
+  box-shadow: ${({ theme }) => theme.boxShadow};
+
+  color: ${({ theme }) => theme.text};
+
   ${flexCenter}
   &:hover {
     cursor: pointer;
   }
+
   overflow: hidden;
   color: black;
 `;
@@ -28,6 +31,8 @@ const LinkTitle = styled.div`
   object-fit: cover;
   display: block;
   width: 100%;
+  color: ${({ theme }) => theme.text};
+
   /* 2줄 말줄임표 */
   text-overflow: ellipsis;
   overflow: hidden;
@@ -41,12 +46,14 @@ const ScrapBox = styled.div`
   aspect-ratio: 1 / 1.15;
   border-radius: 15px;
   padding: 15px;
-  ${boxShadow}
-  display:flex;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  display: flex;
   flex-direction: column;
+
   &:hover {
     cursor: pointer;
   }
+
   overflow: hidden;
 `;
 
