@@ -27,7 +27,7 @@ const BasicModal = (props: ModalPropType) => {
     <S.Wrapper>
       <S.Form width={width} height={height}>
         <S.ModalCloseIcon>
-          {mode == 'night' ? (
+          {mode == 'dark' ? (
             <DeleteIconWhite onClick={onClickCloseModal} />
           ) : (
             <DeleteIconBlack onClick={onClickCloseModal} />

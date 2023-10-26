@@ -7,7 +7,11 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background-color: ${({ theme, color }) =>
-    color === 'positive' ? theme.COLOR.mint : theme.COLOR.darkGrey};
+    color === 'positive'
+      ? theme.COLOR.mint
+      : color === 'transparent'
+      ? theme.COLOR.blue
+      : theme.COLOR.darkGrey};
   color: white;
   border-radius: ${({ width }) => width / 2}px;
   font-size: ${({ fontSize }) => fontSize}px;

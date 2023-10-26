@@ -1,16 +1,18 @@
 import S from './style';
+import { ReactElement } from 'react';
+
 type CircleSize = 'big' | 'medium' | 'small';
 
 export type CircleIconType = {
-  imgurl: string;
+  imgUrl: string;
   size: CircleSize;
+  children?: ReactElement;
 };
 
-const CircleIcon = (props: CircleIconType) => {
-  const { imgurl, size } = props;
+const CircleIcon = ({ children, ...props }: CircleIconType) => {
   return (
     <>
-      <S.CircleImg imgurl={imgurl} size={size} />
+      <S.CircleImg {...props}>{children}</S.CircleImg>
     </>
   );
 };

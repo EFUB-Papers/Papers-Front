@@ -9,7 +9,7 @@ import { modeState } from './atom/mode';
 const CombinedProvider = () => {
   const mode = useRecoilValue(modeState);
   return (
-    <ThemeProvider theme={mode === 'day' ? LIGHT : DARK}>
+    <ThemeProvider theme={mode === 'light' ? LIGHT : DARK}>
       <GlobalStyles />
       <RouterProvider router={router} />
     </ThemeProvider>

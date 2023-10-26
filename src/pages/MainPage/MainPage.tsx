@@ -7,7 +7,6 @@ import Tag, { TagProps } from 'components/_common/Tag/Tag';
 import UserCard, { UserCardProps } from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
-import BasicButton from 'components/_common/BasicButton/BasicButton';
 
 const MainPage = () => {
   // 더미데이터
@@ -16,7 +15,7 @@ const MainPage = () => {
     scrapId: 0,
     link: 'https://biz.heraldcorp.com/view.php?ud:20230912000401',
     linkTitle: '풍요의 제주 ‘일멍쉬멍’ 워케이션 성지로',
-    imgurl:
+    imgUrl:
       'https://res.heraldm.com/content/image/2023/09/12/20230912000420_0.jpg',
     title: '풍요의 제주 ‘일멍쉬멍’ 워케이션 성지로',
     content: '임시 내용입니다.',

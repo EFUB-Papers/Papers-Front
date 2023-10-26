@@ -8,12 +8,12 @@ const ModeToggleButton = () => {
   const [mode, setMode] = useRecoilState(modeState);
 
   const onChangeMode = () => {
-    mode == 'day' ? setMode('night') : setMode('day');
+    mode == 'light' ? setMode('dark') : setMode('light');
   };
   return (
     <S.Wrapper mode={mode} onClick={onChangeMode}>
       <S.Circle mode={mode}>
-        {mode == 'night' ? <NightIcon /> : <DayIcon />}
+        {mode == 'dark' ? <NightIcon /> : <DayIcon />}
       </S.Circle>
     </S.Wrapper>
   );

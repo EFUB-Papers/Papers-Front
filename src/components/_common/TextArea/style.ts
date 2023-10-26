@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../../style/common';
 
-interface IInputWrapper {
+interface TextAreaWrapperProps {
   width: number;
   height?: number;
   placeholder?: string;
+  backgroundColor?: string;
   border?: string;
   borderRadius?: number;
 }
 
-const InputWrapper = styled.div<IInputWrapper>`
+const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
   background-color: ${({ theme }) => theme.input};
   width: ${({ width }) => width}px;
   height: ${({ height }) => (height ? `${height}px` : '100%')};
@@ -20,7 +21,7 @@ const InputWrapper = styled.div<IInputWrapper>`
   ${flexCenter};
 `;
 
-interface IInput {
+interface TextAreaProps {
   paddingLeft?: number;
   hasIcon: boolean;
   readOnly: boolean;
@@ -29,7 +30,7 @@ interface IInput {
   textSize?: number;
 }
 
-const Input = styled.input<IInput>`
+const TextArea = styled.textarea<TextAreaProps>`
   width: ${({ hasIcon, paddingLeft }) =>
     hasIcon && !paddingLeft
       ? `calc(100% - 24px)`
@@ -38,7 +39,6 @@ const Input = styled.input<IInput>`
       : '100%'};
   height: 100%;
   display: flex;
-
   background-color: inherit;
   color: black;
   font-size: ${({ textSize }) => (textSize ? textSize : 16)}px;
@@ -52,8 +52,8 @@ const Input = styled.input<IInput>`
 `;
 
 const S = {
-  InputWrapper,
-  Input
+  TextAreaWrapper,
+  TextArea
 };
 
 export default S;

@@ -6,7 +6,7 @@ const ProfileWrapper = styled.div`
   width: 187px;
   height: 240px;
   color: black;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   padding-top: 1.8rem;
   color: ${({ theme }) => theme.text};
@@ -28,22 +28,20 @@ const UserName = styled.div`
 const UserDetail = styled.div`
   color: ${({ theme }) => theme.COLOR.darkGrey};
   line-height: 1.5;
+  width: 200px;
   text-align: center;
 `;
 
-const FlexWrapper = styled.div`
-  gap: 10px;
+const FlexColumnWrapper = styled.div`
   ${flexCenter};
-  height: 50px;
+  flex-direction: column;
+  gap: 10px;
 `;
-
-const DetailFlexWrapper = styled.div;
 
 export const S = {
   ProfileWrapper,
   UserInfo,
   UserName,
   UserDetail,
-
-  FlexWrapper
+  FlexColumnWrapper
 };

@@ -25,7 +25,7 @@ const CategoryPage = () => {
               scrapId={postId}
               link={originPost.originLink}
               linkTitle={originPost.originTitle}
-              imgurl={imgUrl}
+              imgUrl={imgUrl}
               author={writerInfo.userName}
               title={postTitle}
               content={postDetail}

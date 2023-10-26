@@ -4,12 +4,11 @@ import { ReactComponent as ActivePencilIcon } from 'asset/_common/activePencil.s
 import { ReactComponent as DeleteIcon } from 'asset/_common/trashIcon.svg';
 import { O } from '../style';
 import React, { useState } from 'react';
-import InputBox from '../../../_common/InputBox';
+import InputBox from '../../../_common/InputBox/InputBox';
 
 const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState<string>(title);
-
   const onChange = (e: any) => {
     setName(e.target.value);
   };

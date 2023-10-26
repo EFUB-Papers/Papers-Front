@@ -6,7 +6,6 @@ type InputBoxProps = {
   height?: number;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
-  backgroundColor?: string;
   maxLength?: number;
   textSize?: number;
   disabled?: boolean;
@@ -33,7 +32,6 @@ const InputBox = ({
   ...rest
 }: InputBoxProps) => {
   const hasIcon = !!children;
-
   return (
     <S.InputWrapper {...rest}>
       <S.Input

@@ -18,7 +18,7 @@ const Header = () => {
     <S.Wrapper>
       <S.LogoWrapper>
         <LogoImg />
-        {mode == 'day' ? (
+        {mode == 'light' ? (
           <BlackLogo
             onClick={() => {
               navigate('/');
@@ -27,7 +27,6 @@ const Header = () => {
         ) : (
           <WhiteLogo
             onClick={() => {
-              console.log('aa');
               navigate('/');
             }}
           />
@@ -47,7 +46,7 @@ const Header = () => {
         </BasicButton>
       </S.BasicButtonWrapper>
       <S.ProfileImgWrapper onClick={() => navigate('myPage')}>
-        <CircleIcon size="small" imgurl="" />
+        <CircleIcon size="small" imgUrl="" />
       </S.ProfileImgWrapper>
     </S.Wrapper>
   );

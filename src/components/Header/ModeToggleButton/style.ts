@@ -8,7 +8,7 @@ const Wrapper = styled.div<{
   height: 35px;
   border-radius: 50px;
   background-color: ${({ mode }) =>
-    mode == 'night' ? '#888' : '\n' + '#bbe7f0'};
+    mode == 'dark' ? '#888' : '\n' + '#bbe7f0'};
   position: relative;
 `;
 
@@ -16,7 +16,7 @@ const Circle = styled.div<{
   mode: string;
 }>`
   position: absolute;
-  left: ${({ mode }) => (mode == 'night' ? 33 : 5)}px;
+  left: ${({ mode }) => (mode == 'dark' ? 33 : 5)}px;
   height: 27px;
   width: 27px;
   border-radius: 50%;

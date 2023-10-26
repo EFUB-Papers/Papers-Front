@@ -2,7 +2,8 @@ export const COLOR = {
   mint: '#4DD3DB',
   backgroundGrey: '#F2F2F2', //메인 페이지의 포인트 배경 색상
   lightGrey: '#9A9A9A', //원본 링크 글자, 선택되지 않은 옵션
-  darkGrey: '#ADADAD' //언팔로우 버튼, 취소 버튼 색상
+  darkGrey: '#ADADAD', //언팔로우 버튼, 취소 버튼 색상
+  blue: '#4491e3'
 };
 
 export const TEXT_SIZE = {
@@ -20,6 +21,7 @@ export const TEXT_SIZE = {
 
 export const LIGHT = {
   background: 'white',
+  input: '#f3f3f3',
   header: 'rgba(256, 256, 256, 0.7)',
   line: '#C9C9C9',
   boxShadow: '3px 3px 10px 3px rgba(0, 0, 0, 0.15)',
@@ -30,6 +32,7 @@ export const LIGHT = {
 
 export const DARK = {
   background: 'black',
+  input: '#949494',
   header: 'rgba(0, 0, 0, 0.6)',
   line: '#555',
   boxShadow: ' 0 0 0 1.7px #666',
