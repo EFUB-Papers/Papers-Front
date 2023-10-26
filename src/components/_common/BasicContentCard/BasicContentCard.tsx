@@ -9,13 +9,19 @@ type BasicCardProps = {
   postDetail: string;
   originTitle: string;
   originLink: string;
+  postId: number;
   // Writer: UserType;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
-  const { imgUrl, postDetail, postTitle, originTitle } = props;
+  const { imgUrl, postDetail, postTitle, originTitle, postId } = props;
   return (
-    <S.Wrapper isBorderBottom={true}>
+    <S.Wrapper
+      isBorderBottom={true}
+      onClick={() => {
+        console.log(postId);
+      }}
+    >
       <MoreDotsIcon style={{ position: 'absolute', right: 0, top: 0 }} />
       <S.PostImg imgUrl={imgUrl} />
 

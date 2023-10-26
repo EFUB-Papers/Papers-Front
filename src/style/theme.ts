@@ -22,6 +22,7 @@ export const TEXT_SIZE = {
 export const LIGHT = {
   background: 'white',
   input: '#f3f3f3',
+  selectBox: '#ffffff',
   header: 'rgba(256, 256, 256, 0.7)',
   line: '#C9C9C9',
   boxShadow: '3px 3px 10px 3px rgba(0, 0, 0, 0.15)',
@@ -32,6 +33,7 @@ export const LIGHT = {
 
 export const DARK = {
   background: 'black',
+  selectBox: '#595959',
   input: '#949494',
   header: 'rgba(0, 0, 0, 0.6)',
   line: '#555',

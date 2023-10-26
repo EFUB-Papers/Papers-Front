@@ -41,6 +41,7 @@ const SearchBar = () => {
         {isSelectOpen[1] ? (
           <S.SelectWrapper>
             <S.OptionListWrapper>
+              <S.OptionBox>전체</S.OptionBox>
               {Object.entries(Category).map((entry, index: number) => {
                 return <S.OptionBox key={index}>{entry[1]}</S.OptionBox>;
               })}
@@ -55,7 +56,7 @@ const SearchBar = () => {
           </S.SelectWrapper>
         ) : (
           <S.SelectWrapper>
-            <S.OptionBox>{Category.CURRENT}</S.OptionBox>
+            <S.OptionBox>전체</S.OptionBox>
             <S.IconWrapper>
               <DownArrow
                 onClick={() => {

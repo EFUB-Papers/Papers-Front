@@ -7,9 +7,10 @@ const Wrapper = styled.div<{
   height: 120px;
   left: 0;
   display: flex;
+  width: 850px;
   position: relative;
   ${flexCenter};
-  padding-bottom: 5px;
+  padding-bottom: 30px;
   border-bottom: ${({ isBorderBottom, theme }) =>
     isBorderBottom && `1px solid ${theme.line}`};
   color: ${({ theme }) => theme.text};

@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding-left: 10px;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  z-index: 100;
 `;
 
 const IconWrapper = styled.div`
@@ -35,11 +37,11 @@ const SelectBox = styled.ul`
 const OptionListWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.COLOR.lightGrey};
   border-radius: 10px;
+  background-color: ${({ theme }) => theme.selectBox};
 `;
 
 const OptionBox = styled.li`
   border: none;
-  background-color: white;
   height: 30px;
   width: 65px;
   ${flexCenter};
@@ -61,6 +63,8 @@ const SearchInput = styled.input`
   font-size: 16px;
   font-weight: 400;
   padding-left: 20px;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 `;
 
 const SearchIconWrapper = styled.div`
