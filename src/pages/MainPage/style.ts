@@ -24,7 +24,7 @@ const TagList = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: 700px;
+  width: 960px;
 `;
 
 const Section = styled.div`
