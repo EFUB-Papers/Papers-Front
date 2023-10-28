@@ -3,7 +3,7 @@ import { S } from './style';
 import { ReactComponent as HeartIcon } from 'asset/scrapCard/heart.svg';
 
 export type ScrapCardProps = {
-  width: string;
+  width: number;
   scrapId: number;
   link: string;
   linkTitle: string;

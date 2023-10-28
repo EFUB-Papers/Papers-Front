@@ -42,7 +42,7 @@ const MainPage = () => {
               (post: OnePostType, index: number) =>
                 index < 3 && (
                   <ScrapCard
-                    width="31%"
+                    width={300}
                     scrapId={post.postId}
                     link={post.originPost.originLink}
                     linkTitle={post.originPost.originTitle}
@@ -65,7 +65,7 @@ const MainPage = () => {
               return (
                 index < 3 && (
                   <ScrapCard
-                    width="31%"
+                    width={300}
                     scrapId={post.postId}
                     link={post.originPost.originLink}
                     linkTitle={post.originPost.originTitle}
