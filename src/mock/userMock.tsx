@@ -8,6 +8,15 @@ export const UserMock: UserType = {
   imgUrl:
     'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRT3pf2ui5C-iQmk56kvTqMd6kinKqEoHbHItP7Jyq6XHzXWR-j'
 };
+
+export const userListMock: UserType[] = [
+  UserMock,
+  UserMock,
+  UserMock,
+  UserMock,
+  UserMock
+];
+
 export const MyFolderMock: MyFolderType[] = [
   { id: 1, title: '기본 폴더' },
   { id: 2, title: '전국 맛집 탐방' },
