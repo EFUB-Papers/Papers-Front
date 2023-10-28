@@ -2,8 +2,9 @@ import { styled } from 'styled-components';
 import { flexCenter } from './../../style/common';
 
 const Wrapper = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const Header = styled.div`

@@ -1,9 +1,9 @@
 import S from 'components/_common/BasicButton/style';
-import { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 //positive는 파란 버튼, negative는 회색 버튼
-type ButtonType = 'positive' | 'negative';
+//투명은 완료 버튼
+type ButtonType = 'positive' | 'negative' | 'transparent';
 
 export type BasicButtonProps = {
   color: ButtonType;
@@ -11,6 +11,7 @@ export type BasicButtonProps = {
   fontSize: number;
   width: number;
   height: number;
+  borderRadius?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { S } from './style';
 import { Category } from '../../../constants/Category';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryBar = () => {
   const [category, setCategory] = useState<Category>(Category.CURRENT);
+  const navigate = useNavigate();
 
   return (
     <S.Wrppaer>

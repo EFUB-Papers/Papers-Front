@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
-import { flexCenter, boxShadow } from 'style/common';
+import { flexCenter } from 'style/common';
 
 const ConfirmContainer = styled.div``;
 
 const Modal = styled.div`
   width: 400px;
   height: 130px;
-  background: white;
-  ${boxShadow}
+  background: ${({ theme }) => theme.background};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   ${flexCenter}
   flex-direction: column;
   padding: 20px;

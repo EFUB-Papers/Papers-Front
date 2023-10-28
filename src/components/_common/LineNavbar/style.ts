@@ -6,12 +6,18 @@ const Wrapper = styled.div`
   height: 100px;
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 100px;
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const FlexWrapper = styled.div`
-  ${flexCenter}
-  overflow: 'hidden',
+  ${flexCenter};
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`
@@ -40,7 +46,7 @@ const OneMenu = styled.div<{
   border-top: ${({ currentIdx, index, theme }) =>
     currentIdx === index
       ? `3px solid ${theme.COLOR.mint}`
-      : `2px solid ${theme.COLOR.lineGrey}`};
+      : `2px solid ${theme.line}`};
 `;
 
 const Name = styled.div<{
@@ -52,7 +58,12 @@ const Name = styled.div<{
   color: ${({ currentIdx, index, theme }) =>
     currentIdx === index
       ? `3px solid ${theme.COLOR.mint}`
-      : `2px solid ${theme.COLOR.lineGrey}`};
+      : `2px solid ${theme.line}`};
+`;
+
+const EditModalButton = styled.div`
+  color: ${({ theme }) => theme.COLOR.mint};
+  font-size: 15px;
 `;
 
 export const S = {
@@ -61,5 +72,7 @@ export const S = {
   Name,
   Title,
   ListWrapper,
-  FlexWrapper
+  FlexWrapper,
+  EditModalButton,
+  TitleWrapper
 };

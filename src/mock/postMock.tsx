@@ -12,7 +12,30 @@ export const OnePostMock: OnePostType = {
     originTitle: '풍요의 제주 ‘일멍쉬멍’ 워케이션 성지로',
     originLink: 'https://www.naver.com'
   },
-  writerInfo: UserMock
+  writerInfo: UserMock,
+  CreatedAt: new Date(),
+  tagList: [
+    {
+      tagId: 1,
+      tagName: '여행'
+    },
+    {
+      tagId: 2,
+      tagName: '제주도'
+    },
+    {
+      tagId: 3,
+      tagName: '워케이션'
+    },
+    {
+      tagId: 4,
+      tagName: '송악산'
+    },
+    {
+      tagId: 5,
+      tagName: '장기휴가'
+    }
+  ]
 };
 
 export const PostListMock: OnePostType[] = [

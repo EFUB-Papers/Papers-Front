@@ -1,15 +1,15 @@
 import { styled } from 'styled-components';
-import { boxShadow, omitText } from './../../../style/common';
+import { omitText } from './../../../style/common';
 
 const ModalContainer = styled.div``;
 
 const Modal = styled.div`
   position: absolute;
   display: inline-block;
-  background: white;
+  background: ${({ theme }) => theme.background};
   border-radius: 7px;
   padding: 4px;
-  ${boxShadow}
+  box-shadow: ${({ theme }) => theme.boxShadow};
   z-index: 2;
 `;
 
@@ -22,6 +22,7 @@ const Button = styled.button`
   & + & {
     border-top: 1px solid ${({ theme }) => theme.COLOR.lightGrey};
   }
+
   padding: 4px;
   ${omitText}
 `;
