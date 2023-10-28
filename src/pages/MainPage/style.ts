@@ -25,6 +25,7 @@ const TagList = styled.div`
 
 const ContentWrapper = styled.div`
   width: 960px;
+  margin-bottom: 100px;
 `;
 
 const Section = styled.div`

@@ -9,52 +9,13 @@ import React from 'react';
 import { S } from './style';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { TagType } from 'types/TagType';
+import { PostListMock } from 'mock/postMock';
+import { OnePostType } from 'types/PostType';
+import { userListMock } from 'mock/userMock';
+import { UserType } from 'types/UserType';
+import { tagListMock } from 'mock/tagMock';
 
 const MainPage = () => {
-  // 더미데이터
-  const scrapCardProps: ScrapCardProps = {
-    width: '31%',
-    scrapId: 0,
-    link: 'https://biz.heraldcorp.com/view.php?ud:20230912000401',
-    linkTitle: '풍요의 제주 ‘일멍쉬멍’ 워케이션 성지로',
-    imgUrl:
-      'https://res.heraldm.com/content/image/2023/09/12/20230912000420_0.jpg',
-    title: '풍요의 제주 ‘일멍쉬멍’ 워케이션 성지로',
-    content: '임시 내용입니다.',
-    heartCnt: 2,
-    author: '나는 고양이다'
-  };
-
-  const scrapCardList: ScrapCardProps[] = [
-    scrapCardProps,
-    scrapCardProps,
-    scrapCardProps
-  ];
-
-  const userCardProps: UserCardProps = {
-    width: '31%',
-    userId: 0,
-    imgurl:
-      'https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg',
-    nickname: '나는 고양이다',
-    introduction: '야옹야옹야옹'
-  };
-
-  const userCardList: UserCardProps[] = [
-    userCardProps,
-    userCardProps,
-    userCardProps
-  ];
-
-  const tagList: TagType[] = [
-    { content: '프론트엔드' },
-    { content: '백엔드' },
-    { content: '디자인' },
-    { content: '리액트' },
-    { content: '스프링' },
-    { content: '자바' }
-  ];
-
   return (
     <S.Wrapper>
       <S.Header>
@@ -66,7 +27,7 @@ const MainPage = () => {
         </S.CategoryBarWrapper>
         {/* 태그 리스트 */}
         <S.TagList>
-          {tagList.map((tag) => (
+          {tagListMock.map((tag) => (
             <Tag tag={tag} />
           ))}
         </S.TagList>
@@ -77,9 +38,22 @@ const MainPage = () => {
         <S.Section>
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
-            {scrapCardList.map((scrap) => (
-              <ScrapCard {...scrap} />
-            ))}
+            {PostListMock.map(
+              (post: OnePostType, index: number) =>
+                index < 3 && (
+                  <ScrapCard
+                    width="31%"
+                    scrapId={post.postId}
+                    link={post.originPost.originLink}
+                    linkTitle={post.originPost.originTitle}
+                    imgUrl={post.imgUrl}
+                    title={post.postTitle}
+                    content={post.postDetail}
+                    heartCnt={10}
+                    author={post.writerInfo.userName}
+                  />
+                )
+            )}
           </S.CardList>
         </S.Section>
 
@@ -87,9 +61,23 @@ const MainPage = () => {
         <S.Section>
           <S.Text>팔로우한 유저의 글</S.Text>
           <S.CardList>
-            {scrapCardList.map((scrap) => (
-              <ScrapCard {...scrap} />
-            ))}
+            {PostListMock.map((post: OnePostType, index: number) => {
+              return (
+                index < 3 && (
+                  <ScrapCard
+                    width="31%"
+                    scrapId={post.postId}
+                    link={post.originPost.originLink}
+                    linkTitle={post.originPost.originTitle}
+                    imgUrl={post.imgUrl}
+                    title={post.postTitle}
+                    content={post.postDetail}
+                    heartCnt={10}
+                    author={post.writerInfo.userName}
+                  />
+                )
+              );
+            })}
           </S.CardList>
         </S.Section>
 
@@ -97,9 +85,18 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {userCardList.map((user) => (
-              <UserCard {...user} />
-            ))}
+            {userListMock.map(
+              (user: UserType, index: number) =>
+                index < 3 && (
+                  <UserCard
+                    width="31%"
+                    userId={user.userId}
+                    imgurl={user.imgUrl}
+                    nickname={user.userName}
+                    introduction={user.userDetail}
+                  />
+                )
+            )}
           </S.CardList>
         </S.Section>
       </S.ContentWrapper>
