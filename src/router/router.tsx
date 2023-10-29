@@ -29,9 +29,12 @@ const router = createBrowserRouter([
 
       { element: <CategoryPage />, path: '/category/:categoryId' },
       { element: <SearchPage />, path: '/search' },
-      { element: <DetailPage />, path: '/detail' },
-      { element: <ScrapWritePage />, path: '/scrap-write' }
+      { element: <DetailPage />, path: '/detail' }
     ]
+  },
+  {
+    element: <HeaderLayout isWriteButton={false} />,
+    children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
   }
 ]);
 
