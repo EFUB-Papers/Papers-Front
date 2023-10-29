@@ -6,6 +6,7 @@ import HeaderLayout from 'layout/headerLayout/HeaderLayout';
 import MainPage from 'pages/MainPage/MainPage';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import DetailPage from '../pages/DetailPage/DetailPage';
+import ScrapWritePage from 'pages/ScrapWritePage/ScrapWritePage';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
       { element: <SearchPage />, path: '/search' },
       { element: <DetailPage />, path: '/detail' }
     ]
-  }
+  },
+  { element: <ScrapWritePage />, path: '/scrap-write' }
 ]);
 
 export default router;
