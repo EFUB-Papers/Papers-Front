@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { flexCenter, omitText } from 'style/common';
 import { styled } from 'styled-components';
 
-const Wrapper = styled.div<{ $width: string }>`
-  width: ${({ $width }) => $width};
+const Wrapper = styled.div<{ $width: number }>`
+  width: ${({ $width }) => $width + 'px'};
   display: flex;
   flex-direction: column;
 `;

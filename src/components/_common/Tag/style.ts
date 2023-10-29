@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import { flexCenter } from 'style/common';
+import { TagProps } from './Tag';
 
 const Wrapper = styled.div`
+  ${flexCenter}
   height: 32px;
   font-size: 14px;
   font-weight: bold;
   color: ${({ theme }) => theme.background};
   padding: 6px 12px;
+  margin: 0px 6px;
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
 
@@ -14,4 +18,8 @@ const Wrapper = styled.div`
   }
 `;
 
-export const S = { Wrapper };
+const DeleteButton = styled.button`
+  margin-left: 6px;
+`;
+
+export const S = { Wrapper, DeleteButton };
