@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { S } from './style';
-import { Category } from '../../../constants/Category';
+import { Category, CategoryValuesType } from '../../../constants/Category';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryBar = () => {
-  const [category, setCategory] = useState<Category>(Category.CURRENT);
+  const [category, setCategory] = useState<CategoryValuesType>();
   const navigate = useNavigate();
 
   return (
@@ -13,8 +13,8 @@ const CategoryBar = () => {
         return (
           <S.CategoryItem
             key={index}
-            $isSelected={category === entry[0]}
-            onClick={() => setCategory(entry[0] as Category)}
+            $isSelected={category === entry[1]}
+            onClick={() => setCategory(entry[1])}
           >
             {entry[1]}
           </S.CategoryItem>
