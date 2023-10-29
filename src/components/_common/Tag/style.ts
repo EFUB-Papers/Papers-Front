@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   height: 32px;
   font-size: 14px;
   font-weight: bold;
-  color: ${({ theme }) => theme.background};
+  color: white;
   padding: 6px 12px;
   margin: 0px 6px;
   border-radius: 30px;

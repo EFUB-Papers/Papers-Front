@@ -10,6 +10,8 @@ const Wrapper = styled.div`
 
 const Input = styled.input`
   padding: 0px 6px;
+  color: inherit;
+  background: inherit;
 `;
 
 export const S = { Wrapper, Input };

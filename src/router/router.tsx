@@ -29,10 +29,10 @@ const router = createBrowserRouter([
 
       { element: <CategoryPage />, path: '/category/:categoryId' },
       { element: <SearchPage />, path: '/search' },
-      { element: <DetailPage />, path: '/detail' }
+      { element: <DetailPage />, path: '/detail' },
+      { element: <ScrapWritePage />, path: '/scrap-write' }
     ]
-  },
-  { element: <ScrapWritePage />, path: '/scrap-write' }
+  }
 ]);
 
 export default router;
