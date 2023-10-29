@@ -79,8 +79,8 @@ const ArrowButton = styled.div`
 `;
 
 const Title = styled.textarea`
-  margin: 20px 0px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
+  margin: 30px 0px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-34']};
   width: 100%;
 `;
 
@@ -125,7 +125,7 @@ const Content = styled.textarea`
   padding: 20px 0px;
   width: 100%;
   min-height: 500px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
 `;
 
 const Footer = styled.div`

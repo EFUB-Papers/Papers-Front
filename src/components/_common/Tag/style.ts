@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   font-weight: bold;
   color: white;
   padding: 6px 12px;
-  margin: 0px 6px;
+  margin: 6px 6px;
   border-radius: 30px;
   background: ${({ theme }) => theme.COLOR.mint};
 
