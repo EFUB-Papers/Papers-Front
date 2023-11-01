@@ -85,13 +85,21 @@ const Title = styled.textarea`
 `;
 
 const LinkWrapper = styled.div`
+  width: 100%;
   ${flexCenter}
   justify-content: start;
+  align-items: start;
   margin-top: 26px;
 `;
 
+const LinkColumnWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+`;
+
 const Link = styled.input`
-  margin-left: 8px;
   flex: 1;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
@@ -161,6 +169,7 @@ export const S = {
   ArrowButton,
   Title,
   LinkWrapper,
+  LinkColumnWrapper,
   Link,
   ImageWrapper,
   ImageButton,

@@ -7,12 +7,14 @@ import { ReactComponent as ExitIcon } from 'asset/scrapWritePage/exit.svg';
 import { Category, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
+import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
 
 const ScrapWritePage = () => {
   const [category, setCategory] = useState<CategoryValuesType>();
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [showLinkPreview, setShowLinkPreview] = useState(false);
   const [imgFile, setImgFile] = useState('');
   const [content, setContent] = useState('');
 
@@ -20,8 +22,16 @@ const ScrapWritePage = () => {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
-  // 이미지 업로드 input의 onChange 이벤트 핸들러
-  const previewImage = () => {
+  // 링크 업로드 이벤트 핸들러
+  const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && link) {
+      console.log(link, '링크 미리보기 생성');
+      setShowLinkPreview(true);
+    }
+  };
+
+  // 이미지 업로드 이벤트 핸들러
+  const onImageUpload = () => {
     if (imgRef.current !== null && imgRef.current.files !== null) {
       const file = imgRef.current.files[0];
       const reader = new FileReader();
@@ -81,11 +91,18 @@ const ScrapWritePage = () => {
         {/* 링크 */}
         <S.LinkWrapper>
           <LinkIcon />
-          <S.Link
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            placeholder="링크를 입력하세요."
-          />
+          <S.LinkColumnWrapper>
+            <S.Link
+              value={link}
+              onChange={(e) => {
+                setLink(e.target.value);
+                setShowLinkPreview(false);
+              }}
+              onKeyDown={onLinkUpload}
+              placeholder="링크를 입력하세요."
+            />
+            {showLinkPreview && <LinkPreview />}
+          </S.LinkColumnWrapper>
         </S.LinkWrapper>
         {/* 이미지 */}
         <S.ImageWrapper>
@@ -96,7 +113,7 @@ const ScrapWritePage = () => {
             id="image"
             type="file"
             accept="image/*"
-            onChange={previewImage}
+            onChange={onImageUpload}
             ref={imgRef}
             style={{ display: 'none' }}
           />
