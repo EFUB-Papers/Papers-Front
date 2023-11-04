@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { S } from './style';
-import { Category, CategoryValuesType } from '../../../constants/Category';
+import { CATEGORY, CategoryValuesType } from '../../../constants/Category';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryBar = () => {
@@ -9,7 +9,7 @@ const CategoryBar = () => {
 
   return (
     <S.Wrppaer>
-      {Object.entries(Category).map((entry, index: number) => {
+      {Object.entries(CATEGORY).map((entry, index: number) => {
         return (
           <S.CategoryItem
             key={index}

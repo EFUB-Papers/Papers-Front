@@ -1,14 +1,10 @@
 import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
-import ScrapCard, {
-  ScrapCardProps
-} from 'components/_common/ScrapCard/ScrapCard';
+import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
 import SearchBar from 'components/_common/SearchBar/SearchBar';
-import Tag, { TagProps } from 'components/_common/Tag/Tag';
-import UserCard, { UserCardProps } from 'components/_common/UserCard/UserCard';
+import Tag from 'components/_common/Tag/Tag';
+import UserCard from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
-import BasicButton from 'components/_common/BasicButton/BasicButton';
-import { TagType } from 'types/TagType';
 import { PostListMock } from 'mock/postMock';
 import { OnePostType } from 'types/PostType';
 import { userListMock } from 'mock/userMock';
