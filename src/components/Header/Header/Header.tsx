@@ -15,7 +15,7 @@ export type HeaderProps = {
   isWriteButton?: boolean;
 };
 
-const Header = ({ isWriteButton }: HeaderProps) => {
+const Header = ({ isWriteButton = true }: HeaderProps) => {
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
 
@@ -45,7 +45,7 @@ const Header = ({ isWriteButton }: HeaderProps) => {
             height={35}
             color="positive"
             fontSize={18}
-            onClick={() => {}}
+            onClick={() => navigate('/scrap-write')}
           >
             <S.BasicButtonText>스크랩</S.BasicButtonText>
             <PencilIcon />
