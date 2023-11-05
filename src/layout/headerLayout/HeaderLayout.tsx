@@ -1,12 +1,12 @@
-import Header from 'components/Header/Header/Header';
+import Header, { HeaderProps } from 'components/Header/Header/Header';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { S } from './style';
 
-const HeaderLayout = () => {
+const HeaderLayout = ({ isWriteButton = true }: HeaderProps) => {
   return (
     <S.Wrapper>
-      <Header />
+      <Header isWriteButton={isWriteButton} />
       <S.ContentWrapper>
         <Outlet />
       </S.ContentWrapper>

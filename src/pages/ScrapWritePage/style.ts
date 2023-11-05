@@ -2,11 +2,36 @@ import { styled } from 'styled-components';
 import { flexCenter } from './../../style/common';
 
 const Root = styled.div`
-  ${flexCenter}
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+
+  /* 스크롤 숨기기 */
+  textarea {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+  }
+
+  textarea,
+  input {
+    color: inherit;
+    background: inherit;
+    font-family: inherit;
+  }
 `;
 
 const Wrapper = styled.div`
-  width: 900px;
+  min-width: 300px;
+  max-width: 900px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
 `;
 
 const CategoryDropdown = styled.div`
@@ -16,7 +41,7 @@ const CategoryDropdown = styled.div`
   height: 30px;
   padding: 0px 10px;
   margin-top: 50px;
-  ${flexCenter}; /* justify-content: space-around; */
+  ${flexCenter};
   &:hover {
     cursor: pointer;
   }
@@ -26,7 +51,7 @@ const CategoryDropdown = styled.div`
 const CategoryList = styled.div`
   position: absolute;
   width: inherit;
-  top: 86px;
+  transform: translateY(calc(50% + 20px));
   box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.COLOR.lightGrey};
   border-radius: 4px;
@@ -53,27 +78,37 @@ const ArrowButton = styled.div`
   margin-left: auto;
 `;
 
-const Title = styled.input`
-  margin: 20px 0px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
+const Title = styled.textarea`
+  margin: 30px 0px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-34']};
+  width: 100%;
 `;
 
 const LinkWrapper = styled.div`
+  width: 100%;
   ${flexCenter}
   justify-content: start;
+  align-items: start;
   margin-top: 26px;
 `;
 
+const LinkColumnWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+`;
+
 const Link = styled.input`
-  margin-left: 8px;
-  width: 600px;
+  flex: 1;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
 
 const ImageWrapper = styled.div`
   display: flex;
   justify-content: start;
-  margin-top: 6px;
+  margin-top: 10px;
+  color: ${({ theme }) => theme.COLOR.lightGrey};
 `;
 
 const ImageButton = styled.label`
@@ -83,11 +118,12 @@ const ImageButton = styled.label`
   }
 `;
 
-const ImageText = styled.div`
+const ImageText = styled.input`
+  width: 200px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
 
-const ImgPreview = styled.img`
+const ImagePreview = styled.img`
   width: 500px;
 `;
 
@@ -96,9 +132,31 @@ const Content = styled.textarea`
   margin-top: 30px;
   padding: 20px 0px;
   width: 100%;
-  height: 400px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-family: inherit;
+  min-height: 500px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+`;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+`;
+
+const ExitButton = styled.button`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.COLOR.darkGrey};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  margin-right: 20px;
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.darkGrey};
+  }
 `;
 
 export const S = {
@@ -111,10 +169,13 @@ export const S = {
   ArrowButton,
   Title,
   LinkWrapper,
+  LinkColumnWrapper,
   Link,
   ImageWrapper,
   ImageButton,
   ImageText,
-  ImgPreview,
-  Content
+  ImagePreview,
+  Content,
+  Footer,
+  ExitButton
 };

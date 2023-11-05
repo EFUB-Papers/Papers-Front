@@ -11,9 +11,14 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
 
-const Header = () => {
+export type HeaderProps = {
+  isWriteButton?: boolean;
+};
+
+const Header = ({ isWriteButton = true }: HeaderProps) => {
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
+
   return (
     <S.Wrapper>
       <S.LogoWrapper>
@@ -34,17 +39,20 @@ const Header = () => {
       </S.LogoWrapper>
       <S.BasicButtonWrapper>
         <ModeToggleButton />
-        <BasicButton
-          width={100}
-          height={35}
-          color="positive"
-          fontSize={18}
-          onClick={() => {}}
-        >
-          <S.BasicButtonText>스크랩</S.BasicButtonText>
-          <PencilIcon />
-        </BasicButton>
+        {isWriteButton && (
+          <BasicButton
+            width={100}
+            height={35}
+            color="positive"
+            fontSize={18}
+            onClick={() => navigate('/scrap-write')}
+          >
+            <S.BasicButtonText>스크랩</S.BasicButtonText>
+            <PencilIcon />
+          </BasicButton>
+        )}
       </S.BasicButtonWrapper>
+
       <S.ProfileImgWrapper onClick={() => navigate('myPage')}>
         <CircleIcon size="small" imgUrl="" />
       </S.ProfileImgWrapper>

@@ -32,7 +32,10 @@ const router = createBrowserRouter([
       { element: <DetailPage />, path: '/detail' }
     ]
   },
-  { element: <ScrapWritePage />, path: '/scrap-write' }
+  {
+    element: <HeaderLayout isWriteButton={false} />,
+    children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
+  }
 ]);
 
 export default router;
