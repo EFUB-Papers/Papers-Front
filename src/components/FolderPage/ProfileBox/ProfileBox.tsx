@@ -50,7 +50,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
           <S.UserInfo>
             <InputBox
               type="text"
-              width={200}
+              width={'200px'}
               height={35}
               textSize={14}
               onChange={onChange}
@@ -64,9 +64,9 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             <TextArea
               type={'text'}
               textSize={14}
-              width={200}
+              width={'200px'}
               maxLength={20}
-              height={70}
+              height={'70px'}
               onChange={onChange}
               borderRadius={10}
               name="detail"

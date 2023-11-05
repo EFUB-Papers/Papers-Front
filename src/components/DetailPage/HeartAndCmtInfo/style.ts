@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 70px;
+  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
@@ -18,6 +18,9 @@ const InfoWrapper = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  padding: 10px;
+  width: 100px;
+  height: 30px;
 `;
 
 export const S = {
