@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from '../../../style/common';
 
 interface IInputWrapper {
-  width: number;
+  width: string;
   height?: number;
   placeholder?: string;
   border?: string;
@@ -12,7 +12,7 @@ interface IInputWrapper {
 const InputWrapper = styled.div<IInputWrapper>`
   background-color: ${({ theme }) => theme.input};
   color: ${({ theme }) => theme.text};
-  width: ${({ width }) => width}px;
+  width: ${({ width }) => width};
   height: ${({ height }) => (height ? `${height}px` : '100%')};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 20)}px;
   display: flex;

@@ -1,8 +1,9 @@
-import { OnePostMock } from '../../mock/postMock';
-import CircleBox from '../../components/_common/CircleBox/CircleBox';
+import { OnePostMock } from 'mock/postMock';
+import CircleBox from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
 import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
-import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
+import HeartAndCmtInfo from 'components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
+import Comment from '../../components/DetailPage/Comment/Comment';
 
 const DetailPage = () => {
   const { postId, postDetail, postTitle, originPost, writerInfo } = OnePostMock;
@@ -27,6 +28,7 @@ const DetailPage = () => {
         <S.ContentWrapper>{postDetail}</S.ContentWrapper>
       </S.PostWrapper>
       <HeartAndCmtInfo heartCount={12} commentCount={12} />
+      <Comment />
     </S.Wrapper>
   );
 };

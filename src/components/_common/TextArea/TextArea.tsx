@@ -2,8 +2,8 @@ import S from './style';
 import React, { ReactElement } from 'react';
 
 type TextAreaProps = {
-  width: number;
-  height?: number;
+  width: string;
+  height?: string;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
   backgroundColor?: string;

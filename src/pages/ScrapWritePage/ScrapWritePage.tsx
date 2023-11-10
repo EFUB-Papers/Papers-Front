@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { S } from './style';
 import { ReactComponent as ArrowIcon } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as LinkIcon } from 'asset/scrapWritePage/link.svg';
 import { ReactComponent as ImageIcon } from 'asset/scrapWritePage/image.svg';
+
 import { ReactComponent as ExitIcon } from 'asset/scrapWritePage/exit.svg';
-import { Category, CategoryValuesType } from 'constants/Category';
+import { CATEGORY, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
@@ -71,7 +72,7 @@ const ScrapWritePage = () => {
           </S.ArrowButton>
           {categoryOpen && (
             <S.CategoryList>
-              {Object.values(Category).map((value) => (
+              {Object.values(CATEGORY).map((value) => (
                 <S.CategoryItem onClick={() => setCategory(value)}>
                   {value}
                 </S.CategoryItem>

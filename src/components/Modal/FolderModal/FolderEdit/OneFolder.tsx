@@ -19,7 +19,7 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
         <FolderIcon />
         {isEditMode ? (
           <InputBox
-            width={300}
+            width={'300px'}
             height={40}
             type={'text'}
             onChange={(e) => {

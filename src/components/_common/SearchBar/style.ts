@@ -16,10 +16,10 @@ const Wrapper = styled.div`
 
 const IconWrapper = styled.div`
   position: absolute;
-  right: 0;
+  right: -5px;
   top: 10px;
 `;
-const SelectWrapper = styled.div`
+const SelectWrapper = styled.div<{ value: string }>`
   width: 100px;
   height: 30px;
   align-items: center;
@@ -43,7 +43,7 @@ const OptionListWrapper = styled.div`
 const OptionBox = styled.li`
   border: none;
   height: 30px;
-  width: 65px;
+  width: 80px;
   ${flexCenter};
 
   &:first-child {
@@ -69,7 +69,7 @@ const SearchInput = styled.input`
 
 const SearchIconWrapper = styled.div`
   position: absolute;
-  right: 10px;
+  right: 15px;
 `;
 
 export const S = {
