@@ -11,10 +11,16 @@ const ProfileWrapper = styled.div`
 `;
 
 const UserInfo = styled.div`
-  position: absolute;
-  bottom: 0;
+  margin-top: 20px;
   gap: 10px;
   ${flexCenter};
+  flex-direction: column;
+`;
+
+const UserNameBox = styled.div`
+  margin-bottom: 20px;
+  ${flexCenter};
+  gap: 10px;
   flex-direction: column;
 `;
 
@@ -40,7 +46,6 @@ const FlexWrapper = styled.div`
   ${flexCenter};
 `;
 const UserProfile = styled.div`
-  position: absolute;
   width: 100%;
   ${flexCenter};
   top: 20px;
@@ -49,13 +54,21 @@ const UserProfile = styled.div`
 const Label = styled.span`
   font-size: 12px;
 `;
+
+const ErrorMsg = styled.div`
+  color: ${({ theme }) => theme.COLOR.error};
+  font-size: 14px;
+  height: 20px;
+`;
 export const S = {
   ProfileWrapper,
+  UserNameBox,
   UserInfo,
   UserName,
   UserDetail,
   FlexWrapper,
   UserProfile,
+  ErrorMsg,
   Label,
   FlexColumnWrapper
 };

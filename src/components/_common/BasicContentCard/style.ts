@@ -15,6 +15,10 @@ const Wrapper = styled.div<{
     isBorderBottom && `1px solid ${theme.line}`};
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
+
+  //@media (max-width: 800px) {
+  //  width: 400px;
+  //}
 `;
 
 const PostContentWrapper = styled.div`

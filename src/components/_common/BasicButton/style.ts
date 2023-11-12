@@ -17,6 +17,11 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
     borderRadius ? borderRadius : width / 2}px;
   font-size: ${({ fontSize }) => fontSize}px;
   ${flexCenter};
+
+  :disabled {
+    background-color: #0c8e9f;
+    color: white;
+  }
 `;
 
 const S = {

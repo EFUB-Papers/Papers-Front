@@ -1,5 +1,4 @@
 import LineNavbar from 'components/_common/LineNavbar/LineNavbar';
-import BasicContentCard from 'components/_common/BasicContentCard/BasicContentCard';
 import { PostListMock } from 'mock/postMock';
 import { OneScrapType } from '../../types/ScrapType';
 import S from './style';
@@ -9,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { folderEditModal } from '../../atom/modal';
 import { useEffect } from 'react';
 import { useBodyScrollLock } from '../../hooks/useScrollLock';
+import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
 
 type PropsType = {
   isMine: boolean;
