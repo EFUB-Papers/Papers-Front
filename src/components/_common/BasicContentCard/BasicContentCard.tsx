@@ -15,6 +15,7 @@ type BasicCardProps = {
 
 const BasicContentCard = (props: BasicCardProps) => {
   const { imgUrl, postDetail, postTitle, originTitle, postId } = props;
+
   return (
     <S.Wrapper
       isBorderBottom={true}

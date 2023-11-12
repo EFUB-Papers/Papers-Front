@@ -102,7 +102,7 @@ const ScrapWritePage = () => {
               onKeyDown={onLinkUpload}
               placeholder="링크를 입력하세요."
             />
-            {showLinkPreview && <LinkPreview />}
+            {showLinkPreview && <LinkPreview url={'https://www.naver.com'} />}
           </S.LinkColumnWrapper>
         </S.LinkWrapper>
         {/* 이미지 */}

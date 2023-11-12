@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil';
 import { modeState } from '../../atom/mode';
 
 const NavbarLayout = () => {
-  const { userName, userDetail, imgUrl } = UserMock;
+  const { nickname, userDetail, imgUrl } = UserMock;
   const isMine = false;
   const mode = useRecoilValue(modeState);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const NavbarLayout = () => {
         <S.FlexWrapper>
           {/*프로필 소개글*/}
           <ProfileBox
-            userName={userName}
+            userName={nickname}
             userDetail={userDetail}
             imgUrl={imgUrl}
           />

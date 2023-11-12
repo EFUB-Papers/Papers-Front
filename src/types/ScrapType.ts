@@ -1,6 +1,6 @@
 import { UserType } from './UserType';
 
-export type OnePostType = {
+export type OneScrapType = {
   imgUrl: string;
   postId: number;
   postTitle: string;

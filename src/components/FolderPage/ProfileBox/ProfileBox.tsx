@@ -1,13 +1,11 @@
 import { S } from './style';
 import useInputs from 'hooks/useInputs';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import InputBox from '../../_common/InputBox/InputBox';
 import TextArea from '../../_common/TextArea/TextArea';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
-import FlipCard from '../../_common/FlipCard/FlipCard';
 import Cat from 'asset/profile.png';
-import { ReactComponent as ImgIcon } from 'asset/_common/imageIcon.svg';
 
 type ProfileProps = {
   userName: string;
@@ -18,18 +16,46 @@ type ProfileProps = {
 const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
   //첫번쨰는 이름 변경, 두번쨰는 한줄 소개 변경
   const [isEditMode, setIsEditMode] = useState(false);
+  const [profileImg, setProfileImg] = useState(Cat);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { values, onChange } = useInputs({
     name: userName,
     detail: userDetail
   });
 
-  const [isImgModalOpen, setIsImgModalOpen] = useState(false);
-
   const { name, detail } = values;
 
-  const onClicka = () => {
-    console.log('aa');
+  //파일 변경 함수
+  // const onFileChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   const files = e.target.files;
+  //   if (!files) return;
+  //   //여러개의 파일을 하나씩 순회하여 읽어오기
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(files[0]);
+  //
+  //   return new Promise<void>((resolve) => {
+  //     reader.onload = () => {
+  //       setProfileImg(reader.result || null);
+  //       resolve();
+  //     };
+  //   });
+  // };
+
+  const onFileChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const files = e.target.files;
+    if (!files) return;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const previewImgUrl = reader.result;
+      if (previewImgUrl) {
+        setProfileImg(previewImgUrl);
+      }
+    };
   };
 
   return (
@@ -37,15 +63,40 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
       {isEditMode ? (
         <S.FlexColumnWrapper>
           <S.UserProfile>
-            <FlipCard
-              handleClickArr={onClicka}
-              content={[
-                <CircleIcon imgUrl={Cat} size={'big'}>
-                  <ImgIcon />
-                </CircleIcon>,
-                <CircleIcon imgUrl={Cat} size={'big'} />
-              ]}
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                onFileChanges(e);
+              }}
+              ref={inputRef}
             />
+            {profileImg ? (
+              <CircleIcon
+                onClick={() => inputRef.current?.click()}
+                imgUrl={profileImg}
+                size={'big'}
+              />
+            ) : (
+              <CircleIcon
+                onClick={() => inputRef.current?.click()}
+                imgUrl={profileImg}
+                size={'big'}
+              />
+            )}
+
+            {/*<FlipCard*/}
+            {/*  handleClickArr={() => {*/}
+            {/*    inputRef.current?.click();*/}
+            {/*  }}*/}
+            {/*  content={[*/}
+            {/*    <CircleIcon imgUrl={profileImg} size={'big'}>*/}
+            {/*      <ImgIcon />*/}
+            {/*    </CircleIcon>,*/}
+            {/*    <CircleIcon imgUrl={profileImg} size={'big'} />*/}
+            {/*  ]}*/}
+            {/*/>*/}
           </S.UserProfile>
           <S.UserInfo>
             <InputBox

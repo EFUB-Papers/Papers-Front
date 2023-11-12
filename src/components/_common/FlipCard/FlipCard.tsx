@@ -27,7 +27,7 @@ const FlipCard = ({
       onClick={handleClickArr}
     >
       {isFlipped ? (
-        frontContent
+        <div onClick={handleClickArr}>{frontContent}</div>
       ) : (
         <div onClick={handleClickArr}>{backContent}</div>
       )}
