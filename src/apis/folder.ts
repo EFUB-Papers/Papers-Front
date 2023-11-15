@@ -1,5 +1,6 @@
 import { axiosInstance } from './axiosInstance';
-import { AxiosResponseType } from '../constants/Api';
+import { AxiosResponseType } from 'constants/Api';
+import { OneFolderType } from 'types/FolderType';
 
 export type CreateFolderType = {
   folderName: string;
@@ -16,7 +17,9 @@ export const postNewFolder = async (folderInfo: CreateFolderType) => {
 
 //회원별 폴더 조회
 export const getFolderList = async (nickname: string) => {
-  const { data } = await axiosInstance.get(`/${nickname}/folders`);
+  const { data } = await axiosInstance.get<OneFolderType[]>(
+    `/${nickname}/folders`
+  );
   return data;
 };
 

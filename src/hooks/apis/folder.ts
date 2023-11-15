@@ -10,6 +10,7 @@ import {
 } from '../../apis/folder';
 import { AxiosError } from 'axios';
 import { AxiosResponseType } from '../../constants/Api';
+import { OneFolderType } from '../../types/FolderType';
 
 interface FolderType {
   folderId: number;
@@ -19,7 +20,7 @@ interface FolderType {
 
 //폴더 리스트를 가져오는 쿼리
 export const useGetFolderListQuery = (nickname: string) => {
-  const { data } = useQuery<FolderType[], AxiosError, FolderType[]>({
+  const { data } = useQuery<OneFolderType[], AxiosError, FolderType[]>({
     queryKey: ['folder', nickname],
     queryFn: () => getFolderList(nickname)
   });

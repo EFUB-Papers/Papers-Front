@@ -76,7 +76,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
                 }}
               >
                 <S.Name currentIdx={currentIdx} index={index}>
-                  {folder.title}
+                  {folder.folderName}
                 </S.Name>
               </S.OneMenu>
             );

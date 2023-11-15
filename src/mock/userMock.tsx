@@ -17,16 +17,16 @@ export const userListMock: UserType[] = [
 ];
 
 export const MyFolderMock: MyFolderType[] = [
-  { id: 1, title: '기본 폴더' },
-  { id: 2, title: '전국 맛집 탐방' },
-  { id: 3, title: '프론트엔드 노트' },
-  { id: 4, title: '백엔드 노트' },
-  { id: 5, title: '우리집 강아지' },
-  { id: 6, title: '파리 여행 일기' },
-  { id: 7, title: '글쓰기 노트' },
-  { id: 8, title: '떡볶이 부시기' },
-  { id: 9, title: '고양이 좋아' },
-  { id: 1, title: '기본 폴더' },
-  { id: 2, title: '전국 맛집 탐방' },
-  { id: 3, title: '프론트엔드 노트' }
+  { folderId: 1, folderName: '기본 폴더' },
+  { folderId: 2, folderName: '전국 맛집 탐방' },
+  { folderId: 3, folderName: '프론트엔드 노트' },
+  { folderId: 4, folderName: '백엔드 노트' },
+  { folderId: 5, folderName: '우리집 강아지' },
+  { folderId: 6, folderName: '파리 여행 일기' },
+  { folderId: 7, folderName: '글쓰기 노트' },
+  { folderId: 8, folderName: '떡볶이 부시기' },
+  { folderId: 9, folderName: '고양이 좋아' },
+  { folderId: 1, folderName: '기본 폴더' },
+  { folderId: 2, folderName: '전국 맛집 탐방' },
+  { folderId: 3, folderName: '프론트엔드 노트' }
 ];
