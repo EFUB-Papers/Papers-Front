@@ -4,4 +4,7 @@ export type OneFolderType = {
   folderOwnerNickname: string;
 };
 
-export type MyFolderType = Omit<OneFolderType, 'folderOwnerNickname'>;
+export type OneFolderTypeWithoutUser = Omit<
+  OneFolderType,
+  'folderOwnerNickname'
+>;

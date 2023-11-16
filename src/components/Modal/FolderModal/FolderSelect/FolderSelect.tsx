@@ -18,10 +18,10 @@ const FolderSelect = () => {
         {MyFolderMock.map((folder) => {
           return (
             <SelectOneFolder
-              selected={selectId === folder.id}
-              title={folder.title}
+              selected={selectId === folder.folderId}
+              title={folder.folderName}
               onClick={() => {
-                onSelectFolder(folder.id);
+                onSelectFolder(folder.folderId);
               }}
             />
           );

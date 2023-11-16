@@ -1,5 +1,5 @@
 import { UserType } from 'types/UserType';
-import { MyFolderType } from '../types/FolderType';
+import { OneFolderTypeWithoutUser } from 'types/FolderType';
 
 export const UserMock: UserType = {
   nickname: '나는 고양이다',
@@ -16,7 +16,7 @@ export const userListMock: UserType[] = [
   UserMock
 ];
 
-export const MyFolderMock: MyFolderType[] = [
+export const MyFolderMock: OneFolderTypeWithoutUser[] = [
   { folderId: 1, folderName: '기본 폴더' },
   { folderId: 2, folderName: '전국 맛집 탐방' },
   { folderId: 3, folderName: '프론트엔드 노트' },

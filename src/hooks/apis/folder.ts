@@ -1,16 +1,18 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  ChangeFolderType,
-  CreateFolderType,
   deleteFolder,
-  DeleteFolderType,
   getFolderList,
+  getFolderScrapsList,
   postNewFolder,
   putFolderName
 } from '../../apis/folder';
 import { AxiosError } from 'axios';
 import { AxiosResponseType } from '../../constants/Api';
-import { OneFolderType } from '../../types/FolderType';
+import {
+  OneFolderType,
+  OneFolderTypeWithoutUser
+} from '../../types/FolderType';
+import { OneScrapType } from '../../types/ScrapType';
 
 interface FolderType {
   folderId: number;
@@ -28,14 +30,19 @@ export const useGetFolderListQuery = (nickname: string) => {
 };
 
 //폴더별 스크랩을 가져오는 쿼리
-export const useFolderScrapsQuery = () => {};
+export const useFolderScrapsQuery = (folderId: number) => {
+  const { data } = useQuery<OneScrapType[], AxiosError>({
+    queryKey: ['folderScraps', folderId],
+    queryFn: () => getFolderScrapsList(folderId)
+  });
+};
 
 //폴더를 생성하는 mutation
-export const useCreateNewFolderMutation = () => {
+export const useCreateFolderMutation = () => {
   const { mutate: postNewFolderAction } = useMutation<
     AxiosResponseType,
     AxiosError,
-    CreateFolderType
+    string
   >({
     mutationFn: (folderInfo) => postNewFolder(folderInfo)
   });
@@ -48,7 +55,7 @@ export const useDeleteFolderMutation = () => {
   const { mutate: deleteFolderAction } = useMutation<
     AxiosResponseType,
     AxiosError,
-    DeleteFolderType
+    number
   >({
     mutationFn: (folderInfo) => deleteFolder(folderInfo)
   });
@@ -60,7 +67,7 @@ export const usePutFolderChangeMutation = () => {
   const { mutate: putFolderNameAction } = useMutation<
     AxiosResponseType,
     AxiosError,
-    ChangeFolderType
+    OneFolderTypeWithoutUser
   >({
     mutationFn: (folderInfo) => putFolderName(folderInfo)
   });

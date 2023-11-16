@@ -18,7 +18,6 @@ const UserInfo = styled.div`
 `;
 
 const UserNameBox = styled.div`
-  margin-bottom: 20px;
   ${flexCenter};
   gap: 10px;
   flex-direction: column;

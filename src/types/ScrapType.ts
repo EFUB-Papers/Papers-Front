@@ -2,13 +2,13 @@ import { UserType } from './UserType';
 
 export type OneScrapType = {
   imgUrl: string;
-  postId: number;
-  postTitle: string;
-  postDetail: string;
-  originPost: SimpleOriginPostType; //원본 포스트 정보
+  scrapId: number;
+  scrapTitle: string;
+  scrapContent: string;
+  scrapLink: SimpleOriginPostType; //원본 포스트 정보
   writerInfo: UserType; //작성자 정보
   CreatedAt: Date; //작성 날짜
-  tagList: OneTagType[];
+  tags: OneTagType[];
 };
 
 export type OriginPostType = {
