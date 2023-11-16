@@ -1,4 +1,3 @@
-//팔로우 걸기
 import { axiosInstance } from './axiosInstance';
 
 //팔로우 걸기

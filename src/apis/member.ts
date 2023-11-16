@@ -14,9 +14,13 @@ export const postNewToken = async () => {
 
 //닉네임 중복 조회
 export const postSameName = async (nickname: string) => {
-  return await axiosInstance.post<boolean>('/members/nickname/isExist', {
-    nickname
-  });
+  const { data } = await axiosInstance.post<boolean>(
+    '/members/nickname/isExist',
+    {
+      nickname
+    }
+  );
+  return data;
 };
 
 //회원 정보 조회
@@ -27,7 +31,7 @@ export const postOtherUserInfo = async (nickname: string) => {
   return data;
 };
 
-type ProfileType = {
+export type ProfileType = {
   nickname: string;
   introduce: string;
 };

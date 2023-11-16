@@ -6,7 +6,7 @@ export type NewCommentType = {
   commentContent: string;
 };
 export const postNewComment = async (commentInfo: NewCommentType) => {
-  const data = await axiosInstance.post('/comments', {
+  const { data } = await axiosInstance.post('/comments', {
     ...commentInfo
   });
   return data;
@@ -14,7 +14,7 @@ export const postNewComment = async (commentInfo: NewCommentType) => {
 
 //댓글 삭제
 export const deleteComment = async (commentId: number) => {
-  const data = await axiosInstance.delete(`/comments/${commentId}`);
+  const { data } = await axiosInstance.delete(`/comments/${commentId}`);
   return data;
 };
 

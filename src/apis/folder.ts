@@ -11,6 +11,21 @@ export const postNewFolder = async (folderName: string) => {
   return data;
 };
 
+//폴더 삭제
+export const deleteFolder = async (folderId: number) => {
+  const { data } = await axiosInstance.delete(`/folders/${folderId}`);
+  return data;
+};
+
+//폴더 이름 변경
+export const putFolderName = async (folderInfo: OneFolderTypeWithoutUser) => {
+  const { folderId, folderName } = folderInfo;
+  const { data } = await axiosInstance.put(`/folders/${folderId}`, {
+    folderName
+  });
+  return data;
+};
+
 //회원별 폴더 조회
 export const getFolderList = async (nickname: string) => {
   const { data } = await axiosInstance.get<OneFolderType[]>(
@@ -24,20 +39,5 @@ export const getFolderScrapsList = async (folderId: number) => {
   const { data } = await axiosInstance.get<OneScrapType[]>(
     `/folders/${folderId}/scraps`
   );
-  return data;
-};
-
-//폴더 삭제
-export const deleteFolder = async (folderId: number) => {
-  const { data } = await axiosInstance.delete(`/folders/${folderId}`);
-  return data;
-};
-
-//폴더 이름 변경
-export const putFolderName = async (folderInfo: OneFolderTypeWithoutUser) => {
-  const { folderId, folderName } = folderInfo;
-  const { data } = await axiosInstance.put(`/folders/${folderId}`, {
-    folderName
-  });
   return data;
 };

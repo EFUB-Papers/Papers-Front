@@ -2,7 +2,7 @@
 import { axiosInstance } from './axiosInstance';
 import { CategoryKeyType, SearchRangeKeyType } from '../constants/Category';
 
-export type OneScrapType = {
+export type OneNewScrapType = {
   scrapTitle: string;
   scrapLink: string;
   scrapContent: string;
@@ -14,12 +14,13 @@ type OneTag = {
 };
 
 //스크랩 생성
-export const postNewScrap = async (newScrapInfo: OneScrapType) => {
+export const postNewScrap = async (newScrapInfo: OneNewScrapType) => {
   const { data } = await axiosInstance.post('/scraps', { ...newScrapInfo });
   return data;
 };
 
-type PatchScrapType = OneScrapType & { scrapId: number };
+export type PatchScrapType = OneNewScrapType & { scrapId: number };
+
 //스크랩 수정
 export const patchScrap = async (scrapInfo: PatchScrapType) => {
   const { scrapId } = scrapInfo;
@@ -47,13 +48,14 @@ export const getRecommentScrapList = async () => {
   return data;
 };
 
-type SearchScrapType = {
+export type SearchScrapType = {
   searchby: SearchRangeKeyType;
   category: CategoryKeyType;
   page: number;
 };
+
 //스크랩 검색
-export const searchScrap = async (searchInfo: SearchScrapType) => {
+export const getSearchScrap = async (searchInfo: SearchScrapType) => {
   const { data } = await axiosInstance.get(`/scraps/search`, {
     params: {
       ...searchInfo
