@@ -20,23 +20,29 @@ import profileCardText from 'asset/loginPage/profileCardText.png';
 import { ReactComponent as ScrollMore } from 'asset/loginPage/scrollMore.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { usePostLoginMutation } from 'hooks/apis/member';
+import { setCookie } from 'utils/cookieStorage';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { loginData, postLoginMutate } = usePostLoginMutation();
 
-  //구글 로그인 이벤트 핸들러
+  // 구글 로그인 이벤트 핸들러
   const onGoogleLogin = useGoogleLogin({
     scope: 'email profile',
+    // 구글 로그인 성공 시
     onSuccess: async ({ code }) => {
-      // const data = await axios.post(
-      //   'http://localhost:8080/auth/login',
-      //   {
-      //     code: code
-      //   },
-      //   { headers: { 'Content-Type': 'application/json' } }
-      // );
-      // console.log(data);
+      postLoginMutate(code); // 로그인 api 호출
+      // 쿠키에 액세스 토큰 저장
+      if (loginData) {
+        setCookie('papersToken', loginData.accessToken, {
+          path: '/',
+          secure: false,
+          sameSite: 'none'
+        });
+      }
     },
+    // 구글 로그인 실패 시
     onError: (errorResponse) => {
       console.error(errorResponse);
     },
