@@ -5,30 +5,31 @@ import { ReactComponent as CommentIcon } from 'asset/_common/comment.svg';
 
 type BasicCardProps = {
   imgUrl: string;
-  postTitle: string;
-  postDetail: string;
+  scrapTitle: string;
+  scrapContent: string;
   originTitle: string;
   originLink: string;
-  postId: number;
+  scrapId: number;
   // Writer: UserType;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
-  const { imgUrl, postDetail, postTitle, originTitle, postId } = props;
+  const { imgUrl, scrapContent, scrapTitle, originTitle, scrapId } = props;
+
   return (
     <S.Wrapper
       isBorderBottom={true}
       onClick={() => {
-        console.log(postId);
+        console.log(scrapId);
       }}
     >
       <MoreDotsIcon style={{ position: 'absolute', right: 0, top: 0 }} />
       <S.PostImg imgUrl={imgUrl} />
 
       <S.PostContentWrapper>
-        <S.PostTitle>{postTitle}</S.PostTitle>
+        <S.PostTitle>{scrapTitle}</S.PostTitle>
         <S.OriginalTitle>{originTitle}</S.OriginalTitle>
-        <S.PostDetail>{postDetail}</S.PostDetail>
+        <S.PostDetail>{scrapContent}</S.PostDetail>
       </S.PostContentWrapper>
 
       <S.IconFlexWrapper>

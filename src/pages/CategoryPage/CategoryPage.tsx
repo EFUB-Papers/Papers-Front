@@ -1,7 +1,7 @@
 import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
 import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
 import { PostListMock } from 'mock/postMock';
-import { OnePostType } from 'types/PostType';
+import { OneScrapType } from '../../types/ScrapType';
 import { S } from './style';
 
 const CategoryPage = () => {
@@ -10,25 +10,25 @@ const CategoryPage = () => {
       <S.Category>IT</S.Category>
       <CategoryBar />
       <S.ContentWrapper>
-        {PostListMock.map((post: OnePostType) => {
+        {PostListMock.map((scrap: OneScrapType) => {
           const {
             imgUrl,
-            postId,
-            postTitle,
-            postDetail,
-            originPost,
+            scrapId,
+            scrapTitle,
+            scrapContent,
+            scrapLink,
             writerInfo
-          } = post;
+          } = scrap;
           return (
             <ScrapCard
               width={300}
-              scrapId={postId}
-              link={originPost.originLink}
-              linkTitle={originPost.originTitle}
+              scrapId={scrapId}
+              link={scrapLink.originLink}
+              linkTitle={scrapLink.originTitle}
               imgUrl={imgUrl}
-              author={writerInfo.userName}
-              title={postTitle}
-              content={postDetail}
+              author={writerInfo.nickname}
+              title={scrapTitle}
+              content={scrapContent}
               heartCnt={12}
             />
           );

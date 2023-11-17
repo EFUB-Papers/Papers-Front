@@ -1,6 +1,6 @@
 import { S } from './style';
 import { PostListMock } from '../../mock/postMock';
-import { OnePostType } from '../../types/PostType';
+import { OneScrapType } from '../../types/ScrapType';
 import SearchBar from '../../components/_common/SearchBar/SearchBar';
 import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
 
@@ -9,16 +9,16 @@ const SearchPage = () => {
     <S.Wrapper>
       <SearchBar />
       <S.ContentWrapper>
-        {PostListMock.map((post: OnePostType) => {
-          const { imgUrl, postId, postTitle, postDetail, originPost } = post;
+        {PostListMock.map((post: OneScrapType) => {
+          const { imgUrl, scrapId, scrapTitle, scrapContent, scrapLink } = post;
           return (
             <BasicContentCard
-              postId={postId}
-              originLink={originPost.originLink}
-              originTitle={originPost.originTitle}
+              scrapId={scrapId}
+              originLink={scrapLink.originLink}
+              originTitle={scrapLink.originTitle}
               imgUrl={imgUrl}
-              postTitle={postTitle}
-              postDetail={postDetail}
+              scrapTitle={scrapTitle}
+              scrapContent={scrapContent}
             />
           );
         })}

@@ -8,7 +8,9 @@ const FolderEdit = () => {
       <S.Title>폴더 편집</S.Title>
       <S.FlexBox>
         {MyFolderMock.map((folder) => {
-          return <EditOneFolder id={folder.id} title={folder.title} />;
+          return (
+            <EditOneFolder id={folder.folderId} title={folder.folderName} />
+          );
         })}
       </S.FlexBox>
     </S.ContentWrapper>

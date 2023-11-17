@@ -57,7 +57,9 @@ const OptionBox = styled.li`
   }
 `;
 
-const SearchInput = styled.input`
+const SearchInput = styled.input<{
+  onKeyPress: any;
+}>`
   width: 285px;
   height: 30px;
   font-size: 16px;

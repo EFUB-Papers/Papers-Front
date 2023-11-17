@@ -13,16 +13,23 @@ export type BasicButtonProps = {
   height: number;
   borderRadius?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: any;
 };
 
 const BasicButton = ({
   children,
   width,
   height,
+  disabled,
   ...props
 }: PropsWithChildren<BasicButtonProps>) => {
   return (
-    <S.ButtonWrapper width={width} height={height} {...props}>
+    <S.ButtonWrapper
+      width={width}
+      height={height}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </S.ButtonWrapper>
   );

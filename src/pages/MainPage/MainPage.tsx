@@ -6,7 +6,7 @@ import UserCard from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
 import { PostListMock } from 'mock/postMock';
-import { OnePostType } from 'types/PostType';
+import { OneScrapType } from '../../types/ScrapType';
 import { userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
@@ -35,18 +35,18 @@ const MainPage = () => {
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
             {PostListMock.map(
-              (post: OnePostType, index: number) =>
+              (post: OneScrapType, index: number) =>
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
+                    scrapId={post.scrapId}
+                    link={post.scrapLink.originLink}
+                    linkTitle={post.scrapLink.originTitle}
                     imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    title={post.scrapTitle}
+                    content={post.scrapContent}
                     heartCnt={10}
-                    author={post.writerInfo.userName}
+                    author={post.writerInfo.nickname}
                   />
                 )
             )}
@@ -57,19 +57,19 @@ const MainPage = () => {
         <S.Section>
           <S.Text>팔로우한 유저의 글</S.Text>
           <S.CardList>
-            {PostListMock.map((post: OnePostType, index: number) => {
+            {PostListMock.map((post: OneScrapType, index: number) => {
               return (
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
+                    scrapId={post.scrapId}
+                    link={post.scrapLink.originLink}
+                    linkTitle={post.scrapLink.originTitle}
                     imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    title={post.scrapTitle}
+                    content={post.scrapContent}
                     heartCnt={10}
-                    author={post.writerInfo.userName}
+                    author={post.writerInfo.nickname}
                   />
                 )
               );
@@ -86,9 +86,8 @@ const MainPage = () => {
                 index < 3 && (
                   <UserCard
                     width="31%"
-                    userId={user.userId}
                     imgurl={user.imgUrl}
-                    nickname={user.userName}
+                    nickname={user.nickname}
                     introduction={user.userDetail}
                   />
                 )

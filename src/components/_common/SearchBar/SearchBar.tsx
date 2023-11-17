@@ -36,10 +36,16 @@ const SearchBar = () => {
 
   //검색하는 함수
   const onSubmitSearch = () => {
-    const url = `search?range=${SEARCH_RANGE[searchOption[0]]}&category=${
+    const url = `/search?range=${SEARCH_RANGE[searchOption[0]]}&category=${
       CATEGORY[searchOption[1]]
     }&keyword=${keyword}`;
     navigate(url);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSubmitSearch();
+    }
   };
 
   return (
@@ -124,6 +130,7 @@ const SearchBar = () => {
         )}
       </S.SelectBox>
       <S.SearchInput
+        onKeyPress={handleKeyPress}
         value={keyword}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setKeyword(e.target.value);

@@ -5,7 +5,6 @@ import BasicButton from '../BasicButton/BasicButton';
 
 export type UserCardProps = {
   width: string;
-  userId: number;
   imgurl: string;
   nickname: string;
   introduction: string;
