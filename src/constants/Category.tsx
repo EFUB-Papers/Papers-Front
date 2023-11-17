@@ -1,6 +1,6 @@
 export const CATEGORY: { [key: string]: string } = {
-  TOTAL: '카테고리',
-  CURRENT: '시사',
+  ALL: '카테고리',
+  NEWS: '시사',
   CULTURE: '문화',
   TRAVEL: '여행',
   IT: 'IT',
@@ -16,8 +16,8 @@ export type CategoryKeyType = keyof typeof CATEGORY;
 export type CategoryValuesType = CategoryType[keyof CategoryType];
 
 export const SEARCH_RANGE: { [key: string]: string } = {
-  TOTAL: '전체',
-  TITLE: '제목, 내용',
+  ALL: '전체',
+  TITLECONTENT: '제목, 내용',
   TAG: '태그'
 };
 

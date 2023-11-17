@@ -64,6 +64,37 @@ const ListWrapper = styled.div`
   gap: 20px;
 `;
 
+const OneCommentBox = styled.div`
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.line};
+  padding: 10px;
+`;
+
+const CommentContextBox = styled.div`
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 15px;
+`;
+
+const SubComment = styled.div`
+  padding: 15px;
+  color: ${({ theme }) => theme.COLOR.darkGrey};
+`;
+
+const SubCommentWrapper = styled.div`
+  margin-left: 20px;
+  padding: 10px;
+  border-left: 3px solid ${({ theme }) => theme.line};
+`;
+
+const ReplyNewContainer = styled.div`
+  width: 100%;
+`;
+
+const ReplyContainer = styled.div`
+  margin: 10px 0 10px 0;
+`;
+
 export const S = {
   Wrapper,
   NameBox,
@@ -72,7 +103,13 @@ export const S = {
   ContentBox,
   MyInfoBox,
   OneCommentWrapper,
+  OneCommentBox,
+  CommentContextBox,
+  SubComment,
+  SubCommentWrapper,
   ListWrapper,
   UserInfoBox,
   NewCommentWrapper
 };
+
+export const R = { ReplyNewContainer, ReplyContainer };

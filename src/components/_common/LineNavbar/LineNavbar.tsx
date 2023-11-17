@@ -4,7 +4,7 @@ import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
 import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
 import { arraySlice } from 'utils/arrayHelper';
 import { MyFolderMock } from 'mock/userMock';
-import { MyFolderType } from 'types/FolderType';
+import { OneFolderTypeWithoutUser } from 'types/FolderType';
 import { useRecoilState } from 'recoil';
 import { folderEditModal } from 'atom/modal';
 
@@ -22,7 +22,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
   const totalFolderLength = MyFolderMock.length;
 
   const lastGroup = Math.ceil(totalFolderLength / pagePerGroup) - 1;
-  const slicedMenu: MyFolderType[][] = arraySlice(MyFolderMock);
+  const slicedMenu: OneFolderTypeWithoutUser[][] = arraySlice(MyFolderMock);
 
   const onMovePrevGroup = () => {
     setCurrentFolderGroup(currentFolderGroup - 1);
@@ -76,7 +76,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
                 }}
               >
                 <S.Name currentIdx={currentIdx} index={index}>
-                  {folder.title}
+                  {folder.folderName}
                 </S.Name>
               </S.OneMenu>
             );

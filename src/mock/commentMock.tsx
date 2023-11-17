@@ -1,48 +1,67 @@
-import { OneCommentType } from '../types/CommentType';
+import { OneCommentType, OneReplyType } from '../types/CommentType';
 
 export const CommentMock: OneCommentType[] = [
   {
-    commentId: '1',
-    scrapId: '1',
-    commentContent: '바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요',
-    commentWriter: 'writer1'
+    commentId: 1,
+    scrapId: 1,
+    commentContent:
+      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
+    writerNickname: '강아지',
+    writerImg: '',
+    createdAt: null,
+    commentIsMine: true
   },
   {
-    commentId: '2',
-    scrapId: '1',
+    commentId: 1,
+    scrapId: 1,
     commentContent:
-      '바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요. 바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요',
-    commentWriter: 'writer2'
+      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
+    writerNickname: '강아지',
+    writerImg: '',
+    createdAt: null,
+    commentIsMine: true
   },
   {
-    commentId: '3',
-    scrapId: '1',
+    commentId: 1,
+    scrapId: 1,
     commentContent:
-      '바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요 바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요. 바다가 너무 예쁘네요^^ 저도 꼭 가보고 싶네요',
-    commentWriter: 'writer3'
+      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
+    writerNickname: '강아지',
+    writerImg: '',
+    createdAt: null,
+    commentIsMine: true
   }
 ];
 
-export const SubCommentMock: OneCommentType[] = [
+export const ReplyMock: OneReplyType[] = [
   {
-    commentId: '1',
-    scrapId: '1',
-    commentContent:
+    commentId: 1,
+    replyId: 1,
+    replyContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
-    commentWriter: 'writer1'
+    replyWriterNickname: '강아지',
+    replyWriterImg: '',
+    createdAt: null,
+    commentIsMine: true
   },
   {
-    commentId: '2',
-    scrapId: '1',
-    commentContent:
-      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요 그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
-    commentWriter: 'writer2'
+    commentId: 2,
+    replyId: 2,
+    replyContent:
+      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
+    replyWriterNickname: '강아지',
+    replyWriterImg: '',
+    createdAt: null,
+    commentIsMine: true
   },
   {
-    commentId: '3',
-    scrapId: '1',
-    commentContent:
-      "그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요 '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요 '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요'",
-    commentWriter: 'writer3'
+    commentId: 3,
+    replyId: 3,
+    replyContent:
+      '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
+    replyWriterNickname: '강아지',
+    replyWriterImg: '',
+    createdAt: null,
+    commentIsMine: true
   }
 ];

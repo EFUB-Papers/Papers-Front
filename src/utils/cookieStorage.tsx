@@ -1,0 +1,3 @@
+const cookieStorage = () => {
+  const getCookie = () => {};
+};

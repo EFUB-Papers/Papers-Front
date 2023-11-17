@@ -1,9 +1,11 @@
 export const COLOR = {
   mint: '#4DD3DB',
+  darkMint: '#0e8d93',
   backgroundGrey: '#F2F2F2', //메인 페이지의 포인트 배경 색상
   lightGrey: '#9A9A9A', //원본 링크 글자, 선택되지 않은 옵션
   darkGrey: '#ADADAD', //언팔로우 버튼, 취소 버튼 색상
-  blue: '#4491e3'
+  blue: '#4491e3',
+  error: '#f16829'
 };
 
 export const TEXT_SIZE = {
@@ -41,6 +43,10 @@ export const DARK = {
   text: 'white',
   COLOR: { ...COLOR },
   TEXT_SIZE: { ...TEXT_SIZE }
+};
+
+export const MEDIA = {
+  mobile: '400px'
 };
 
 export type ThemeType = typeof LIGHT;

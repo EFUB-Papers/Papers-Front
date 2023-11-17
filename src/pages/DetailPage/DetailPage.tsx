@@ -3,7 +3,8 @@ import CircleBox from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
 import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
 import HeartAndCmtInfo from 'components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
-import Comment from '../../components/DetailPage/Comment/Comment';
+import Comment from 'components/DetailPage/Comment/Comment';
+import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 
 const DetailPage = () => {
   const { postId, postDetail, postTitle, originPost, writerInfo } = OnePostMock;
@@ -18,11 +19,12 @@ const DetailPage = () => {
       <S.UserInfoWrapper>
         <CircleBox imgUrl={writerInfo.imgUrl} size={'small'} />
         <S.FlexColumnWrapper>
-          <S.Name>{writerInfo.userName}</S.Name>
+          <S.Name>{writerInfo.nickname}</S.Name>
           <S.DateInfo>7일전</S.DateInfo>
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>
       <S.PostWrapper>
+        <LinkPreview url={'https://www.naver.com'} />
         <S.PrePostWrapper></S.PrePostWrapper>
         <S.ImgWrapper />
         <S.ContentWrapper>{postDetail}</S.ContentWrapper>

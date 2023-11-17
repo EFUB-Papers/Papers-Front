@@ -5,14 +5,19 @@ import router from './router/router';
 import { ThemeProvider } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { modeState } from './atom/mode';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const CombinedProvider = () => {
   const mode = useRecoilValue(modeState);
+  const queryClient = new QueryClient();
+
   return (
-    <ThemeProvider theme={mode === 'light' ? LIGHT : DARK}>
-      <GlobalStyles />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={mode === 'light' ? LIGHT : DARK}>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

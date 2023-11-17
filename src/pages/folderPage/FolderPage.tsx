@@ -1,7 +1,6 @@
 import LineNavbar from 'components/_common/LineNavbar/LineNavbar';
-import BasicContentCard from 'components/_common/BasicContentCard/BasicContentCard';
 import { PostListMock } from 'mock/postMock';
-import { OnePostType } from 'types/PostType';
+import { OneScrapType } from '../../types/ScrapType';
 import S from './style';
 import { UserMock } from 'mock/userMock';
 import FolderModal from '../../components/Modal/FolderModal/FolderModal';
@@ -9,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { folderEditModal } from '../../atom/modal';
 import { useEffect } from 'react';
 import { useBodyScrollLock } from '../../hooks/useScrollLock';
+import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
 
 type PropsType = {
   isMine: boolean;
@@ -31,11 +31,11 @@ const FolderPage = ({ isMine }: PropsType) => {
     <S.ListWrapper isScrollAble={!isFolderEditModalOpen}>
       {isFolderEditModalOpen && <FolderModal option={'edit'} />}
       <LineNavbar
-        title={isMine ? '내 폴더' : `${UserMock.userName}님의 폴더`}
+        title={isMine ? '내 폴더' : `${UserMock.nickname}님의 폴더`}
       />
 
       <S.ContentWrapper>
-        {PostListMock.map((post: OnePostType) => {
+        {PostListMock.map((post: OneScrapType) => {
           const { imgUrl, postTitle, originPost, postDetail, postId } = post;
           const { originLink, originTitle } = originPost;
           return (
