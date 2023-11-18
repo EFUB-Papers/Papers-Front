@@ -70,10 +70,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
     const formData = new FormData();
     formData.append('profileImg', profileImg);
     formData.append('dto', JSON.stringify(dto));
-    postProfileMutate({
-      profileImg,
-      dto
-    });
+    postProfileMutate(formData);
   };
 
   return (

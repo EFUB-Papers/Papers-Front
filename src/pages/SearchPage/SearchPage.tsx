@@ -13,12 +13,12 @@ const SearchPage = () => {
           const { imgUrl, scrapId, scrapTitle, scrapContent, scrapLink } = post;
           return (
             <BasicContentCard
-              postId={scrapId}
+              scrapId={scrapId}
               originLink={scrapLink}
               originTitle={scrapLink}
               imgUrl={imgUrl}
-              postTitle={scrapTitle}
-              postDetail={scrapContent}
+              scrapTitle={scrapTitle}
+              scrapContent={scrapContent}
             />
           );
         })}

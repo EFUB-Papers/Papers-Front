@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCookie } from 'utils/cookieStorage';
 import { NETWORK } from '../constants/Api';
 
 export const axiosInstance = axios.create({
@@ -18,7 +19,7 @@ axiosInstance.interceptors.request.use(
       throw new Error(`config.header is undefined`);
     }
     config.headers['Content-Type'] = 'application/json; charset=utf-8';
-    // config.headers['Authorization'] = authToken?.access;
+    config.headers['Authorization'] = `Bearer ${getCookie('papersToken')}`;
     return config;
   },
   //요청 에러 시 수행 로직

@@ -1,26 +1,28 @@
 import { useMutation } from '@tanstack/react-query';
-import { NewCommentType, deleteComment, postNewComment } from 'apis/comment';
+import { deleteComment, NewCommentType, postNewComment } from 'apis/comment';
 import { AxiosError } from 'axios';
 import { AxiosResponseType } from 'constants/Api';
 
 //댓글 작성 mutation
-export const usePostNewCommentMutation = (commentInfo: NewCommentType) => {
+export const usePostNewCommentMutation = () => {
   const { mutate: postCommentAction } = useMutation<
     AxiosResponseType,
-    AxiosError
+    AxiosError,
+    NewCommentType
   >({
-    mutationFn: () => postNewComment(commentInfo)
+    mutationFn: (commentInfo: NewCommentType) => postNewComment(commentInfo)
   });
   return { postCommentAction };
 };
 
 //댓글 삭제
-export const useDeleteCommentMutation = (commentId: number) => {
+export const useDeleteCommentMutation = () => {
   const { mutate: deleteCommentAction } = useMutation<
     AxiosResponseType,
-    AxiosError
+    AxiosError,
+    number
   >({
-    mutationFn: () => deleteComment(commentId)
+    mutationFn: (commentId: number) => deleteComment(commentId)
   });
   return { deleteCommentAction };
 };

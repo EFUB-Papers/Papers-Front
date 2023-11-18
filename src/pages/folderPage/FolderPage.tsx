@@ -39,10 +39,10 @@ const FolderPage = ({ isMine }: PropsType) => {
           const { imgUrl, scrapTitle, scrapLink, scrapContent, scrapId } = post;
           return (
             <BasicContentCard
-              postId={scrapId}
+              scrapId={scrapId}
               imgUrl={imgUrl}
-              postDetail={scrapContent}
-              postTitle={scrapTitle}
+              scrapContent={scrapContent}
+              scrapTitle={scrapTitle}
               originTitle={scrapLink}
               originLink={scrapLink}
             />

@@ -1,30 +1,40 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  postFollowUser,
   deleteFollowUser,
   getFollowerList,
-  getFollowingList
+  getFollowingList,
+  postFollowUser
 } from 'apis/follow';
+import { AxiosResponseType } from '../../constants/Api';
+import { AxiosError } from 'axios';
 
 //팔로우 걸기
-export const usePostFollowMutation = (nickname: string) => {
-  const { mutate: postFollowMutate } = useMutation({
-    mutationFn: () => postFollowUser(nickname)
+export const usePostFollowMutation = () => {
+  const { mutate: postFollowMutate } = useMutation<
+    AxiosResponseType,
+    AxiosError,
+    string
+  >({
+    mutationFn: (nickname: string) => postFollowUser(nickname)
   });
   return { postFollowMutate };
 };
 
 //팔로우 취소
-export const useDeleteFollowMutation = (nickname: string) => {
-  const { mutate: deleteFollowMutate } = useMutation({
-    mutationFn: () => deleteFollowUser(nickname)
+export const useDeleteFollowMutation = () => {
+  const { mutate: deleteFollowMutate } = useMutation<
+    AxiosResponseType,
+    AxiosError,
+    string
+  >({
+    mutationFn: (nickname: string) => deleteFollowUser(nickname)
   });
   return { deleteFollowMutate };
 };
 
 //팔로잉 조회
 export const useGetFollowingQuery = () => {
-  const data = useQuery({
+  const { data } = useQuery({
     queryKey: ['following'],
     queryFn: getFollowingList
   });
@@ -33,7 +43,7 @@ export const useGetFollowingQuery = () => {
 
 //팔로워 조회
 export const useGetFollowerQuery = () => {
-  const data = useQuery({
+  const { data } = useQuery({
     queryKey: ['follower'],
     queryFn: getFollowerList
   });
