@@ -7,8 +7,10 @@ import MainPage from 'pages/MainPage/MainPage';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import DetailPage from '../pages/DetailPage/DetailPage';
 import ScrapWritePage from 'pages/ScrapWritePage/ScrapWritePage';
+import LoginPage from 'pages/LoginPage/LoginPage';
 
 const router = createBrowserRouter([
+  { element: <LoginPage />, path: '/login' },
   {
     element: <NavbarLayout />,
     children: [

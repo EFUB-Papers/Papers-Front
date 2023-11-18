@@ -1,6 +1,6 @@
 //스크랩 삭제하는 mutation
 import { useMutation } from '@tanstack/react-query';
-import { deleteScrap, DeleteScrapType } from '../../apis/scraps';
+import { deleteScrap } from '../../apis/scraps';
 import { AxiosResponseType } from '../../constants/Api';
 import { AxiosError } from 'axios';
 
@@ -9,9 +9,9 @@ export const deleteScrapMutation = () => {
   const { mutate: deleteScrapAction } = useMutation<
     AxiosResponseType,
     AxiosError,
-    DeleteScrapType
+    number
   >({
-    mutationFn: (scrapInfo) => deleteScrap(scrapInfo)
+    mutationFn: (scrapId) => deleteScrap(scrapId)
   });
   return { deleteScrapAction };
 };

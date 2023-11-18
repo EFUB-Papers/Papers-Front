@@ -2,9 +2,10 @@ import { axiosInstance } from './axiosInstance';
 
 //회원 가입
 export const postLogin = async (code: string) => {
-  return await axiosInstance.post('/auth/login', {
+  const { data } = await axiosInstance.post('/auth/login', {
     code
   });
+  return data;
 };
 
 //토큰 재발급✅수정 필요

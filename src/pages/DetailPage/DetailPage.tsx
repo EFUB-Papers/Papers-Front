@@ -7,14 +7,15 @@ import Comment from 'components/DetailPage/Comment/Comment';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 
 const DetailPage = () => {
-  const { postId, postDetail, postTitle, originPost, writerInfo } = OnePostMock;
+  const { scrapId, scrapContent, scrapTitle, scrapLink, writerInfo } =
+    OnePostMock;
   return (
     <S.Wrapper>
       <S.FlexWrapper>
         <S.Category>여행</S.Category>
         <RightArrow />
       </S.FlexWrapper>
-      <S.Title>{postTitle}</S.Title>
+      <S.Title>{scrapTitle}</S.Title>
       <S.TagWrapper></S.TagWrapper>
       <S.UserInfoWrapper>
         <CircleBox imgUrl={writerInfo.imgUrl} size={'small'} />
@@ -27,7 +28,7 @@ const DetailPage = () => {
         <LinkPreview url={'https://www.naver.com'} />
         <S.PrePostWrapper></S.PrePostWrapper>
         <S.ImgWrapper />
-        <S.ContentWrapper>{postDetail}</S.ContentWrapper>
+        <S.ContentWrapper>{scrapContent}</S.ContentWrapper>
       </S.PostWrapper>
       <HeartAndCmtInfo heartCount={12} commentCount={12} />
       <Comment />

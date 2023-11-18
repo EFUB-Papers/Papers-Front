@@ -39,12 +39,12 @@ const MainPage = () => {
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
+                    scrapId={post.scrapId}
+                    link={post.scrapLink.originLink}
+                    linkTitle={post.scrapLink.originTitle}
                     imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    title={post.scrapTitle}
+                    content={post.scrapContent}
                     heartCnt={10}
                     author={post.writerInfo.nickname}
                   />
@@ -62,12 +62,12 @@ const MainPage = () => {
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
+                    scrapId={post.scrapId}
+                    link={post.scrapLink.originLink}
+                    linkTitle={post.scrapLink.originTitle}
                     imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    title={post.scrapTitle}
+                    content={post.scrapContent}
                     heartCnt={10}
                     author={post.writerInfo.nickname}
                   />

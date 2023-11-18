@@ -13,22 +13,22 @@ const CategoryPage = () => {
         {PostListMock.map((scrap: OneScrapType) => {
           const {
             imgUrl,
-            postId,
-            postTitle,
-            postDetail,
-            originPost,
+            scrapId,
+            scrapTitle,
+            scrapContent,
+            scrapLink,
             writerInfo
           } = scrap;
           return (
             <ScrapCard
               width={300}
-              scrapId={postId}
-              link={originPost.originLink}
-              linkTitle={originPost.originTitle}
+              scrapId={scrapId}
+              link={scrapLink.originLink}
+              linkTitle={scrapLink.originTitle}
               imgUrl={imgUrl}
               author={writerInfo.nickname}
-              title={postTitle}
-              content={postDetail}
+              title={scrapTitle}
+              content={scrapContent}
               heartCnt={12}
             />
           );
