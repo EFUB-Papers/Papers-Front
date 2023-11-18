@@ -8,9 +8,10 @@ export const postLogin = async (code: string) => {
   return data;
 };
 
-//토큰 재발급✅수정 필요
+//토큰 재발급 ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
 export const postNewToken = async () => {
-  return await axiosInstance.post('/auth/reissue');
+  const { data } = await axiosInstance.post('/auth/reissue');
+  return data;
 };
 
 //닉네임 중복 조회

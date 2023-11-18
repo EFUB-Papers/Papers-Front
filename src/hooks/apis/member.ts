@@ -1,10 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   ProfileType,
   postMyProfile,
   postOtherUserInfo,
   postSameName,
-  postLogin
+  postLogin,
+  postNewToken
 } from 'apis/member';
 import { AxiosError } from 'axios';
 
@@ -30,7 +31,15 @@ export const usePostLoginMutation = () => {
   return { loginData, postLoginMutate };
 };
 
-//폴더 이름 변경: 폴더 이름을 변경하는 mutation
+//토큰 재발급 mutation ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
+export const usePostNewTokenMutation = () => {
+  const { data: newTokenData, mutate: postNewTokenAction } = useMutation({
+    mutationFn: () => postNewToken()
+  });
+  return { newTokenData, postNewTokenAction };
+};
+
+//닉네임 중복 조회 mutation
 export const useSameNameMutation = (nickname: string) => {
   const { mutate: checkSameNameMutate } = useMutation<boolean, AxiosError>({
     mutationFn: () => postSameName(nickname)
