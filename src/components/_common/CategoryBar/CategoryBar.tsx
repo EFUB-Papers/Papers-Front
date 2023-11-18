@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { S } from './style';
-import { CATEGORY, CategoryValuesType } from '../../../constants/Category';
-import { useNavigate } from 'react-router-dom';
+import {
+  CategoryValuesType,
+  CategoryWithoutAll
+} from '../../../constants/Category';
 
 const CategoryBar = () => {
   const [category, setCategory] = useState<CategoryValuesType>();
-  const navigate = useNavigate();
-
   return (
     <S.Wrppaer>
-      {Object.entries(CATEGORY).map((entry, index: number) => {
+      {Object.entries(CategoryWithoutAll).map((entry, index: number) => {
         return (
           <S.CategoryItem
             key={index}

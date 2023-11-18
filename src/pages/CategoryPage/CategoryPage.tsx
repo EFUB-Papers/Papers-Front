@@ -1,8 +1,7 @@
 import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
-import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
-import { PostListMock } from 'mock/postMock';
-import { OneScrapType } from '../../types/ScrapType';
 import { S } from './style';
+import { PostListMock } from '../../mock/postMock';
+import ScrapCard from '../../components/_common/ScrapCard/ScrapCard';
 
 const CategoryPage = () => {
   return (
@@ -10,29 +9,33 @@ const CategoryPage = () => {
       <S.Category>IT</S.Category>
       <CategoryBar />
       <S.ContentWrapper>
-        {PostListMock.map((scrap: OneScrapType) => {
-          const {
-            imgUrl,
-            scrapId,
-            scrapTitle,
-            scrapContent,
-            scrapLink,
-            writerInfo
-          } = scrap;
-          return (
-            <ScrapCard
-              width={300}
-              scrapId={scrapId}
-              link={scrapLink.originLink}
-              linkTitle={scrapLink.originTitle}
-              imgUrl={imgUrl}
-              author={writerInfo.nickname}
-              title={scrapTitle}
-              content={scrapContent}
-              heartCnt={12}
-            />
-          );
-        })}
+        <>
+          {PostListMock.map((scrap) => {
+            const {
+              scrapId,
+              scrapTitle,
+              scrapContent,
+              scrapLink,
+              imgUrl,
+              writerInfo
+            } = scrap;
+            return (
+              <>
+                <ScrapCard
+                  width={300}
+                  scrapId={scrapId}
+                  link={scrapLink}
+                  linkTitle={scrapLink}
+                  imgUrl={imgUrl}
+                  title={scrapTitle}
+                  content={scrapContent}
+                  heartCnt={10}
+                  author={writerInfo.nickname}
+                />
+              </>
+            );
+          })}
+        </>
       </S.ContentWrapper>
     </S.Wrapper>
   );

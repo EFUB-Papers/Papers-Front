@@ -37,15 +37,14 @@ const FolderPage = ({ isMine }: PropsType) => {
       <S.ContentWrapper>
         {PostListMock.map((post: OneScrapType) => {
           const { imgUrl, scrapTitle, scrapLink, scrapContent, scrapId } = post;
-          const { originLink, originTitle } = scrapLink;
           return (
             <BasicContentCard
               scrapId={scrapId}
               imgUrl={imgUrl}
               scrapContent={scrapContent}
               scrapTitle={scrapTitle}
-              originTitle={originTitle}
-              originLink={originLink}
+              originTitle={scrapLink}
+              originLink={scrapLink}
             />
           );
         })}

@@ -1,14 +1,18 @@
 import { UserType } from './UserType';
+import { CategoryKeyType } from 'constants/Category';
 
 export type OneScrapType = {
   imgUrl: string;
   scrapId: number;
   scrapTitle: string;
   scrapContent: string;
-  scrapLink: SimpleOriginPostType; //원본 포스트 정보
+  scrapLink: string;
   writerInfo: UserType; //작성자 정보
   CreatedAt: Date; //작성 날짜
+  heartCnt: number; //좋아요 개수
+  commentCnt: number; //댓글 개수
   tags: OneTagType[];
+  category: CategoryKeyType;
 };
 
 export type OriginPostType = {
