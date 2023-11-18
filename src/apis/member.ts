@@ -8,8 +8,7 @@ export const postLogin = async (code: string) => {
   return data;
 };
 
-//토큰 재발급✅수정 필요
-export const postNewToken = async () => {
+export const postNewToken = async (): Promise<string> => {
   return await axiosInstance.post('/auth/reissue');
 };
 

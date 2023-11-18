@@ -1,7 +1,7 @@
 import { axiosInstance } from './axiosInstance';
 import { AxiosResponseType } from 'constants/Api';
 import { OneFolderType, OneFolderTypeWithoutUser } from 'types/FolderType';
-import { OneScrapType } from '../types/ScrapType';
+import { OneScrapType } from 'types/ScrapType';
 
 //폴더 생성
 export const postNewFolder = async (folderName: string) => {
