@@ -1,5 +1,5 @@
 import { UserType } from './UserType';
-import { CategoryKeyType } from '../constants/Category';
+import { CategoryKeyType } from 'constants/Category';
 
 export type OneScrapType = {
   imgUrl: string;
