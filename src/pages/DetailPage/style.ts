@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 
 const FlexWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -20,24 +21,17 @@ const Category = styled.div`
 `;
 
 const PostWrapper = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.line};
   width: 100%;
   ${flexCenter};
   flex-direction: column;
   margin-top: 50px;
+  /* border: 1px solid red; */
 `;
 
 const Title = styled.div`
   font-size: 28px;
   font-weight: 700;
-  margin-top: 20px;
-`;
-
-const TagWrapper = styled.div`
-  width: 100%;
-  margin-top: 30px;
-  height: 50px;
-  background-color: pink;
+  margin: 20px 0px;
 `;
 
 const UserInfoWrapper = styled.div`
@@ -69,7 +63,6 @@ const PrePostWrapper = styled.div`
 
 const ImgWrapper = styled.img`
   width: 600px;
-  height: 300px;
   margin-top: 50px;
 `;
 
@@ -77,13 +70,13 @@ const ContentWrapper = styled.div`
   width: 100%;
   min-height: 100px;
   margin-top: 50px;
+  margin-bottom: 40px;
   line-height: 1.6;
 `;
 
 export const S = {
   Wrapper,
   Title,
-  TagWrapper,
   Category,
   Name,
   PrePostWrapper,

@@ -31,7 +31,7 @@ const router = createBrowserRouter([
 
       { element: <CategoryPage />, path: '/category/:categoryId' },
       { element: <SearchPage />, path: '/search' },
-      { element: <DetailPage />, path: '/detail' }
+      { element: <DetailPage />, path: '/detail/:scrapId' }
     ]
   },
   {

@@ -6,9 +6,11 @@ const NewCommentWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 10px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  padding: 18px;
   margin-top: 10px;
-  height: 180px;
   margin-bottom: 30px;
 `;
 
@@ -23,7 +25,6 @@ const OneCommentWrapper = styled.div`
 
 const MyInfoBox = styled.div`
   display: flex;
-  padding: 10px;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -41,20 +42,16 @@ const FlexBox = styled.div`
   gap: 10px;
 `;
 
-const ContentBox = styled.div`
-  width: 100%;
-`;
 const NameBox = styled.div`
   font-size: 16px;
 `;
 
 const TextAreaBox = styled.div`
-  width: calc(100% - 10px);
-  height: 100px;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 10px;
+  margin-top: 16px;
 `;
 
 const ListWrapper = styled.div`
@@ -66,8 +63,7 @@ const ListWrapper = styled.div`
 
 const OneCommentBox = styled.div`
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.line};
-  padding: 10px;
+  /* border-bottom: 1px solid ${({ theme }) => theme.line}; */
 `;
 
 const CommentContextBox = styled.div`
@@ -77,8 +73,12 @@ const CommentContextBox = styled.div`
 `;
 
 const SubComment = styled.div`
-  padding: 15px;
+  display: inline-block;
+  margin: 15px;
   color: ${({ theme }) => theme.COLOR.darkGrey};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const SubCommentWrapper = styled.div`
@@ -89,10 +89,12 @@ const SubCommentWrapper = styled.div`
 
 const ReplyNewContainer = styled.div`
   width: 100%;
+  padding: 10px;
+  padding-bottom: 0px;
 `;
 
 const ReplyContainer = styled.div`
-  margin: 10px 0 10px 0;
+  margin-bottom: 30px;
 `;
 
 export const S = {
@@ -100,7 +102,6 @@ export const S = {
   NameBox,
   FlexBox,
   TextAreaBox,
-  ContentBox,
   MyInfoBox,
   OneCommentWrapper,
   OneCommentBox,
