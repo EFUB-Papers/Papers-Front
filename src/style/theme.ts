@@ -27,6 +27,7 @@ export const LIGHT = {
   selectBox: '#ffffff',
   header: 'rgba(256, 256, 256, 0.7)',
   line: '#C9C9C9',
+  lineForDark: `rbga(0,0,0,0)`,
   boxShadow: '3px 3px 10px 3px rgba(0, 0, 0, 0.15)',
   text: 'black',
   COLOR: { ...COLOR },
@@ -39,7 +40,8 @@ export const DARK = {
   input: '#595959',
   header: 'rgba(0, 0, 0, 0.6)',
   line: '#555',
-  boxShadow: ' 0 0 0 1.7px #666',
+  lineForDark: '#555',
+  boxShadow: ' 0 0 0 0px #666',
   text: 'white',
   COLOR: { ...COLOR },
   TEXT_SIZE: { ...TEXT_SIZE }

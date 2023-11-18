@@ -4,6 +4,7 @@ import { flexCenter } from '../../../style/common';
 const NewCommentWrapper = styled.div`
   width: 100%;
   box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   border-radius: 10px;
   display: flex;
   flex-direction: column;

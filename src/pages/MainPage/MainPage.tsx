@@ -10,6 +10,7 @@ import { OneScrapType } from '../../types/ScrapType';
 import { userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
+import { Navigate } from 'react-router';
 
 const MainPage = () => {
   return (

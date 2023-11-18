@@ -1,6 +1,10 @@
 import React from 'react';
 import { S } from './style';
-import { ReactComponent as HeartIcon } from 'asset/scrapCard/heart.svg';
+import { ReactComponent as LightHeartIcon } from 'asset/scrapCard/lightHeart.svg';
+import { ReactComponent as DarkHeartIcon } from 'asset/scrapCard/darkHeart.svg';
+import { useRecoilValue } from 'recoil';
+import { modeState } from 'atom/mode';
+import { useNavigate } from 'react-router-dom';
 
 export type ScrapCardProps = {
   width: number;
@@ -15,8 +19,14 @@ export type ScrapCardProps = {
 };
 
 const ScrapCard = (props: ScrapCardProps) => {
+  const mode = useRecoilValue(modeState);
+  const navigate = useNavigate();
+
   return (
-    <S.Wrapper $width={props.width}>
+    <S.Wrapper
+      onClick={() => navigate(`/detail/${props.scrapId}`)}
+      $width={props.width}
+    >
       <S.LinkBox to={props.link} target="_blank">
         <S.LinkTitle>{props.linkTitle}</S.LinkTitle>
       </S.LinkBox>
@@ -27,7 +37,7 @@ const ScrapCard = (props: ScrapCardProps) => {
         <S.Title>{props.title}</S.Title>
         <S.Content>{props.content}</S.Content>
         <S.Footer>
-          <HeartIcon />
+          {mode === 'light' ? <LightHeartIcon /> : <DarkHeartIcon />}
           <S.HeartCnt>{props.heartCnt}</S.HeartCnt>
           <S.Author>{`by ${props.author}`}</S.Author>
         </S.Footer>

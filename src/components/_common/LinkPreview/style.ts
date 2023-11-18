@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   height: 140px;
   border-radius: 6px;
   box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   padding: 10px;
   margin: 10px 0px;
   &:hover {

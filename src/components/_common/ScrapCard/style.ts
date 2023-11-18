@@ -15,7 +15,7 @@ const LinkBox = styled(Link)`
   padding: 10px 15px;
   font-size: 17px;
   box-shadow: ${({ theme }) => theme.boxShadow};
-
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   color: ${({ theme }) => theme.text};
 
   ${flexCenter}
@@ -47,6 +47,7 @@ const ScrapBox = styled.div`
   border-radius: 15px;
   padding: 15px;
   box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   display: flex;
   flex-direction: column;
 
