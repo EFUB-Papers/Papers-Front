@@ -6,6 +6,10 @@ import TextArea from '../../_common/TextArea/TextArea';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 import Cat from 'asset/profile.png';
+import {
+  usePostProfile,
+  useSameNameMutation
+} from '../../../hooks/apis/member';
 
 type ProfileProps = {
   userName: string;
@@ -17,8 +21,12 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
   //첫번쨰는 이름 변경, 두번쨰는 한줄 소개 변경
   const [isEditMode, setIsEditMode] = useState(false);
   const [profileImg, setProfileImg] = useState(Cat);
-  const [errorMessage, setErrorMessage] =
-    useState<string>('닉네임이 중복됩니다.');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  //이름 중복 검사
+  const { postSameNameAction, data: hasSameName } = useSameNameMutation();
+  //프로필 정보 변경
+  const { postProfileMutate } = usePostProfile();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,12 +38,11 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
   const { name, detail } = values;
 
   //닉네임 중복 검사
-  const onSubmitNickname = () => {
-    //닉네임이 중복일 경우
-    setErrorMessage('닉네임이 이미 존재합니다.');
-
-    //닉네임이 될 경우
-    setErrorMessage('');
+  const onSubmitNickname = async () => {
+    postSameNameAction(name);
+    if (hasSameName) {
+      setErrorMessage('중복된 이름이 있습니다.');
+    }
   };
 
   const onFileChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +58,19 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
         setProfileImg(previewImgUrl);
       }
     };
+  };
+
+  //프로필 변경 제출
+  const onSubmitProfile = () => {
+    const dto = {
+      nickname: name,
+      introduce: detail
+    };
+
+    const formData = new FormData();
+    formData.append('profileImg', profileImg);
+    formData.append('dto', JSON.stringify(dto));
+    postProfileMutate(formData);
   };
 
   return (
@@ -99,7 +119,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
               <BasicButton
                 onClick={onSubmitNickname}
                 color={'positive'}
-                width={100}
+                width={80}
                 height={30}
                 fontSize={14}
               >
@@ -125,13 +145,11 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             <BasicButton
               color={'transparent'}
               fontSize={16}
-              onClick={() => {
-                setIsEditMode(false);
-              }}
+              onClick={onSubmitProfile}
               width={70}
               height={30}
               borderRadius={5}
-              disabled={!errorMessage}
+              disabled={errorMessage.length}
               children={<div>완료</div>}
             />
           </S.UserInfo>

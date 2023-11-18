@@ -7,7 +7,7 @@ import Comment from 'components/DetailPage/Comment/Comment';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 
 const DetailPage = () => {
-  const { scrapId, scrapContent, scrapTitle, scrapLink, writerInfo } =
+  const { scrapId, scrapTitle, scrapContent, scrapLink, writerInfo } =
     OnePostMock;
   return (
     <S.Wrapper>
@@ -25,7 +25,7 @@ const DetailPage = () => {
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>
       <S.PostWrapper>
-        <LinkPreview url={'https://www.naver.com'} />
+        <LinkPreview url={scrapLink} />
         <S.PrePostWrapper></S.PrePostWrapper>
         <S.ImgWrapper />
         <S.ContentWrapper>{scrapContent}</S.ContentWrapper>

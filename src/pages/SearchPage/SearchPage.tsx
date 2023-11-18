@@ -14,8 +14,8 @@ const SearchPage = () => {
           return (
             <BasicContentCard
               scrapId={scrapId}
-              originLink={scrapLink.originLink}
-              originTitle={scrapLink.originTitle}
+              originLink={scrapLink}
+              originTitle={scrapLink}
               imgUrl={imgUrl}
               scrapTitle={scrapTitle}
               scrapContent={scrapContent}
