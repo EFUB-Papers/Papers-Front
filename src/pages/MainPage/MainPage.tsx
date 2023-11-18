@@ -35,18 +35,18 @@ const MainPage = () => {
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
             {PostListMock.map(
-              (post: OneScrapType, index: number) =>
+              (scrap: OneScrapType, index: number) =>
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
-                    imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    scrapId={scrap.scrapId}
+                    link={scrap.scrapLink}
+                    linkTitle={scrap.scrapLink}
+                    imgUrl={scrap.imgUrl}
+                    title={scrap.scrapTitle}
+                    content={scrap.scrapContent}
                     heartCnt={10}
-                    author={post.writerInfo.nickname}
+                    author={scrap.writerInfo.nickname}
                   />
                 )
             )}
@@ -57,23 +57,22 @@ const MainPage = () => {
         <S.Section>
           <S.Text>팔로우한 유저의 글</S.Text>
           <S.CardList>
-            {PostListMock.map((post: OneScrapType, index: number) => {
-              return (
+            {PostListMock.map(
+              (scrap: OneScrapType, index: number) =>
                 index < 3 && (
                   <ScrapCard
                     width={300}
-                    scrapId={post.postId}
-                    link={post.originPost.originLink}
-                    linkTitle={post.originPost.originTitle}
-                    imgUrl={post.imgUrl}
-                    title={post.postTitle}
-                    content={post.postDetail}
+                    scrapId={scrap.scrapId}
+                    link={scrap.scrapLink}
+                    linkTitle={scrap.scrapLink}
+                    imgUrl={scrap.imgUrl}
+                    title={scrap.scrapTitle}
+                    content={scrap.scrapContent}
                     heartCnt={10}
-                    author={post.writerInfo.nickname}
+                    author={scrap.writerInfo.nickname}
                   />
                 )
-              );
-            })}
+            )}
           </S.CardList>
         </S.Section>
 

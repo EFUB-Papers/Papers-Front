@@ -11,7 +11,6 @@ export type CircleIconType = {
 };
 
 const CircleIcon = ({ onClick, children, ...props }: CircleIconType) => {
-  console.log('props', props);
   return (
     <>
       <S.CircleImg onClick={onClick} {...props}>

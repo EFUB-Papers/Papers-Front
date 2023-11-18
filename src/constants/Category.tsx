@@ -1,5 +1,4 @@
-export const CATEGORY: { [key: string]: string } = {
-  ALL: '카테고리',
+export const CategoryWithoutAll = {
   NEWS: '시사',
   CULTURE: '문화',
   TRAVEL: '여행',
@@ -7,6 +6,11 @@ export const CATEGORY: { [key: string]: string } = {
   LIFE: '라이프',
   KNOWLEDGE: '지식',
   ETC: '기타'
+} as const;
+
+export const CATEGORY: { [key: string]: string } = {
+  ALL: '카테고리',
+  ...CategoryWithoutAll
 } as const;
 
 export type CategoryType = typeof CATEGORY;

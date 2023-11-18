@@ -4,7 +4,10 @@ import { NETWORK } from '../constants/Api';
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
   timeout: NETWORK.TIMEOUT,
-  withCredentials: true
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
 });
 
 //1. 요청 인터셉터

@@ -16,7 +16,7 @@ const SearchBar = () => {
   const [isSelectOpen, setIsSelectOpen] = useState([false, false]);
   const [searchOption, setSearchOption] = useState<
     [SearchRangeKeyType, CategoryKeyType]
-  >(['TOTAL', 'TOTAL']);
+  >(['ALL', 'ALL']);
   const navigate = useNavigate();
   const onClickSearchOption = ({
     sort,

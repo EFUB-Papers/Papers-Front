@@ -1,18 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
-import {
-  ProfileType,
-  postMyProfile,
-  postOtherUserInfo,
-  postSameName
-} from 'apis/member';
+import { postMyProfile, postOtherUserInfo, postSameName } from 'apis/member';
 import { AxiosError } from 'axios';
 
 //폴더 이름 변경: 폴더 이름을 변경하는 mutation
-export const useSameNameMutation = (nickname: string) => {
-  const { mutate: checkSameNameMutate } = useMutation<boolean, AxiosError>({
-    mutationFn: () => postSameName(nickname)
+export const useSameNameMutation = () => {
+  const { mutate: postSameNameAction, data } = useMutation<
+    boolean,
+    AxiosError,
+    string
+  >({
+    mutationFn: (nickname: string) => postSameName(nickname)
   });
-  return { checkSameNameMutate };
+  return { postSameNameAction, data };
 };
 
 //회원 정보 조회
@@ -24,9 +23,13 @@ export const useUserDetailInfo = (nickname: string) => {
 };
 
 //프로필 설정
-export const usePostProfile = (profileInfo: ProfileType) => {
-  const { mutate: postProfileMutate } = useMutation<boolean, AxiosError>({
-    mutationFn: () => postMyProfile(profileInfo)
+export const usePostProfile = () => {
+  const { mutate: postProfileMutate } = useMutation<
+    boolean,
+    AxiosError,
+    FormData
+  >({
+    mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo)
   });
   return { postProfileMutate };
 };
