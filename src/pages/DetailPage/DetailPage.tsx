@@ -25,7 +25,11 @@ const DetailPage = () => {
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>
       <S.PostWrapper>
-        <LinkPreview url={scrapLink} />
+        <LinkPreview
+          url={
+            'https://velog.io/@kyleryu/10%EC%82%B4-%EA%BC%AC%EB%A7%88-%EA%B0%9C%EB%B0%9C%EC%9E%90-%ED%8C%90%EA%B5%90-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%8C%80%ED%91%9C%EA%B0%80-%EB%90%98%EB%8B%A4'
+          }
+        />
         <S.PrePostWrapper></S.PrePostWrapper>
         <S.ImgWrapper />
         <S.ContentWrapper>{scrapContent}</S.ContentWrapper>

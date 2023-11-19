@@ -7,7 +7,6 @@ const Wrapper = styled.div<{
   height: 120px;
   left: 0;
   display: flex;
-  width: 850px;
   position: relative;
   ${flexCenter};
   padding-bottom: 30px;
@@ -15,10 +14,6 @@ const Wrapper = styled.div<{
     isBorderBottom && `1px solid ${theme.line}`};
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
-
-  //@media (max-width: 800px) {
-  //  width: 400px;
-  //}
 `;
 
 const PostContentWrapper = styled.div`

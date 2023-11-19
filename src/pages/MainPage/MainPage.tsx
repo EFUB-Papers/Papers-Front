@@ -6,7 +6,7 @@ import UserCard from 'components/_common/UserCard/UserCard';
 import React from 'react';
 import { S } from './style';
 import { PostListMock } from 'mock/postMock';
-import { OneScrapType } from '../../types/ScrapType';
+import { OneScrapType } from 'types/ScrapType';
 import { userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
