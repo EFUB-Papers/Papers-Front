@@ -10,8 +10,9 @@ import { CATEGORY, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modeState } from 'atom/mode';
+import { folderEditModal, folderSelectModal } from '../../atom/modal';
 
 const ScrapWritePage = () => {
   const [category, setCategory] = useState<CategoryValuesType>();
@@ -21,11 +22,12 @@ const ScrapWritePage = () => {
   const [showLinkPreview, setShowLinkPreview] = useState(false);
   const [imgFile, setImgFile] = useState('');
   const [content, setContent] = useState('');
-
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const mode = useRecoilValue(modeState);
+  const setFolderEditModalOpen = useSetRecoilState(folderEditModal);
+  const setFolderSelectModalOpen = useSetRecoilState(folderSelectModal);
 
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -65,14 +67,6 @@ const ScrapWritePage = () => {
     }
   };
 
-  // const onChangeEditModalOpen = () => {
-  //   setIsSelectModalOpen((prev) => !prev);
-  // };
-  //
-  // const onChangeSelectModalOpen = () => {
-  //   setIsSelectModalOpen((prev) => !prev);
-  // };
-
   return (
     <>
       <S.Root>
@@ -99,8 +93,20 @@ const ScrapWritePage = () => {
               )}
             </S.CategoryDropdown>
             {/*폴더 선택*/}
-            <S.Button>폴더 선택</S.Button>
-            <S.Button>폴더 편집</S.Button>
+            <S.Button
+              onClick={() => {
+                setFolderSelectModalOpen(true);
+              }}
+            >
+              폴더 선택
+            </S.Button>
+            <S.Button
+              onClick={() => {
+                setFolderEditModalOpen(true);
+              }}
+            >
+              폴더 편집
+            </S.Button>
           </S.FolderButtonWrapper>
           {/* 제목 */}
           <S.Title

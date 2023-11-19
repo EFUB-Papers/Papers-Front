@@ -11,7 +11,6 @@ const FolderSelect = () => {
 
   return (
     <S.ContentWrapper>
-      <S.Title>이동할 폴더 선택</S.Title>
       <S.FlexBox>
         {MyFolderMock.map((folder) => {
           return (

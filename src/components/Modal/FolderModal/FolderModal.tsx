@@ -3,6 +3,8 @@ import { folderEditModal, folderSelectModal } from '../../../atom/modal';
 import BasicModal from '../BasicModal/BasicModal';
 import FolderEdit from './FolderEdit/FolderEdit';
 import FolderSelect from './FolderSelect/FolderSelect';
+import BasicButton from '../../_common/BasicButton/BasicButton';
+import { S } from './style';
 
 const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
   const setIsEditModalOpen = useSetRecoilState(folderEditModal);
@@ -13,7 +15,10 @@ const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
       height={500}
       onCloseModal={() => setIsEditModalOpen(false)}
     >
-      <FolderEdit />
+      <>
+        <S.Title>폴더 편집</S.Title>
+        <FolderEdit />
+      </>
     </BasicModal>
   ) : (
     <BasicModal
@@ -21,7 +26,15 @@ const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
       height={500}
       onCloseModal={() => setIsSelectModalOpen(false)}
     >
-      <FolderSelect />
+      <>
+        <S.EditIconWrapper>
+          <S.Title>이동할 폴더 선택</S.Title>
+          <BasicButton color={'positive'} fontSize={14} width={70} height={30}>
+            완료
+          </BasicButton>
+        </S.EditIconWrapper>
+        <FolderSelect />
+      </>
     </BasicModal>
   );
 };
