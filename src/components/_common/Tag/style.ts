@@ -3,6 +3,7 @@ import { flexCenter } from 'style/common';
 import { TagProps } from './Tag';
 
 const Wrapper = styled.div`
+  display: inline;
   ${flexCenter}
   height: 32px;
   font-size: 14px;

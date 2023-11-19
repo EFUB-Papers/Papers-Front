@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { getCookie, setCookie } from 'utils/cookieStorage';
 import { NETWORK } from 'constants/Api';
-import { postNewToken } from '@/apis/member';
+import { postNewToken } from 'apis/member';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,

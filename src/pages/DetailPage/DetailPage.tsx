@@ -5,10 +5,19 @@ import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
 import HeartAndCmtInfo from 'components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
 import Comment from 'components/DetailPage/Comment/Comment';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
+import TagCreator from 'components/_common/TagCreator/TagCreator';
 
 const DetailPage = () => {
-  const { scrapId, scrapTitle, scrapContent, scrapLink, writerInfo } =
-    OnePostMock;
+  const {
+    scrapId,
+    scrapTitle,
+    scrapContent,
+    scrapLink,
+    writerInfo,
+    imgUrl,
+    tags
+  } = OnePostMock;
+
   return (
     <S.Wrapper>
       <S.FlexWrapper>
@@ -16,7 +25,7 @@ const DetailPage = () => {
         <RightArrow />
       </S.FlexWrapper>
       <S.Title>{scrapTitle}</S.Title>
-      <S.TagWrapper></S.TagWrapper>
+      <TagCreator isCreator={false} tags={tags} />
       <S.UserInfoWrapper>
         <CircleBox imgUrl={writerInfo.imgUrl} size={'small'} />
         <S.FlexColumnWrapper>
@@ -25,9 +34,9 @@ const DetailPage = () => {
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>
       <S.PostWrapper>
-        <LinkPreview url={scrapLink} />
-        <S.PrePostWrapper></S.PrePostWrapper>
-        <S.ImgWrapper />
+        <LinkPreview url="https://despiteallthat.tistory.com/243" />
+        {/* <S.PrePostWrapper></S.PrePostWrapper> */}
+        <S.ImgWrapper src={imgUrl} />
         <S.ContentWrapper>{scrapContent}</S.ContentWrapper>
       </S.PostWrapper>
       <HeartAndCmtInfo heartCount={12} commentCount={12} />

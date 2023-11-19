@@ -15,7 +15,7 @@ const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
     backgroundColor ? backgroundColor : theme.input};
   width: ${({ width }) => width};
   height: ${({ height }) => (height ? `${height}` : '100%')};
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 20)}px;
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 10)}px;
   display: flex;
   padding: 10px;
   border: ${({ border }) => (border ? border : 'none')};

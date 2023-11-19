@@ -23,7 +23,6 @@ const BasicContentCard = (props: BasicCardProps) => {
         console.log(scrapId);
       }}
     >
-      <MoreDotsIcon style={{ position: 'absolute', right: 0, top: 0 }} />
       <S.PostImg imgUrl={imgUrl} />
 
       <S.PostContentWrapper>
@@ -32,16 +31,19 @@ const BasicContentCard = (props: BasicCardProps) => {
         <S.PostDetail>{scrapContent}</S.PostDetail>
       </S.PostContentWrapper>
 
-      <S.IconFlexWrapper>
-        <S.IconContainer>
-          <HeartIcon />
-          <S.IconText>23</S.IconText>
-        </S.IconContainer>
-        <S.IconContainer>
-          <CommentIcon />
-          <S.IconText>11</S.IconText>
-        </S.IconContainer>
-      </S.IconFlexWrapper>
+      <S.IconWrapper>
+        <MoreDotsIcon />
+        <S.IconFlexWrapper>
+          <S.IconContainer>
+            <HeartIcon />
+            <S.IconText>23</S.IconText>
+          </S.IconContainer>
+          <S.IconContainer>
+            <CommentIcon />
+            <S.IconText>11</S.IconText>
+          </S.IconContainer>
+        </S.IconFlexWrapper>
+      </S.IconWrapper>
     </S.Wrapper>
   );
 };

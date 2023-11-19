@@ -21,21 +21,13 @@ const Header = ({ isWriteButton = true }: HeaderProps) => {
 
   return (
     <S.Wrapper>
-      <S.LogoWrapper>
+      <S.LogoWrapper
+        onClick={() => {
+          navigate('/');
+        }}
+      >
         <LogoImg />
-        {mode == 'light' ? (
-          <BlackLogo
-            onClick={() => {
-              navigate('/');
-            }}
-          />
-        ) : (
-          <WhiteLogo
-            onClick={() => {
-              navigate('/');
-            }}
-          />
-        )}
+        {mode == 'light' ? <BlackLogo /> : <WhiteLogo />}
       </S.LogoWrapper>
       <S.BasicButtonWrapper>
         <ModeToggleButton />
