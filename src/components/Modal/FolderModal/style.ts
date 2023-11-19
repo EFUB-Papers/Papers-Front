@@ -4,6 +4,7 @@ import { flexCenter } from '../../../style/common';
 const Title = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
   height: 50px;
   display: flex;
   align-items: center;
@@ -39,6 +40,7 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
   justify-content: space-between;
+  color: ${({ theme }) => theme.text};
 `;
 
 const IconContainer = styled.div<{ selected?: boolean }>`

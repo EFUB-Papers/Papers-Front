@@ -2,6 +2,10 @@ import { S } from './style';
 import { ReactComponent as MoreDotsIcon } from 'asset/_common/moreDots.svg';
 import { ReactComponent as HeartIcon } from 'asset/_common/heart.svg';
 import { ReactComponent as CommentIcon } from 'asset/_common/comment.svg';
+import MoreBox from '../MoreBox/MoreBox';
+import { folderSelectModal } from '../../../atom/modal';
+import { useSetRecoilState } from 'recoil';
+import { useState } from 'react';
 
 type BasicCardProps = {
   imgUrl: string;
@@ -10,11 +14,12 @@ type BasicCardProps = {
   originTitle: string;
   originLink: string;
   scrapId: number;
-  // Writer: UserType;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
   const { imgUrl, scrapContent, scrapTitle, originTitle, scrapId } = props;
+  const setEditModalOpen = useSetRecoilState(folderSelectModal);
+  const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
   return (
     <S.Wrapper
@@ -23,6 +28,26 @@ const BasicContentCard = (props: BasicCardProps) => {
         console.log(scrapId);
       }}
     >
+      <S.MoreBoxWrapper>
+        <MoreBox
+          isModalOpen={isMoreBoxOpen}
+          closeModal={() => {
+            setIsMoreBoxOpen(false);
+          }}
+          buttons={[
+            {
+              name: '폴더 이동',
+              onClick: () => {
+                setEditModalOpen(true);
+              }
+            },
+            {
+              name: '삭제',
+              onClick: () => {}
+            }
+          ]}
+        />
+      </S.MoreBoxWrapper>
       <S.PostImg imgUrl={imgUrl} />
 
       <S.PostContentWrapper>
@@ -32,7 +57,11 @@ const BasicContentCard = (props: BasicCardProps) => {
       </S.PostContentWrapper>
 
       <S.IconWrapper>
-        <MoreDotsIcon />
+        <MoreDotsIcon
+          onClick={() => {
+            setIsMoreBoxOpen(true);
+          }}
+        />
         <S.IconFlexWrapper>
           <S.IconContainer>
             <HeartIcon />

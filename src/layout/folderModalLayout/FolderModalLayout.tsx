@@ -1,11 +1,10 @@
-import FolderEdit from '../../components/Modal/FolderModal/FolderEdit/FolderEdit';
-import FolderSelect from '../../components/Modal/FolderModal/FolderSelect/FolderSelect';
 import { useRecoilValue } from 'recoil';
 import { folderEditModal, folderSelectModal } from '../../atom/modal';
 import { Outlet } from 'react-router-dom';
 import { useBodyScrollLock } from '../../hooks/useScrollLock';
 import { useEffect } from 'react';
 import { S } from './style';
+import FolderModal from '../../components/Modal/FolderModal/FolderModal';
 
 const FolderModalLayout = () => {
   const isEditModalOpen = useRecoilValue(folderEditModal);
@@ -24,13 +23,10 @@ const FolderModalLayout = () => {
 
   return (
     <S.Wrapper isScrollAble={!isEditModalOpen && !isSelectModalOpen}>
-      {(isEditModalOpen || isSelectModalOpen) && (
-        <S.ModalWrapper>
-          {isEditModalOpen && <FolderEdit />}
-          {isSelectModalOpen && <FolderSelect />}
-        </S.ModalWrapper>
-      )}
-
+      <S.ModalWrapper>
+        {isEditModalOpen && <FolderModal option={'edit'} />}
+        {isSelectModalOpen && <FolderModal option={'select'} />}
+      </S.ModalWrapper>
       <Outlet />
     </S.Wrapper>
   );

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { S } from './style';
+import { modeState } from '../../../atom/mode';
+import { useRecoilValue } from 'recoil';
 
 type Button = {
   name: string;
@@ -14,6 +16,7 @@ type MoreBoxProps = {
 
 const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const mode = useRecoilValue(modeState);
 
   useEffect(() => {
     // 모달 바깥 클릭시 모달 닫기
@@ -33,13 +36,11 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
     };
   }, [isModalOpen, closeModal]);
 
-  console.log(isModalOpen);
-
   return (
     <S.ModalContainer>
       {isModalOpen && (
         <>
-          <S.Modal ref={modalRef}>
+          <S.Modal mode={mode} ref={modalRef}>
             <S.ButtonList
               onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
                 // 이벤트 버블링 막기
