@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { flexCenter } from './../../style/common';
+import { flexCenter, imageRatio } from './../../style/common';
 
 const Root = styled.div`
   width: 100%;
@@ -8,6 +8,7 @@ const Root = styled.div`
   justify-content: center;
 
   /* 스크롤 숨기기 */
+
   textarea {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -34,17 +35,22 @@ const Wrapper = styled.div`
   margin-bottom: 100px;
 `;
 
+const LinkBoxWrapper = styled.div`
+  position: relative;
+`;
+
 const CategoryDropdown = styled.div`
   border: 1px solid ${({ theme }) => theme.line};
   border-radius: 4px;
   width: 160px;
   height: 30px;
   padding: 0px 10px;
-  margin-top: 50px;
   ${flexCenter};
+
   &:hover {
     cursor: pointer;
   }
+
   background: ${({ theme }) => theme.background};
 `;
 
@@ -57,15 +63,18 @@ const CategoryList = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+
   &:hover {
     cursor: default;
   }
+
   background: inherit;
   z-index: 1;
 `;
 
 const CategoryItem = styled.div`
   margin: 4px 10px;
+
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.text};
@@ -113,6 +122,7 @@ const ImageWrapper = styled.div`
 
 const ImageButton = styled.label`
   margin-right: 10px;
+
   &:hover {
     cursor: pointer;
   }
@@ -123,8 +133,11 @@ const ImageText = styled.input`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
 
-const ImagePreview = styled.img`
-  width: 500px;
+const ImagePreview = styled.div<{ backgroundImage: string }>`
+  width: 400px;
+  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-size: auto;
+  ${imageRatio};
 `;
 
 const Content = styled.textarea`
@@ -154,9 +167,36 @@ const ExitButton = styled.button`
   color: ${({ theme }) => theme.COLOR.darkGrey};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   margin-right: 20px;
+
   svg > path {
     stroke: ${({ theme }) => theme.COLOR.darkGrey};
   }
+`;
+
+const DeleteButton = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  ${flexCenter};
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+
+const Button = styled.div`
+  color: ${({ theme }) => theme.text};
+`;
+
+const FolderButtonWrapper = styled.div`
+  gap: 30px;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
 `;
 
 export const S = {
@@ -177,5 +217,9 @@ export const S = {
   ImagePreview,
   Content,
   Footer,
-  ExitButton
+  ExitButton,
+  LinkBoxWrapper,
+  DeleteButton,
+  Button,
+  FolderButtonWrapper
 };

@@ -15,10 +15,14 @@ const Wrapper = styled.div<{
     isBorderBottom && `1px solid ${theme.line}`};
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
+  position: relative;
+`;
 
-  //@media (max-width: 800px) {
-  //  width: 400px;
-  //}
+const MoreBoxWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
 `;
 
 const PostContentWrapper = styled.div`
@@ -97,5 +101,6 @@ export const S = {
   IconContainer,
   IconWrapper,
   IconText,
-  IconFlexWrapper
+  IconFlexWrapper,
+  MoreBoxWrapper
 };

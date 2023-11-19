@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { S } from './style';
+import { S, XS } from './style';
+import FlipCard from '../FlipCard/FlipCard';
 
-function LinkPreview({ url }: { url: string }) {
+function LinkPreview({ url, size }: { url: string; size: 'small' | 'big' }) {
   const [previewData, setPreviewData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,14 +39,31 @@ function LinkPreview({ url }: { url: string }) {
   }
 
   if (!previewData) {
-    return <p>Failed to fetch link preview.</p>;
+    return <S.FailText>데이터를 불러오는데 실패했습니다.</S.FailText>;
   }
 
   const handleClick = () => {
     window.open(url, '_blank');
   };
 
-  return (
+  return size == 'small' ? (
+    <XS.SmallWrapper onClick={handleClick}>
+      <FlipCard
+        content={[
+          <S.ColumnWrapper>
+            <XS.SmallContent>{previewData?.description}</XS.SmallContent>
+          </S.ColumnWrapper>,
+          <XS.SmallFlex>
+            <XS.SmallImg src={previewData?.image} alt="Link Preview" />
+            <XS.SmallColumn>
+              <XS.SmallTitle>{previewData?.title}</XS.SmallTitle>
+              <XS.SmallSource>{url}</XS.SmallSource>
+            </XS.SmallColumn>
+          </XS.SmallFlex>
+        ]}
+      />
+    </XS.SmallWrapper>
+  ) : (
     <S.Wrapper onClick={handleClick}>
       {previewData?.image && (
         <S.Image src={previewData?.image} alt="Link Preview" />

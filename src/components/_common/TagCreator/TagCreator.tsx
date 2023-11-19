@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { TagType } from 'types/TagType';
+import React, { useRef, useState } from 'react';
 import Tag from '../Tag/Tag';
 import { S } from './style';
-import { v4 as uuidv4 } from 'uuid';
 import { OneTagType } from 'types/ScrapType';
+import { v4 } from 'uuid';
 
 type TagCreatorProps = {
   isCreator?: boolean;
@@ -11,25 +10,27 @@ type TagCreatorProps = {
 };
 
 const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
-  const [tagId, setTagId] = useState(0);
   const [input, setInput] = useState('');
   const [tagList, setTagList] = useState<OneTagType[]>([...tags]);
 
   //태그 추가 (엔터 입력 시)
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setTagId((prev) => prev + 1);
-      const newTag: OneTagType = {
-        tagId: tagId,
-        tagName: input
-      };
-      setTagList((currTagList) => [...currTagList, newTag]);
-      setInput('');
+      onCreateTag();
     }
   };
 
+  const onCreateTag = () => {
+    const newTag: OneTagType = {
+      tagId: v4(),
+      tagName: input
+    };
+    setTagList((currTagList) => [...currTagList, newTag]);
+    setInput('');
+  };
+
   //태그 삭제 (X 버튼 클릭 시)
-  const onDelete = (id: number) => {
+  const onDelete = (id: string) => {
     setTagList((currTagList) => currTagList.filter((tag) => tag.tagId !== id));
   };
 

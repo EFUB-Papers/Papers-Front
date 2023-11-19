@@ -7,13 +7,10 @@ import MyMenu from 'components/FolderPage/MyMenu/MyMenu';
 import { UserMock } from 'mock/userMock';
 import Header from 'components/Header/Header/Header';
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { modeState } from '../../atom/mode';
 
 const NavbarLayout = () => {
   const { nickname, userDetail, imgUrl } = UserMock;
   const isMine = false;
-  const mode = useRecoilValue(modeState);
   const navigate = useNavigate();
 
   return (

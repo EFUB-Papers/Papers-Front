@@ -24,7 +24,7 @@ const Form = styled.form<{
   background-color: ${({ theme }) => theme.background};
   border-radius: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  padding: 32px;
+  padding: 16px;
 `;
 
 const ModalCloseIcon = styled.div`

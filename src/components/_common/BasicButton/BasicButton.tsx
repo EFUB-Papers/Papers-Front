@@ -1,8 +1,6 @@
 import S from 'components/_common/BasicButton/style';
 import React, { PropsWithChildren } from 'react';
 
-//positive는 파란 버튼, negative는 회색 버튼
-//투명은 완료 버튼
 type ButtonType = 'positive' | 'negative' | 'transparent';
 
 export type BasicButtonProps = {

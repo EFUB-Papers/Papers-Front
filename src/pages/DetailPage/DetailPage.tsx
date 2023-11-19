@@ -34,8 +34,10 @@ const DetailPage = () => {
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>
       <S.PostWrapper>
-        <LinkPreview url="https://despiteallthat.tistory.com/243" />
-        {/* <S.PrePostWrapper></S.PrePostWrapper> */}
+        <LinkPreview
+          size={'big'}
+          url="https://despiteallthat.tistory.com/243"
+        />
         <S.ImgWrapper src={imgUrl} />
         <S.ContentWrapper>{scrapContent}</S.ContentWrapper>
       </S.PostWrapper>
