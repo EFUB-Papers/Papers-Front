@@ -21,3 +21,7 @@ export const modalBackGround = css`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.65);
 `;
+
+export const imageRatio = css`
+  aspect-ratio: 5 / 3;
+`;

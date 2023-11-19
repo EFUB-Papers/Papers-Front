@@ -39,7 +39,7 @@ function LinkPreview({ url, size }: { url: string; size: 'small' | 'big' }) {
   }
 
   if (!previewData) {
-    return <p>Failed to fetch link preview.</p>;
+    return <S.FailText>데이터를 불러오는데 실패했습니다.</S.FailText>;
   }
 
   const handleClick = () => {
@@ -50,20 +50,17 @@ function LinkPreview({ url, size }: { url: string; size: 'small' | 'big' }) {
     <XS.SmallWrapper onClick={handleClick}>
       <FlipCard
         content={[
+          <S.ColumnWrapper>
+            <XS.SmallContent>{previewData?.description}</XS.SmallContent>
+          </S.ColumnWrapper>,
           <XS.SmallFlex>
             <XS.SmallImg src={previewData?.image} alt="Link Preview" />
             <XS.SmallColumn>
               <XS.SmallTitle>{previewData?.title}</XS.SmallTitle>
               <XS.SmallSource>{url}</XS.SmallSource>
             </XS.SmallColumn>
-          </XS.SmallFlex>,
-          <S.ColumnWrapper>
-            <XS.SmallContent>{previewData?.description}</XS.SmallContent>
-          </S.ColumnWrapper>
+          </XS.SmallFlex>
         ]}
-        handleClick={() => {
-          console.log('aa');
-        }}
       />
     </XS.SmallWrapper>
   ) : (

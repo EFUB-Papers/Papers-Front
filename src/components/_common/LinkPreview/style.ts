@@ -55,6 +55,11 @@ const Source = styled.div`
 const SmallWrapper = styled.div`
   width: 100%;
   height: 40px;
+  color: ${({ theme }) => theme.text};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const SmallImg = styled.img`
@@ -84,12 +89,26 @@ const SmallSource = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
 `;
 
+const FailText = styled.div`
+  color: ${({ theme }) => theme.COLOR.error};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
+}`;
+
 const SmallContent = styled.div`
   height: 40px;
   overflow: hidden;
+  color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
-export const S = { Wrapper, Image, ColumnWrapper, Title, Content, Source };
+export const S = {
+  Wrapper,
+  Image,
+  ColumnWrapper,
+  Title,
+  Content,
+  Source,
+  FailText
+};
 
 export const XS = {
   SmallWrapper,

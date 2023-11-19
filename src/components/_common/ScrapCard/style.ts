@@ -61,7 +61,7 @@ const ScrapBox = styled.div`
 const ImageBox = styled.div`
   width: 100%;
   aspect-ratio: 5 / 3;
-  ${flexCenter}
+  ${flexCenter};
   overflow: hidden;
 `;
 

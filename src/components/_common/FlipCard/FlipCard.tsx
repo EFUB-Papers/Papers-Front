@@ -3,7 +3,7 @@ import { S } from './style';
 
 type CardProps = {
   content: [frontContent: ReactElement, backContent: ReactElement];
-  handleClick: () => void;
+  handleClick?: () => void;
 };
 
 const FlipCard = ({

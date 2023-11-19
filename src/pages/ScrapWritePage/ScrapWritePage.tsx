@@ -3,12 +3,15 @@ import { S } from './style';
 import { ReactComponent as ArrowIcon } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as LinkIcon } from 'asset/scrapWritePage/link.svg';
 import { ReactComponent as ImageIcon } from 'asset/scrapWritePage/image.svg';
-
 import { ReactComponent as ExitIcon } from 'asset/scrapWritePage/exit.svg';
+import { ReactComponent as DeleteIcon } from 'asset/_common/smallDeleteIcon.svg';
+import { ReactComponent as DeleteIconWhite } from 'asset/_common/smallDeleteIconWhite.svg';
 import { CATEGORY, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
+import { useRecoilValue } from 'recoil';
+import { modeState } from 'atom/mode';
 
 const ScrapWritePage = () => {
   const [category, setCategory] = useState<CategoryValuesType>();
@@ -22,6 +25,7 @@ const ScrapWritePage = () => {
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const mode = useRecoilValue(modeState);
 
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -64,22 +68,27 @@ const ScrapWritePage = () => {
   return (
     <S.Root>
       <S.Wrapper>
-        {/* 카테고리 선택 */}
-        <S.CategoryDropdown onClick={() => setCategoryOpen((prev) => !prev)}>
-          <S.CategoryText>{category ? category : '카테고리'}</S.CategoryText>
-          <S.ArrowButton>
-            <ArrowIcon />
-          </S.ArrowButton>
-          {categoryOpen && (
-            <S.CategoryList>
-              {Object.values(CATEGORY).map((value) => (
-                <S.CategoryItem onClick={() => setCategory(value)}>
-                  {value}
-                </S.CategoryItem>
-              ))}
-            </S.CategoryList>
-          )}
-        </S.CategoryDropdown>
+        <S.FolderButtonWrapper>
+          {/* 카테고리 선택 */}
+          <S.CategoryDropdown onClick={() => setCategoryOpen((prev) => !prev)}>
+            <S.CategoryText>{category ? category : '카테고리'}</S.CategoryText>
+            <S.ArrowButton>
+              <ArrowIcon />
+            </S.ArrowButton>
+            {categoryOpen && (
+              <S.CategoryList>
+                {Object.values(CATEGORY).map((value) => (
+                  <S.CategoryItem onClick={() => setCategory(value)}>
+                    {value}
+                  </S.CategoryItem>
+                ))}
+              </S.CategoryList>
+            )}
+          </S.CategoryDropdown>
+          {/*폴더 선택*/}
+          <S.Button>폴더 선택</S.Button>
+          <S.Button>폴더 편집</S.Button>
+        </S.FolderButtonWrapper>
         {/* 제목 */}
         <S.Title
           rows={1}
@@ -103,7 +112,12 @@ const ScrapWritePage = () => {
               placeholder="링크를 입력하세요."
             />
             {showLinkPreview && (
-              <LinkPreview size={'big'} url={'https://www.naver.com'} />
+              <S.LinkBoxWrapper>
+                <LinkPreview size={'big'} url={link} />
+                <S.DeleteButton>
+                  {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
+                </S.DeleteButton>
+              </S.LinkBoxWrapper>
             )}
           </S.LinkColumnWrapper>
         </S.LinkWrapper>
@@ -121,7 +135,12 @@ const ScrapWritePage = () => {
             style={{ display: 'none' }}
           />
           {imgFile ? (
-            <S.ImagePreview src={imgFile} />
+            <S.LinkBoxWrapper>
+              <S.ImagePreview backgroundImage={imgFile} />
+              <S.DeleteButton>
+                {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
+              </S.DeleteButton>
+            </S.LinkBoxWrapper>
           ) : (
             <S.ImageText placeholder="표지 이미지를 선택해주세요." disabled />
           )}
