@@ -10,6 +10,7 @@ import { OneScrapType } from 'types/ScrapType';
 import { userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
+import { Navigate } from 'react-router';
 
 const MainPage = () => {
   return (
@@ -23,8 +24,8 @@ const MainPage = () => {
         </S.CategoryBarWrapper>
         {/* 태그 리스트 */}
         <S.TagList>
-          {tagListMock.map((tag) => (
-            <Tag tag={tag} />
+          {tagListMock.map((tag, index) => (
+            <Tag tag={tag} key={index} />
           ))}
         </S.TagList>
       </S.Header>
@@ -38,6 +39,7 @@ const MainPage = () => {
               (scrap: OneScrapType, index: number) =>
                 index < 3 && (
                   <ScrapCard
+                    key={index}
                     width={300}
                     scrapId={scrap.scrapId}
                     link={scrap.scrapLink}
@@ -61,6 +63,7 @@ const MainPage = () => {
               (scrap: OneScrapType, index: number) =>
                 index < 3 && (
                   <ScrapCard
+                    key={index}
                     width={300}
                     scrapId={scrap.scrapId}
                     link={scrap.scrapLink}
@@ -84,6 +87,7 @@ const MainPage = () => {
               (user: UserType, index: number) =>
                 index < 3 && (
                   <UserCard
+                    key={index}
                     width="31%"
                     imgurl={user.imgUrl}
                     nickname={user.nickname}

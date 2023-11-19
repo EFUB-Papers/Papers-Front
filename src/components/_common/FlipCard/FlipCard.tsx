@@ -3,12 +3,12 @@ import { S } from './style';
 
 type CardProps = {
   content: [frontContent: ReactElement, backContent: ReactElement];
-  handleClickArr: () => void;
+  handleClick: () => void;
 };
 
 const FlipCard = ({
   content: [frontContent, backContent],
-  handleClickArr
+  handleClick
 }: CardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -24,12 +24,12 @@ const FlipCard = ({
     <S.CardWrapper
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClickArr}
+      onClick={handleClick}
     >
       {isFlipped ? (
-        <div onClick={handleClickArr}>{frontContent}</div>
+        <div onClick={handleClick}>{frontContent}</div>
       ) : (
-        <div onClick={handleClickArr}>{backContent}</div>
+        <div onClick={handleClick}>{backContent}</div>
       )}
     </S.CardWrapper>
   );

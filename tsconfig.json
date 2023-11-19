@@ -23,10 +23,6 @@
     // 타입 정의를 찾을 경로 설정
     "outDir": "dist",
     "baseUrl": "./src",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
     }
   },
   "include": [

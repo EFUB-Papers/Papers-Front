@@ -5,12 +5,12 @@ const Wrapper = styled.div`
   position: relative;
   width: 550px;
   height: 50px;
-  border: 1px solid ${({ theme }) => theme.line};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   border-radius: 25px;
   display: flex;
   align-items: center;
   padding-left: 10px;
-  box-shadow: ${({ theme }) => theme.boxShadow};
   z-index: 100;
 `;
 

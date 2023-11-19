@@ -6,8 +6,10 @@ const Wrapper = styled.div`
   height: 140px;
   border-radius: 6px;
   box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   padding: 10px;
   margin: 10px 0px;
+
   &:hover {
     cursor: pointer;
   }
@@ -50,4 +52,51 @@ const Source = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
 `;
 
+const SmallWrapper = styled.div`
+  width: 100%;
+  height: 40px;
+`;
+
+const SmallImg = styled.img`
+  width: 40px;
+  height: 40px;
+`;
+
+const SmallTitle = styled.div`
+  width: 100%;
+  height: 30px;
+`;
+
+const SmallFlex = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const SmallColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const SmallSource = styled.div`
+  color: ${({ theme }) => theme.COLOR.darkGrey};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
+`;
+
+const SmallContent = styled.div`
+  height: 40px;
+  overflow: hidden;
+`;
+
 export const S = { Wrapper, Image, ColumnWrapper, Title, Content, Source };
+
+export const XS = {
+  SmallWrapper,
+  SmallImg,
+  SmallTitle,
+  SmallColumn,
+  SmallFlex,
+  SmallSource,
+  SmallContent
+};

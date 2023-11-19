@@ -4,12 +4,13 @@ import { flexCenter, omitText } from 'style/common';
 const Wrapper = styled.div<{
   isBorderBottom: boolean;
 }>`
-  height: 120px;
+  height: 140px;
   left: 0;
   display: flex;
-  position: relative;
+  width: 850px;
   ${flexCenter};
-  padding-bottom: 30px;
+  padding: 20px 0px;
+  box-sizing: border-box;
   border-bottom: ${({ isBorderBottom, theme }) =>
     isBorderBottom && `1px solid ${theme.line}`};
   color: ${({ theme }) => theme.text};
@@ -18,21 +19,21 @@ const Wrapper = styled.div<{
 
 const PostContentWrapper = styled.div`
   color: ${({ theme }) => theme.text};
-  width: 550px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  gap: 10px;
-  position: relative;
-  margin-top: 5px;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0px 14px;
 `;
 
 const PostImg = styled.div<{
   imgUrl: string;
 }>`
+  flex: none;
   background-image: url(${({ imgUrl }) => imgUrl});
-  height: 100px;
-  width: 200px;
+  height: 100%;
+  width: 180px;
   background-size: cover;
 `;
 
@@ -45,8 +46,13 @@ const PostTitle = styled.div`
 const PostDetail = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   ${omitText};
-  height: 34px;
-  width: 89%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
 `;
 
 const OriginalTitle = styled.div`
@@ -56,6 +62,10 @@ const OriginalTitle = styled.div`
 
 const IconWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  height: 100%;
 `;
 const IconContainer = styled.div`
   display: flex;
@@ -68,12 +78,11 @@ const IconText = styled.div`
 `;
 
 const IconFlexWrapper = styled.div`
+  flex: none;
   display: flex;
   gap: 20px;
-  position: absolute;
-  right: 0;
-  bottom: 20px;
 `;
+
 export const S = {
   Wrapper,
   PostContentWrapper,

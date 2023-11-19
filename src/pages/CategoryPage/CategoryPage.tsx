@@ -2,11 +2,15 @@ import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
 import { S } from './style';
 import { PostListMock } from '../../mock/postMock';
 import ScrapCard from '../../components/_common/ScrapCard/ScrapCard';
+import { useParams } from 'react-router';
+import { CATEGORY, CategoryKeyType } from 'constants/Category';
 
 const CategoryPage = () => {
+  const { categoryId } = useParams();
+
   return (
     <S.Wrapper>
-      <S.Category>IT</S.Category>
+      <S.Category>{CATEGORY[categoryId as CategoryKeyType]}</S.Category>
       <CategoryBar />
       <S.ContentWrapper>
         <>

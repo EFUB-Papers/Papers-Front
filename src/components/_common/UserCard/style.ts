@@ -8,6 +8,7 @@ const Wrapper = styled.div<{ $width: string }>`
   ${flexCenter}
   flex-direction: column;
   box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
 
   &:hover {
     cursor: pointer;

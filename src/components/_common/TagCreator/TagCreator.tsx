@@ -3,26 +3,34 @@ import { TagType } from 'types/TagType';
 import Tag from '../Tag/Tag';
 import { S } from './style';
 import { v4 as uuidv4 } from 'uuid';
+import { OneTagType } from 'types/ScrapType';
 
-const TagCreator = () => {
+type TagCreatorProps = {
+  isCreator?: boolean;
+  tags?: OneTagType[];
+};
+
+const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
+  const [tagId, setTagId] = useState(0);
   const [input, setInput] = useState('');
-  const [tags, setTags] = useState<TagType[]>([]);
+  const [tagList, setTagList] = useState<OneTagType[]>([...tags]);
 
   //태그 추가 (엔터 입력 시)
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const newTag: TagType = {
-        id: uuidv4(),
-        content: input
+      setTagId((prev) => prev + 1);
+      const newTag: OneTagType = {
+        tagId: tagId,
+        tagName: input
       };
-      setTags((currTags) => [...currTags, newTag]);
+      setTagList((currTagList) => [...currTagList, newTag]);
       setInput('');
     }
   };
 
   //태그 삭제 (X 버튼 클릭 시)
-  const onDelete = (id: string) => {
-    setTags((currTags) => currTags.filter((tag) => tag.id !== id));
+  const onDelete = (id: number) => {
+    setTagList((currTagList) => currTagList.filter((tag) => tag.tagId !== id));
   };
 
   const inputWidthRef = useRef<HTMLSpanElement>(null);
@@ -38,21 +46,27 @@ const TagCreator = () => {
   return (
     <S.Wrapper>
       {/* 태그 리스트 */}
-      {tags.map((tag: TagType, index: number) => (
-        <Tag key={index} tag={tag} onDelete={onDelete} />
-      ))}
+      {tagList.map((tag: OneTagType, index: number) =>
+        isCreator ? (
+          <Tag key={index} tag={tag} onDelete={onDelete} />
+        ) : (
+          <Tag key={index} tag={tag} />
+        )
+      )}
       {/* 태그 입력창 */}
-      <S.InputWrapper>
-        <S.InputWidth ref={inputWidthRef} aria-hidden="true"></S.InputWidth>
-        <S.Input
-          className="input"
-          placeholder="태그를 입력하세요"
-          value={input}
-          onChange={onChangeInput}
-          onKeyDown={onEnter}
-          $empty={!input}
-        />
-      </S.InputWrapper>
+      {isCreator && (
+        <S.InputWrapper>
+          <S.InputWidth ref={inputWidthRef} aria-hidden="true"></S.InputWidth>
+          <S.Input
+            className="input"
+            placeholder="태그를 입력하세요"
+            value={input}
+            onChange={onChangeInput}
+            onKeyDown={onEnter}
+            $empty={!input}
+          />
+        </S.InputWrapper>
+      )}
     </S.Wrapper>
   );
 };
