@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import { flexCenter } from '../../../style/common';
 
 const Title = styled.div`
-  width: 90%;
-  position: fixed;
-  top: 20px;
+  width: 100%;
   background-color: ${({ theme }) => theme.background};
   height: 50px;
   display: flex;
   align-items: center;
+  padding-left: 10px;
+  position: absolute;
+  top: 0;
 `;
 
 const FlexBox = styled.div`
@@ -23,6 +24,10 @@ const ContentWrapper = styled.div`
   width: 400px;
   height: 460px;
   position: relative;
+  background-color: ${({ theme }) => theme.background};
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Wrapper = styled.div`
@@ -47,6 +52,13 @@ const IconContainer = styled.div<{ selected?: boolean }>`
 const ButtonWrapper = styled.div`
   cursor: pointer;
 `;
+
+const DeleteIconWrapper = styled.div`
+  position: fixed;
+  top: 10px;
+  right: 10px;
+`;
+
 export const O = {
   Wrapper,
   IconContainer,
@@ -56,5 +68,6 @@ export const O = {
 export const S = {
   ContentWrapper,
   Title,
-  FlexBox
+  FlexBox,
+  DeleteIconWrapper
 };

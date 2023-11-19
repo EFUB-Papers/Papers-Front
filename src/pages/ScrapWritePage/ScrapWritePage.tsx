@@ -65,105 +65,119 @@ const ScrapWritePage = () => {
     }
   };
 
+  // const onChangeEditModalOpen = () => {
+  //   setIsSelectModalOpen((prev) => !prev);
+  // };
+  //
+  // const onChangeSelectModalOpen = () => {
+  //   setIsSelectModalOpen((prev) => !prev);
+  // };
+
   return (
-    <S.Root>
-      <S.Wrapper>
-        <S.FolderButtonWrapper>
-          {/* 카테고리 선택 */}
-          <S.CategoryDropdown onClick={() => setCategoryOpen((prev) => !prev)}>
-            <S.CategoryText>{category ? category : '카테고리'}</S.CategoryText>
-            <S.ArrowButton>
-              <ArrowIcon />
-            </S.ArrowButton>
-            {categoryOpen && (
-              <S.CategoryList>
-                {Object.values(CATEGORY).map((value) => (
-                  <S.CategoryItem onClick={() => setCategory(value)}>
-                    {value}
-                  </S.CategoryItem>
-                ))}
-              </S.CategoryList>
-            )}
-          </S.CategoryDropdown>
-          {/*폴더 선택*/}
-          <S.Button>폴더 선택</S.Button>
-          <S.Button>폴더 편집</S.Button>
-        </S.FolderButtonWrapper>
-        {/* 제목 */}
-        <S.Title
-          rows={1}
-          ref={titleRef}
-          value={title}
-          onChange={onChangeTitle}
-          placeholder="제목을 입력하세요"
-        />
-        <TagCreator />
-        {/* 링크 */}
-        <S.LinkWrapper>
-          <LinkIcon />
-          <S.LinkColumnWrapper>
-            <S.Link
-              value={link}
-              onChange={(e) => {
-                setLink(e.target.value);
-                setShowLinkPreview(false);
-              }}
-              onKeyDown={onLinkUpload}
-              placeholder="링크를 입력하세요."
+    <>
+      <S.Root>
+        <S.Wrapper>
+          <S.FolderButtonWrapper>
+            {/* 카테고리 선택 */}
+            <S.CategoryDropdown
+              onClick={() => setCategoryOpen((prev) => !prev)}
+            >
+              <S.CategoryText>
+                {category ? category : '카테고리'}
+              </S.CategoryText>
+              <S.ArrowButton>
+                <ArrowIcon />
+              </S.ArrowButton>
+              {categoryOpen && (
+                <S.CategoryList>
+                  {Object.values(CATEGORY).map((value) => (
+                    <S.CategoryItem onClick={() => setCategory(value)}>
+                      {value}
+                    </S.CategoryItem>
+                  ))}
+                </S.CategoryList>
+              )}
+            </S.CategoryDropdown>
+            {/*폴더 선택*/}
+            <S.Button>폴더 선택</S.Button>
+            <S.Button>폴더 편집</S.Button>
+          </S.FolderButtonWrapper>
+          {/* 제목 */}
+          <S.Title
+            rows={1}
+            ref={titleRef}
+            value={title}
+            onChange={onChangeTitle}
+            placeholder="제목을 입력하세요"
+          />
+          <TagCreator />
+          {/* 링크 */}
+          <S.LinkWrapper>
+            <LinkIcon />
+            <S.LinkColumnWrapper>
+              <S.Link
+                value={link}
+                onChange={(e) => {
+                  setLink(e.target.value);
+                  setShowLinkPreview(false);
+                }}
+                onKeyDown={onLinkUpload}
+                placeholder="링크를 입력하세요."
+              />
+              {showLinkPreview && (
+                <S.LinkBoxWrapper>
+                  <LinkPreview size={'big'} url={link} />
+                  <S.DeleteButton>
+                    {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
+                  </S.DeleteButton>
+                </S.LinkBoxWrapper>
+              )}
+            </S.LinkColumnWrapper>
+          </S.LinkWrapper>
+          {/* 이미지 */}
+          <S.ImageWrapper>
+            <S.ImageButton htmlFor="image">
+              <ImageIcon />
+            </S.ImageButton>
+            <input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={onImageUpload}
+              ref={imgRef}
+              style={{ display: 'none' }}
             />
-            {showLinkPreview && (
+            {imgFile ? (
               <S.LinkBoxWrapper>
-                <LinkPreview size={'big'} url={link} />
+                <S.ImagePreview backgroundImage={imgFile} />
                 <S.DeleteButton>
                   {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
                 </S.DeleteButton>
               </S.LinkBoxWrapper>
+            ) : (
+              <S.ImageText placeholder="표지 이미지를 선택해주세요." disabled />
             )}
-          </S.LinkColumnWrapper>
-        </S.LinkWrapper>
-        {/* 이미지 */}
-        <S.ImageWrapper>
-          <S.ImageButton htmlFor="image">
-            <ImageIcon />
-          </S.ImageButton>
-          <input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={onImageUpload}
-            ref={imgRef}
-            style={{ display: 'none' }}
+          </S.ImageWrapper>
+          {/* 내용 */}
+          <S.Content
+            ref={contentRef}
+            value={content}
+            onChange={onChangeContent}
+            placeholder="자신의 생각을 적어보세요"
           />
-          {imgFile ? (
-            <S.LinkBoxWrapper>
-              <S.ImagePreview backgroundImage={imgFile} />
-              <S.DeleteButton>
-                {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
-              </S.DeleteButton>
-            </S.LinkBoxWrapper>
-          ) : (
-            <S.ImageText placeholder="표지 이미지를 선택해주세요." disabled />
-          )}
-        </S.ImageWrapper>
-        {/* 내용 */}
-        <S.Content
-          ref={contentRef}
-          value={content}
-          onChange={onChangeContent}
-          placeholder="자신의 생각을 적어보세요"
-        />
-        {/* 푸터 */}
-        <S.Footer>
-          <S.ExitButton>
-            <ExitIcon />
-            나가기
-          </S.ExitButton>
-          <BasicButton color="positive" fontSize={18} width={110} height={40}>
-            등록하기
-          </BasicButton>
-        </S.Footer>
-      </S.Wrapper>
-    </S.Root>
+          {/* 푸터 */}
+          <S.Footer>
+            <S.ExitButton>
+              <ExitIcon />
+              나가기
+            </S.ExitButton>
+            <BasicButton color="positive" fontSize={18} width={110} height={40}>
+              등록하기
+            </BasicButton>
+          </S.Footer>
+        </S.Wrapper>
+      </S.Root>
+    </>
   );
 };
 

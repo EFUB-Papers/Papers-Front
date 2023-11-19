@@ -8,35 +8,40 @@ import SearchPage from '../pages/SearchPage/SearchPage';
 import DetailPage from '../pages/DetailPage/DetailPage';
 import ScrapWritePage from 'pages/ScrapWritePage/ScrapWritePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
+import FolderModalLayout from '../layout/folderModalLayout/FolderModalLayout';
 
 const router = createBrowserRouter([
   { element: <LoginPage />, path: '/login' },
   {
-    element: <NavbarLayout />,
+    element: <FolderModalLayout />,
     children: [
       {
-        element: <FolderPage isMine={true} />,
-        path: '/myPage'
+        element: <NavbarLayout />,
+        children: [
+          {
+            element: <FolderPage isMine={true} />,
+            path: '/myPage'
+          },
+          { element: <FolderPage isMine={false} />, path: '/user/:userId' }
+        ]
       },
-      { element: <FolderPage isMine={false} />, path: '/user/:userId' }
-    ]
-  },
-  {
-    element: <HeaderLayout />,
-    children: [
       {
-        path: '/',
-        element: <MainPage />
+        element: <HeaderLayout />,
+        children: [
+          {
+            path: '/',
+            element: <MainPage />
+          },
+          { element: <CategoryPage />, path: '/category/:categoryId' },
+          { element: <SearchPage />, path: '/search' },
+          { element: <DetailPage />, path: '/detail/:scrapId' }
+        ]
       },
-
-      { element: <CategoryPage />, path: '/category/:categoryId' },
-      { element: <SearchPage />, path: '/search' },
-      { element: <DetailPage />, path: '/detail/:scrapId' }
+      {
+        element: <HeaderLayout isWriteButton={false} />,
+        children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
+      }
     ]
-  },
-  {
-    element: <HeaderLayout isWriteButton={false} />,
-    children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
   }
 ]);
 
