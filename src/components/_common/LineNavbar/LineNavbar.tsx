@@ -5,8 +5,10 @@ import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
 import { arraySlice } from 'utils/arrayHelper';
 import { OneFolderTypeWithoutUser } from 'types/FolderType';
 import { useSetRecoilState } from 'recoil';
-import { folderEditModal } from 'atom/modal';
 import { useSearchParams } from 'react-router-dom';
+import BasicButton from '../BasicButton/BasicButton';
+import { COLOR } from '../../../style/theme';
+import { folderEditModal } from 'atom/modal';
 
 type NavbarProps = {
   title?: string;
@@ -91,6 +93,18 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
               </S.OneMenu>
             );
           })}
+          <BasicButton
+            color={'transparent'}
+            textColor={COLOR.blue}
+            fontSize={15}
+            width={100}
+            height={40}
+            onClick={() => {
+              setIsEditModalOpen(true);
+            }}
+          >
+            폴더 추가
+          </BasicButton>
         </S.ListWrapper>
         {currentFolderGroup !== lastGroup && (
           <NextIcon

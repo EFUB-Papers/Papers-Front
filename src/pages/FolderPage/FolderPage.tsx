@@ -29,7 +29,7 @@ const FolderPage = () => {
         />
       )}
 
-      <ScrapList />
+      <ScrapList isMine={isMine} />
     </S.ListWrapper>
   );
 };

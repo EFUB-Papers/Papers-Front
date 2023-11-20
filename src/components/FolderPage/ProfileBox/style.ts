@@ -57,7 +57,7 @@ const Label = styled.span`
 const ErrorMsg = styled.div`
   color: ${({ theme }) => theme.COLOR.error};
   font-size: 14px;
-  height: 20px;
+  height: 10px;
 `;
 export const S = {
   ProfileWrapper,

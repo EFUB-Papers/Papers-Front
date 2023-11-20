@@ -9,6 +9,7 @@ const MenuWrapper = styled.div`
   grid-template-rows: 40px 40px 40px 40px;
   gap: 2rem;
   margin-left: 1rem;
+  margin-top: 4rem;
 `;
 
 const MenuIcon = styled.div`

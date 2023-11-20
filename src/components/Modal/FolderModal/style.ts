@@ -17,11 +17,16 @@ const FlexBox = styled.div`
   gap: 5px;
 `;
 
+const FlexBoxRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
 const ContentWrapper = styled.div`
   overflow: scroll;
   width: 400px;
   height: 430px;
-  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -59,6 +64,7 @@ const EditIconWrapper = styled.div`
   height: 50px;
   ${flexCenter};
   justify-content: space-between;
+  position: relative;
 `;
 
 export const O = {
@@ -67,10 +73,18 @@ export const O = {
   ButtonWrapper
 };
 
+const SelectButton = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 50px;
+`;
+
 export const S = {
   ContentWrapper,
   Title,
   FlexBox,
   DeleteIconWrapper,
-  EditIconWrapper
+  EditIconWrapper,
+  SelectButton,
+  FlexBoxRow
 };

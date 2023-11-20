@@ -1,7 +1,7 @@
 import S from 'components/_common/BasicButton/style';
 import React, { PropsWithChildren } from 'react';
 
-type ButtonType = 'positive' | 'negative' | 'transparent';
+type ButtonType = 'positive' | 'grey' | 'blue' | 'transparent';
 
 export type BasicButtonProps = {
   color: ButtonType;
@@ -12,6 +12,7 @@ export type BasicButtonProps = {
   borderRadius?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: any;
+  textColor?: string;
 };
 
 const BasicButton = ({

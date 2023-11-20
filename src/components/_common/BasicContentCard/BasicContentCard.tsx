@@ -6,6 +6,7 @@ import MoreBox from '../MoreBox/MoreBox';
 import { folderSelectModal } from '../../../atom/modal';
 import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
+import { useDeleteScrapMutation } from '../../../hooks/apis/scrap';
 
 type BasicCardProps = {
   imgUrl: string;
@@ -14,12 +15,23 @@ type BasicCardProps = {
   originTitle: string;
   originLink: string;
   scrapId: number;
+  isMine: boolean;
+  folderId?: number;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
-  const { imgUrl, scrapContent, scrapTitle, originTitle, scrapId } = props;
-  const setEditModalOpen = useSetRecoilState(folderSelectModal);
+  const {
+    isMine,
+    imgUrl,
+    scrapContent,
+    scrapTitle,
+    originTitle,
+    scrapId,
+    folderId
+  } = props;
+  const setSelectModalOpen = useSetRecoilState(folderSelectModal);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
+  const { deleteScrapMutate } = useDeleteScrapMutation();
 
   return (
     <S.Wrapper
@@ -28,26 +40,31 @@ const BasicContentCard = (props: BasicCardProps) => {
         console.log(scrapId);
       }}
     >
-      <S.MoreBoxWrapper>
-        <MoreBox
-          isModalOpen={isMoreBoxOpen}
-          closeModal={() => {
-            setIsMoreBoxOpen(false);
-          }}
-          buttons={[
-            {
-              name: '폴더 이동',
-              onClick: () => {
-                setEditModalOpen(true);
+      {isMine && (
+        <S.MoreBoxWrapper>
+          <MoreBox
+            isModalOpen={isMoreBoxOpen}
+            closeModal={() => {
+              setIsMoreBoxOpen(false);
+            }}
+            buttons={[
+              {
+                name: '폴더 이동',
+                onClick: () => {
+                  setSelectModalOpen(true);
+                }
+              },
+              {
+                name: '삭제',
+                onClick: () => {
+                  deleteScrapMutate(scrapId);
+                }
               }
-            },
-            {
-              name: '삭제',
-              onClick: () => {}
-            }
-          ]}
-        />
-      </S.MoreBoxWrapper>
+            ]}
+          />
+        </S.MoreBoxWrapper>
+      )}
+
       <S.PostImg imgUrl={imgUrl} />
 
       <S.PostContentWrapper>

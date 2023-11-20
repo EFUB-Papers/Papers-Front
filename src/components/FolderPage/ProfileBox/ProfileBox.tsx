@@ -143,7 +143,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
             />
 
             <BasicButton
-              color={'transparent'}
+              color={'blue'}
               fontSize={16}
               onClick={onSubmitProfile}
               width={70}
@@ -164,7 +164,7 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
               <S.UserName>{userName}</S.UserName>
               <S.UserDetail>{userDetail}</S.UserDetail>
               <BasicButton
-                color={'transparent'}
+                color={'blue'}
                 fontSize={14}
                 onClick={() => {
                   setIsEditMode(true);

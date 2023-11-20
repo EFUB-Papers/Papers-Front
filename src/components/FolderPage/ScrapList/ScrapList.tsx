@@ -3,7 +3,7 @@ import { PostListMock } from '../../../mock/postMock';
 import { OneScrapType } from '../../../types/ScrapType';
 import BasicContentCard from '../../_common/BasicContentCard/BasicContentCard';
 
-const ScrapList = () => {
+const ScrapList = ({ isMine }: { isMine: boolean }) => {
   const urlSearchParams = new URLSearchParams(window.location.search);
   //const folderId = urlSearchParams.get('folderId');
   //const scrapList = useFolderScrapsQuery(folderId);
@@ -20,6 +20,7 @@ const ScrapList = () => {
             scrapTitle={scrapTitle}
             originTitle={scrapLink}
             originLink={scrapLink}
+            isMine={isMine}
           />
         );
       })}
