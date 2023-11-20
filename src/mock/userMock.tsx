@@ -1,5 +1,6 @@
 import { UserType } from 'types/UserType';
 import { OneFolderType } from 'types/FolderType';
+import { FollowingType } from '../types/FollowingType';
 
 export const UserMock: UserType = {
   nickname: '나는 고양이다',
@@ -62,4 +63,22 @@ export const folderMock: OneFolderType[] = [
     folderName: '고양이 좋아',
     folderOwnerNickname: '나는 고양이다'
   }
+];
+
+export const OneFollowing = {
+  followNickname: '나는 강아지다',
+  followProfileImg: '',
+  followDescription: '멍멍 멍멍 멍멍 멍멍!'
+};
+
+export const followingMock: FollowingType[] = [
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing
 ];

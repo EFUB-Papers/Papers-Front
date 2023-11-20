@@ -9,6 +9,8 @@ import DetailPage from '../pages/DetailPage/DetailPage';
 import ScrapWritePage from 'pages/ScrapWritePage/ScrapWritePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import ModalLayout from '../layout/ModalLayout/ModalLayout';
+import FollowingPage from '../pages/FollowingPage/FollowingPage';
+import LikePage from '../pages/LikePage/LikePage';
 
 const router = createBrowserRouter([
   { element: <LoginPage />, path: '/login' },
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
           {
             element: <FolderPage />,
             path: '/folder/:nickname'
+          },
+          {
+            element: <FollowingPage />,
+            path: '/following'
+          },
+          {
+            element: <LikePage />,
+            path: '/like'
           }
         ]
       },

@@ -9,33 +9,34 @@ const MyMenu = () => {
   const navigate = useNavigate();
   return (
     <>
-      <M.MenuWrapper
-        onClick={() => {
-          navigate('/folder/나는 고양이다');
-        }}
-      >
-        <M.MenuIcon>
-          <FolderIcon />
-        </M.MenuIcon>
-        <M.MenuText>내 폴더</M.MenuText>
+      <M.MenuWrapper>
+        <M.OneMenuWrapper onClick={() => navigate('/folder/나는%20고양이다')}>
+          <M.MenuIcon>
+            <FolderIcon />
+          </M.MenuIcon>
+          <M.MenuText>내 폴더</M.MenuText>
+        </M.OneMenuWrapper>
 
-        <M.MenuIcon>
-          <FollowingIcon />
-        </M.MenuIcon>
+        <M.OneMenuWrapper onClick={() => navigate('/like')}>
+          <M.MenuIcon>
+            <FollowingIcon />
+          </M.MenuIcon>
+          <M.MenuText>좋아요한 스크랩</M.MenuText>
+        </M.OneMenuWrapper>
 
-        <M.MenuText>좋아요한 스크랩</M.MenuText>
+        <M.OneMenuWrapper onClick={() => navigate('/following')}>
+          <M.MenuIcon>
+            <HeartIcon />
+          </M.MenuIcon>
+          <M.MenuText>팔로잉 목록</M.MenuText>
+        </M.OneMenuWrapper>
 
-        <M.MenuIcon>
-          <HeartIcon />
-        </M.MenuIcon>
-
-        <M.MenuText>팔로잉 목록</M.MenuText>
-
-        <M.MenuIcon>
-          <LogoutIcon />
-        </M.MenuIcon>
-
-        <M.MenuText>로그아웃</M.MenuText>
+        <M.OneMenuWrapper>
+          <M.MenuIcon>
+            <LogoutIcon />
+          </M.MenuIcon>
+          <M.MenuText>로그아웃</M.MenuText>
+        </M.OneMenuWrapper>
       </M.MenuWrapper>
     </>
   );

@@ -5,7 +5,7 @@ import { flexCenter } from './../../../style/common';
 const Wrapper = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   aspect-ratio: 1 / 1.15;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border: 1px solid ${({ theme }) => theme.lineForDark};
