@@ -1,15 +1,14 @@
 import { useRecoilValue } from 'recoil';
-import { folderEditModal, folderSelectModal } from '../../atom/modal';
 import { Outlet, useParams } from 'react-router-dom';
 import { useBodyScrollLock } from '../../hooks/useScrollLock';
 import { useEffect } from 'react';
 import { S } from './style';
-import FolderModal from '../../components/Modal/FolderModal/FolderModal';
+import { folderModalAtom } from '../../atom/modal';
 import { folderMock } from '../../mock/userMock';
+import FolderModal from '../../components/Modal/FolderModal/FolderModal';
 
-const FolderModalLayout = () => {
-  const isEditModalOpen = useRecoilValue(folderEditModal);
-  const isSelectModalOpen = useRecoilValue(folderSelectModal);
+const ModalLayout = () => {
+  const folderModal = useRecoilValue(folderModalAtom);
 
   const { lockScroll, openScroll } = useBodyScrollLock();
   const params = useParams();
@@ -18,26 +17,21 @@ const FolderModalLayout = () => {
   const folderList = folderMock;
   //모달이 꺼지고 켜질 때 뒤 배경 스크롤 중지
   useEffect(() => {
-    if (isEditModalOpen) {
+    if (folderModal.open) {
       lockScroll();
     } else {
       openScroll();
     }
-  }, [isEditModalOpen]);
+  }, [folderModal.open]);
 
   return (
-    <S.Wrapper isScrollAble={!isEditModalOpen && !isSelectModalOpen}>
+    <S.Wrapper isScrollAble={!folderModal.open}>
       <S.ModalWrapper>
-        {isEditModalOpen && (
-          <FolderModal option={'edit'} folderList={folderList} />
-        )}
-        {isSelectModalOpen && (
-          <FolderModal option={'select'} folderList={folderList} />
-        )}
+        {folderModal.open && <FolderModal folderList={folderList} />}
       </S.ModalWrapper>
       <Outlet />
     </S.Wrapper>
   );
 };
 
-export default FolderModalLayout;
+export default ModalLayout;

@@ -8,7 +8,7 @@ import { useSetRecoilState } from 'recoil';
 import { useSearchParams } from 'react-router-dom';
 import BasicButton from '../BasicButton/BasicButton';
 import { COLOR } from '../../../style/theme';
-import { folderEditModal } from 'atom/modal';
+import { folderModalAtom } from '../../../atom/modal';
 
 type NavbarProps = {
   title?: string;
@@ -49,7 +49,7 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
     setSearchParams(searchParams);
   };
 
-  const setIsEditModalOpen = useSetRecoilState(folderEditModal);
+  const setIsEditModalOpen = useSetRecoilState(folderModalAtom);
   return (
     <S.Wrapper>
       <S.TitleWrapper>
@@ -57,7 +57,11 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
         {isMine && (
           <S.EditModalButton
             onClick={() => {
-              setIsEditModalOpen(true);
+              setIsEditModalOpen({
+                option: 'edit',
+                open: true,
+                scrapId: 0
+              });
             }}
           >
             폴더 편집
@@ -100,7 +104,11 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
             width={100}
             height={40}
             onClick={() => {
-              setIsEditModalOpen(true);
+              setIsEditModalOpen({
+                option: 'add',
+                open: true,
+                scrapId: 0
+              });
             }}
           >
             폴더 추가

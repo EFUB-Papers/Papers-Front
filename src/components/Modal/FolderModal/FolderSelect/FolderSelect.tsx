@@ -3,22 +3,23 @@ import { S } from '../style';
 import { useState } from 'react';
 import { OneFolderType } from '../../../../types/FolderType';
 import BasicButton from '../../../_common/BasicButton/BasicButton';
+import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
+import { useRecoilValue } from 'recoil';
+import { folderModalAtom } from '../../../../atom/modal';
 
-const FolderSelect = ({
-  folderList,
-  scrapId
-}: {
-  folderList: OneFolderType[];
-  scrapId: number;
-}) => {
+const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const [selectId, setSelectId] = useState<number | null>(null);
-  // const { patchNewScrapMutate } = usePatchScrapMutation();
+  const { patchNewScrapMutate } = usePatchScrapMutation();
+  const folderModalState = useRecoilValue(folderModalAtom);
 
   const onClickChangeFolder = () => {
-    // if (selectId) {
-    //   console.log(selectId);
-    //   patchNewScrapMutate({ folderId: selectId, scrapId });
-    // }
+    if (selectId) {
+      console.log(selectId);
+      patchNewScrapMutate({
+        folderId: selectId,
+        scrapId: folderModalState.scrapId
+      });
+    }
   };
 
   const onSelectFolder = (id: number) => {

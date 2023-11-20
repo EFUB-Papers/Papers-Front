@@ -79,6 +79,10 @@ const SelectButton = styled.div`
   right: 50px;
 `;
 
+const AddBox = styled.div`
+  margin-top: 30px;
+`;
+
 export const S = {
   ContentWrapper,
   Title,
@@ -86,5 +90,6 @@ export const S = {
   DeleteIconWrapper,
   EditIconWrapper,
   SelectButton,
-  FlexBoxRow
+  FlexBoxRow,
+  AddBox
 };

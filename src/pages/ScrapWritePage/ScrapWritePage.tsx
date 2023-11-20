@@ -10,9 +10,9 @@ import { CATEGORY, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { modeState } from 'atom/mode';
-import { folderEditModal, folderSelectModal } from '../../atom/modal';
+import { folderModalAtom } from '../../atom/modal';
 
 const ScrapWritePage = () => {
   const [category, setCategory] = useState<CategoryValuesType>();
@@ -26,9 +26,8 @@ const ScrapWritePage = () => {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const mode = useRecoilValue(modeState);
-  const setFolderEditModalOpen = useSetRecoilState(folderEditModal);
-  const setFolderSelectModalOpen = useSetRecoilState(folderSelectModal);
-
+  const [folderModalState, setFolderModalState] =
+    useRecoilState(folderModalAtom);
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && link) {
@@ -95,14 +94,22 @@ const ScrapWritePage = () => {
             {/*폴더 선택*/}
             <S.Button
               onClick={() => {
-                setFolderSelectModalOpen(true);
+                setFolderModalState({
+                  option: 'select',
+                  open: true,
+                  scrapId: 0
+                });
               }}
             >
               폴더 선택
             </S.Button>
             <S.Button
               onClick={() => {
-                setFolderEditModalOpen(true);
+                setFolderModalState({
+                  option: 'edit',
+                  open: true,
+                  scrapId: 0
+                });
               }}
             >
               폴더 편집

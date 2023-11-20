@@ -8,12 +8,12 @@ import SearchPage from '../pages/SearchPage/SearchPage';
 import DetailPage from '../pages/DetailPage/DetailPage';
 import ScrapWritePage from 'pages/ScrapWritePage/ScrapWritePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
-import FolderModalLayout from '../layout/folderModalLayout/FolderModalLayout';
+import ModalLayout from '../layout/ModalLayout/ModalLayout';
 
 const router = createBrowserRouter([
   { element: <LoginPage />, path: '/login' },
   {
-    element: <FolderModalLayout />,
+    element: <ModalLayout />,
     children: [
       {
         element: <NavbarLayout />,

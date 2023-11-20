@@ -3,10 +3,10 @@ import { ReactComponent as MoreDotsIcon } from 'asset/_common/moreDots.svg';
 import { ReactComponent as HeartIcon } from 'asset/_common/heart.svg';
 import { ReactComponent as CommentIcon } from 'asset/_common/comment.svg';
 import MoreBox from '../MoreBox/MoreBox';
-import { folderSelectModal } from '../../../atom/modal';
 import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useDeleteScrapMutation } from '../../../hooks/apis/scrap';
+import { folderModalAtom } from '../../../atom/modal';
 
 type BasicCardProps = {
   imgUrl: string;
@@ -20,16 +20,9 @@ type BasicCardProps = {
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
-  const {
-    isMine,
-    imgUrl,
-    scrapContent,
-    scrapTitle,
-    originTitle,
-    scrapId,
-    folderId
-  } = props;
-  const setSelectModalOpen = useSetRecoilState(folderSelectModal);
+  const { isMine, imgUrl, scrapContent, scrapTitle, originTitle, scrapId } =
+    props;
+  const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
   const { deleteScrapMutate } = useDeleteScrapMutation();
 
@@ -51,7 +44,11 @@ const BasicContentCard = (props: BasicCardProps) => {
               {
                 name: '폴더 이동',
                 onClick: () => {
-                  setSelectModalOpen(true);
+                  setFolderModal({
+                    option: 'select',
+                    scrapId: scrapId,
+                    open: true
+                  });
                 }
               },
               {
