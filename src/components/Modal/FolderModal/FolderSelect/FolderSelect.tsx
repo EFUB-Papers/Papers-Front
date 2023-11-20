@@ -1,9 +1,9 @@
-import { MyFolderMock } from 'mock/userMock';
 import SelectOneFolder from './OneFoler';
 import { S } from '../style';
 import { useState } from 'react';
+import { OneFolderType } from '../../../../types/FolderType';
 
-const FolderSelect = () => {
+const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const [selectId, setSelectId] = useState<number>(0);
   const onSelectFolder = (id: number) => {
     setSelectId(id);
@@ -12,7 +12,7 @@ const FolderSelect = () => {
   return (
     <S.ContentWrapper>
       <S.FlexBox>
-        {MyFolderMock.map((folder) => {
+        {folderList.map((folder) => {
           return (
             <SelectOneFolder
               selected={selectId === folder.folderId}

@@ -45,7 +45,7 @@ const Header = ({ isWriteButton = true }: HeaderProps) => {
         )}
       </S.BasicButtonWrapper>
 
-      <S.ProfileImgWrapper onClick={() => navigate('myPage')}>
+      <S.ProfileImgWrapper onClick={() => navigate('/folder/나는 고양이다')}>
         <CircleIcon size="small" imgUrl="" />
       </S.ProfileImgWrapper>
     </S.Wrapper>

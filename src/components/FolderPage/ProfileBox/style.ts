@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from 'style/common';
 
 const ProfileWrapper = styled.div`
-  margin-top: 7rem;
+  margin-top: 5rem;
   width: 187px;
   height: 300px;
   flex-direction: column;

@@ -11,7 +11,7 @@ const MyMenu = () => {
     <>
       <M.MenuWrapper
         onClick={() => {
-          navigate('/myfolder');
+          navigate('/folder/나는 고양이다');
         }}
       >
         <M.MenuIcon>

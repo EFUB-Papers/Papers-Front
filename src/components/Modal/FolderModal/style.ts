@@ -7,6 +7,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   padding-left: 10px;
+  height: 40px;
 `;
 
 const FlexBox = styled.div`

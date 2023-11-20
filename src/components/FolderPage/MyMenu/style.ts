@@ -8,7 +8,6 @@ const MenuWrapper = styled.div`
   grid-template-areas: 'icon1 text1' 'icon2 text2' 'icon3 text3' 'icon4 text4';
   grid-template-rows: 40px 40px 40px 40px;
   gap: 2rem;
-  margin-top: 4rem;
   margin-left: 1rem;
 `;
 

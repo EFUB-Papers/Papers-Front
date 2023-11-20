@@ -10,7 +10,7 @@ import React from 'react';
 
 const NavbarLayout = () => {
   const { nickname, userDetail, imgUrl } = UserMock;
-  const isMine = false;
+  const isMine = true;
   const navigate = useNavigate();
 
   return (

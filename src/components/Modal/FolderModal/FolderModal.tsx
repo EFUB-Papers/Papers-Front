@@ -5,8 +5,15 @@ import FolderEdit from './FolderEdit/FolderEdit';
 import FolderSelect from './FolderSelect/FolderSelect';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import { S } from './style';
+import { OneFolderType } from '../../../types/FolderType';
 
-const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
+const FolderModal = ({
+  option,
+  folderList
+}: {
+  option: 'edit' | 'select';
+  folderList: OneFolderType[];
+}) => {
   const setIsEditModalOpen = useSetRecoilState(folderEditModal);
   const setIsSelectModalOpen = useSetRecoilState(folderSelectModal);
   return option == 'edit' ? (
@@ -17,7 +24,7 @@ const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
     >
       <>
         <S.Title>폴더 편집</S.Title>
-        <FolderEdit />
+        <FolderEdit folderList={folderList} />
       </>
     </BasicModal>
   ) : (
@@ -33,7 +40,7 @@ const FolderModal = ({ option }: { option: 'edit' | 'select' }) => {
             완료
           </BasicButton>
         </S.EditIconWrapper>
-        <FolderSelect />
+        <FolderSelect folderList={folderList} />
       </>
     </BasicModal>
   );
