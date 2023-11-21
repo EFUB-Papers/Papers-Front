@@ -10,7 +10,7 @@ import { CATEGORY, CategoryValuesType } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modeState } from 'atom/mode';
 import { folderModalAtom } from '../../atom/modal';
 
@@ -26,8 +26,7 @@ const ScrapWritePage = () => {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const mode = useRecoilValue(modeState);
-  const [folderModalState, setFolderModalState] =
-    useRecoilState(folderModalAtom);
+  const setFolderModalState = useSetRecoilState(folderModalAtom);
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && link) {

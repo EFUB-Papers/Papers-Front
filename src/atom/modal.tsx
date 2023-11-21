@@ -8,3 +8,8 @@ export const folderModalAtom = atom({
     scrapId: 1
   }
 });
+
+export const userModalAtom = atom({
+  key: 'userModal',
+  default: false
+});

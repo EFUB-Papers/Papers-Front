@@ -8,6 +8,7 @@ const Title = styled.div`
   align-items: center;
   padding-left: 10px;
   height: 40px;
+  font-weight: 600;
 `;
 
 const FlexBox = styled.div`

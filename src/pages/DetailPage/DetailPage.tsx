@@ -8,15 +8,7 @@ import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 
 const DetailPage = () => {
-  const {
-    scrapId,
-    scrapTitle,
-    scrapContent,
-    scrapLink,
-    writerInfo,
-    imgUrl,
-    tags
-  } = OnePostMock;
+  const { scrapTitle, scrapContent, writerInfo, imgUrl, tags } = OnePostMock;
 
   return (
     <S.Wrapper>
