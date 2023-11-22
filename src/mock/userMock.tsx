@@ -1,5 +1,6 @@
 import { UserType } from 'types/UserType';
-import { OneFolderTypeWithoutUser } from 'types/FolderType';
+import { OneFolderType } from 'types/FolderType';
+import { FollowingType } from '../types/FollowingType';
 
 export const UserMock: UserType = {
   nickname: '나는 고양이다',
@@ -16,17 +17,68 @@ export const userListMock: UserType[] = [
   UserMock
 ];
 
-export const MyFolderMock: OneFolderTypeWithoutUser[] = [
-  { folderId: 1, folderName: '기본 폴더' },
-  { folderId: 2, folderName: '전국 맛집 탐방' },
-  { folderId: 3, folderName: '프론트엔드 노트' },
-  { folderId: 4, folderName: '백엔드 노트' },
-  { folderId: 5, folderName: '우리집 강아지' },
-  { folderId: 6, folderName: '파리 여행 일기' },
-  { folderId: 7, folderName: '글쓰기 노트' },
-  { folderId: 8, folderName: '떡볶이 부시기' },
-  { folderId: 9, folderName: '고양이 좋아' },
-  { folderId: 1, folderName: '기본 폴더' },
-  { folderId: 2, folderName: '전국 맛집 탐방' },
-  { folderId: 3, folderName: '프론트엔드 노트' }
+export const folderMock: OneFolderType[] = [
+  {
+    folderId: 1,
+    folderName: '기본 폴더',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 2,
+    folderName: '전국 맛집 탐방',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 3,
+    folderName: '프론트엔드 노트',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 4,
+    folderName: '백엔드 노트',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 5,
+    folderName: '우리집 강아지',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 6,
+    folderName: '파리 여행 일기',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 7,
+    folderName: '글쓰기 노트',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 8,
+    folderName: '떡볶이 부시기',
+    folderOwnerNickname: '나는 고양이다'
+  },
+  {
+    folderId: 9,
+    folderName: '고양이 좋아',
+    folderOwnerNickname: '나는 고양이다'
+  }
+];
+
+export const OneFollowing = {
+  followNickname: '나는 강아지다',
+  followProfileImg: '',
+  followDescription: '멍멍 멍멍 멍멍 멍멍!'
+};
+
+export const followingMock: FollowingType[] = [
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing,
+  OneFollowing
 ];

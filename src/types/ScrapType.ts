@@ -29,6 +29,6 @@ export type SimpleOriginPostType = Omit<
 >;
 
 export type OneTagType = {
-  tagId: string;
+  tagId: number;
   tagName: string;
 };

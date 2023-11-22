@@ -9,10 +9,13 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   background-color: ${({ theme, color }) =>
     color === 'positive'
       ? theme.COLOR.mint
-      : color === 'transparent'
+      : color === 'blue'
       ? theme.COLOR.blue
-      : theme.COLOR.darkGrey};
-  color: white;
+      : color === 'grey'
+      ? theme.COLOR.darkGrey
+      : 'transparent'};
+  color: ${({ textColor }) => (textColor ? textColor : 'white')};
+
   border-radius: ${({ borderRadius, width }) =>
     borderRadius ? borderRadius : width / 2}px;
   font-size: ${({ fontSize }) => fontSize}px;

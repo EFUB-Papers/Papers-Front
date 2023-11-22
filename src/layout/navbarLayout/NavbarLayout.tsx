@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
@@ -10,12 +10,11 @@ import React from 'react';
 
 const NavbarLayout = () => {
   const { nickname, userDetail, imgUrl } = UserMock;
-  const isMine = false;
-  const navigate = useNavigate();
+  const isMine = true;
 
   return (
     <S.Wrapper>
-      {!isMine && <Header />}
+      <Header />
       <S.NavBarWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}

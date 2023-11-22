@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from 'style/common';
 
 const ProfileWrapper = styled.div`
-  margin-top: 7rem;
+  margin-top: 5rem;
   width: 187px;
   height: 300px;
   flex-direction: column;
@@ -36,18 +36,29 @@ const UserDetail = styled.div`
   text-align: center;
 `;
 
-const FlexColumnWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const FlexWrapper = styled.div`
   ${flexCenter};
 `;
+
+const FlexWrapperColumn = styled.div`
+  ${flexCenter};
+  margin-top: 30px;
+  flex-direction: column;
+`;
+
+const Title = styled.div`
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  height: 40px;
+  font-weight: 600;
+`;
+
 const UserProfile = styled.div`
   width: 100%;
   ${flexCenter};
-  top: 20px;
 `;
 
 const Label = styled.span`
@@ -57,7 +68,7 @@ const Label = styled.span`
 const ErrorMsg = styled.div`
   color: ${({ theme }) => theme.COLOR.error};
   font-size: 14px;
-  height: 20px;
+  height: 10px;
 `;
 export const S = {
   ProfileWrapper,
@@ -67,7 +78,8 @@ export const S = {
   UserDetail,
   FlexWrapper,
   UserProfile,
+  Title,
   ErrorMsg,
   Label,
-  FlexColumnWrapper
+  FlexWrapperColumn
 };

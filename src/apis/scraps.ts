@@ -7,6 +7,7 @@ export type OneNewScrapType = {
   scrapLink: string;
   scrapContent: string;
   tags: OneTag[];
+  folderId: number;
 };
 
 type OneTag = {
@@ -19,7 +20,14 @@ export const postNewScrap = async (newScrapInfo: OneNewScrapType) => {
   return data;
 };
 
-export type PatchScrapType = OneNewScrapType & { scrapId: number };
+export type PatchScrapType = {
+  scrapId: number;
+  scrapTitle?: string;
+  scrapLink?: string;
+  scrapContent?: string;
+  tags?: OneTag[];
+  folderId: number;
+};
 
 //스크랩 수정
 export const patchScrap = async (scrapInfo: PatchScrapType) => {

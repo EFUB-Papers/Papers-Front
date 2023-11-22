@@ -34,7 +34,7 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  height: 40px;
+  height: 50px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 
   /* 두줄 말줄임표 */

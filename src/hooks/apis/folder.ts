@@ -62,7 +62,8 @@ export const usePutFolderChangeMutation = () => {
 export const useGetFolderListQuery = (nickname: string) => {
   const { data } = useQuery<OneFolderType[], AxiosError, FolderType[]>({
     queryKey: ['folder', nickname],
-    queryFn: () => getFolderList(nickname)
+    queryFn: () => getFolderList(nickname),
+    enabled: !nickname
   });
   return data;
 };
