@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,21 +12,11 @@
     //json파일을 ts모듈로 불러올 수 있음.
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "node_modules/@types",
-      "src/types"
-    ],
+    "typeRoots": ["node_modules/@types", "src/types"],
     // 타입 정의를 찾을 경로 설정
     "outDir": "dist",
-    "baseUrl": "./src",
-    }
+    "baseUrl": "./src"
   },
-  "include": [
-    "src",
-    "src/components",
-    "src/custom.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", "src/components", "src/custom.d.ts"],
+  "exclude": ["node_modules"]
 }
