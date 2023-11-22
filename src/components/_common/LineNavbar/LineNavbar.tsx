@@ -3,15 +3,20 @@ import { S } from './style';
 import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
 import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
 import { arraySlice } from 'utils/arrayHelper';
-import { MyFolderMock } from 'mock/userMock';
 import { OneFolderTypeWithoutUser } from 'types/FolderType';
-import { useRecoilState } from 'recoil';
-import { folderEditModal } from 'atom/modal';
+import { useSetRecoilState } from 'recoil';
+import { useSearchParams } from 'react-router-dom';
+import BasicButton from '../BasicButton/BasicButton';
+import { COLOR } from '../../../style/theme';
+import { folderModalAtom } from '../../../atom/modal';
 
 type NavbarProps = {
   title?: string;
+  folderList: OneFolderTypeWithoutUser[];
+  isMine: boolean;
 };
-const LineNavbar = ({ title }: NavbarProps) => {
+
+const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
   //현재 선택된 폴더 인덱스
   const [currentIdx, setCurrentIdx] = useState(0);
   //현재 선택된 폴더 그룹 인덱스
@@ -19,10 +24,13 @@ const LineNavbar = ({ title }: NavbarProps) => {
 
   const pagePerGroup = 6;
 
-  const totalFolderLength = MyFolderMock.length;
+  const totalFolderLength = folderList?.length;
 
   const lastGroup = Math.ceil(totalFolderLength / pagePerGroup) - 1;
-  const slicedMenu: OneFolderTypeWithoutUser[][] = arraySlice(MyFolderMock);
+  const slicedMenu: OneFolderTypeWithoutUser[][] =
+    folderList && arraySlice(folderList);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onMovePrevGroup = () => {
     setCurrentFolderGroup(currentFolderGroup - 1);
@@ -35,22 +43,30 @@ const LineNavbar = ({ title }: NavbarProps) => {
     setCurrentIdx((currentIdx) => currentIdx - 1);
   };
 
-  const onClickFolder = (index: number) => {
+  const onClickFolder = (index: number, folderId: number) => {
     setCurrentIdx(index);
+    searchParams.set('folderId', String(folderId));
+    setSearchParams(searchParams);
   };
 
-  const [isEditModalOpen, setIsEditModalOpen] = useRecoilState(folderEditModal);
+  const setIsEditModalOpen = useSetRecoilState(folderModalAtom);
   return (
     <S.Wrapper>
       <S.TitleWrapper>
         {title && <S.Title>{title}</S.Title>}
-        <S.EditModalButton
-          onClick={() => {
-            setIsEditModalOpen(true);
-          }}
-        >
-          폴더 편집
-        </S.EditModalButton>
+        {isMine && (
+          <S.EditModalButton
+            onClick={() => {
+              setIsEditModalOpen({
+                option: 'edit',
+                open: true,
+                scrapId: 0
+              });
+            }}
+          >
+            폴더 편집
+          </S.EditModalButton>
+        )}
       </S.TitleWrapper>
       <S.FlexWrapper>
         {currentFolderGroup !== 0 && (
@@ -72,7 +88,7 @@ const LineNavbar = ({ title }: NavbarProps) => {
                 currentIdx={currentIdx}
                 index={index}
                 onClick={() => {
-                  onClickFolder(index);
+                  onClickFolder(index, folder.folderId);
                 }}
               >
                 <S.Name currentIdx={currentIdx} index={index}>
@@ -81,6 +97,22 @@ const LineNavbar = ({ title }: NavbarProps) => {
               </S.OneMenu>
             );
           })}
+          <BasicButton
+            color={'transparent'}
+            textColor={COLOR.blue}
+            fontSize={15}
+            width={100}
+            height={40}
+            onClick={() => {
+              setIsEditModalOpen({
+                option: 'add',
+                open: true,
+                scrapId: 0
+              });
+            }}
+          >
+            폴더 추가
+          </BasicButton>
         </S.ListWrapper>
         {currentFolderGroup !== lastGroup && (
           <NextIcon

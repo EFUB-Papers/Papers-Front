@@ -2,20 +2,23 @@ import React from 'react';
 import { S } from './style';
 import CircleIcon from '../CircleBox/CircleBox';
 import BasicButton from '../BasicButton/BasicButton';
+import { FollowingType } from '../../../types/FollowingType';
 
-export type UserCardProps = {
+type CardPropsType = {
   width: string;
-  imgurl: string;
-  nickname: string;
-  introduction: string;
-};
+} & FollowingType;
 
-const UserCard = (props: UserCardProps) => {
+const UserCard = ({
+  width,
+  followNickname,
+  followDescription,
+  followProfileImg
+}: CardPropsType) => {
   return (
-    <S.Wrapper $width={props.width}>
-      <CircleIcon imgUrl={props.imgurl} size="medium" />
-      <S.Nickname>{props.nickname}</S.Nickname>
-      <S.Introduction>{props.introduction}</S.Introduction>
+    <S.Wrapper $width={width}>
+      <CircleIcon imgUrl={followProfileImg} size="medium" />
+      <S.Nickname>{followNickname}</S.Nickname>
+      <S.Introduction>{followDescription}</S.Introduction>
       <BasicButton color="positive" fontSize={16} width={100} height={35}>
         언팔로우
       </BasicButton>

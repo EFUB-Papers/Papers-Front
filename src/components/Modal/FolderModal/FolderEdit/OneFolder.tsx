@@ -5,12 +5,33 @@ import { ReactComponent as DeleteIcon } from 'asset/_common/trashIcon.svg';
 import { O } from '../style';
 import React, { useState } from 'react';
 import InputBox from '../../../_common/InputBox/InputBox';
+import {
+  useDeleteFolderMutation,
+  usePutFolderChangeMutation
+} from '../../../../hooks/apis/folder';
+import { OneFolderTypeWithoutUser } from '../../../../types/FolderType';
 
 const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState<string>(title);
+  const { putFolderNameMutate } = usePutFolderChangeMutation();
+  const { deleteFolderMutate } = useDeleteFolderMutation();
+
   const onChange = (e: any) => {
     setName(e.target.value);
+  };
+
+  const onSubmitFolderChange = () => {
+    const folderInfo: OneFolderTypeWithoutUser = {
+      folderId: id,
+      folderName: name
+    };
+    putFolderNameMutate(folderInfo);
+    setIsEditMode(false);
+  };
+
+  const onDeleteFolder = () => {
+    deleteFolderMutate(id);
   };
 
   return (
@@ -38,7 +59,7 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
         {isEditMode ? (
           <ActivePencilIcon
             onClick={() => {
-              setIsEditMode(false);
+              onSubmitFolderChange();
             }}
           />
         ) : (
@@ -48,7 +69,7 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
             }}
           />
         )}
-        {!isEditMode && <DeleteIcon />}
+        {!isEditMode && <DeleteIcon onClick={onDeleteFolder} />}
       </O.IconContainer>
     </O.Wrapper>
   );

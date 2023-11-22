@@ -7,6 +7,8 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   padding-left: 10px;
+  height: 40px;
+  font-weight: 600;
 `;
 
 const FlexBox = styled.div`
@@ -16,11 +18,16 @@ const FlexBox = styled.div`
   gap: 5px;
 `;
 
+const FlexBoxRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
 const ContentWrapper = styled.div`
   overflow: scroll;
   width: 400px;
   height: 430px;
-  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -58,6 +65,7 @@ const EditIconWrapper = styled.div`
   height: 50px;
   ${flexCenter};
   justify-content: space-between;
+  position: relative;
 `;
 
 export const O = {
@@ -66,10 +74,23 @@ export const O = {
   ButtonWrapper
 };
 
+const SelectButton = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 50px;
+`;
+
+const AddBox = styled.div`
+  margin-top: 30px;
+`;
+
 export const S = {
   ContentWrapper,
   Title,
   FlexBox,
   DeleteIconWrapper,
-  EditIconWrapper
+  EditIconWrapper,
+  SelectButton,
+  FlexBoxRow,
+  AddBox
 };

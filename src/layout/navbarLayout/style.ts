@@ -22,6 +22,7 @@ const NavBarWrapper = styled.div`
 
 const FlexWrapper = styled.div`
   ${flexCenter};
+  flex-direction: column;
 `;
 
 const ButtonTextWrapper = styled.div`

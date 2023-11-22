@@ -10,7 +10,6 @@ import { OneScrapType } from 'types/ScrapType';
 import { userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
-import { Navigate } from 'react-router';
 
 const MainPage = () => {
   return (
@@ -89,9 +88,9 @@ const MainPage = () => {
                   <UserCard
                     key={index}
                     width="31%"
-                    imgurl={user.imgUrl}
-                    nickname={user.nickname}
-                    introduction={user.userDetail}
+                    followProfileImg={user.imgUrl}
+                    followNickname={user.nickname}
+                    followDescription={user.userDetail}
                   />
                 )
             )}
