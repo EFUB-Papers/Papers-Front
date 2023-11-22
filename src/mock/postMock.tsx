@@ -14,23 +14,23 @@ export const OnePostMock: OneScrapType = {
   CreatedAt: new Date(),
   tags: [
     {
-      tagId: '1',
+      tagId: 1,
       tagName: '여행'
     },
     {
-      tagId: '2',
+      tagId: 2,
       tagName: '제주도'
     },
     {
-      tagId: '3',
+      tagId: 3,
       tagName: '워케이션'
     },
     {
-      tagId: '4',
+      tagId: 4,
       tagName: '송악산'
     },
     {
-      tagId: '5',
+      tagId: 5,
       tagName: '장기휴가'
     }
   ],

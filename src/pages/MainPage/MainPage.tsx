@@ -24,7 +24,7 @@ const MainPage = () => {
         {/* 태그 리스트 */}
         <S.TagList>
           {tagListMock.map((tag, index) => (
-            <Tag tag={tag} key={index} />
+            <Tag tagId={tag.tagId} tagName={tag.tagName} key={index} />
           ))}
         </S.TagList>
       </S.Header>

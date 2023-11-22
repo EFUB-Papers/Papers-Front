@@ -3,6 +3,7 @@ import Tag from '../Tag/Tag';
 import { S } from './style';
 import { OneTagType } from 'types/ScrapType';
 import { v4 } from 'uuid';
+import { NewTagType } from 'types/TagType';
 
 type TagCreatorProps = {
   isCreator?: boolean;
@@ -11,7 +12,11 @@ type TagCreatorProps = {
 
 const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
   const [input, setInput] = useState('');
-  const [tagList, setTagList] = useState<OneTagType[]>([...tags]);
+  const [tagList, setTagList] = useState<NewTagType[]>([
+    ...tags.map((tag) => {
+      return { tagId: v4(), tagName: tag.tagName };
+    })
+  ]);
 
   //태그 추가 (엔터 입력 시)
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -21,7 +26,7 @@ const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
   };
 
   const onCreateTag = () => {
-    const newTag: OneTagType = {
+    const newTag: NewTagType = {
       tagId: v4(),
       tagName: input
     };
@@ -47,11 +52,16 @@ const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
   return (
     <S.Wrapper>
       {/* 태그 리스트 */}
-      {tagList.map((tag: OneTagType, index: number) =>
+      {tagList.map((tag: NewTagType, index: number) =>
         isCreator ? (
-          <Tag key={index} tag={tag} onDelete={onDelete} />
+          <Tag
+            key={index}
+            tagId={tag.tagId}
+            tagName={tag.tagName}
+            onDelete={onDelete}
+          />
         ) : (
-          <Tag key={index} tag={tag} />
+          <Tag key={index} tagId={tag.tagId} tagName={tag.tagName} />
         )
       )}
       {/* 태그 입력창 */}

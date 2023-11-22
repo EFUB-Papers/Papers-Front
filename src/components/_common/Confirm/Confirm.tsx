@@ -29,7 +29,7 @@ const Confirm = (props: ConfirmProps) => {
             <S.ButtonWrapper>
               {/* 취소 버튼 */}
               <BasicButton
-                color={'negative'}
+                color={'grey'}
                 fontSize={16}
                 width={90}
                 height={30}
