@@ -34,7 +34,7 @@ const UserModal = ({ imgUrl, userName, userDetail }: ProfileProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   //닉네임 중복 검사
-  const onSubmitNickname = async () => {
+  const onSubmitNickname = () => {
     postSameNameAction(name);
     if (hasSameName) {
       setErrorMessage('중복된 이름이 있습니다.');

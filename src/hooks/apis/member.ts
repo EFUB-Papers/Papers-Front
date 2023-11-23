@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import {
   postMyProfile,
-  postOtherUserInfo,
   postNewToken,
+  postOtherUserInfo,
   postSameName
 } from 'apis/member';
 import { AxiosError } from 'axios';

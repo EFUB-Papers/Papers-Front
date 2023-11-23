@@ -3,7 +3,7 @@ import { NETWORK } from 'constants/Api';
 import { postNewToken } from 'apis/member';
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.REACT_APP_BACK_URL,
   timeout: NETWORK.TIMEOUT,
   withCredentials: true,
   headers: {
@@ -22,13 +22,9 @@ axiosInstance.interceptors.request.use(
       window.location.href = '/';
       throw new Error('토큰이 없습니다.');
     }
-    if (!config.headers['authorization']) {
-      if (localStorage.getItem('papersToken')) {
-        config.headers['Authorization'] = `Bearer ${localStorage.getItem(
-          'papersToken'
-        )}`;
-      }
-    }
+    config.headers['Authorization'] = `Bearer ${localStorage.getItem(
+      'papersToken'
+    )}`;
     return config;
   },
   //요청 에러 시 수행 로직
@@ -59,11 +55,15 @@ axiosInstance.interceptors.response.use(
     if (error?.response?.status === 401 && !isRefreshing) {
       isRefreshing = true;
       const data = await postNewToken();
-      localStorage.setItem('papersToken', data.accessToken);
-      localStorage.setItem('nickname', data.nickname);
-      originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
-      const originalResponse = await axios.request(originalRequest);
-      return originalResponse.data;
+      if (data) {
+        localStorage.setItem('papersToken', data.accessToken);
+        localStorage.setItem('nickname', data.nickname);
+        originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
+        const originalResponse = await axios.request(originalRequest);
+        return originalResponse.data;
+      } else {
+        window.location.href = '/login';
+      }
     } else {
       throw error;
     }

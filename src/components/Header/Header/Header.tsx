@@ -7,9 +7,10 @@ import { S } from './style';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 import { useNavigate } from 'react-router-dom';
 import ModeToggleButton from '../ModeToggleButton/ModeToggleButton';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
+import { useUserDetailInfoMutation } from '../../../hooks/apis/member';
 
 export type HeaderProps = {
   isWriteButton?: boolean;
@@ -18,6 +19,17 @@ export type HeaderProps = {
 const Header = ({ isWriteButton = true }: HeaderProps) => {
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
+  const { postGetUserInfoMutate } = useUserDetailInfoMutation();
+
+  useEffect(() => {
+    const nickname = localStorage.getItem('nickname');
+    if (nickname) {
+      const data = postGetUserInfoMutate(nickname);
+      console.log('daa', data);
+    }
+
+    console.log();
+  }, []);
 
   return (
     <S.Wrapper>

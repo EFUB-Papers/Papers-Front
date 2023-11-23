@@ -42,9 +42,11 @@ export const postSameName = async (nickname: string) => {
 
 //회원 정보 조회
 export const postOtherUserInfo = async (nickname: string) => {
+  console.log('nickname', nickname);
   const { data } = await axiosInstance.post('/members/search', {
     nickname
   });
+  console.log('data', data);
   return data;
 };
 
