@@ -1,5 +1,4 @@
 import { OneTagType } from 'types/ScrapType';
-import { TagType } from 'types/TagType';
 
 export const tagListMock: OneTagType[] = [
   { tagId: 0, tagName: '프론트엔드' },

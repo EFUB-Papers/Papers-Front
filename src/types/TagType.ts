@@ -1,4 +1,4 @@
-export type TagType = {
-  id?: string;
-  content: string;
+export type NewTagType = {
+  tagId: string;
+  tagName: string;
 };

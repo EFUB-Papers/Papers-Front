@@ -1,10 +1,19 @@
+import axios from 'axios';
 import { axiosInstance } from './axiosInstance';
 
 //회원 가입
 export const postLogin = async (code: string) => {
-  const { data } = await axiosInstance.post('/auth/login', {
-    code
-  });
+  const { data } = await axios.post(
+    'http://3.37.102.113:8080/auth/login',
+    {
+      code
+    },
+    {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      withCredentials: true
+    }
+  );
+  console.log(data);
   return data;
 };
 

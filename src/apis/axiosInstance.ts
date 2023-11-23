@@ -19,12 +19,16 @@ axiosInstance.interceptors.request.use(
     if (config?.headers == null) {
       throw new Error(`헤더가 정의되지 않았습니다.`);
     }
-    if (!getCookie('papersToken')) {
+    if (!localStorage.getItem('papersToken')) {
       window.location.href = '/';
-      throw new Error('토큰이 유효하지 않습니다');
+      throw new Error('토큰이 없습니다.');
     }
     if (!config.headers['authorization']) {
-      config.headers['Authorization'] = `Bearer ${getCookie('papersToken')}`;
+      if (localStorage.getItem('papersToken')) {
+        config.headers['Authorization'] = `Bearer ${localStorage.getItem(
+          'papersToken'
+        )}`;
+      }
     }
     return config;
   },

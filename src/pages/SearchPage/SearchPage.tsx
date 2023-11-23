@@ -19,6 +19,7 @@ const SearchPage = () => {
               imgUrl={imgUrl}
               scrapTitle={scrapTitle}
               scrapContent={scrapContent}
+              isMine={true}
             />
           );
         })}

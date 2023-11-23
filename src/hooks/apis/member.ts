@@ -1,34 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  postLogin,
   postMyProfile,
   postOtherUserInfo,
   postNewToken,
   postSameName
 } from 'apis/member';
 import { AxiosError } from 'axios';
-
-export type LoginResponseType = {
-  isExist: boolean;
-  email: string;
-  nickname: string;
-  accessToken: string;
-};
-
-//회원 가입 mutation
-export const usePostLoginMutation = () => {
-  const { data: loginData, mutate: postLoginMutate } = useMutation<
-    LoginResponseType,
-    AxiosError,
-    string
-  >({
-    mutationFn: (code: string) => postLogin(code),
-    onError: (err) => {
-      console.log(err);
-    }
-  });
-  return { loginData, postLoginMutate };
-};
 
 //토큰 재발급 mutation ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
 export const usePostNewTokenMutation = () => {
