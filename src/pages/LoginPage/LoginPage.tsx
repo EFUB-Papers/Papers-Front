@@ -18,36 +18,16 @@ import toggleText from 'asset/loginPage/toggleText.png';
 import previewText from 'asset/loginPage/previewText.png';
 import profileCardText from 'asset/loginPage/profileCardText.png';
 import { ReactComponent as ScrollMore } from 'asset/loginPage/scrollMore.svg';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { usePostLoginMutation } from 'hooks/apis/member';
-import { setCookie } from 'utils/cookieStorage';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { loginData, postLoginMutate } = usePostLoginMutation();
 
-  // 구글 로그인 이벤트 핸들러
-  const onGoogleLogin = useGoogleLogin({
-    scope: 'email profile',
-    // 구글 로그인 성공 시
-    onSuccess: async ({ code }) => {
-      postLoginMutate(code); // 로그인 api 호출
-      // 쿠키에 액세스 토큰 저장
-      if (loginData) {
-        setCookie('papersToken', loginData.accessToken, {
-          path: '/',
-          secure: false,
-          sameSite: 'none'
-        });
-      }
-    },
-    // 구글 로그인 실패 시
-    onError: (errorResponse) => {
-      console.error(errorResponse);
-    },
-    flow: 'auth-code'
-  });
+  // 구글 로그인 페이지로 리다이렉션 (구글 계정 고르는 페이지)
+  const onGoogleLogin = () => {
+    window.location.href =
+      'https://accounts.google.com/o/oauth2/v2/auth?client_id=166892546465-mvg7ktdjmtmk5r288qnp1060f8ajb0a1.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=code&scope=email+profile';
+  };
 
   return (
     <S.Wrapper>
