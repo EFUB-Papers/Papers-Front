@@ -33,6 +33,7 @@ const MainPage = () => {
       const data = await postLogin(code);
       console.log('data', data);
       localStorage.setItem('papersToken', data.accessToken);
+      localStorage.setItem('nickname', data.nickname);
       navigate('/');
     } catch (error) {
       console.log(error);

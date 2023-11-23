@@ -17,8 +17,15 @@ export const postLogin = async (code: string) => {
   return data;
 };
 
-export const postNewToken = async (): Promise<string> => {
-  return await axiosInstance.post('/auth/reissue');
+type NewTokenResponseType = {
+  accessToken: string;
+  email: string;
+  nickname: string;
+};
+
+export const postNewToken = async (): Promise<NewTokenResponseType> => {
+  const { data } = await axiosInstance.post('/auth/reissue');
+  return data;
 };
 
 //닉네임 중복 조회

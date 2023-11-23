@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import { getCookie, setCookie } from 'utils/cookieStorage';
 import { NETWORK } from 'constants/Api';
 import { postNewToken } from 'apis/member';
 
@@ -59,9 +58,10 @@ axiosInstance.interceptors.response.use(
     //인증 문제
     if (error?.response?.status === 401 && !isRefreshing) {
       isRefreshing = true;
-      const newToken = await postNewToken();
-      setCookie('papersToken', newToken);
-      originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+      const data = await postNewToken();
+      localStorage.setItem('papersToken', data.accessToken);
+      localStorage.setItem('nickname', data.nickname);
+      originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
       const originalResponse = await axios.request(originalRequest);
       return originalResponse.data;
     } else {
