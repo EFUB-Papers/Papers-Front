@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { axiosInstance } from './axiosInstance';
+import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
+import { UserInfoType } from '../hooks/apis/member';
 
 //회원 가입
 export const postLogin = async (code: string) => {
@@ -23,14 +24,13 @@ type NewTokenResponseType = {
   nickname: string;
 };
 
-export const postNewToken = async (): Promise<NewTokenResponseType> => {
-  const { data } = await axiosInstance.post('/auth/reissue');
+export const postNewToken = async () => {
+  const data: NewTokenResponseType = await axiosInstance.get('/auth/reissue');
   return data;
 };
 
 //닉네임 중복 조회
 export const postSameName = async (nickname: string) => {
-  console.log('이름중복', nickname);
   const { data } = await axiosInstance.post<boolean>(
     '/members/nickname/isExist',
     {
@@ -41,10 +41,13 @@ export const postSameName = async (nickname: string) => {
 };
 
 //회원 정보 조회
-export const postOtherUserInfo = async (nickname: string) => {
-  const { data } = await axiosInstance.post('/members/search', {
-    nickname
-  });
+export const getOtherUserInfo = async (nickname: string) => {
+  const { data } = await axios.get<UserInfoType>(
+    `http://3.37.102.113:8080/members/search/${nickname}`,
+    {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    }
+  );
   return data;
 };
 
@@ -55,6 +58,7 @@ export type ProfileType = {
   };
   profileImg: File;
 };
+
 //프로필 설정
 export const postMyProfile = async (profileInfo: FormData) => {
   console.log(profileInfo);
@@ -66,4 +70,8 @@ export const postMyProfile = async (profileInfo: FormData) => {
   return data;
 };
 
-//회원별 스크랩 조회✅ 수정 필요
+//랜덤 회원 리스트 조회
+export const getRecommendUsers = async () => {
+  const { data } = await axiosInstanceWithoutToken('/members/random-list');
+  return data;
+};

@@ -1,5 +1,5 @@
 //스크랩 삭제
-import { axiosInstance } from './axiosInstance';
+import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { CategoryKeyType, SearchRangeKeyType } from '../constants/Category';
 
 export type OneNewScrapType = {
@@ -44,15 +44,18 @@ export const deleteScrap = async (scrapId: number) => {
   return data;
 };
 
-//스크랩 조회
+//스크랩 디테일 조회
 export const getScrapDetail = async (scrapId: number) => {
   const { data } = await axiosInstance.get(`/scraps/${scrapId}`);
   return data;
 };
 
 //내 추천 스크랩 보기
-export const getRecommentScrapList = async () => {
-  const { data } = await axiosInstance.get(`/scraps/recommend`);
+export const getRecommendScrapList = async () => {
+  const { data } = await axiosInstanceWithoutToken.get(
+    `/scraps/recommend?page=1`
+  );
+  console.log('dagta', data);
   return data;
 };
 
@@ -69,5 +72,13 @@ export const getSearchScrap = async (searchInfo: SearchScrapType) => {
       ...searchInfo
     }
   });
+  return data;
+};
+
+//회원별 스크랩 조회
+export const getMyScraps = async (nickname: string) => {
+  const { data } = await axiosInstanceWithoutToken(
+    `/members/${nickname}/scraps`
+  );
   return data;
 };

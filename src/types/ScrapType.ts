@@ -1,16 +1,20 @@
 import { UserType } from './UserType';
 import { CategoryKeyType } from 'constants/Category';
 
-export type OneScrapType = {
-  imgUrl: string;
+export type SimpleOneScrapType = {
+  imgUrl: string; //빠짐
   scrapId: number;
   scrapTitle: string;
-  scrapContent: string;
+  scrapContent: string; //빠짐
   scrapLink: string;
-  writerInfo: UserType; //작성자 정보
-  CreatedAt: Date; //작성 날짜
-  heartCnt: number; //좋아요 개수
-  commentCnt: number; //댓글 개수
+  writerNickname: string;
+  writerProfile: string | null;
+  CreatedAt: Date; //빠짐
+  heartCnt: number; //빠짐
+  commentCnt: number; //빠짐
+};
+
+export type OneScrapType = SimpleOneScrapType & {
   tags: OneTagType[];
   category: CategoryKeyType;
 };

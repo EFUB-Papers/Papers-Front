@@ -1,10 +1,12 @@
 import { S } from './style';
 import React from 'react';
 import BasicButton from '../../_common/BasicButton/BasicButton';
-import CircleIcon from '../../_common/CircleBox/CircleBox';
 import { useRecoilState } from 'recoil';
 import { userModalAtom } from '../../../atom/modal';
 import UserModal from '../../Modal/UserModal/UserModal';
+import { LocalStorage } from '../../../utils/localStorage';
+import { useUserInfoQuery } from '../../../hooks/apis/member';
+import CircleIcon from '../../_common/CircleBox/CircleBox';
 
 export type ProfileProps = {
   userName: string;
@@ -15,24 +17,19 @@ export type ProfileProps = {
 const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
   const [userModalState, setUserModalState] = useRecoilState(userModalAtom);
 
+  const nickname = LocalStorage.getNickname()!;
+  const userInfo = useUserInfoQuery(nickname);
+
   return (
     <>
-      {userModalState && (
-        <UserModal
-          userName={userName}
-          userDetail={userDetail}
-          imgUrl={imgUrl}
-        />
-      )}
-
       <S.ProfileWrapper>
         <S.FlexWrapperColumn>
           <S.UserProfile>
-            <CircleIcon size="big" imgUrl={imgUrl} />
+            <CircleIcon size="big" imgUrl={userInfo?.profileImgUrl} />
           </S.UserProfile>
           <S.UserInfo>
-            <S.UserName>{userName}</S.UserName>
-            <S.UserDetail>{userDetail}</S.UserDetail>
+            <S.UserName>{userInfo?.nickname}</S.UserName>
+            <S.UserDetail>{userInfo?.introduce}</S.UserDetail>
             <BasicButton
               color={'blue'}
               fontSize={14}

@@ -23,3 +23,8 @@ export const getFollowerList = async () => {
   const { data } = await axiosInstance.get('/members/followers');
   return data;
 };
+
+export const getCurrentFollowing = async (nickname: string) => {
+  const { data } = await axiosInstance.get(`/follows/isFollower/${nickname}`);
+  return data;
+};

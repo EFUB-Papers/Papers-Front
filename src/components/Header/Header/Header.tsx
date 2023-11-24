@@ -10,12 +10,14 @@ import ModeToggleButton from '../ModeToggleButton/ModeToggleButton';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
+import { UserInfoType } from '../../../hooks/apis/member';
 
 export type HeaderProps = {
   isWriteButton?: boolean;
+  userInfo: UserInfoType | undefined;
 };
 
-const Header = ({ isWriteButton = true }: HeaderProps) => {
+const Header = ({ isWriteButton = true, userInfo }: HeaderProps) => {
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
 
@@ -44,10 +46,25 @@ const Header = ({ isWriteButton = true }: HeaderProps) => {
           </BasicButton>
         )}
       </S.BasicButtonWrapper>
-
-      <S.ProfileImgWrapper onClick={() => navigate('/folder/나는 고양이다')}>
-        <CircleIcon size="small" imgUrl="" />
-      </S.ProfileImgWrapper>
+      {userInfo ? (
+        <S.ProfileImgWrapper
+          onClick={() => navigate(`/folder/${userInfo.nickname}`)}
+        >
+          <CircleIcon size="small" imgUrl={''} />
+        </S.ProfileImgWrapper>
+      ) : (
+        <BasicButton
+          color={'grey'}
+          fontSize={12}
+          width={60}
+          height={35}
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
+          로그인
+        </BasicButton>
+      )}
     </S.Wrapper>
   );
 };

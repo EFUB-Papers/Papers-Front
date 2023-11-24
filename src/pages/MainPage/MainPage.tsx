@@ -3,45 +3,37 @@ import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
 import SearchBar from 'components/_common/SearchBar/SearchBar';
 import Tag from 'components/_common/Tag/Tag';
 import UserCard from 'components/_common/UserCard/UserCard';
-import React, { useEffect } from 'react';
 import { S } from './style';
 import { PostListMock } from 'mock/postMock';
 import { OneScrapType } from 'types/ScrapType';
-import { userListMock } from 'mock/userMock';
+import { UserMock, userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { postLogin } from 'apis/member';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUserInfoQuery } from '../../hooks/apis/member';
+import { LocalStorage } from '../../utils/localStorage';
+import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
+import UserModal from 'components/Modal/UserModal/UserModal';
+import { useRecommendUsersQuery } from '../../hooks/apis/member';
 const MainPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const params = useParams();
+  const isFirst = params.isFirst;
+  const nickname = LocalStorage.getNickname()!;
+  const userInfo = useUserInfoQuery(nickname);
+  const scrapList = useRecommendScrapQuery();
 
-  // 구글 로그인 처리
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search); //구글 로그인 redirect URI
-    const code = searchParams.get('code'); //URI의 파라미터에서 code를 추출
-    if (code) {
-      console.log('code', code);
-      login(code); //추출한 code로 백엔드에 로그인 api 요청
-    }
-  }, []);
-
-  // 백엔드에 로그인 api 요청
-  const login = async (code: string) => {
-    try {
-      const data = await postLogin(code);
-      console.log('data', data);
-      localStorage.setItem('papersToken', data.accessToken);
-      localStorage.setItem('nickname', data.nickname);
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const userList = useRecommendUsersQuery();
+  console.log('userList', userList);
 
   return (
     <S.Wrapper>
+      {isFirst && userInfo && (
+        <UserModal
+          imgUrl={userInfo.profileImgUrl}
+          userName={userInfo.nickname!}
+          userDetail={userInfo.introduce!}
+        />
+      )}
       <S.Header>
         {/* 검색바 */}
         <SearchBar />
@@ -75,7 +67,7 @@ const MainPage = () => {
                     title={scrap.scrapTitle}
                     content={scrap.scrapContent}
                     heartCnt={10}
-                    author={scrap.writerInfo.nickname}
+                    author={scrap.writerNickname}
                   />
                 )
             )}
@@ -99,7 +91,7 @@ const MainPage = () => {
                     title={scrap.scrapTitle}
                     content={scrap.scrapContent}
                     heartCnt={10}
-                    author={scrap.writerInfo.nickname}
+                    author={scrap.writerNickname}
                   />
                 )
             )}
@@ -110,7 +102,7 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {userListMock.map(
+            {userList.map(
               (user: UserType, index: number) =>
                 index < 3 && (
                   <UserCard

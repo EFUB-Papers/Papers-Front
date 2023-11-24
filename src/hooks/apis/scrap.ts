@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   deleteScrap,
-  getRecommentScrapList,
+  getRecommendScrapList,
   getScrapDetail,
   getSearchScrap,
   OneNewScrapType,
@@ -65,7 +65,7 @@ export const useGetScrapDetailQuery = (scrapId: number) => {
 export const useRecommendScrapQuery = () => {
   const { data } = useQuery({
     queryKey: ['recommendScrap'],
-    queryFn: () => getRecommentScrapList()
+    queryFn: () => getRecommendScrapList()
   });
   return data;
 };
