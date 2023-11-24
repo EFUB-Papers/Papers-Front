@@ -30,11 +30,7 @@ const NavbarLayout = () => {
       <S.NavBarWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}
-          <ProfileBox
-            imgUrl={userInfo?.profileImgUrl || ''}
-            userName={userInfo?.nickname || ''}
-            userDetail={userInfo?.introduce || ''}
-          />
+          <ProfileBox />
           {isMine && <MyMenu />}
           <S.ScrapButtonWrapper>
             <BasicButton width={150} height={50} color="positive" fontSize={22}>

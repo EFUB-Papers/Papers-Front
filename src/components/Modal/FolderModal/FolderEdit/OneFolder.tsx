@@ -31,6 +31,8 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
   };
 
   const onDeleteFolder = () => {
+    console.log('id', id);
+    console.log('폴더 삭제');
     deleteFolderMutate(id);
   };
 

@@ -22,11 +22,7 @@ interface FolderType {
 
 //폴더 생성: 폴더를 생성하는 mutation
 export const useCreateFolderMutation = () => {
-  const { mutate: postNewFolderAction } = useMutation<
-    AxiosResponseType,
-    AxiosError,
-    string
-  >({
+  const { mutate: postNewFolderAction } = useMutation<any, AxiosError, string>({
     mutationFn: (folderInfo) => postNewFolder(folderInfo)
   });
 
@@ -60,10 +56,9 @@ export const usePutFolderChangeMutation = () => {
 
 //회원별 폴더 조회 : 폴더 리스트를 가져오는 쿼리
 export const useGetFolderListQuery = (nickname: string) => {
-  const { data } = useQuery<OneFolderType[], AxiosError, FolderType[]>({
+  const { data } = useQuery<OneFolderType[], AxiosError, OneFolderType[]>({
     queryKey: ['folder', nickname],
-    queryFn: () => getFolderList(nickname),
-    enabled: !nickname
+    queryFn: () => getFolderList(nickname)
   });
   return data;
 };

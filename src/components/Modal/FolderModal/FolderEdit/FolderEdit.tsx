@@ -18,6 +18,7 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
       folderId: -1
     });
   };
+
   return (
     <S.ContentWrapper>
       <S.FlexBox>

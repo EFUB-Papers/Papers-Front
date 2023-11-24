@@ -38,7 +38,9 @@ const Text = styled.div`
 `;
 
 const CardList = styled.div`
-  ${flexCenter}
+  ${flexCenter};
+  flex-wrap: wrap;
+  gap: 30px;
   justify-content: space-between;
 `;
 

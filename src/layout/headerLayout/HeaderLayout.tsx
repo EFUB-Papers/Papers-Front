@@ -8,9 +8,7 @@ import Header from '../../components/Header/Header/Header';
 const HeaderLayout = () => {
   const isWriteButton = true;
   const nickname = LocalStorage.getNickname()!;
-  console.log('nickname', nickname);
   const userInfo = useUserInfoQuery(nickname);
-  console.log('useInfo', userInfo);
   return (
     <S.Wrapper>
       <Header isWriteButton={isWriteButton} userInfo={userInfo} />

@@ -56,6 +56,7 @@ export const usePostProfile = () => {
   >({
     mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo)
   });
+
   return { postProfileMutate };
 };
 

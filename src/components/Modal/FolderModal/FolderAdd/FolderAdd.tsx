@@ -12,7 +12,8 @@ const FolderAdd = () => {
     setNewFolderInput(e.target.value);
   };
 
-  const onSubmitCreateNewFolder = () => {
+  const onSubmitCreateNewFolder = (e: any) => {
+    e.preventDefault();
     postNewFolderAction(newFolderInput);
   };
 
@@ -39,7 +40,10 @@ const FolderAdd = () => {
               fontSize={12}
               height={30}
               width={60}
-              onClick={onSubmitCreateNewFolder}
+              onClick={(e) => {
+                onSubmitCreateNewFolder(e);
+              }}
+              disabled={!newFolderInput.length}
             >
               완료
             </BasicButton>

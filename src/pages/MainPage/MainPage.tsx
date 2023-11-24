@@ -4,7 +4,6 @@ import SearchBar from 'components/_common/SearchBar/SearchBar';
 import Tag from 'components/_common/Tag/Tag';
 import UserCard from 'components/_common/UserCard/UserCard';
 import { S } from './style';
-import { PostListMock } from 'mock/postMock';
 import { OneScrapType } from 'types/ScrapType';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
@@ -22,7 +21,10 @@ const MainPage = () => {
   const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
+  /*추천 스크랩*/
   const scrapList = useRecommendScrapQuery();
+  /*내 스크랩*/
+  console.log(scrapList);
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
 
@@ -55,49 +57,46 @@ const MainPage = () => {
         <S.Section>
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
-            {PostListMock.map(
-              (scrap: OneScrapType, index: number) =>
-                index < 3 && (
-                  <ScrapCard
-                    key={index}
-                    width={300}
-                    scrapId={scrap.scrapId}
-                    link={scrap.scrapLink}
-                    linkTitle={scrap.scrapLink}
-                    imgUrl={scrap.imgUrl}
-                    title={scrap.scrapTitle}
-                    content={scrap.scrapContent}
-                    heartCnt={10}
-                    author={scrap.writerNickname}
-                  />
-                )
-            )}
+            {scrapList?.scraps?.map((scrap: OneScrapType, index: number) => (
+              <ScrapCard
+                key={index}
+                width={300}
+                scrapId={scrap.scrapId}
+                link={scrap.scrapLink}
+                linkTitle={scrap.scrapLink}
+                imgUrl={scrap.imgUrl}
+                title={scrap.scrapTitle}
+                content={scrap.scrapContent}
+                heartCnt={10}
+                author={scrap.writerNickname}
+              />
+            ))}
           </S.CardList>
         </S.Section>
 
         {/* 팔로우한 유저의 글 */}
-        <S.Section>
-          <S.Text>팔로우한 유저의 글</S.Text>
-          <S.CardList>
-            {PostListMock.map(
-              (scrap: OneScrapType, index: number) =>
-                index < 3 && (
-                  <ScrapCard
-                    key={index}
-                    width={300}
-                    scrapId={scrap.scrapId}
-                    link={scrap.scrapLink}
-                    linkTitle={scrap.scrapLink}
-                    imgUrl={scrap.imgUrl}
-                    title={scrap.scrapTitle}
-                    content={scrap.scrapContent}
-                    heartCnt={10}
-                    author={scrap.writerNickname}
-                  />
-                )
-            )}
-          </S.CardList>
-        </S.Section>
+        {/*<S.Section>*/}
+        {/*  <S.Text>팔로우한 유저의 글</S.Text>*/}
+        {/*  <S.CardList>*/}
+        {/*    {PostListMock.map(*/}
+        {/*      (scrap: OneScrapType, index: number) =>*/}
+        {/*        index < 3 && (*/}
+        {/*          <ScrapCard*/}
+        {/*            key={index}*/}
+        {/*            width={300}*/}
+        {/*            scrapId={scrap.scrapId}*/}
+        {/*            link={scrap.scrapLink}*/}
+        {/*            linkTitle={scrap.scrapLink}*/}
+        {/*            imgUrl={scrap.imgUrl}*/}
+        {/*            title={scrap.scrapTitle}*/}
+        {/*            content={scrap.scrapContent}*/}
+        {/*            heartCnt={10}*/}
+        {/*            author={scrap.writerNickname}*/}
+        {/*          />*/}
+        {/*        )*/}
+        {/*    )}*/}
+        {/*  </S.CardList>*/}
+        {/*</S.Section>*/}
 
         {/* 추천 유저 */}
         <S.Section>

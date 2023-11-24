@@ -4,7 +4,6 @@ import {
   getRecommendScrapList,
   getScrapDetail,
   getSearchScrap,
-  OneNewScrapType,
   patchScrap,
   PatchScrapType,
   postNewScrap,
@@ -73,7 +72,7 @@ export const useRecommendScrapQuery = () => {
 //스크랩 검색
 export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
   const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
-    queryKey: ['recommendScrap'],
+    queryKey: ['searchScrap'],
     queryFn: () => getSearchScrap(searchInfo)
   });
   return data;

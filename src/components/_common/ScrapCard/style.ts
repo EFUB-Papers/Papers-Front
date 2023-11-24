@@ -69,6 +69,13 @@ const Img = styled.img`
   width: 100%;
 `;
 
+const TextImg = styled.div`
+  width: 100%;
+  background-color: ${({ theme }) => theme.input};
+  height: 100%;
+  padding: 10px;
+`;
+
 const Title = styled.div`
   font-size: 18px;
   margin-top: 8px;
@@ -108,6 +115,7 @@ export const S = {
   ScrapBox,
   ImageBox,
   Img,
+  TextImg,
   Title,
   Content,
   Footer,
