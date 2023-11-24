@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteFolder,
   getFolderList,
@@ -14,19 +14,21 @@ import {
 } from '../../types/FolderType';
 import { OneScrapType } from '../../types/ScrapType';
 
-interface FolderType {
-  folderId: number;
-  folderName: string;
-  folderOwnerNickname: string; //나이거나 다른 유저일 수 있음
-}
-
 //폴더 생성: 폴더를 생성하는 mutation
-export const useCreateFolderMutation = () => {
-  const { mutate: postNewFolderAction } = useMutation<any, AxiosError, string>({
-    mutationFn: (folderInfo) => postNewFolder(folderInfo)
+export const useCreateFolderMutation = (nickname: string) => {
+  const queryClient = useQueryClient();
+  const { mutate: postNewFolderAction, isSuccess } = useMutation<
+    any,
+    AxiosError,
+    string
+  >({
+    mutationFn: (folderInfo) => postNewFolder(folderInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder', nickname] });
+    }
   });
 
-  return { postNewFolderAction };
+  return { postNewFolderAction, isSuccess };
 };
 
 //폴더 삭제 : 폴더를 삭제하는 mutation
