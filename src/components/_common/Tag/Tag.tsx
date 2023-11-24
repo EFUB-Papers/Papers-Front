@@ -1,11 +1,9 @@
 import React from 'react';
 import { S } from './style';
 import { ReactComponent as DeleteIcon } from 'asset/_common/delete.svg';
-import { OneTagType } from 'types/ScrapType';
-import { NewTagType } from 'types/TagType';
 
 export type TagProps = {
-  tagId: number | string;
+  tagId?: number | string;
   tagName: string;
   onDelete?: (id: string) => void; //TagCreator에서 X 클릭 시 이벤트 핸들러
 };

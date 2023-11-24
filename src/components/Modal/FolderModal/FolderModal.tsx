@@ -31,6 +31,15 @@ const FolderModal = ({ folderList }: { folderList: OneFolderType[] }) => {
         <FolderSelect folderList={folderList} />
       </>
     </BasicModal>
+  ) : folderModalState.option === 'scrapWrite' ? (
+    <BasicModal width={450} height={500} onCloseModal={onModalClose}>
+      <>
+        <S.EditIconWrapper>
+          <S.Title>폴더 선택</S.Title>
+        </S.EditIconWrapper>
+        <FolderSelect folderList={folderList} />
+      </>
+    </BasicModal>
   ) : (
     <BasicModal width={450} height={200} onCloseModal={onModalClose}>
       <S.FlexBox>

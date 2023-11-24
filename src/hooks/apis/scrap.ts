@@ -20,9 +20,9 @@ export const useNewScrapMutation = () => {
   const { mutate: postNewScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
-    OneNewScrapType
+    FormData
   >({
-    mutationFn: (scrapInfo: OneNewScrapType) => postNewScrap(scrapInfo)
+    mutationFn: (scrapInfo: FormData) => postNewScrap(scrapInfo)
     // onSuccess: queryClient.invalidateQueries('scrap')
   });
   return { postNewScrapMutate };

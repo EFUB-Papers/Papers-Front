@@ -1,17 +1,19 @@
 export const CategoryWithoutAll = {
-  NEWS: '시사',
-  CULTURE: '문화',
-  TRAVEL: '여행',
-  IT: 'IT',
-  LIFE: '라이프',
-  KNOWLEDGE: '지식',
-  ETC: '기타'
+  news: '시사',
+  culture: '문화',
+  travel: '여행',
+  it: 'IT',
+  life: '라이프',
+  knowledge: '지식',
+  etc: '기타'
 } as const;
 
 export const CATEGORY: { [key: string]: string } = {
   ALL: '카테고리',
   ...CategoryWithoutAll
 } as const;
+
+export type CategoryWithoutAllKeyType = keyof typeof CategoryWithoutAll;
 
 export type CategoryType = typeof CATEGORY;
 

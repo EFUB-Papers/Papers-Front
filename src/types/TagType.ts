@@ -1,4 +1,4 @@
 export type NewTagType = {
-  tagId: string;
+  tagId?: string;
   tagName: string;
 };
