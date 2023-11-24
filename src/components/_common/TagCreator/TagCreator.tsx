@@ -7,16 +7,16 @@ import { NewTagType } from 'types/TagType';
 
 type TagCreatorProps = {
   isCreator?: boolean;
-  tags?: OneTagType[];
+  newTagList: NewTagType[];
+  setNewTagList?: React.Dispatch<React.SetStateAction<NewTagType[]>>;
 };
 
-const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
+const TagCreator = ({
+  isCreator = true,
+  newTagList = [],
+  setNewTagList
+}: TagCreatorProps) => {
   const [input, setInput] = useState('');
-  const [tagList, setTagList] = useState<NewTagType[]>([
-    ...tags.map((tag) => {
-      return { tagId: v4(), tagName: tag.tagName };
-    })
-  ]);
 
   //태그 추가 (엔터 입력 시)
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,13 +30,16 @@ const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
       tagId: v4(),
       tagName: input
     };
-    setTagList((currTagList) => [...currTagList, newTag]);
+    setNewTagList && setNewTagList((currTagList) => [...currTagList, newTag]);
     setInput('');
   };
 
   //태그 삭제 (X 버튼 클릭 시)
   const onDelete = (id: string) => {
-    setTagList((currTagList) => currTagList.filter((tag) => tag.tagId !== id));
+    setNewTagList &&
+      setNewTagList((currTagList) =>
+        currTagList.filter((tag) => tag.tagId !== id)
+      );
   };
 
   const inputWidthRef = useRef<HTMLSpanElement>(null);
@@ -52,7 +55,7 @@ const TagCreator = ({ isCreator = true, tags = [] }: TagCreatorProps) => {
   return (
     <S.Wrapper>
       {/* 태그 리스트 */}
-      {tagList.map((tag: NewTagType, index: number) =>
+      {newTagList.map((tag: NewTagType, index: number) =>
         isCreator ? (
           <Tag
             key={index}

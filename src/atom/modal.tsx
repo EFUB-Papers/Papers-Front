@@ -5,7 +5,8 @@ export const folderModalAtom = atom({
   default: {
     option: 'edit',
     open: false,
-    scrapId: 1
+    scrapId: 1,
+    folderId: -1
   }
 });
 

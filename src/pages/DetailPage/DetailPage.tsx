@@ -24,7 +24,12 @@ const DetailPage = () => {
         <RightArrow />
       </S.FlexWrapper>
       <S.Title>{scrapTitle}</S.Title>
-      <TagCreator isCreator={false} tags={tags} />
+      <TagCreator
+        isCreator={false}
+        newTagList={tags.map((tag) => {
+          return { tagName: tag.tagName };
+        })}
+      />
       <S.UserInfoWrapper>
         <CircleBox imgUrl={writerProfile} size={'small'} />
         <S.FlexColumnWrapper>

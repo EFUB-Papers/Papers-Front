@@ -13,6 +13,8 @@ export const CATEGORY: { [key: string]: string } = {
   ...CATEGORY_WITHOUT_ALL
 } as const;
 
+export type CategoryWithoutAllKeyType = keyof typeof CATEGORY_WITHOUT_ALL;
+
 export type CategoryType = typeof CATEGORY;
 
 export type CategoryKeyType = keyof typeof CATEGORY;
