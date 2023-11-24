@@ -39,13 +39,6 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export interface ErrorResponseData {
-  statusCode?: number;
-  message?: string;
-  code?: number;
-  sent?: boolean;
-}
-
 const isRefreshing = false;
 let retry = false;
 //2.응답 인터셉터
@@ -77,29 +70,3 @@ axiosInstance.interceptors.response.use(
     }
   }
 );
-// if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
-//   tokenStorage.removeAccessToken();
-//
-//   throw new HTTPError(status, data.message, data.code);
-// }
-
-//     isRefreshing = true;
-//     const data = await postNewToken();
-//     console.log(data);
-//     if (data) {
-//       console.log('재발급');
-//       localStorage.removeItem('papersToken');
-//       localStorage.removeItem('nickname');
-//       localStorage.setItem('papersToken', data.accessToken);
-//       localStorage.setItem('nickname', data.nickname);
-//       originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
-//       const originalResponse = await axios.request(originalRequest);
-//       console.log('originalResponse', originalResponse);
-//       return originalResponse.data;
-//     } else {
-//       window.location.href = '/login';
-//     }
-//   } else {
-//     throw error;
-//   }
-// }
