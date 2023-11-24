@@ -7,7 +7,7 @@ import { ReactComponent as ExitIcon } from 'asset/scrapWritePage/exit.svg';
 import { ReactComponent as DeleteIcon } from 'asset/_common/smallDeleteIcon.svg';
 import { ReactComponent as DeleteIconWhite } from 'asset/_common/smallDeleteIconWhite.svg';
 import {
-  CategoryWithoutAll,
+  CATEGORY_WITHOUT_ALL,
   CategoryWithoutAllKeyType
 } from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
@@ -112,20 +112,20 @@ const ScrapWritePage = () => {
               onClick={() => setCategoryOpen((prev) => !prev)}
             >
               <S.CategoryText>
-                {category ? CategoryWithoutAll[category] : '카테고리'}
+                {category ? CATEGORY_WITHOUT_ALL[category] : '카테고리'}
               </S.CategoryText>
               <S.ArrowButton>
                 <ArrowIcon />
               </S.ArrowButton>
               {categoryOpen && (
                 <S.CategoryList>
-                  {Object.keys(CategoryWithoutAll).map((key) => (
+                  {Object.keys(CATEGORY_WITHOUT_ALL).map((key) => (
                     <S.CategoryItem
                       onClick={() =>
                         setCategory(key as CategoryWithoutAllKeyType)
                       }
                     >
-                      {CategoryWithoutAll[key as CategoryWithoutAllKeyType]}
+                      {CATEGORY_WITHOUT_ALL[key as CategoryWithoutAllKeyType]}
                     </S.CategoryItem>
                   ))}
                 </S.CategoryList>
