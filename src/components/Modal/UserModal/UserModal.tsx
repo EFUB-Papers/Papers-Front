@@ -43,7 +43,9 @@ const UserModal = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   //닉네임 중복 검사
-  const onSubmitNickname = () => {
+  const onSubmitNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     postSameNameAction(name);
     if (hasSameName) {
       setErrorMessage('중복된 이름이 있습니다.');
@@ -66,7 +68,7 @@ const UserModal = ({
   };
 
   //프로필 변경 제출
-  const onSubmitProfile = () => {
+  const onSubmitProfile = (e: React.MouseEvent<HTMLButtonElement>) => {
     const dto = {
       nickname: name,
       introduce: detail
@@ -141,7 +143,6 @@ const UserModal = ({
                 중복 확인
               </BasicButton>
               <S.ErrorMsg>{errorMessage}</S.ErrorMsg>
-              {/*닉네임 중복 검사*/}
             </S.UserNameBox>
             <TextArea
               type={'text'}

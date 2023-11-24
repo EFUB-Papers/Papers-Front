@@ -22,14 +22,6 @@ const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
 
   return (
     <>
-      {userModalState && (
-        <UserModal
-          userName={userInfo?.nickname || ''}
-          userDetail={userInfo?.introduce || ''}
-          imgUrl={userInfo?.profileImgUrl || ''}
-        />
-      )}
-
       <S.ProfileWrapper>
         <S.FlexWrapperColumn>
           <S.UserProfile>

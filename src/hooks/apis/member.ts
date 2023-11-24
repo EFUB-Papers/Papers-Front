@@ -3,8 +3,10 @@ import {
   getOtherUserInfo,
   postMyProfile,
   postNewToken,
-  postSameName
+  postSameName,
+  getRecommendUsers
 } from 'apis/member';
+
 import { AxiosError } from 'axios';
 
 //토큰 재발급 mutation ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
@@ -56,4 +58,13 @@ export const usePostProfile = () => {
     mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo)
   });
   return { postProfileMutate };
+};
+
+export const useRecommendUsersQuery = () => {
+  const { data } = useQuery({
+    queryKey: ['userList'],
+    queryFn: () => getRecommendUsers()
+  });
+
+  return data;
 };

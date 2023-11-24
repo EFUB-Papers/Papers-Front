@@ -8,7 +8,14 @@ import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 
 const DetailPage = () => {
-  const { scrapTitle, scrapContent, writerInfo, imgUrl, tags } = OnePostMock;
+  const {
+    scrapTitle,
+    scrapContent,
+    writerNickname,
+    writerProfile,
+    imgUrl,
+    tags
+  } = OnePostMock;
 
   return (
     <S.Wrapper>
@@ -19,9 +26,9 @@ const DetailPage = () => {
       <S.Title>{scrapTitle}</S.Title>
       <TagCreator isCreator={false} tags={tags} />
       <S.UserInfoWrapper>
-        <CircleBox imgUrl={writerInfo.imgUrl} size={'small'} />
+        <CircleBox imgUrl={writerProfile} size={'small'} />
         <S.FlexColumnWrapper>
-          <S.Name>{writerInfo.nickname}</S.Name>
+          <S.Name>{writerNickname}</S.Name>
           <S.DateInfo>7일전</S.DateInfo>
         </S.FlexColumnWrapper>
       </S.UserInfoWrapper>

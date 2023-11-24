@@ -12,7 +12,6 @@ const AuthPage = () => {
       login(code); //추출한 code로 백엔드에 로그인 api 요청
     }
   }, []);
-  const [isFirst, setIsFirst] = useState<boolean>();
 
   // 백엔드에 로그인 api 요청
   const login = async (code: string) => {
@@ -20,10 +19,9 @@ const AuthPage = () => {
       const data = await postLogin(code);
       console.log('aaa', data);
       if (data) {
-        data.isFirst && setIsFirst(true);
         localStorage.setItem('papersToken', data.accessToken);
         localStorage.setItem('nickname', data.nickname);
-        navigate('/?isFirst=true');
+        navigate(`/?isFirst=${!data.isExist}`);
       }
     } catch (error) {
       console.log(error);

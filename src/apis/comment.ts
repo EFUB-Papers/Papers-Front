@@ -6,16 +6,16 @@ export type NewCommentType = {
   commentContent: string;
 };
 export const postNewComment = async (commentInfo: NewCommentType) => {
-  const { data } = await axiosInstance.post('/comments', {
+  const res = await axiosInstance.post('/comments', {
     ...commentInfo
   });
-  return data;
+  return res;
 };
 
 //댓글 삭제
 export const deleteComment = async (commentId: number) => {
-  const { data } = await axiosInstance.delete(`/comments/${commentId}`);
-  return data;
+  const res = await axiosInstance.delete(`/comments/${commentId}`);
+  return res;
 };
 
 //스크랩의 댓글 목록 조회
@@ -30,16 +30,16 @@ export type NewReplyType = {
 };
 //대댓글 작성
 export const postNewReply = async (replyInfo: NewReplyType) => {
-  const data = await axiosInstance.post('/replys', {
+  const res = await axiosInstance.post('/replys', {
     ...replyInfo
   });
-  return data;
+  return res;
 };
 
 //대댓글 삭제
 export const deleteReply = async (replyId: number) => {
-  const data = await axiosInstance.delete(`/replyies/${replyId}`);
-  return data;
+  const res = await axiosInstance.delete(`/replyies/${replyId}`);
+  return res;
 };
 
 //댓글의 대댓글 목록 조회

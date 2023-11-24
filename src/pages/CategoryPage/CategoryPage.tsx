@@ -21,7 +21,7 @@ const CategoryPage = () => {
               scrapContent,
               scrapLink,
               imgUrl,
-              writerInfo
+              writerNickname
             } = scrap;
             return (
               <>
@@ -34,7 +34,7 @@ const CategoryPage = () => {
                   title={scrapTitle}
                   content={scrapContent}
                   heartCnt={10}
-                  author={writerInfo.nickname}
+                  author={writerNickname}
                 />
               </>
             );

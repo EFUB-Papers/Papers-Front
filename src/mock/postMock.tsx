@@ -10,7 +10,8 @@ export const OnePostMock: OneScrapType = {
   scrapLink: 'https://despiteallthat.tistory.com/243',
   imgUrl:
     'https://ak-d.tripcdn.com/images/1mj1c12000bnc2cdm5451_C_800_600_R5.jpg_.webp?proc=autoorient',
-  writerInfo: UserMock,
+  writerNickname: '나는 고양이다',
+  writerProfile: '',
   CreatedAt: new Date(),
   tags: [
     {

@@ -2,6 +2,14 @@ import axios, { AxiosError } from 'axios';
 import { NETWORK } from 'constants/Api';
 import { postNewToken } from 'apis/member';
 
+export const axiosInstanceWithoutToken = axios.create({
+  baseURL: process.env.REACT_APP_BACK_URL,
+  timeout: NETWORK.TIMEOUT,
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+});
+
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACK_URL,
   timeout: NETWORK.TIMEOUT,
@@ -52,13 +60,19 @@ axiosInstance.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config!;
     //인증 문제
-    if (error?.response?.status === 401 && !isRefreshing) {
+    if (error?.response?.status == 401 && !isRefreshing) {
       isRefreshing = true;
       const data = await postNewToken();
+      console.log(data);
       if (data) {
+        console.log('재발급');
+        localStorage.removeItem('papersToken');
+        localStorage.removeItem('nickname');
         localStorage.setItem('papersToken', data.accessToken);
         localStorage.setItem('nickname', data.nickname);
-        originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
+        originalRequest.headers[
+          'Authorization'
+        ] = `Bearer ${localStorage.getItem('paparsToken')}`;
         const originalResponse = await axios.request(originalRequest);
         return originalResponse.data;
       } else {

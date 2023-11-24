@@ -9,10 +9,6 @@ const HeaderLayout = () => {
   const isWriteButton = true;
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
-
-  //유저 정보 가져오기
-  // const userInfo: any = postGetUserInfoMutate(LocalStorage.getNickname()!);
-
   return (
     <S.Wrapper>
       <Header isWriteButton={isWriteButton} userInfo={userInfo} />

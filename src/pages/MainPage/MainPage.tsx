@@ -3,33 +3,34 @@ import ScrapCard from 'components/_common/ScrapCard/ScrapCard';
 import SearchBar from 'components/_common/SearchBar/SearchBar';
 import Tag from 'components/_common/Tag/Tag';
 import UserCard from 'components/_common/UserCard/UserCard';
-import React from 'react';
 import { S } from './style';
 import { PostListMock } from 'mock/postMock';
 import { OneScrapType } from 'types/ScrapType';
-import { userListMock } from 'mock/userMock';
+import { UserMock, userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useUserInfoQuery } from '../../hooks/apis/member';
 import { LocalStorage } from '../../utils/localStorage';
-import UserModal from '../../components/Modal/UserModal/UserModal';
-
+import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
+import UserModal from 'components/Modal/UserModal/UserModal';
+import { useRecommendUsersQuery } from '../../hooks/apis/member';
 const MainPage = () => {
   const params = useParams();
-
+  const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
+  const scrapList = useRecommendScrapQuery();
 
-  //파람에 isFirst가 true이면 모달
-  const isFirst = params.isFirst;
+  const userList = useRecommendUsersQuery();
+  console.log('userList', userList);
 
   return (
     <S.Wrapper>
       {isFirst && userInfo && (
         <UserModal
+          imgUrl={userInfo.profileImgUrl}
           userName={userInfo.nickname!}
-          imgUrl={userInfo.profileImgUrl!}
           userDetail={userInfo.introduce!}
         />
       )}
@@ -66,7 +67,7 @@ const MainPage = () => {
                     title={scrap.scrapTitle}
                     content={scrap.scrapContent}
                     heartCnt={10}
-                    author={scrap.writerInfo.nickname}
+                    author={scrap.writerNickname}
                   />
                 )
             )}
@@ -90,7 +91,7 @@ const MainPage = () => {
                     title={scrap.scrapTitle}
                     content={scrap.scrapContent}
                     heartCnt={10}
-                    author={scrap.writerInfo.nickname}
+                    author={scrap.writerNickname}
                   />
                 )
             )}
@@ -101,7 +102,7 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {userListMock.map(
+            {userList.map(
               (user: UserType, index: number) =>
                 index < 3 && (
                   <UserCard

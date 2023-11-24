@@ -4,13 +4,15 @@ import { ReactComponent as HeartIcon } from 'asset/navBar/heart.svg';
 import { ReactComponent as LogoutIcon } from 'asset/navBar/logout.svg';
 import { M } from './style';
 import { useNavigate } from 'react-router-dom';
+import { LocalStorage } from '../../../utils/localStorage';
 
 const MyMenu = () => {
   const navigate = useNavigate();
+  const nickname = LocalStorage.getNickname();
   return (
     <>
       <M.MenuWrapper>
-        <M.OneMenuWrapper onClick={() => navigate('/folder/나는%20고양이다')}>
+        <M.OneMenuWrapper onClick={() => navigate(`/folder/%{nickname}`)}>
           <M.MenuIcon>
             <FolderIcon />
           </M.MenuIcon>
