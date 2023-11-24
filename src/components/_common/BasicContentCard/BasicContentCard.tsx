@@ -47,7 +47,8 @@ const BasicContentCard = (props: BasicCardProps) => {
                   setFolderModal({
                     option: 'select',
                     scrapId: scrapId,
-                    open: true
+                    open: true,
+                    folderId: -1
                   });
                 }
               },

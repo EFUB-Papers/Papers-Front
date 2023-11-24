@@ -3,20 +3,26 @@ import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { CategoryKeyType, SearchRangeKeyType } from '../constants/Category';
 
 export type OneNewScrapType = {
+  writerNickname: string;
   scrapTitle: string;
   scrapLink: string;
   scrapContent: string;
-  tags: OneTag[];
+  category: string;
   folderId: number;
+  tags: OneTag[];
 };
 
 type OneTag = {
-  content: string;
+  tagName: string;
 };
 
 //스크랩 생성
-export const postNewScrap = async (newScrapInfo: OneNewScrapType) => {
-  const { data } = await axiosInstance.post('/scraps', { ...newScrapInfo });
+export const postNewScrap = async (newScrapInfo: FormData) => {
+  const { data } = await axiosInstance.post(
+    '/scraps',
+    { ...newScrapInfo },
+    { headers: { 'Content-Type': 'multipart/form-data' } }
+  );
   return data;
 };
 

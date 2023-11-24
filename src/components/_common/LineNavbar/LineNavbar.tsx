@@ -60,7 +60,8 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
               setIsEditModalOpen({
                 option: 'edit',
                 open: true,
-                scrapId: 0
+                scrapId: 0,
+                folderId: -1
               });
             }}
           >
@@ -107,7 +108,8 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
               setIsEditModalOpen({
                 option: 'add',
                 open: true,
-                scrapId: 0
+                scrapId: 0,
+                folderId: -1
               });
             }}
           >

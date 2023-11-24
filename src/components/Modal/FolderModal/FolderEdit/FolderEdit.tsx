@@ -14,7 +14,8 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
     setFolderModalState({
       option: 'add',
       open: true,
-      scrapId: 0
+      scrapId: 0,
+      folderId: -1
     });
   };
   return (

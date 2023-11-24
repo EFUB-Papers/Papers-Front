@@ -6,27 +6,64 @@ import { ReactComponent as ImageIcon } from 'asset/scrapWritePage/image.svg';
 import { ReactComponent as ExitIcon } from 'asset/scrapWritePage/exit.svg';
 import { ReactComponent as DeleteIcon } from 'asset/_common/smallDeleteIcon.svg';
 import { ReactComponent as DeleteIconWhite } from 'asset/_common/smallDeleteIconWhite.svg';
-import { CATEGORY, CategoryValuesType } from 'constants/Category';
+import {
+  CategoryWithoutAll,
+  CategoryWithoutAllKeyType
+} from 'constants/Category';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { modeState } from 'atom/mode';
 import { folderModalAtom } from '../../atom/modal';
+import { useNewScrapMutation } from 'hooks/apis/scrap';
+import { OneNewScrapType } from 'apis/scraps';
+import { NewTagType } from 'types/TagType';
+import { LocalStorage } from 'utils/localStorage';
 
 const ScrapWritePage = () => {
-  const [category, setCategory] = useState<CategoryValuesType>();
+  const [category, setCategory] = useState<CategoryWithoutAllKeyType>();
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
   const [showLinkPreview, setShowLinkPreview] = useState(false);
   const [imgFile, setImgFile] = useState('');
   const [content, setContent] = useState('');
+  const [newTagList, setNewTagList] = useState<NewTagType[]>([]);
+
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const mode = useRecoilValue(modeState);
-  const setFolderModalState = useSetRecoilState(folderModalAtom);
+  const [folderModalState, setFolderModalState] =
+    useRecoilState(folderModalAtom);
+
+  const { postNewScrapMutate } = useNewScrapMutation(); //스크랩 작성 mutate
+
+  //스크랩 생성 요청
+  const onSubmit = () => {
+    if (imgRef && imgRef.current && imgRef.current.files) {
+      const formData = new FormData();
+      formData.append('thumbnail', imgRef.current.files[0]);
+
+      const scrapInfo: OneNewScrapType = {
+        writerNickname: LocalStorage.getNickname()!,
+        scrapTitle: title,
+        scrapLink: link,
+        scrapContent: content,
+        category: category as string,
+        tags: newTagList.map((newTag) => {
+          return { tagName: newTag.tagName };
+        }),
+        folderId: folderModalState.folderId
+      };
+      formData.append('dto', JSON.stringify(scrapInfo));
+
+      console.log('스크랩 작성 body의 dto', scrapInfo);
+      postNewScrapMutate(formData);
+    }
+  };
+
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && link) {
@@ -75,16 +112,20 @@ const ScrapWritePage = () => {
               onClick={() => setCategoryOpen((prev) => !prev)}
             >
               <S.CategoryText>
-                {category ? category : '카테고리'}
+                {category ? CategoryWithoutAll[category] : '카테고리'}
               </S.CategoryText>
               <S.ArrowButton>
                 <ArrowIcon />
               </S.ArrowButton>
               {categoryOpen && (
                 <S.CategoryList>
-                  {Object.values(CATEGORY).map((value) => (
-                    <S.CategoryItem onClick={() => setCategory(value)}>
-                      {value}
+                  {Object.keys(CategoryWithoutAll).map((key) => (
+                    <S.CategoryItem
+                      onClick={() =>
+                        setCategory(key as CategoryWithoutAllKeyType)
+                      }
+                    >
+                      {CategoryWithoutAll[key as CategoryWithoutAllKeyType]}
                     </S.CategoryItem>
                   ))}
                 </S.CategoryList>
@@ -94,9 +135,10 @@ const ScrapWritePage = () => {
             <S.Button
               onClick={() => {
                 setFolderModalState({
-                  option: 'select',
+                  option: 'scrapWrite',
                   open: true,
-                  scrapId: 0
+                  scrapId: 0,
+                  folderId: -1
                 });
               }}
             >
@@ -107,7 +149,8 @@ const ScrapWritePage = () => {
                 setFolderModalState({
                   option: 'edit',
                   open: true,
-                  scrapId: 0
+                  scrapId: 0,
+                  folderId: -1
                 });
               }}
             >
@@ -122,7 +165,8 @@ const ScrapWritePage = () => {
             onChange={onChangeTitle}
             placeholder="제목을 입력하세요"
           />
-          <TagCreator />
+          {/* 태그 생성자 */}
+          <TagCreator newTagList={newTagList} setNewTagList={setNewTagList} />
           {/* 링크 */}
           <S.LinkWrapper>
             <LinkIcon />
@@ -183,7 +227,13 @@ const ScrapWritePage = () => {
               <ExitIcon />
               나가기
             </S.ExitButton>
-            <BasicButton color="positive" fontSize={18} width={110} height={40}>
+            <BasicButton
+              onClick={onSubmit}
+              color="positive"
+              fontSize={18}
+              width={110}
+              height={40}
+            >
               등록하기
             </BasicButton>
           </S.Footer>
