@@ -30,9 +30,7 @@ axiosInstance.interceptors.request.use(
       window.location.href = '/';
       throw new Error('토큰이 없습니다.');
     }
-    config.headers['Authorization'] = `Bearer ${localStorage.getItem(
-      'papersToken'
-    )}`;
+    config.headers['Authorization'] = `${localStorage.getItem('papersToken')}`;
     return config;
   },
   //요청 에러 시 수행 로직
@@ -41,15 +39,8 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export interface ErrorResponseData {
-  statusCode?: number;
-  message?: string;
-  code?: number;
-  sent?: boolean;
-}
-
-let isRefreshing = false;
-
+const isRefreshing = false;
+let retry = false;
 //2.응답 인터셉터
 axiosInstance.interceptors.response.use(
   //응답이 성공적으로 왔을 때 로직
@@ -58,28 +49,24 @@ axiosInstance.interceptors.response.use(
   },
   //응답에서 에러가 났을 때 로직
   async (error: AxiosError) => {
-    const originalRequest = error.config!;
     //인증 문제
     if (error?.response?.status == 401 && !isRefreshing) {
-      isRefreshing = true;
-      const data = await postNewToken();
-      console.log(data);
-      if (data) {
-        console.log('재발급');
-        localStorage.removeItem('papersToken');
-        localStorage.removeItem('nickname');
-        localStorage.setItem('papersToken', data.accessToken);
-        localStorage.setItem('nickname', data.nickname);
-        originalRequest.headers[
-          'Authorization'
-        ] = `Bearer ${localStorage.getItem('paparsToken')}`;
-        const originalResponse = await axios.request(originalRequest);
-        return originalResponse.data;
-      } else {
-        window.location.href = '/login';
+      const originalRequest = error.config;
+
+      if (!error.response || !originalRequest)
+        throw new Error('에러가 발생했습니다.');
+
+      const { data, status } = error.response;
+
+      if (status === 401 && !retry) {
+        retry = true;
+        const newAccessToken = await postNewToken();
+        console.log('new', newAccessToken);
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        localStorage.setItem('papersToken', newAccessToken);
+
+        return axiosInstance(originalRequest);
       }
-    } else {
-      throw error;
     }
   }
 );

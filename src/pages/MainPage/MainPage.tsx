@@ -6,24 +6,25 @@ import UserCard from 'components/_common/UserCard/UserCard';
 import { S } from './style';
 import { PostListMock } from 'mock/postMock';
 import { OneScrapType } from 'types/ScrapType';
-import { UserMock, userListMock } from 'mock/userMock';
 import { UserType } from 'types/UserType';
 import { tagListMock } from 'mock/tagMock';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useUserInfoQuery } from '../../hooks/apis/member';
+import { useParams } from 'react-router-dom';
+import {
+  useRecommendUsersQuery,
+  useUserInfoQuery
+} from '../../hooks/apis/member';
 import { LocalStorage } from '../../utils/localStorage';
 import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
 import UserModal from 'components/Modal/UserModal/UserModal';
-import { useRecommendUsersQuery } from '../../hooks/apis/member';
+
 const MainPage = () => {
   const params = useParams();
   const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
   const scrapList = useRecommendScrapQuery();
-
+  /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
-  console.log('userList', userList);
 
   return (
     <S.Wrapper>
@@ -102,7 +103,7 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {userList.map(
+            {userList?.map(
               (user: UserType, index: number) =>
                 index < 3 && (
                   <UserCard

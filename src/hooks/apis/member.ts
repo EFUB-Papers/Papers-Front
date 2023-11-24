@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getOtherUserInfo,
+  getRecommendUsers,
   postMyProfile,
   postNewToken,
-  postSameName,
-  getRecommendUsers
+  postSameName
 } from 'apis/member';
 
 import { AxiosError } from 'axios';
@@ -20,7 +20,7 @@ export const usePostNewTokenMutation = () => {
 //닉네임 중복 조회 mutation
 export const useSameNameMutation = () => {
   const { mutate: postSameNameAction, data } = useMutation<
-    boolean,
+    any,
     AxiosError,
     string
   >({
@@ -44,7 +44,6 @@ export const useUserInfoQuery = (nickname: string) => {
     queryFn: () => getOtherUserInfo(nickname),
     enabled: !!nickname
   });
-
   return userInfo;
 };
 

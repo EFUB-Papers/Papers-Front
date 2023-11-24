@@ -66,16 +66,21 @@ export const getRecommendScrapList = async () => {
 };
 
 export type SearchScrapType = {
-  searchby: SearchRangeKeyType;
-  category: CategoryKeyType;
+  searchby?: SearchRangeKeyType;
+  category?: CategoryKeyType;
+  keyword?: string;
   page: number;
 };
 
 //스크랩 검색
 export const getSearchScrap = async (searchInfo: SearchScrapType) => {
-  const { data } = await axiosInstance.get(`/scraps/search`, {
+  const { category, searchby, page, keyword } = searchInfo;
+  const { data } = await axiosInstance.post(`/scraps/search`, {
+    keyword,
     params: {
-      ...searchInfo
+      searchby,
+      category,
+      page
     }
   });
   return data;
