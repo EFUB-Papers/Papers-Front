@@ -7,7 +7,7 @@ export const CommentMock: OneCommentType[] = [
     commentContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     writerNickname: '강아지',
-    writerImg: '',
+    writerProfileImgUrl: '',
     createdAt: null,
     commentIsMine: true
   },
@@ -17,7 +17,7 @@ export const CommentMock: OneCommentType[] = [
     commentContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     writerNickname: '강아지',
-    writerImg: '',
+    writerProfileImgUrl: '',
     createdAt: null,
     commentIsMine: true
   },
@@ -27,7 +27,7 @@ export const CommentMock: OneCommentType[] = [
     commentContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     writerNickname: '강아지',
-    writerImg: '',
+    writerProfileImgUrl: '',
     createdAt: null,
     commentIsMine: true
   }
@@ -40,7 +40,7 @@ export const ReplyMock: OneReplyType[] = [
     replyContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     replyWriterNickname: '강아지',
-    replyWriterImg: '',
+    replyWriterProfileImg: '',
     createdAt: null,
     commentIsMine: true
   },
@@ -50,7 +50,7 @@ export const ReplyMock: OneReplyType[] = [
     replyContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     replyWriterNickname: '강아지',
-    replyWriterImg: '',
+    replyWriterProfileImg: '',
     createdAt: null,
     commentIsMine: true
   },
@@ -60,7 +60,7 @@ export const ReplyMock: OneReplyType[] = [
     replyContent:
       '그러게요 저도 동해바다 참 좋아하는데 이번 연휴에 가고 싶어요',
     replyWriterNickname: '강아지',
-    replyWriterImg: '',
+    replyWriterProfileImg: '',
     createdAt: null,
     commentIsMine: true
   }

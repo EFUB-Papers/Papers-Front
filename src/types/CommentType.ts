@@ -3,7 +3,7 @@ export type OneCommentType = {
   scrapId: number;
   commentContent: string;
   writerNickname: '강아지';
-  writerImg: '';
+  writerProfileImgUrl: '';
   createdAt: null;
   commentIsMine: boolean;
 };
@@ -12,7 +12,7 @@ export type OneReplyType = {
   replyId: number;
   commentId: number;
   replyContent: string;
-  replyWriterImg: string;
+  replyWriterProfileImg: string;
   replyWriterNickname: string;
   createdAt: null;
   commentIsMine: boolean;
