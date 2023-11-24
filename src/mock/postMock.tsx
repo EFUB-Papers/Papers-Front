@@ -36,7 +36,8 @@ export const OnePostMock: OneScrapType = {
     }
   ],
   heartCnt: 10,
-  commentCnt: 10
+  commentCnt: 10,
+  folderId: 1
 };
 
 export const PostListMock: OneScrapType[] = [

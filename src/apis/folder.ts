@@ -31,14 +31,18 @@ export const getFolderList = async (nickname: string) => {
   const { data } = await axiosInstanceWithoutToken.get<OneFolderType[]>(
     `/members/${nickname}/folders`
   );
-  console.log('foilder', data);
   return data;
 };
 
 //폴더별 스크랩 조회
 export const getFolderScrapsList = async (folderId: number) => {
-  const { data } = await axiosInstance.get<OneScrapType[]>(
-    `/folders/${folderId}/scraps`
-  );
-  return data;
+  try {
+    const { data } = await axiosInstanceWithoutToken.get<OneScrapType[]>(
+      `/folders/${folderId}/scraps`
+    );
+    console.log('scrapList', data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };

@@ -16,15 +16,22 @@ type BasicCardProps = {
   originLink: string;
   scrapId: number;
   isMine: boolean;
-  folderId?: number;
+  folderId: number;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
-  const { isMine, imgUrl, scrapContent, scrapTitle, originTitle, scrapId } =
-    props;
+  const {
+    isMine,
+    imgUrl,
+    scrapContent,
+    scrapTitle,
+    originTitle,
+    scrapId,
+    folderId
+  } = props;
   const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
-  const { deleteScrapMutate } = useDeleteScrapMutation();
+  const { deleteScrapMutate } = useDeleteScrapMutation(folderId);
 
   return (
     <S.Wrapper

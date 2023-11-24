@@ -34,9 +34,17 @@ const SearchPage = () => {
       <SearchBar />
       <S.ContentWrapper>
         {PostListMock.map((post: OneScrapType) => {
-          const { imgUrl, scrapId, scrapTitle, scrapContent, scrapLink } = post;
+          const {
+            imgUrl,
+            scrapId,
+            scrapTitle,
+            scrapContent,
+            scrapLink,
+            folderId
+          } = post;
           return (
             <BasicContentCard
+              folderId={folderId}
               scrapId={scrapId}
               originLink={scrapLink}
               originTitle={scrapLink}

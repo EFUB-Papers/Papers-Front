@@ -3,16 +3,11 @@ import { ReactComponent as PencilIcon } from 'asset/_common/greyPencil.svg';
 import { ReactComponent as ActivePencilIcon } from 'asset/_common/activePencil.svg';
 import { ReactComponent as DeleteIcon } from 'asset/_common/trashIcon.svg';
 import { O } from '../style';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputBox from '../../../_common/InputBox/InputBox';
-import {
-  useDeleteFolderMutation,
-  usePutFolderChangeMutation
-} from '../../../../hooks/apis/folder';
+import { usePutFolderChangeMutation } from '../../../../hooks/apis/folder';
 import { OneFolderTypeWithoutUser } from '../../../../types/FolderType';
 import { LocalStorage } from 'utils/localStorage';
-import { useSetRecoilState } from 'recoil';
-import { folderModalAtom } from 'atom/modal';
 
 const EditOneFolder = ({
   id,

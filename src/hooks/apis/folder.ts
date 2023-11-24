@@ -75,9 +75,10 @@ export const useGetFolderListQuery = (nickname: string) => {
 
 //폴더별 스크랩 조회 : 폴더별 스크랩을 가져오는 쿼리
 export const useFolderScrapsQuery = (folderId: number) => {
-  const { data } = useQuery<OneScrapType[], AxiosError>({
+  const { data } = useQuery<any, AxiosError>({
     queryKey: ['folderScraps', folderId],
     queryFn: () => getFolderScrapsList(folderId)
   });
+  console.log('data', data);
   return data;
 };

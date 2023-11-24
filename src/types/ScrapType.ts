@@ -11,7 +11,8 @@ export type SimpleOneScrapType = {
   writerProfile: string | null;
   CreatedAt: Date; //빠짐
   heartCnt: number; //빠짐
-  commentCnt: number; //빠짐
+  commentCnt: number; //빠짐\
+  folderId: number;
 };
 
 export type OneScrapType = SimpleOneScrapType & {

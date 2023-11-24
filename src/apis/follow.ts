@@ -2,8 +2,12 @@ import { axiosInstance } from './axiosInstance';
 
 //팔로우 걸기
 export const postFollowUser = async (nickname: string) => {
-  const { data } = await axiosInstance.post(`/follows/${nickname}`);
-  return data;
+  try {
+    const { data } = await axiosInstance.post(`/follows/${nickname}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //팔로우 취소
@@ -24,7 +28,12 @@ export const getFollowerList = async () => {
   return data;
 };
 
+//현재 팔로우 중인지 조회
 export const getCurrentFollowing = async (nickname: string) => {
-  const { data } = await axiosInstance.get(`/follows/isFollower/${nickname}`);
-  return data;
+  try {
+    const data = await axiosInstance.get(`/follows/isFollower/${nickname}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };

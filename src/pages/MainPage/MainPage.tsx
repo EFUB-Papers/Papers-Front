@@ -74,30 +74,6 @@ const MainPage = () => {
           </S.CardList>
         </S.Section>
 
-        {/* 팔로우한 유저의 글 */}
-        {/*<S.Section>*/}
-        {/*  <S.Text>팔로우한 유저의 글</S.Text>*/}
-        {/*  <S.CardList>*/}
-        {/*    {PostListMock.map(*/}
-        {/*      (scrap: OneScrapType, index: number) =>*/}
-        {/*        index < 3 && (*/}
-        {/*          <ScrapCard*/}
-        {/*            key={index}*/}
-        {/*            width={300}*/}
-        {/*            scrapId={scrap.scrapId}*/}
-        {/*            link={scrap.scrapLink}*/}
-        {/*            linkTitle={scrap.scrapLink}*/}
-        {/*            imgUrl={scrap.imgUrl}*/}
-        {/*            title={scrap.scrapTitle}*/}
-        {/*            content={scrap.scrapContent}*/}
-        {/*            heartCnt={10}*/}
-        {/*            author={scrap.writerNickname}*/}
-        {/*          />*/}
-        {/*        )*/}
-        {/*    )}*/}
-        {/*  </S.CardList>*/}
-        {/*</S.Section>*/}
-
         {/* 추천 유저 */}
         <S.Section>
           <S.Text>추천 유저</S.Text>

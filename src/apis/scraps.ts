@@ -46,8 +46,13 @@ export const patchScrap = async (scrapInfo: PatchScrapType) => {
 
 //스크랩 삭제
 export const deleteScrap = async (scrapId: number) => {
-  const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
-  return data;
+  console.log('scar', scrapId);
+  try {
+    const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //스크랩 디테일 조회
