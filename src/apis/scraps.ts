@@ -53,6 +53,7 @@ export const deleteScrap = async (scrapId: number) => {
 //스크랩 디테일 조회
 export const getScrapDetail = async (scrapId: number) => {
   const { data } = await axiosInstance.get(`/scraps/${scrapId}`);
+  console.log('스크랩 디테일 조회', data);
   return data;
 };
 

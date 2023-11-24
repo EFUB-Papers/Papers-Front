@@ -4,11 +4,25 @@ import TextArea from '../../_common/TextArea/TextArea';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import { S } from './style';
+import { usePostNewCommentMutation } from 'hooks/apis/comment';
+import { useParams } from 'react-router';
 
 const NewComment = () => {
-  const { values, onChange } = useInputs({
+  const { values, setValues, onChange } = useInputs({
     comment: ''
   });
+
+  const params = useParams();
+  const { postCommentAction } = usePostNewCommentMutation();
+
+  const onPostComment = () => {
+    postCommentAction({
+      scrapId: params.scrapId!,
+      commentContent: values.comment
+    });
+    setValues({ comment: '' });
+  };
+
   return (
     <S.NewCommentWrapper>
       <S.MyInfoBox>
@@ -16,7 +30,13 @@ const NewComment = () => {
           <CircleIcon imgUrl={''} size={'small'} />
           <S.NameBox>나는 고양이다</S.NameBox>
         </S.FlexBox>
-        <BasicButton color={'positive'} fontSize={14} width={60} height={30}>
+        <BasicButton
+          onClick={onPostComment}
+          color={'positive'}
+          fontSize={14}
+          width={60}
+          height={30}
+        >
           등록
         </BasicButton>
       </S.MyInfoBox>
