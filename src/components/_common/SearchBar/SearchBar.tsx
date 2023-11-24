@@ -16,7 +16,7 @@ const SearchBar = () => {
   const [isSelectOpen, setIsSelectOpen] = useState([false, false]);
   const [searchOption, setSearchOption] = useState<
     [SearchRangeKeyType, CategoryKeyType]
-  >(['ALL', 'ALL']);
+  >(['all', 'all']);
   const navigate = useNavigate();
   const onClickSearchOption = ({
     sort,
@@ -36,9 +36,7 @@ const SearchBar = () => {
 
   //검색하는 함수
   const onSubmitSearch = () => {
-    const url = `/search?range=${SEARCH_RANGE[searchOption[0]]}&category=${
-      CATEGORY[searchOption[1]]
-    }&keyword=${keyword}`;
+    const url = `/search?range=${searchOption[0]}&category=${searchOption[1]}&keyword=${keyword}`;
     navigate(url);
   };
 
@@ -54,7 +52,7 @@ const SearchBar = () => {
         {isSelectOpen[0] ? (
           <S.SelectWrapper value={'range'}>
             <S.OptionListWrapper>
-              {Object.keys(SEARCH_RANGE).map((item) => (
+              {Object.keys(SEARCH_RANGE).map((item: string) => (
                 <S.OptionBox
                   key={item}
                   onClick={() => {
@@ -64,7 +62,7 @@ const SearchBar = () => {
                     });
                   }}
                 >
-                  {SEARCH_RANGE[item] as SearchRangeKeyType}
+                  {SEARCH_RANGE[item] as string}
                 </S.OptionBox>
               ))}
             </S.OptionListWrapper>

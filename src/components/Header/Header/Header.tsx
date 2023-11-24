@@ -25,7 +25,7 @@ const Header = ({ isWriteButton = true, userInfo }: HeaderProps) => {
     <S.Wrapper>
       <S.LogoWrapper
         onClick={() => {
-          navigate('/');
+          navigate('/main');
         }}
       >
         <LogoImg />
@@ -59,7 +59,7 @@ const Header = ({ isWriteButton = true, userInfo }: HeaderProps) => {
           width={60}
           height={35}
           onClick={() => {
-            navigate('/login');
+            navigate('/');
           }}
         >
           로그인

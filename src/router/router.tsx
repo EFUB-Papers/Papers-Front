@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   {
     element: <PrivateRoute />,
     children: [
-      { element: <LoginPage />, path: '/login' },
+      { element: <LoginPage />, path: '/' },
       {
         element: <ModalLayout />,
         children: [
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
             element: <HeaderLayout />,
             children: [
               {
-                path: '/',
+                path: '/main',
                 element: <MainPage />
               },
               { element: <CategoryPage />, path: '/category/:categoryId' },

@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSearchScrap } from './apis/scrap';
+import { useSearchScrapQuery } from './apis/scrap';
 import { SearchScrapType } from '../apis/scraps';
 
 const InfiniteScroll = (searchInfo: SearchScrapType) => {
@@ -14,9 +14,10 @@ const InfiniteScroll = (searchInfo: SearchScrapType) => {
     const searchInfo = {
       searchby: 'ALL',
       category: 'ALL',
-      page: pageParams
+      page: pageParams,
+      keyword: ''
     };
-    const res = useSearchScrap(searchInfo);
+    const res = useSearchScrapQuery(searchInfo);
     console.log('infinite scroll', res);
     return res;
   };

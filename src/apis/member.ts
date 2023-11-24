@@ -1,21 +1,16 @@
-import axios from 'axios';
 import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { UserInfoType } from '../hooks/apis/member';
-
-//회원 가입
+//회원 가입✅
 export const postLogin = async (code: string) => {
-  const { data } = await axios.post(
-    'http://3.37.102.113:8080/auth/login',
-    {
+  try {
+    const { data } = await axiosInstanceWithoutToken.post('/auth/login', {
       code
-    },
-    {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      withCredentials: true
-    }
-  );
-  console.log(data);
-  return data;
+    });
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 type NewTokenResponseType = {
@@ -24,31 +19,38 @@ type NewTokenResponseType = {
   nickname: string;
 };
 
+//토큰 재발급
 export const postNewToken = async () => {
   const data: NewTokenResponseType = await axiosInstance.get('/auth/reissue');
-  return data;
+  return data.accessToken;
 };
 
-//닉네임 중복 조회
+//닉네임 중복 조회✅
 export const postSameName = async (nickname: string) => {
-  const { data } = await axiosInstance.post<boolean>(
-    '/members/nickname/isExist',
-    {
-      nickname
-    }
-  );
-  return data;
+  try {
+    const data = await axiosInstance.post<boolean>(
+      '/members/nickname/isExist',
+      {
+        nickname
+      }
+    );
+    console.log('data', data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //회원 정보 조회
 export const getOtherUserInfo = async (nickname: string) => {
-  const { data } = await axios.get<UserInfoType>(
-    `http://3.37.102.113:8080/members/search/${nickname}`,
-    {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' }
-    }
-  );
-  return data;
+  try {
+    const { data } = await axiosInstanceWithoutToken.get<UserInfoType>(
+      `/members/search/${nickname}`
+    );
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export type ProfileType = {
@@ -61,17 +63,24 @@ export type ProfileType = {
 
 //프로필 설정
 export const postMyProfile = async (profileInfo: FormData) => {
-  console.log(profileInfo);
-  const { data } = await axiosInstance.post('/members/profile', profileInfo, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-  return data;
+  try {
+    const { data } = await axiosInstance.post('/members/profile', profileInfo, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //랜덤 회원 리스트 조회
 export const getRecommendUsers = async () => {
-  const { data } = await axiosInstanceWithoutToken('/members/random-list');
-  return data;
+  try {
+    const { data } = await axiosInstanceWithoutToken('/members/random-list');
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };

@@ -71,11 +71,10 @@ export const useRecommendScrapQuery = () => {
 };
 
 //스크랩 검색
-export const useSearchScrap = (searchInfo: SearchScrapType) => {
+export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
   const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
     queryKey: ['recommendScrap'],
     queryFn: () => getSearchScrap(searchInfo)
-    // queryFn: (queryKey, searchInfo, context) => getSearchScrap(searchInfo)
   });
   return data;
 };
