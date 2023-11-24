@@ -32,25 +32,33 @@ export const useCreateFolderMutation = (nickname: string) => {
 };
 
 //폴더 삭제 : 폴더를 삭제하는 mutation
-export const useDeleteFolderMutation = () => {
+export const useDeleteFolderMutation = (nickname: string) => {
+  const queryClient = useQueryClient();
   const { mutate: deleteFolderMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     number
   >({
-    mutationFn: (folderInfo) => deleteFolder(folderInfo)
+    mutationFn: (folderInfo) => deleteFolder(folderInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder', nickname] });
+    }
   });
   return { deleteFolderMutate };
 };
 
 //폴더 이름 변경: 폴더 이름을 변경하는 mutation
-export const usePutFolderChangeMutation = () => {
+export const usePutFolderChangeMutation = (nickname: string) => {
+  const queryClient = useQueryClient();
   const { mutate: putFolderNameMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     OneFolderTypeWithoutUser
   >({
-    mutationFn: (folderInfo) => putFolderName(folderInfo)
+    mutationFn: (folderInfo) => putFolderName(folderInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder', nickname] });
+    }
   });
 
   return { putFolderNameMutate };

@@ -10,16 +10,29 @@ import {
   usePutFolderChangeMutation
 } from '../../../../hooks/apis/folder';
 import { OneFolderTypeWithoutUser } from '../../../../types/FolderType';
+import { LocalStorage } from 'utils/localStorage';
+import { useSetRecoilState } from 'recoil';
+import { folderModalAtom } from 'atom/modal';
 
-const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
+const EditOneFolder = ({
+  id,
+  title,
+  onDeleteFolder
+}: {
+  id: number;
+  title: string;
+  onDeleteFolder: (id: number) => void;
+}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState<string>(title);
-  const { putFolderNameMutate } = usePutFolderChangeMutation();
-  const { deleteFolderMutate } = useDeleteFolderMutation();
 
   const onChange = (e: any) => {
     setName(e.target.value);
   };
+
+  const { putFolderNameMutate } = usePutFolderChangeMutation(
+    LocalStorage.getNickname()!
+  );
 
   const onSubmitFolderChange = () => {
     const folderInfo: OneFolderTypeWithoutUser = {
@@ -28,12 +41,6 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
     };
     putFolderNameMutate(folderInfo);
     setIsEditMode(false);
-  };
-
-  const onDeleteFolder = () => {
-    console.log('id', id);
-    console.log('폴더 삭제');
-    deleteFolderMutate(id);
   };
 
   return (
@@ -71,7 +78,13 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
             }}
           />
         )}
-        {!isEditMode && <DeleteIcon onClick={onDeleteFolder} />}
+        {!isEditMode && (
+          <DeleteIcon
+            onClick={() => {
+              onDeleteFolder(id);
+            }}
+          />
+        )}
       </O.IconContainer>
     </O.Wrapper>
   );
