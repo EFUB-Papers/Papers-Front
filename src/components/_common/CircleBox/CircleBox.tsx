@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 type CircleSize = 'big' | 'medium' | 'small' | 'verySmall';
 
 export type CircleIconType = {
-  imgUrl: string;
+  imgUrl: string | null | undefined;
   size: CircleSize;
   children?: ReactElement;
   onClick?: () => void;

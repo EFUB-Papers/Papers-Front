@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { axiosInstance } from './axiosInstance';
+import { UserInfoType } from '../hooks/apis/member';
 
 //회원 가입
 export const postLogin = async (code: string) => {
@@ -41,11 +42,13 @@ export const postSameName = async (nickname: string) => {
 };
 
 //회원 정보 조회
-export const postOtherUserInfo = async (nickname: string) => {
-  console.log('nickname', nickname);
-  const { data } = await axiosInstance.post('/members/search', {
-    nickname
-  });
+export const getOtherUserInfo = async (nickname: string) => {
+  const { data } = await axios.get<UserInfoType>(
+    `http://3.37.102.113:8080/members/search/${nickname}`,
+    {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    }
+  );
   console.log('data', data);
   return data;
 };

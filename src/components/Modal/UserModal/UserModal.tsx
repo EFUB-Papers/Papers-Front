@@ -11,10 +11,17 @@ import InputBox from '../../_common/InputBox/InputBox';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import TextArea from '../../_common/TextArea/TextArea';
 import useInputs from '../../../hooks/useInputs';
-import { ProfileProps } from '../../FolderPage/ProfileBox/ProfileBox';
 import { userModalAtom } from '../../../atom/modal';
 
-const UserModal = ({ imgUrl, userName, userDetail }: ProfileProps) => {
+const UserModal = ({
+  imgUrl,
+  userName,
+  userDetail
+}: {
+  imgUrl: string | null;
+  userName: string;
+  userDetail: string;
+}) => {
   const setUserModalOpen = useSetRecoilState(userModalAtom);
 
   const { values, onChange } = useInputs({
@@ -24,7 +31,9 @@ const UserModal = ({ imgUrl, userName, userDetail }: ProfileProps) => {
 
   const { name, detail } = values;
 
-  const [profileImg, setProfileImg] = useState<string>(imgUrl);
+  const [profileImg, setProfileImg] = useState<string | null | undefined>(
+    imgUrl
+  );
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   //이름 중복 검사
@@ -64,7 +73,10 @@ const UserModal = ({ imgUrl, userName, userDetail }: ProfileProps) => {
     };
 
     const formData = new FormData();
-    formData.append('profileImg', profileImg);
+    //프로필 이미지가 있을 때만 제출
+    if (profileImg) {
+      formData.append('profileImg', profileImg);
+    }
     formData.append('dto', JSON.stringify(dto));
     postProfileMutate(formData);
   };

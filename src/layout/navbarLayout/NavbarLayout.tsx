@@ -2,26 +2,29 @@ import { Outlet } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
-import ProfileBox from 'components/FolderPage/ProfileBox/ProfileBox';
 import MyMenu from 'components/FolderPage/MyMenu/MyMenu';
-import { UserMock } from 'mock/userMock';
 import Header from 'components/Header/Header/Header';
 import React from 'react';
+import { LocalStorage } from '../../utils/localStorage';
+import { useUserInfoQuery } from '../../hooks/apis/member';
+import ProfileBox from '../../components/FolderPage/ProfileBox/ProfileBox';
 
 const NavbarLayout = () => {
-  const { nickname, userDetail, imgUrl } = UserMock;
   const isMine = true;
+
+  const nickname = LocalStorage.getNickname()!;
+  const userInfo = useUserInfoQuery(nickname);
 
   return (
     <S.Wrapper>
-      <Header />
+      <Header userInfo={userInfo} />
       <S.NavBarWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}
           <ProfileBox
-            userName={nickname}
-            userDetail={userDetail}
-            imgUrl={imgUrl}
+            imgUrl={userInfo?.profileImgUrl || ''}
+            userName={userInfo?.nickname || ''}
+            userDetail={userInfo?.introduce || ''}
           />
           {isMine && <MyMenu />}
           <S.ScrapButtonWrapper>

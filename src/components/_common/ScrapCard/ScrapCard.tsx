@@ -5,7 +5,6 @@ import { ReactComponent as DarkHeartIcon } from 'asset/scrapCard/darkHeart.svg';
 import { useRecoilValue } from 'recoil';
 import { modeState } from 'atom/mode';
 import { useNavigate } from 'react-router-dom';
-import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
 
 export type ScrapCardProps = {
   width: number;
@@ -29,7 +28,7 @@ const ScrapCard = (props: ScrapCardProps) => {
       $width={props.width}
     >
       <S.LinkBox to={props.link} target="_blank">
-        <LinkPreview url={props.link} size={'small'} />
+        {/*<LinkPreview url={props.link} size={'small'} />*/}
       </S.LinkBox>
       <S.ScrapBox>
         <S.ImageBox>

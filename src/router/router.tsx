@@ -12,8 +12,13 @@ import ModalLayout from '../layout/ModalLayout/ModalLayout';
 import FollowingPage from '../pages/FollowingPage/FollowingPage';
 import LikePage from '../pages/LikePage/LikePage';
 import PrivateRoute from './Private';
+import AuthPage from '../pages/AuthPage/AuthPage';
 
 const router = createBrowserRouter([
+  {
+    element: <AuthPage />,
+    path: '/auth'
+  },
   {
     element: <PrivateRoute />,
     children: [
@@ -51,7 +56,7 @@ const router = createBrowserRouter([
             ]
           },
           {
-            element: <HeaderLayout isWriteButton={false} />,
+            element: <HeaderLayout />,
             children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
           }
         ]

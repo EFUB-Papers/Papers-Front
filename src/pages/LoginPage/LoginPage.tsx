@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { S } from './style';
 import { ReactComponent as GoogleLoginButton } from 'asset/loginPage/googleLoginButton.svg';
-import { useGoogleLogin } from '@react-oauth/google';
 import { ReactComponent as LogoImg } from 'asset/_common/logoImg.svg';
 import { ReactComponent as BlackLogo } from 'asset/_common/logoBlack.svg';
-import { ReactComponent as WhiteLogo } from 'asset/_common/logoWhite.svg';
 import mainImage from 'asset/loginPage/mainImage.png';
 import searchBarImage from 'asset/loginPage/searchBarImage.png';
 import folderImage from 'asset/loginPage/folderImage.png';
@@ -25,8 +23,7 @@ const LoginPage = () => {
 
   // 구글 로그인 페이지로 리다이렉션 (구글 계정 고르는 페이지)
   const onGoogleLogin = () => {
-    window.location.href =
-      'https://accounts.google.com/o/oauth2/v2/auth?client_id=166892546465-mvg7ktdjmtmk5r288qnp1060f8ajb0a1.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=code&scope=email+profile';
+    window.location.href = `${process.env.REACT_APP_GOOGLE_LOGIN}`;
   };
 
   return (

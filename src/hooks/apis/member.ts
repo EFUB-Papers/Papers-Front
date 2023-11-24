@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
+  getOtherUserInfo,
   postMyProfile,
   postNewToken,
-  postOtherUserInfo,
   postSameName
 } from 'apis/member';
 import { AxiosError } from 'axios';
@@ -27,16 +27,23 @@ export const useSameNameMutation = () => {
   return { postSameNameAction, data };
 };
 
+export type UserInfoType = {
+  defaultFolderId: number;
+  email: string;
+  introduce: string | null;
+  nickname: string | null;
+  profileImgUrl: string | null;
+};
+
 //회원 정보 조회
-export const useUserDetailInfoMutation = () => {
-  const { mutate: postGetUserInfoMutate } = useMutation<
-    boolean,
-    AxiosError,
-    string
-  >({
-    mutationFn: (nickname: string) => postOtherUserInfo(nickname)
+export const useUserInfoQuery = (nickname: string) => {
+  const { data: userInfo } = useQuery({
+    queryKey: ['userInfo', nickname],
+    queryFn: () => getOtherUserInfo(nickname),
+    enabled: !!nickname
   });
-  return { postGetUserInfoMutate };
+
+  return userInfo;
 };
 
 //프로필 설정
