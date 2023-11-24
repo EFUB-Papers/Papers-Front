@@ -9,6 +9,7 @@ export const postNewComment = async (commentInfo: NewCommentType) => {
   const res = await axiosInstance.post('/comments', {
     ...commentInfo
   });
+  console.log('댓글 작성됨', res.data);
   return res;
 };
 
@@ -20,19 +21,21 @@ export const deleteComment = async (commentId: number) => {
 
 //스크랩의 댓글 목록 조회
 export const getCommentList = async (scrapId: number) => {
-  const data = await axiosInstance.get(`/scraps/${scrapId}/comments`);
+  const { data } = await axiosInstance.get(`/scraps/${scrapId}/comments`);
+  console.log('댓글 목록', data);
   return data;
 };
 
 export type NewReplyType = {
-  commentId: string;
+  commentId: number;
   replyContent: string;
 };
 //대댓글 작성
 export const postNewReply = async (replyInfo: NewReplyType) => {
-  const res = await axiosInstance.post('/replys', {
+  const res = await axiosInstance.post('/replies', {
     ...replyInfo
   });
+  console.log('대댓글 작성됨', res.data);
   return res;
 };
 
@@ -44,6 +47,7 @@ export const deleteReply = async (replyId: number) => {
 
 //댓글의 대댓글 목록 조회
 export const getReplyList = async (commentId: number) => {
-  const data = await axiosInstance.get(`/comments/${commentId}/replies`);
+  const { data } = await axiosInstance.get(`/comments/${commentId}/replies`);
+  console.log(`${commentId}번 댓글에 달린 대댓글 목록`, data);
   return data;
 };

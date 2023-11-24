@@ -6,8 +6,13 @@ import { ReplyMock } from '../../../mock/commentMock';
 import ReplyList from './ReplyList';
 
 const OneComment = ({ comment }: { comment: OneCommentType }) => {
-  const { commentId, commentContent, writerNickname, writerImg, scrapId } =
-    comment;
+  const {
+    commentId,
+    commentContent,
+    writerNickname,
+    writerProfileImgUrl,
+    scrapId
+  } = comment;
   const [isSubCommentOpen, setIsSubCommentOpen] = useState(false);
 
   useEffect(() => {
@@ -17,7 +22,7 @@ const OneComment = ({ comment }: { comment: OneCommentType }) => {
     <S.OneCommentWrapper>
       <S.OneCommentBox>
         <S.UserInfoBox isSub={true}>
-          <CircleIcon imgUrl={''} size={'small'} />
+          <CircleIcon imgUrl={writerProfileImgUrl} size={'small'} />
           <S.NameBox>{writerNickname}</S.NameBox>
         </S.UserInfoBox>
         <S.CommentContextBox>{commentContent}</S.CommentContextBox>
@@ -30,7 +35,7 @@ const OneComment = ({ comment }: { comment: OneCommentType }) => {
         </S.SubComment>
         {isSubCommentOpen && (
           <>
-            <ReplyList replyList={ReplyMock} />
+            <ReplyList commentId={commentId} />
           </>
         )}
       </S.OneCommentBox>

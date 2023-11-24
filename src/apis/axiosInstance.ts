@@ -45,7 +45,7 @@ let retry = false;
 axiosInstance.interceptors.response.use(
   //응답이 성공적으로 왔을 때 로직
   (response: any) => {
-    return response.data;
+    return response;
   },
   //응답에서 에러가 났을 때 로직
   async (error: AxiosError) => {
