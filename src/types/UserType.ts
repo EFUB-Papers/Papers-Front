@@ -1,7 +1,7 @@
 export type UserType = {
-  imgUrl: string;
+  profileImgUrl: string;
   nickname: string; //userName
-  userDetail: string; //introduce
+  introduce: string; //introduce
 };
 
 export type CommentUserType = {

@@ -2,6 +2,7 @@ import { S } from './style';
 import CircleIcon from '../CircleBox/CircleBox';
 import BasicButton from '../BasicButton/BasicButton';
 import { FollowingType } from '../../../types/FollowingType';
+import { useNavigate } from 'react-router-dom';
 import {
   useGetCurrentFollowQuery,
   usePostFollowMutation,
@@ -14,18 +15,28 @@ type CardPropsType = {
 
 const UserCard = ({
   width,
-  followNickname,
-  followDescription,
-  followProfileImg
+  followingNickname,
+  followingDescription,
+  followingProfileImg
 }: CardPropsType) => {
   const { postFollowMutate } = usePostFollowMutation();
   const { deleteFollowMutate } = useDeleteFollowMutation();
-  const currentFollow = useGetCurrentFollowQuery(followNickname);
+  const currentFollow = useGetCurrentFollowQuery(followingNickname);
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper $width={width}>
-      <CircleIcon imgUrl={followProfileImg} size="medium" />
-      <S.Nickname>{followNickname}</S.Nickname>
-      <S.Introduction>{followDescription}</S.Introduction>
+      <S.ProfileImg>
+        <CircleIcon
+          onClick={() => navigate(`/folder/${followingNickname}`)}
+          imgUrl={followingProfileImg}
+          size="medium"
+        />
+      </S.ProfileImg>
+      <S.Nickname onClick={() => navigate(`/folder/${followingNickname}`)}>
+        {followingNickname}
+      </S.Nickname>
+      <S.Introduction>{followingDescription}</S.Introduction>
 
       {currentFollow ? (
         <BasicButton
@@ -35,7 +46,7 @@ const UserCard = ({
           height={35}
           onClick={(e) => {
             e.preventDefault();
-            deleteFollowMutate(followNickname);
+            deleteFollowMutate(followingNickname);
           }}
         >
           언팔로우
@@ -48,7 +59,7 @@ const UserCard = ({
           height={35}
           onClick={(e) => {
             e.preventDefault();
-            postFollowMutate(followNickname);
+            postFollowMutate(followingNickname);
           }}
         >
           팔로우

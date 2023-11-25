@@ -23,8 +23,6 @@ const MainPage = () => {
   const userInfo = useUserInfoQuery(nickname);
   /*추천 스크랩*/
   const scrapList = useRecommendScrapQuery();
-  /*내 스크랩*/
-  console.log(scrapList);
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
 
@@ -57,7 +55,7 @@ const MainPage = () => {
         <S.Section>
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
-            {scrapList?.scraps?.map((scrap: OneScrapType, index: number) => (
+            {scrapList?.map((scrap: OneScrapType, index: number) => (
               <ScrapCard
                 key={index}
                 width={300}
@@ -84,9 +82,9 @@ const MainPage = () => {
                   <UserCard
                     key={index}
                     width="31%"
-                    followProfileImg={user.imgUrl}
-                    followNickname={user.nickname}
-                    followDescription={user.userDetail}
+                    followingProfileImg={user.profileImgUrl}
+                    followingNickname={user.nickname}
+                    followingDescription={user.introduce}
                   />
                 )
             )}
