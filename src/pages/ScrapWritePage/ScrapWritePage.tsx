@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { S } from './style';
 import { ReactComponent as ArrowIcon } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as LinkIcon } from 'asset/scrapWritePage/link.svg';
@@ -16,20 +16,34 @@ import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modeState } from 'atom/mode';
 import { folderModalAtom } from '../../atom/modal';
-import { useNewScrapMutation } from 'hooks/apis/scrap';
+import { useNewScrapMutation, usePatchScrapMutation } from 'hooks/apis/scrap';
 import { OneNewScrapType } from 'apis/scraps';
 import { NewTagType } from 'types/TagType';
 import { LocalStorage } from 'utils/localStorage';
+import { useLocation } from 'react-router-dom';
+import { PrevScrapType } from 'pages/DetailPage/DetailPage';
 
 const ScrapWritePage = () => {
-  const [category, setCategory] = useState<CategoryWithoutAllKeyType>();
+  // 게시글 수정 시 기존 스크랩 내용
+  const { state: prevScrap, pathname } = useLocation() as unknown as {
+    state: PrevScrapType;
+    pathname: string;
+  };
+
+  const [category, setCategory] = useState<CategoryWithoutAllKeyType>(
+    prevScrap && prevScrap.category
+  );
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [link, setLink] = useState('');
+  const [title, setTitle] = useState(prevScrap ? prevScrap.scrapTitle : '');
+  const [link, setLink] = useState(prevScrap ? prevScrap.scrapLink : '');
   const [showLinkPreview, setShowLinkPreview] = useState(false);
   const [imgFile, setImgFile] = useState('');
-  const [content, setContent] = useState('');
-  const [newTagList, setNewTagList] = useState<NewTagType[]>([]);
+  const [content, setContent] = useState(
+    prevScrap ? prevScrap.scrapContent : ''
+  );
+  const [newTagList, setNewTagList] = useState<NewTagType[]>(
+    prevScrap ? prevScrap.tags : []
+  );
 
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
@@ -39,30 +53,67 @@ const ScrapWritePage = () => {
     useRecoilState(folderModalAtom);
 
   const { postNewScrapMutate } = useNewScrapMutation(); //스크랩 작성 mutate
+  const { patchNewScrapMutate } = usePatchScrapMutation(); //스크랩 수정 mutate
 
-  //스크랩 생성 요청
+  //스크랩 생성/수정 요청
   const onSubmit = () => {
-    if (imgRef && imgRef.current && imgRef.current.files) {
-      const formData = new FormData();
-      formData.append('thumbnail', imgRef.current.files[0]);
-
-      const scrapInfo: OneNewScrapType = {
+    if (
+      imgRef &&
+      imgRef.current &&
+      imgRef.current.files &&
+      title &&
+      link &&
+      content &&
+      category &&
+      folderModalState.folderId !== -1
+    ) {
+      // dto 가공
+      const dto: OneNewScrapType = {
         writerNickname: LocalStorage.getNickname()!,
         scrapTitle: title,
         scrapLink: link,
         scrapContent: content,
         category: category as string,
+        folderId: folderModalState.folderId,
         tags: newTagList.map((newTag) => {
           return { tagName: newTag.tagName };
-        }),
-        folderId: folderModalState.folderId
+        })
       };
-      formData.append('dto', JSON.stringify(scrapInfo));
+      console.log('스크랩 작성/수정 body의 dto', dto);
 
-      console.log('스크랩 작성 body의 dto', scrapInfo);
-      postNewScrapMutate(formData);
+      // 폼데이터 가공
+      const formData = new FormData();
+
+      // 폼데이터에 thumbnail 추가
+      imgRef.current.files[0]
+        ? formData.append('thumbnail', imgRef.current.files[0])
+        : formData.append('thumbnail', new Blob([]));
+
+      // 폼데이터에 dto 추가
+      formData.append(
+        'dto',
+        new Blob([JSON.stringify(dto)], {
+          type: 'application/json'
+        })
+      );
+      for (const x of formData.entries()) {
+        console.log(x);
+      }
+
+      // 스크랩 작성/수정 api 요청
+      pathname === '/scrap-write'
+        ? postNewScrapMutate(formData)
+        : patchNewScrapMutate({
+            scrapId: prevScrap?.scrapId,
+            scrapInfo: formData
+          });
     }
   };
+
+  //스크랩 수정 시 기존에 있던 링크 미리보기
+  useEffect(() => {
+    prevScrap?.scrapLink && setShowLinkPreview(true);
+  }, []);
 
   // 링크 업로드 이벤트 핸들러
   const onLinkUpload = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -198,14 +249,17 @@ const ScrapWritePage = () => {
             <input
               id="image"
               type="file"
+              name="file"
               accept="image/*"
               onChange={onImageUpload}
               ref={imgRef}
               style={{ display: 'none' }}
             />
-            {imgFile ? (
+            {imgFile || prevScrap?.imgUrl ? (
               <S.LinkBoxWrapper>
-                <S.ImagePreview backgroundImage={imgFile} />
+                <S.ImagePreview
+                  backgroundImage={imgFile ? imgFile : prevScrap?.imgUrl}
+                />
                 <S.DeleteButton>
                   {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
                 </S.DeleteButton>

@@ -6,9 +6,7 @@ export type NewCommentType = {
   commentContent: string;
 };
 export const postNewComment = async (commentInfo: NewCommentType) => {
-  const res = await axiosInstance.post('/comments', {
-    ...commentInfo
-  });
+  const res = await axiosInstance.post('/comments', commentInfo);
   console.log('댓글 작성됨', res.data);
   return res;
 };
@@ -32,9 +30,7 @@ export type NewReplyType = {
 };
 //대댓글 작성
 export const postNewReply = async (replyInfo: NewReplyType) => {
-  const res = await axiosInstance.post('/replies', {
-    ...replyInfo
-  });
+  const res = await axiosInstance.post('/replies', replyInfo);
   console.log('대댓글 작성됨', res.data);
   return res;
 };

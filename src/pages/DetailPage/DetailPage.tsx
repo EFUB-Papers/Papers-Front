@@ -1,4 +1,4 @@
-import { OnePostMock } from 'mock/postMock';
+import { useState } from 'react';
 import CircleBox from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
 import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
@@ -7,21 +7,57 @@ import Comment from 'components/DetailPage/Comment/Comment';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import { useGetScrapDetailQuery } from 'hooks/apis/scrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { OneTagType } from 'types/ScrapType';
+import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
+import MoreBox from 'components/_common/MoreBox/MoreBox';
+import { useDeleteScrapMutation } from './../../hooks/apis/scrap';
+import { v4 } from 'uuid';
+import { NewTagType } from 'types/TagType';
+
+export type PrevScrapType = {
+  scrapId: number;
+  scrapTitle: string;
+  scrapLink: string;
+  scrapContent: string;
+  category: string;
+  // folderId: number;
+  imgUrl: string;
+  tags: NewTagType[];
+};
 
 const DetailPage = () => {
-  const {
-    scrapTitle,
-    scrapContent,
-    writerNickname,
-    writerProfile,
-    imgUrl,
-    tags
-  } = OnePostMock;
+  const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
   const params = useParams();
+  const navigate = useNavigate();
+
   const data = useGetScrapDetailQuery(Number(params.scrapId));
+  const { deleteScrapMutate } = useDeleteScrapMutation();
+
+  const openMoreBox = () => setIsMoreBoxOpen(true);
+  const closeMoreBox = () => setIsMoreBoxOpen(false);
+
+  const onEdit = () => {
+    const prevScrap: PrevScrapType = {
+      scrapId: data?.scrapId,
+      scrapTitle: data?.scrapTitle,
+      scrapLink: data?.link,
+      scrapContent: data?.scrapContent,
+      category: data?.categoryName,
+      imgUrl: data?.imgUrl,
+      // folderId: data?.folerId,
+      tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
+        return { tagId: v4(), tagName: tag.tagName };
+      })
+    };
+    navigate('/scrap-edit', { state: prevScrap });
+  };
+
+  const onDelete = () => {
+    deleteScrapMutate(data.scrapId);
+    navigate(-1);
+  };
 
   return (
     <S.Wrapper>
@@ -42,6 +78,23 @@ const DetailPage = () => {
           <S.Name>{data?.writerNickname}</S.Name>
           <S.DateInfo>{data?.createdAt}</S.DateInfo>
         </S.FlexColumnWrapper>
+        <S.MoreDotsWrappr>
+          <MoreDots onClick={openMoreBox} />
+        </S.MoreDotsWrappr>
+        <MoreBox
+          isMoreBoxOpen={isMoreBoxOpen}
+          closeMoreBox={closeMoreBox}
+          buttons={[
+            {
+              name: '삭제하기',
+              onClick: onDelete
+            },
+            {
+              name: '편집하기',
+              onClick: onEdit
+            }
+          ]}
+        />
       </S.UserInfoWrapper>
       <S.PostWrapper>
         <LinkPreview size={'big'} url={data?.link} />
