@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteScrap,
+  getCategoryScrapList,
   getLikeScraps,
   getRecommendScrapList,
   getScrapDetail,
@@ -13,6 +14,7 @@ import {
 import { AxiosError } from 'axios';
 import { OneScrapType } from '../../types/ScrapType';
 import { AxiosResponseType } from '../../constants/Api';
+import { CategoryKeyType } from 'constants/Category';
 
 //스크랩 생성
 export const useNewScrapMutation = () => {
@@ -90,6 +92,15 @@ export const useLikeScrapsQuery = () => {
   const { data } = useQuery({
     queryKey: ['likeScraps'],
     queryFn: () => getLikeScraps()
+  });
+  return data;
+};
+
+//카테고리 별 스크랩 불러오기
+export const useCategoryScrapQuery = (category: CategoryKeyType) => {
+  const { data } = useQuery({
+    queryKey: ['categoryScraps', category],
+    queryFn: () => getCategoryScrapList(category)
   });
   return data;
 };

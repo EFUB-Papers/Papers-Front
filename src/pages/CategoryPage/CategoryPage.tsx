@@ -1,17 +1,15 @@
 import CategoryBar from 'components/_common/CategoryBar/CategoryBar';
 import { S } from './style';
-import { PostListMock } from '../../mock/postMock';
 import ScrapCard from '../../components/_common/ScrapCard/ScrapCard';
 import { useParams } from 'react-router';
 import { CATEGORY, CategoryKeyType } from 'constants/Category';
-import InfiniteScroll from '../../hooks/useInfiniteQuery';
-import { useSearchScrapQuery } from '../../hooks/apis/scrap';
+import { useCategoryScrapQuery } from '../../hooks/apis/scrap';
+import { OneScrapType } from 'types/ScrapType';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
 
-  const searchList = useSearchScrapQuery({ category: categoryId, page: 1 });
-  console.log('search', searchList);
+  const categoryList = useCategoryScrapQuery(categoryId!);
 
   return (
     <S.Wrapper>
@@ -19,7 +17,7 @@ const CategoryPage = () => {
       <CategoryBar />
       <S.ContentWrapper>
         <>
-          {PostListMock.map((scrap) => {
+          {categoryList?.map((scrap: OneScrapType) => {
             const {
               scrapId,
               scrapTitle,
@@ -46,7 +44,6 @@ const CategoryPage = () => {
           })}
         </>
       </S.ContentWrapper>
-      <InfiniteScroll page={1} />
     </S.Wrapper>
   );
 };

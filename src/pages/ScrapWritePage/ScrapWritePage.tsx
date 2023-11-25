@@ -31,7 +31,7 @@ const ScrapWritePage = () => {
   };
 
   const [category, setCategory] = useState<CategoryWithoutAllKeyType>(
-    prevScrap && prevScrap.category
+    prevScrap && prevScrap.categoryName
   );
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [title, setTitle] = useState(prevScrap ? prevScrap.scrapTitle : '');

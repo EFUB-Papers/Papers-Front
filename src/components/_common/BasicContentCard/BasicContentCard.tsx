@@ -40,12 +40,7 @@ const BasicContentCard = (props: BasicCardProps) => {
   const navigate = useNavigate();
 
   return (
-    <S.Wrapper
-      isBorderBottom={true}
-      onClick={() => {
-        navigate(`/detail/${scrapId}`);
-      }}
-    >
+    <S.Wrapper isBorderBottom={true}>
       {isMine && (
         <S.MoreBoxWrapper>
           <MoreBox
@@ -75,10 +70,18 @@ const BasicContentCard = (props: BasicCardProps) => {
           />
         </S.MoreBoxWrapper>
       )}
+      <S.PostImg
+        imgUrl={imgUrl}
+        onClick={() => {
+          navigate(`/detail/${scrapId}`);
+        }}
+      />
 
-      <S.PostImg imgUrl={imgUrl} />
-
-      <S.PostContentWrapper>
+      <S.PostContentWrapper
+        onClick={() => {
+          navigate(`/detail/${scrapId}`);
+        }}
+      >
         <S.PostTitle>{scrapTitle}</S.PostTitle>
         <S.OriginalTitle>{originTitle}</S.OriginalTitle>
         <S.PostDetail>{scrapContent}</S.PostDetail>

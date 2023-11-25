@@ -61,7 +61,6 @@ export const getRecommendScrapList = async () => {
   const { data } = await axiosInstanceWithoutToken.get(
     `/scraps/recommend?page=1`
   );
-  console.log('dagta', data);
   return data;
 };
 
@@ -79,7 +78,7 @@ export const getSearchScrap = async (
   const { searchby, category, keyword } = searchInfo;
   try {
     const data = await axiosInstance.post(
-      `/scraps/search?searchby=${searchby}&category=${category}&page=1`,
+      `/scraps/search?searchby=${searchby}&category=${category}`,
       {
         query: keyword
       }
@@ -93,8 +92,20 @@ export const getSearchScrap = async (
 
 export const getLikeScraps = async () => {
   try {
-    const data = await axiosInstance.get(`/scraps/liked?page=1`);
+    const data = await axiosInstance.get(`/scraps/liked`);
     console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//카테고리별 스크랩 조회
+export const getCategoryScrapList = async (category: CategoryKeyType) => {
+  try {
+    const { data } = await axiosInstanceWithoutToken.get(
+      `/scraps/category?category=${category}`
+    );
+    return data;
   } catch (err) {
     console.log(err);
   }

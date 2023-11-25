@@ -24,7 +24,8 @@ export type PrevScrapType = {
   scrapTitle: string;
   scrapLink: string;
   scrapContent: string;
-  category: string;
+  // category: string;
+  categoryName: string;
   folderId: number;
   imgUrl: string;
   tags: NewTagType[];
@@ -37,6 +38,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   const data = useGetScrapDetailQuery(Number(params.scrapId));
+  console.log('aaa', data);
   const { deleteScrapMutate } = useDeleteScrapMutation();
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
@@ -48,7 +50,8 @@ const DetailPage = () => {
       scrapTitle: data?.scrapTitle,
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
-      category: data?.categoryName,
+      //ategory: data?.category,
+      categoryName: data?.categoryName,
       imgUrl: data?.imgUrl,
       folderId: data?.folerId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {

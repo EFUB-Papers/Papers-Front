@@ -15,6 +15,9 @@ import {
 import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
 import { LocalStorage } from '../../utils/localStorage';
 import UserModal from '../../components/Modal/UserModal/UserModal';
+import { useSetRecoilState } from 'recoil';
+import { folderModalAtom } from 'atom/modal';
+import { useEffect } from 'react';
 
 const MainPage = () => {
   const params = useParams();
@@ -26,10 +29,19 @@ const MainPage = () => {
   /*추천 스크랩*/
   const scrapList = useRecommendScrapQuery();
   /*내 스크랩*/
-  console.log(scrapList);
+  console.log('scrapList', scrapList);
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
   console.log('user', userList);
+
+  const setFolderModal = useSetRecoilState(folderModalAtom);
+
+  useEffect(() => {
+    setFolderModal((prev) => ({
+      ...prev,
+      defaultFolderId: userInfo?.defaultFolderId || -1
+    }));
+  }, [userInfo]);
 
   return (
     <S.Wrapper>
@@ -60,7 +72,7 @@ const MainPage = () => {
         <S.Section>
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
-            {scrapList?.scraps?.map((scrap: OneScrapType, index: number) => (
+            {scrapList?.map((scrap: OneScrapType, index: number) => (
               <ScrapCard
                 key={index}
                 width={300}

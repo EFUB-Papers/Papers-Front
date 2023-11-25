@@ -18,7 +18,7 @@ const ScrapList = ({
 
   return (
     <S.ContentWrapper>
-      {folderScrapList?.scraps.map((post: any) => {
+      {folderScrapList?.map((post: any) => {
         const {
           imgUrl,
           scrapTitle,

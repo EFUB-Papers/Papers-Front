@@ -6,6 +6,7 @@ import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
 import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
+import React from 'react';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const [selectId, setSelectId] = useState<number | null>(null);
@@ -15,12 +16,15 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
 
   //기본 설정한 폴더로 선택해주기
   useEffect(() => {
-    setSelectId(folderModalState.folderId);
+    setSelectId(folderModalState.defaultFolderId);
+    console.log('selectId', selectId);
   }, []);
 
-  const onClickChangeFolder = () => {
+  const onClickChangeFolder = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     if (selectId) {
-      console.log(selectId);
+      e.preventDefault();
       if (folderModalState.option === 'select') {
         const formData = new FormData();
         formData.append(
@@ -68,7 +72,9 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
           fontSize={14}
           width={70}
           height={30}
-          onClick={onClickChangeFolder}
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            onClickChangeFolder(e);
+          }}
         >
           완료
         </BasicButton>
