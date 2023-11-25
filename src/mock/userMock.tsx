@@ -4,7 +4,7 @@ import { FollowingType } from '../types/FollowingType';
 
 export const UserMock: UserType = {
   nickname: '나는 고양이다',
-  userDetail: '고양이는 빠른 반사신경, 탁월한 유연성이 있다.',
+  introduce: '고양이는 빠른 반사신경, 탁월한 유연성이 있다.',
   profileImgUrl:
     'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRT3pf2ui5C-iQmk56kvTqMd6kinKqEoHbHItP7Jyq6XHzXWR-j'
 };
@@ -66,9 +66,9 @@ export const folderMock: OneFolderType[] = [
 ];
 
 export const OneFollowing = {
-  followNickname: '나는 강아지다',
-  followProfileImg: '',
-  followDescription: '멍멍 멍멍 멍멍 멍멍!'
+  followingNickname: '나는 강아지다',
+  followingProfileImg: '',
+  followingDescription: '멍멍 멍멍 멍멍 멍멍!'
 };
 
 export const followingMock: FollowingType[] = [

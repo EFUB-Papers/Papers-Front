@@ -7,38 +7,43 @@ import { LocalStorage } from '../../../utils/localStorage';
 import { useUserInfoQuery } from '../../../hooks/apis/member';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 
-export type ProfileProps = {
-  userName: string;
-  userDetail: string;
-  imgUrl: string;
+export type ProfileBoxProps = {
+  isMine: boolean;
+  nickname: string;
+  introduce: string;
+  profileImgUrl: string;
 };
 
-const ProfileBox = () => {
+const ProfileBox = ({
+  isMine,
+  nickname,
+  introduce,
+  profileImgUrl
+}: ProfileBoxProps) => {
   const setUserModalState = useSetRecoilState(userModalAtom);
-
-  const nickname = LocalStorage.getNickname()!;
-  const userInfo = useUserInfoQuery(nickname);
 
   return (
     <>
       <S.ProfileWrapper>
         <S.FlexWrapperColumn>
           <S.UserProfile>
-            <CircleIcon size="big" imgUrl={userInfo?.profileImgUrl} />
+            <CircleIcon size="big" imgUrl={profileImgUrl} />
           </S.UserProfile>
           <S.UserInfo>
-            <S.UserName>{userInfo?.nickname}</S.UserName>
-            <S.UserDetail>{userInfo?.introduce}</S.UserDetail>
-            <BasicButton
-              color={'blue'}
-              fontSize={14}
-              onClick={() => setUserModalState(true)}
-              width={100}
-              borderRadius={5}
-              height={30}
-            >
-              프로필 수정
-            </BasicButton>
+            <S.UserName>{nickname}</S.UserName>
+            <S.UserDetail>{introduce}</S.UserDetail>
+            {isMine && (
+              <BasicButton
+                color={'blue'}
+                fontSize={14}
+                onClick={() => setUserModalState(true)}
+                width={100}
+                borderRadius={5}
+                height={30}
+              >
+                프로필 수정
+              </BasicButton>
+            )}
           </S.UserInfo>
         </S.FlexWrapperColumn>
       </S.ProfileWrapper>

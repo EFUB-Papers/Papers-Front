@@ -28,8 +28,7 @@ const MainPage = () => {
   console.log('userInfo', userInfo);
   /*추천 스크랩*/
   const scrapList = useRecommendScrapQuery();
-  /*내 스크랩*/
-  console.log('scrapList', scrapList);
+
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
   console.log('user', userList);
@@ -99,9 +98,9 @@ const MainPage = () => {
                   <UserCard
                     key={index}
                     width="31%"
-                    followProfileImg={user.profileImgUrl}
-                    followNickname={user.nickname}
-                    followDescription={user.userDetail}
+                    followingProfileImg={user.profileImgUrl}
+                    followingNickname={user.nickname}
+                    followingDescription={user.introduce}
                   />
                 )
             )}

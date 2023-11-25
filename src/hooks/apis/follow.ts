@@ -37,7 +37,7 @@ export const useDeleteFollowMutation = () => {
 export const useGetFollowingQuery = () => {
   const { data } = useQuery({
     queryKey: ['following'],
-    queryFn: getFollowingList
+    queryFn: () => getFollowingList()
   });
   return data;
 };

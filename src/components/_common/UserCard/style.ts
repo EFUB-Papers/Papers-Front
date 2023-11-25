@@ -9,14 +9,15 @@ const Wrapper = styled.div<{ $width: string }>`
   flex-direction: column;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border: 1px solid ${({ theme }) => theme.lineForDark};
-
-  &:hover {
-    cursor: pointer;
-  }
-
   border-radius: 15px;
   padding: 15px;
   overflow: hidden;
+`;
+
+const ProfileImg = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Nickname = styled.div`
@@ -25,6 +26,10 @@ const Nickname = styled.div`
   margin: 12px 0px;
   text-align: center;
   ${omitText}
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Introduction = styled.div`
@@ -44,6 +49,7 @@ const Introduction = styled.div`
 
 export const S = {
   Wrapper,
+  ProfileImg,
   Nickname,
   Introduction
 };
