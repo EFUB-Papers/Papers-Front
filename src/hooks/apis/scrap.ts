@@ -4,7 +4,6 @@ import {
   getRecommendScrapList,
   getScrapDetail,
   getSearchScrap,
-  OneNewScrapType,
   patchScrap,
   PatchScrapType,
   postNewScrap,
@@ -13,6 +12,7 @@ import {
 import { AxiosError } from 'axios';
 import { OneScrapType } from '../../types/ScrapType';
 import { AxiosResponseType } from '../../constants/Api';
+import { useQueryClient } from '@tanstack/react-query';
 
 //스크랩 생성
 export const useNewScrapMutation = () => {
@@ -41,13 +41,17 @@ export const usePatchScrapMutation = () => {
 };
 
 //스크랩 삭제
-export const useDeleteScrapMutation = () => {
+export const useDeleteScrapMutation = (folderId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: deleteScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     number
   >({
-    mutationFn: (scrapId: number) => deleteScrap(scrapId)
+    mutationFn: (scrapId: number) => deleteScrap(scrapId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
+    }
   });
   return { deleteScrapMutate };
 };
@@ -73,7 +77,7 @@ export const useRecommendScrapQuery = () => {
 //스크랩 검색
 export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
   const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
-    queryKey: ['recommendScrap'],
+    queryKey: ['searchScrap'],
     queryFn: () => getSearchScrap(searchInfo)
   });
   return data;

@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   deleteFollowUser,
+  getCurrentFollowing,
   getFollowerList,
   getFollowingList,
   postFollowUser
@@ -46,6 +47,14 @@ export const useGetFollowerQuery = () => {
   const { data } = useQuery({
     queryKey: ['follower'],
     queryFn: getFollowerList
+  });
+  return data;
+};
+
+export const useGetCurrentFollowQuery = (nickname: string) => {
+  const { data } = useQuery({
+    queryKey: ['currentFollow', nickname],
+    queryFn: () => getCurrentFollowing(nickname)
   });
   return data;
 };

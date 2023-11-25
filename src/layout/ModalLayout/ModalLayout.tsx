@@ -4,11 +4,11 @@ import { useBodyScrollLock } from '../../hooks/useScrollLock';
 import { useEffect } from 'react';
 import { S } from './style';
 import { folderModalAtom, userModalAtom } from '../../atom/modal';
-import { folderMock } from '../../mock/userMock';
 import FolderModal from '../../components/Modal/FolderModal/FolderModal';
 import { LocalStorage } from 'utils/localStorage';
 import { useUserInfoQuery } from 'hooks/apis/member';
 import UserModal from 'components/Modal/UserModal/UserModal';
+import { useGetFolderListQuery } from '../../hooks/apis/folder';
 
 const ModalLayout = () => {
   const folderModal = useRecoilValue(folderModalAtom);
@@ -16,9 +16,8 @@ const ModalLayout = () => {
 
   const { lockScroll, openScroll } = useBodyScrollLock();
   const params = useParams();
-  //const nickname = params.nickname;
-  //const folderList = useGetFolderListQuery(nickname!);
-  const folderList = folderMock;
+  const urlNickname = params.nickname;
+  const folderList = useGetFolderListQuery(urlNickname!)!;
   //모달이 꺼지고 켜질 때 뒤 배경 스크롤 중지
   useEffect(() => {
     if (folderModal.open) {

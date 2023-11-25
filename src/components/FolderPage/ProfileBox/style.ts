@@ -65,11 +65,13 @@ const Label = styled.span`
   font-size: 12px;
 `;
 
-const ErrorMsg = styled.div`
-  color: ${({ theme }) => theme.COLOR.error};
+const Message = styled.div<{ isError: boolean }>`
+  color: ${({ theme, isError }) =>
+    isError ? theme.COLOR.error : theme.COLOR.mint};
   font-size: 14px;
   height: 10px;
 `;
+
 export const S = {
   ProfileWrapper,
   UserNameBox,
@@ -79,7 +81,7 @@ export const S = {
   FlexWrapper,
   UserProfile,
   Title,
-  ErrorMsg,
+  Message,
   Label,
   FlexWrapperColumn
 };

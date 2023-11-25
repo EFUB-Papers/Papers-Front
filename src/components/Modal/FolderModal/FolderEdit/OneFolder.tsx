@@ -3,23 +3,31 @@ import { ReactComponent as PencilIcon } from 'asset/_common/greyPencil.svg';
 import { ReactComponent as ActivePencilIcon } from 'asset/_common/activePencil.svg';
 import { ReactComponent as DeleteIcon } from 'asset/_common/trashIcon.svg';
 import { O } from '../style';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputBox from '../../../_common/InputBox/InputBox';
-import {
-  useDeleteFolderMutation,
-  usePutFolderChangeMutation
-} from '../../../../hooks/apis/folder';
+import { usePutFolderChangeMutation } from '../../../../hooks/apis/folder';
 import { OneFolderTypeWithoutUser } from '../../../../types/FolderType';
+import { LocalStorage } from 'utils/localStorage';
 
-const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
+const EditOneFolder = ({
+  id,
+  title,
+  onDeleteFolder
+}: {
+  id: number;
+  title: string;
+  onDeleteFolder: (id: number) => void;
+}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState<string>(title);
-  const { putFolderNameMutate } = usePutFolderChangeMutation();
-  const { deleteFolderMutate } = useDeleteFolderMutation();
 
   const onChange = (e: any) => {
     setName(e.target.value);
   };
+
+  const { putFolderNameMutate } = usePutFolderChangeMutation(
+    LocalStorage.getNickname()!
+  );
 
   const onSubmitFolderChange = () => {
     const folderInfo: OneFolderTypeWithoutUser = {
@@ -28,10 +36,6 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
     };
     putFolderNameMutate(folderInfo);
     setIsEditMode(false);
-  };
-
-  const onDeleteFolder = () => {
-    deleteFolderMutate(id);
   };
 
   return (
@@ -69,7 +73,13 @@ const EditOneFolder = ({ id, title }: { id: number; title: string }) => {
             }}
           />
         )}
-        {!isEditMode && <DeleteIcon onClick={onDeleteFolder} />}
+        {!isEditMode && (
+          <DeleteIcon
+            onClick={() => {
+              onDeleteFolder(id);
+            }}
+          />
+        )}
       </O.IconContainer>
     </O.Wrapper>
   );

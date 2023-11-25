@@ -17,6 +17,9 @@ type NavbarProps = {
 };
 
 const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
+  if (!folderList) {
+    return <div>폴더 없음</div>;
+  }
   //현재 선택된 폴더 인덱스
   const [currentIdx, setCurrentIdx] = useState(0);
   //현재 선택된 폴더 그룹 인덱스
@@ -50,6 +53,7 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
   };
 
   const setIsEditModalOpen = useSetRecoilState(folderModalAtom);
+
   return (
     <S.Wrapper>
       <S.TitleWrapper>
@@ -98,23 +102,25 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
               </S.OneMenu>
             );
           })}
-          <BasicButton
-            color={'transparent'}
-            textColor={COLOR.blue}
-            fontSize={15}
-            width={100}
-            height={40}
-            onClick={() => {
-              setIsEditModalOpen({
-                option: 'add',
-                open: true,
-                scrapId: 0,
-                folderId: -1
-              });
-            }}
-          >
-            폴더 추가
-          </BasicButton>
+          {isMine && (
+            <BasicButton
+              color={'transparent'}
+              textColor={COLOR.blue}
+              fontSize={15}
+              width={100}
+              height={40}
+              onClick={() => {
+                setIsEditModalOpen({
+                  option: 'add',
+                  open: true,
+                  scrapId: 0,
+                  folderId: -1
+                });
+              }}
+            >
+              폴더 추가
+            </BasicButton>
+          )}
         </S.ListWrapper>
         {currentFolderGroup !== lastGroup && (
           <NextIcon

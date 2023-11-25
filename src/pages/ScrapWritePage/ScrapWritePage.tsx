@@ -13,7 +13,7 @@ import {
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import LinkPreview from 'components/_common/LinkPreview/LinkPreview';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { modeState } from 'atom/mode';
 import { folderModalAtom } from '../../atom/modal';
 import { useNewScrapMutation } from 'hooks/apis/scrap';

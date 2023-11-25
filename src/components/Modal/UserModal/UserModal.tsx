@@ -31,10 +31,9 @@ const UserModal = ({
 
   const { name, detail } = values;
 
-  const [profileImg, setProfileImg] = useState<string | null | undefined>(
-    imgUrl
-  );
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [profileImg, setProfileImg] = useState<string | null>();
+  //두번째는 에러 메세지인지 여부
+  const [message, setMessage] = useState<[string, boolean]>(['', false]);
 
   //이름 중복 검사
   const { postSameNameAction, data: hasSameName } = useSameNameMutation();
@@ -45,10 +44,11 @@ const UserModal = ({
   //닉네임 중복 검사
   const onSubmitNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
     postSameNameAction(name);
     if (hasSameName) {
-      setErrorMessage('중복된 이름이 있습니다.');
+      setMessage(['중복된 이름이 있습니다.', true]);
+    } else {
+      setMessage(['사용 가능한 닉네임입니다.', false]);
     }
   };
 
@@ -68,25 +68,36 @@ const UserModal = ({
   };
 
   //프로필 변경 제출
-  const onSubmitProfile = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSubmitProfile = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     const dto = {
       nickname: name,
       introduce: detail
     };
-
     const formData = new FormData();
-    //프로필 이미지가 있을 때만 제출
+
     if (profileImg) {
-      formData.append('profileImg', profileImg);
+      // const fileImg = dataURItoFile(profileImg);
+      const image = new Blob([profileImg], {
+        type: 'image/jpeg'
+      });
+      formData.append('profileImg', image);
     }
-    formData.append('dto', JSON.stringify(dto));
-    postProfileMutate(formData);
+
+    const userDto = new Blob([JSON.stringify(dto)], {
+      type: 'application/json'
+    });
+    formData.append('dto', userDto);
+    const data = postProfileMutate(formData);
+    console.log(data);
   };
 
   return (
     <BasicModal
-      width={450}
-      height={500}
+      width={350}
+      height={480}
       onCloseModal={() => {
         setUserModalOpen(false);
       }}
@@ -133,6 +144,7 @@ const UserModal = ({
                 readonly={false}
                 placeholder={'닉네임을 입력해주세요.'}
               />
+              <S.Message isError={message[1]}>{message[0]}</S.Message>
               <BasicButton
                 onClick={onSubmitNickname}
                 color={'positive'}
@@ -142,7 +154,6 @@ const UserModal = ({
               >
                 중복 확인
               </BasicButton>
-              <S.ErrorMsg>{errorMessage}</S.ErrorMsg>
             </S.UserNameBox>
             <TextArea
               type={'text'}
@@ -165,7 +176,7 @@ const UserModal = ({
               width={70}
               height={30}
               borderRadius={5}
-              disabled={errorMessage.length}
+              disabled={!message.length}
               children={<div>완료</div>}
             />
           </S.UserInfo>

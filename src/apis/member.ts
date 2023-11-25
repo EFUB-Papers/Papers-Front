@@ -34,7 +34,6 @@ export const postSameName = async (nickname: string) => {
         nickname
       }
     );
-    console.log('data', data);
     return data;
   } catch (err) {
     console.log(err);
@@ -69,6 +68,7 @@ export const postMyProfile = async (profileInfo: FormData) => {
         'Content-Type': 'multipart/form-data'
       }
     });
+    console.log('data', data);
     return data;
   } catch (err) {
     console.log(err);

@@ -46,8 +46,13 @@ export const patchScrap = async (scrapInfo: PatchScrapType) => {
 
 //스크랩 삭제
 export const deleteScrap = async (scrapId: number) => {
-  const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
-  return data;
+  console.log('scar', scrapId);
+  try {
+    const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //스크랩 디테일 조회
@@ -74,23 +79,29 @@ export type SearchScrapType = {
 };
 
 //스크랩 검색
-export const getSearchScrap = async (searchInfo: SearchScrapType) => {
-  const { category, searchby, page, keyword } = searchInfo;
-  const { data } = await axiosInstance.post(`/scraps/search`, {
-    keyword,
-    params: {
-      searchby,
-      category,
-      page
+export const getSearchScrap = async (
+  searchInfo: SearchScrapType
+): Promise<any> => {
+  try {
+    const { searchby, category, page, keyword } = searchInfo;
+    const queryParams = [];
+    if (searchby) {
+      queryParams.push(`searchby=${searchby}`);
     }
-  });
-  return data;
-};
-
-//회원별 스크랩 조회
-export const getMyScraps = async (nickname: string) => {
-  const { data } = await axiosInstanceWithoutToken(
-    `/members/${nickname}/scraps`
-  );
-  return data;
+    if (category) {
+      queryParams.push(`category=${category}`);
+    }
+    queryParams.push(`page=${page}`);
+    const queryString = queryParams.join('&');
+    const data = await axiosInstance.post(
+      `/scraps/search${queryString ? `?${queryString}` : ''}`,
+      {
+        query: keyword
+      }
+    );
+    console.log('data', data);
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 };

@@ -1,9 +1,8 @@
 import { S } from './style';
 import React from 'react';
 import BasicButton from '../../_common/BasicButton/BasicButton';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { userModalAtom } from '../../../atom/modal';
-import UserModal from '../../Modal/UserModal/UserModal';
 import { LocalStorage } from '../../../utils/localStorage';
 import { useUserInfoQuery } from '../../../hooks/apis/member';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
@@ -14,8 +13,8 @@ export type ProfileProps = {
   imgUrl: string;
 };
 
-const ProfileBox = ({ userName, userDetail, imgUrl }: ProfileProps) => {
-  const [userModalState, setUserModalState] = useRecoilState(userModalAtom);
+const ProfileBox = () => {
+  const setUserModalState = useSetRecoilState(userModalAtom);
 
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);

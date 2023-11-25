@@ -3,17 +3,25 @@ import { useCreateFolderMutation } from '../../../../hooks/apis/folder';
 import { S } from '../style';
 import InputBox from '../../../_common/InputBox/InputBox';
 import BasicButton from '../../../_common/BasicButton/BasicButton';
+import { useSetRecoilState } from 'recoil';
+import { folderModalAtom } from 'atom/modal';
+import { LocalStorage } from 'utils/localStorage';
 
 const FolderAdd = () => {
   const [newFolderInput, setNewFolderInput] = useState('');
-  const { postNewFolderAction } = useCreateFolderMutation();
+  const { postNewFolderAction } = useCreateFolderMutation(
+    LocalStorage.getNickname()!
+  );
+  const setFolderModalState = useSetRecoilState(folderModalAtom);
 
   const onChange = (e: any) => {
     setNewFolderInput(e.target.value);
   };
 
-  const onSubmitCreateNewFolder = () => {
+  const onSubmitCreateNewFolder = (e: any) => {
+    e.preventDefault();
     postNewFolderAction(newFolderInput);
+    setFolderModalState((prev) => ({ ...prev, open: false }));
   };
 
   return (
@@ -39,7 +47,10 @@ const FolderAdd = () => {
               fontSize={12}
               height={30}
               width={60}
-              onClick={onSubmitCreateNewFolder}
+              onClick={(e) => {
+                onSubmitCreateNewFolder(e);
+              }}
+              disabled={!newFolderInput.length}
             >
               완료
             </BasicButton>
