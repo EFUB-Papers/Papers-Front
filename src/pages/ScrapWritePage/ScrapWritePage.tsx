@@ -37,7 +37,8 @@ const ScrapWritePage = () => {
   const [title, setTitle] = useState(prevScrap ? prevScrap.scrapTitle : '');
   const [link, setLink] = useState(prevScrap ? prevScrap.scrapLink : '');
   const [showLinkPreview, setShowLinkPreview] = useState(false);
-  const [imgFile, setImgFile] = useState('');
+  const [imgFile, setImgFile] = useState<File>();
+  const [imgUrl, setImgUrl] = useState('');
   const [content, setContent] = useState(
     prevScrap ? prevScrap.scrapContent : ''
   );
@@ -86,8 +87,8 @@ const ScrapWritePage = () => {
       const formData = new FormData();
 
       // 폼데이터에 thumbnail 추가
-      imgRef.current.files[0]
-        ? formData.append('thumbnail', imgRef.current.files[0])
+      imgFile
+        ? formData.append('thumbnail', imgFile)
         : formData.append('thumbnail', new Blob([]));
 
       // 폼데이터에 dto 추가
@@ -128,10 +129,11 @@ const ScrapWritePage = () => {
   const onImageUpload = () => {
     if (imgRef.current !== null && imgRef.current.files !== null) {
       const file = imgRef.current.files[0];
+      setImgFile(file);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        setImgFile(reader.result as string);
+        setImgUrl(reader.result as string);
       };
     }
   };
@@ -139,9 +141,9 @@ const ScrapWritePage = () => {
   // 이미지가 가로로 긴지 여부
   const img = new Image();
   useEffect(() => {
-    img.src = imgFile ? imgFile : prevScrap?.imgUrl;
+    img.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
     setHorizontal(img.width > img.height ? true : false);
-  }, [imgFile]);
+  }, [imgUrl]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -241,7 +243,12 @@ const ScrapWritePage = () => {
               />
               {/* 링크 미리보기 */}
               {showLinkPreview && (
-                <S.PreviewWrapper>
+                <S.PreviewWrapper
+                  onClick={() => {
+                    setLink('');
+                    setShowLinkPreview(false);
+                  }}
+                >
                   <LinkPreview size={'big'} url={link} />
                   <S.DeleteButton>
                     {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
@@ -265,14 +272,19 @@ const ScrapWritePage = () => {
               style={{ display: 'none' }}
             />
             {/* 이미지 미리보기 */}
-            {imgFile || prevScrap?.imgUrl ? (
-              <S.PreviewWrapper>
+            {imgUrl || prevScrap?.imgUrl ? (
+              <S.PreviewWrapper
+                onClick={() => {
+                  setImgFile(undefined);
+                  setImgUrl('');
+                }}
+              >
                 <S.ImagePreview
                   $horizontal={horizontal}
-                  src={imgFile ? imgFile : prevScrap?.imgUrl}
+                  src={imgUrl ? imgUrl : prevScrap?.imgUrl}
                 />
                 <S.DeleteButton>
-                  {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
+                  <DeleteIconWhite />
                 </S.DeleteButton>
               </S.PreviewWrapper>
             ) : (
