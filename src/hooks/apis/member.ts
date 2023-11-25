@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   getOtherUserInfo,
   getRecommendUsers,
@@ -48,13 +48,17 @@ export const useUserInfoQuery = (nickname: string) => {
 };
 
 //프로필 설정
-export const usePostProfile = () => {
+export const usePostProfile = (nickname: string) => {
+  const queryClient = useQueryClient();
   const { mutate: postProfileMutate } = useMutation<
     boolean,
     AxiosError,
     FormData
   >({
-    mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo)
+    mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder', nickname] });
+    }
   });
 
   return { postProfileMutate };

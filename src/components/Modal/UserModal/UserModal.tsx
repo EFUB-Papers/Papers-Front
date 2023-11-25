@@ -12,7 +12,6 @@ import BasicButton from '../../_common/BasicButton/BasicButton';
 import TextArea from '../../_common/TextArea/TextArea';
 import useInputs from '../../../hooks/useInputs';
 import { userModalAtom } from '../../../atom/modal';
-// import useCompressImage from '../../../hooks/useCompressImage';
 
 const UserModal = ({
   imgUrl,
@@ -25,21 +24,29 @@ const UserModal = ({
 }) => {
   const setUserModalOpen = useSetRecoilState(userModalAtom);
   const { values, onChange } = useInputs({
-    name: userName,
     detail: userDetail
   });
-  // const { compressImage } = useCompressImage();
-
-  const { name, detail } = values;
-
-  const [profileImg, setProfileImg] = useState<string | null>(imgUrl);
   //두번째는 에러 메세지인지 여부
   const [message, setMessage] = useState<[string, boolean]>(['', false]);
 
+  const [name, setName] = useState(userName);
+
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isValidName = /^[a-zA-Z]+$/.test(event.target.value);
+    if (isValidName) {
+      setName(event.target.value);
+    } else {
+      setMessage(['띄어쓰기 없이 영어로 입력해주세요.', true]);
+    }
+  };
+
+  const { detail } = values;
+
+  const [profileImg, setProfileImg] = useState<string | null>();
   //이름 중복 검사
   const { postSameNameAction, data: hasSameName } = useSameNameMutation();
   //프로필 정보 변경
-  const { postProfileMutate } = usePostProfile();
+  const { postProfileMutate } = usePostProfile(userName);
 
   const inputRef = useRef<HTMLInputElement>(null);
   //닉네임 중복 검사
@@ -123,6 +130,12 @@ const UserModal = ({
                 imgUrl={profileImg}
                 size={'big'}
               />
+            ) : imgUrl ? (
+              <CircleIcon
+                onClick={() => inputRef.current?.click()}
+                imgUrl={imgUrl}
+                size={'big'}
+              />
             ) : (
               <CircleIcon
                 onClick={() => inputRef.current?.click()}
@@ -138,7 +151,9 @@ const UserModal = ({
                 width={'200px'}
                 height={35}
                 textSize={14}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChangeName(e);
+                }}
                 borderRadius={10}
                 maxLength={15}
                 name="name"

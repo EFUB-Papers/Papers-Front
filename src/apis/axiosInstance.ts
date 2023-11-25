@@ -21,7 +21,7 @@ export const axiosInstance = axios.create({
 
 //1. 요청 인터셉터
 axiosInstance.interceptors.request.use(
-  //요청 보내기 전에 수행 로직
+  //요청 보내기 전에 수행
   (config) => {
     if (config?.headers == null) {
       throw new Error(`헤더가 정의되지 않았습니다.`);
