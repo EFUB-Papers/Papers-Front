@@ -44,6 +44,7 @@ const ScrapWritePage = () => {
   const [newTagList, setNewTagList] = useState<NewTagType[]>(
     prevScrap ? prevScrap.tags : []
   );
+  const [horizontal, setHorizontal] = useState(false); //이미지가 가로로 긴지 여부
 
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
@@ -134,6 +135,13 @@ const ScrapWritePage = () => {
       };
     }
   };
+
+  // 이미지가 가로로 긴지 여부
+  const img = new Image();
+  useEffect(() => {
+    img.src = imgFile ? imgFile : prevScrap?.imgUrl;
+    setHorizontal(img.width > img.height ? true : false);
+  }, [imgFile]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -231,13 +239,14 @@ const ScrapWritePage = () => {
                 onKeyDown={onLinkUpload}
                 placeholder="링크를 입력하세요."
               />
+              {/* 링크 미리보기 */}
               {showLinkPreview && (
-                <S.LinkBoxWrapper>
+                <S.PreviewWrapper>
                   <LinkPreview size={'big'} url={link} />
                   <S.DeleteButton>
                     {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
                   </S.DeleteButton>
-                </S.LinkBoxWrapper>
+                </S.PreviewWrapper>
               )}
             </S.LinkColumnWrapper>
           </S.LinkWrapper>
@@ -255,15 +264,17 @@ const ScrapWritePage = () => {
               ref={imgRef}
               style={{ display: 'none' }}
             />
+            {/* 이미지 미리보기 */}
             {imgFile || prevScrap?.imgUrl ? (
-              <S.LinkBoxWrapper>
+              <S.PreviewWrapper>
                 <S.ImagePreview
-                  backgroundImage={imgFile ? imgFile : prevScrap?.imgUrl}
+                  $horizontal={horizontal}
+                  src={imgFile ? imgFile : prevScrap?.imgUrl}
                 />
                 <S.DeleteButton>
                   {mode === 'light' ? <DeleteIcon /> : <DeleteIconWhite />}
                 </S.DeleteButton>
-              </S.LinkBoxWrapper>
+              </S.PreviewWrapper>
             ) : (
               <S.ImageText placeholder="표지 이미지를 선택해주세요." disabled />
             )}
