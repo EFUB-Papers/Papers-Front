@@ -9,12 +9,12 @@ type Button = {
 };
 
 type MoreBoxProps = {
-  isModalOpen: boolean;
-  closeModal: () => void;
+  isMoreBoxOpen: boolean;
+  closeMoreBox: () => void;
   buttons: Button[];
 };
 
-const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
+const MoreBox = ({ isMoreBoxOpen, closeMoreBox, buttons }: MoreBoxProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const mode = useRecoilValue(modeState);
 
@@ -22,11 +22,11 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
     // 모달 바깥 클릭시 모달 닫기
     const onClickOutside = (e: MouseEvent) => {
       if (
-        isModalOpen &&
+        isMoreBoxOpen &&
         modalRef.current &&
         !modalRef.current.contains(e.target as Node)
       ) {
-        closeModal();
+        closeMoreBox();
       }
     };
 
@@ -34,11 +34,11 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
     return () => {
       document.removeEventListener('mousedown', onClickOutside);
     };
-  }, [isModalOpen, closeModal]);
+  }, [isMoreBoxOpen, closeMoreBox]);
 
   return (
     <S.ModalContainer>
-      {isModalOpen && (
+      {isMoreBoxOpen && (
         <>
           <S.Modal mode={mode} ref={modalRef}>
             <S.ButtonList
@@ -51,7 +51,7 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
                 <S.Button
                   onClick={() => {
                     button.onClick();
-                    closeModal();
+                    closeMoreBox();
                   }}
                   key={index}
                 >
@@ -60,7 +60,7 @@ const MoreBox = ({ isModalOpen, closeModal, buttons }: MoreBoxProps) => {
               ))}
             </S.ButtonList>
           </S.Modal>
-          {/* <S.Backdrop onClick={closeModal}></S.Backdrop> */}
+          {/* <S.Backdrop onClick={closeMoreBox}></S.Backdrop> */}
         </>
       )}
     </S.ModalContainer>

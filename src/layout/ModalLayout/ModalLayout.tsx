@@ -17,7 +17,9 @@ const ModalLayout = () => {
   const { lockScroll, openScroll } = useBodyScrollLock();
   const params = useParams();
   const urlNickname = params.nickname;
-  const folderList = useGetFolderListQuery(urlNickname!)!;
+  const folderList = useGetFolderListQuery(
+    urlNickname ? urlNickname! : LocalStorage.getNickname()!
+  )!;
   //모달이 꺼지고 켜질 때 뒤 배경 스크롤 중지
   useEffect(() => {
     if (folderModal.open) {

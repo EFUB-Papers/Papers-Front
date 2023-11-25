@@ -56,8 +56,12 @@ const router = createBrowserRouter([
             ]
           },
           {
-            element: <HeaderLayout />,
+            element: <HeaderLayout isWriteButton={false} />,
             children: [{ element: <ScrapWritePage />, path: '/scrap-write' }]
+          },
+          {
+            element: <HeaderLayout isWriteButton={false} />,
+            children: [{ element: <ScrapWritePage />, path: '/scrap-edit' }]
           }
         ]
       }

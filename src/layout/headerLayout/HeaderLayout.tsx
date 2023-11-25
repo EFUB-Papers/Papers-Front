@@ -5,8 +5,11 @@ import { useUserInfoQuery } from '../../hooks/apis/member';
 import { LocalStorage } from '../../utils/localStorage';
 import Header from '../../components/Header/Header/Header';
 
-const HeaderLayout = () => {
-  const isWriteButton = true;
+export type HeaderLayoutProps = {
+  isWriteButton?: boolean;
+};
+
+const HeaderLayout = ({ isWriteButton = true }: HeaderLayoutProps) => {
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
   return (

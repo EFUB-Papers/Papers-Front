@@ -18,28 +18,22 @@ type OneTag = {
 
 //스크랩 생성
 export const postNewScrap = async (newScrapInfo: FormData) => {
-  const { data } = await axiosInstance.post(
-    '/scraps',
-    { ...newScrapInfo },
-    { headers: { 'Content-Type': 'multipart/form-data' } }
-  );
+  const { data } = await axiosInstance.post('/scraps', newScrapInfo, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
   return data;
 };
 
 export type PatchScrapType = {
   scrapId: number;
-  scrapTitle?: string;
-  scrapLink?: string;
-  scrapContent?: string;
-  tags?: OneTag[];
-  folderId: number;
+  scrapInfo: FormData;
 };
 
 //스크랩 수정
-export const patchScrap = async (scrapInfo: PatchScrapType) => {
-  const { scrapId } = scrapInfo;
-  const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, {
-    ...scrapInfo
+export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
+  // const { scrapId } = scrapInfo;
+  const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, scrapInfo, {
+    headers: { 'Content-Type': 'multipart/form-data' }
   });
   return data;
 };

@@ -48,6 +48,13 @@ const FlexColumnWrapper = styled.div`
   flex-direction: column;
 `;
 
+const MoreDotsWrappr = styled.div`
+  margin-left: auto;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Name = styled.div``;
 
 const DateInfo = styled.div`
@@ -82,6 +89,7 @@ export const S = {
   PrePostWrapper,
   PostWrapper,
   FlexColumnWrapper,
+  MoreDotsWrappr,
   ImgWrapper,
   DateInfo,
   UserInfoWrapper,

@@ -17,9 +17,16 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
     if (selectId) {
       console.log(selectId);
       if (folderModalState.option === 'select') {
+        const formData = new FormData();
+        formData.append(
+          'dto',
+          new Blob([JSON.stringify({ folderId: selectId })], {
+            type: 'application/json'
+          })
+        );
         patchNewScrapMutate({
-          folderId: selectId,
-          scrapId: folderModalState.scrapId
+          scrapId: folderModalState.scrapId,
+          scrapInfo: formData
         });
       } else if (folderModalState.option === 'scrapWrite') {
         setFolderModalState((prev) => ({

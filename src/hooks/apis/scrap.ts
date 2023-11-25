@@ -35,13 +35,14 @@ export const usePatchScrapMutation = () => {
     AxiosError,
     PatchScrapType
   >({
-    mutationFn: (scrapInfo: PatchScrapType) => patchScrap(scrapInfo)
+    mutationFn: (pathScrapInfo: PatchScrapType) =>
+      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo)
   });
   return { patchNewScrapMutate };
 };
 
 //스크랩 삭제
-export const useDeleteScrapMutation = (folderId: number) => {
+export const useDeleteScrapMutation = (folderId?: number) => {
   const queryClient = useQueryClient();
   const { mutate: deleteScrapMutate } = useMutation<
     AxiosResponseType,
