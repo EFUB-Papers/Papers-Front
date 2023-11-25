@@ -24,8 +24,15 @@ const InfoWrapper = styled.div`
   height: 30px;
 `;
 
+const HeartWrapper = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export const S = {
   Wrapper,
   HeartCount,
-  InfoWrapper
+  InfoWrapper,
+  HeartWrapper
 };

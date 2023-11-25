@@ -102,6 +102,8 @@ const DetailPage = () => {
         <S.ContentWrapper>{data?.scrapContent}</S.ContentWrapper>
       </S.PostWrapper>
       <HeartAndCmtInfo
+        scrapId={data?.scrapId}
+        liked={data?.liked}
         heartCount={data?.heartCount}
         commentCount={data?.commentCount}
       />

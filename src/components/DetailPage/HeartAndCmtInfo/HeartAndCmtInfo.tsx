@@ -8,32 +8,54 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
 import { S } from './style';
+import {
+  useDeleteScrapLikeMutation,
+  usePostScrapLikeMutation
+} from 'hooks/apis/likes';
 
 type HeartProps = {
+  scrapId: number;
+  liked: boolean;
   heartCount: number;
   commentCount: number;
 };
-const HeartAndCmtInfo = ({ heartCount, commentCount }: HeartProps) => {
+const HeartAndCmtInfo = ({
+  scrapId,
+  liked,
+  heartCount,
+  commentCount
+}: HeartProps) => {
   const mode = useRecoilValue(modeState);
-  const [isClickHeart, setIsClickHeart] = useState(false);
+  const [isClickHeart, setIsClickHeart] = useState(liked);
+
+  const { postScrapLikeAction } = usePostScrapLikeMutation();
+  const { deleteScrapLikeAction } = useDeleteScrapLikeMutation();
+
+  const onClick = () => {
+    isClickHeart
+      ? deleteScrapLikeAction(scrapId)
+      : postScrapLikeAction(scrapId);
+
+    setIsClickHeart((prev) => !prev);
+  };
 
   return (
     <S.Wrapper>
       <S.InfoWrapper>
-        {isClickHeart ? (
-          mode == 'light' ? (
-            <FilledHeartLight onClick={() => setIsClickHeart(false)} />
+        <S.HeartWrapper onClick={onClick}>
+          {isClickHeart ? (
+            mode == 'light' ? (
+              <FilledHeartLight />
+            ) : (
+              <FilledHeartDark />
+            )
+          ) : mode == 'light' ? (
+            <EmptyHeartLight />
           ) : (
-            <FilledHeartDark onClick={() => setIsClickHeart(false)} />
-          )
-        ) : mode == 'light' ? (
-          <EmptyHeartLight onClick={() => setIsClickHeart(true)} />
-        ) : (
-          <EmptyHeartDark />
-        )}
-        <S.HeartCount onClick={() => setIsClickHeart(true)}>
-          {heartCount}
-        </S.HeartCount>
+            <EmptyHeartDark />
+          )}
+        </S.HeartWrapper>
+        <S.HeartCount>{heartCount}</S.HeartCount>
       </S.InfoWrapper>
       <S.InfoWrapper>
         {mode == 'light' ? <CommentIconLight /> : <CommentIconDark />}
