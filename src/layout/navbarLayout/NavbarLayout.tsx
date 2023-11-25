@@ -23,6 +23,7 @@ const NavbarLayout = () => {
 
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
+  console.log('userINfo', userInfo);
 
   return (
     <S.Wrapper>

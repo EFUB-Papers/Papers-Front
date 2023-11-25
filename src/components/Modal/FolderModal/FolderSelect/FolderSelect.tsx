@@ -1,10 +1,10 @@
 import SelectOneFolder from './OneFoler';
 import { S } from '../style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OneFolderType } from '../../../../types/FolderType';
 import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
@@ -12,6 +12,11 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const { patchNewScrapMutate } = usePatchScrapMutation();
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
+
+  //기본 설정한 폴더로 선택해주기
+  useEffect(() => {
+    setSelectId(folderModalState.folderId);
+  }, []);
 
   const onClickChangeFolder = () => {
     if (selectId) {

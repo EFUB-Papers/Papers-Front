@@ -15,13 +15,15 @@ export type ScrapCardProps = {
   imgUrl: string;
   title: string;
   content: string;
-  heartCnt: number;
+  heartCount: number;
   author: string;
 };
 
 const ScrapCard = (props: ScrapCardProps) => {
   const mode = useRecoilValue(modeState);
   const navigate = useNavigate();
+
+  console.log('count', props.heartCount);
 
   return (
     <S.Wrapper
@@ -43,7 +45,7 @@ const ScrapCard = (props: ScrapCardProps) => {
         <S.Content>{props.content}</S.Content>
         <S.Footer>
           {mode === 'light' ? <LightHeartIcon /> : <DarkHeartIcon />}
-          <S.HeartCnt>{props.heartCnt}</S.HeartCnt>
+          <S.HeartCnt>{props.heartCount}</S.HeartCnt>
           <S.Author>{`by ${props.author}`}</S.Author>
         </S.Footer>
       </S.ScrapBox>

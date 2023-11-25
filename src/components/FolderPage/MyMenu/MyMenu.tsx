@@ -4,11 +4,16 @@ import { ReactComponent as HeartIcon } from 'asset/navBar/heart.svg';
 import { ReactComponent as LogoutIcon } from 'asset/navBar/logout.svg';
 import { M } from './style';
 import { useNavigate } from 'react-router-dom';
-import { LocalStorage } from '../../../utils/localStorage';
 
 const MyMenu = () => {
   const navigate = useNavigate();
-  const nickname = LocalStorage.getNickname();
+
+  const onClickLogout = () => {
+    localStorage.removeItem('papersToken');
+    localStorage.removeItem('nickname');
+    window.location.href = '/main';
+  };
+
   return (
     <>
       <M.MenuWrapper>
@@ -37,7 +42,7 @@ const MyMenu = () => {
           <M.MenuIcon>
             <LogoutIcon />
           </M.MenuIcon>
-          <M.MenuText>로그아웃</M.MenuText>
+          <M.MenuText onClick={onClickLogout}>로그아웃</M.MenuText>
         </M.OneMenuWrapper>
       </M.MenuWrapper>
     </>

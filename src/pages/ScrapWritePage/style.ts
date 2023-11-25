@@ -136,7 +136,7 @@ const ImageText = styled.input`
 const ImagePreview = styled.div<{ backgroundImage: string }>`
   width: 400px;
   background-image: url(${({ backgroundImage }) => backgroundImage});
-  background-size: auto;
+  background-size: cover;
   ${imageRatio};
 `;
 

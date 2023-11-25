@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { flexCenter } from 'style/common';
 
 const Wrapper = styled.div`
-  ${flexCenter};
   flex-direction: column;
   margin-top: 50px;
+  min-height: 100vh;
 `;
 
 const Category = styled.div`
@@ -21,8 +20,13 @@ const ContentWrapper = styled.div`
   justify-content: center;
 `;
 
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 export const S = {
   Wrapper,
   Category,
-  ContentWrapper
+  ContentWrapper,
+  FlexBox
 };

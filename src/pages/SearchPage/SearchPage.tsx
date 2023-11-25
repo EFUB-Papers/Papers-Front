@@ -1,61 +1,80 @@
 import { S } from './style';
-import { PostListMock } from '../../mock/postMock';
-import { OneScrapType } from '../../types/ScrapType';
 import SearchBar from '../../components/_common/SearchBar/SearchBar';
-import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
 import { useSearchParams } from 'react-router-dom';
 import { useSearchScrapQuery } from '../../hooks/apis/scrap';
+import { CategoryKeyType, SearchRangeKeyType } from '../../constants/Category';
+import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
+import { PostListMock } from '../../mock/postMock';
+import { OneScrapType } from '../../types/ScrapType';
+
+export type SearchScrapType = {
+  searchby?: SearchRangeKeyType;
+  category?: CategoryKeyType;
+  keyword?: string;
+  page: number;
+};
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams);
-  const range = searchParams.get('range');
+  const searchby = searchParams.get('range');
   const category = searchParams.get('category');
   const keyword = searchParams.get('keyword') || '';
 
   const searchInfo: Record<string, string> = {};
-  if (range && range !== 'all') {
-    searchInfo.range = range;
+  if (searchby && searchby !== 'all') {
+    searchInfo.searchby = searchby;
   }
 
-  if (category && range !== 'all') {
+  if (category && category !== 'all') {
     searchInfo.category = category;
   }
 
   if (keyword) {
     searchInfo.keyword = keyword;
   }
+  console.log('searchInfo', searchInfo);
 
   const searchList = useSearchScrapQuery({ ...searchInfo, page: 1 });
-  console.log(searchList);
+  console.log('searchList', searchList);
 
   return (
     <S.Wrapper>
-      <SearchBar />
-      <S.ContentWrapper>
-        {PostListMock.map((post: OneScrapType) => {
-          const {
-            imgUrl,
-            scrapId,
-            scrapTitle,
-            scrapContent,
-            scrapLink,
-            folderId
-          } = post;
-          return (
-            <BasicContentCard
-              folderId={folderId}
-              scrapId={scrapId}
-              originLink={scrapLink}
-              originTitle={scrapLink}
-              imgUrl={imgUrl}
-              scrapTitle={scrapTitle}
-              scrapContent={scrapContent}
-              isMine={true}
-            />
-          );
-        })}
-      </S.ContentWrapper>
+      <S.FlexBox>
+        <SearchBar />
+      </S.FlexBox>
+      {PostListMock.length ? (
+        <S.ContentWrapper>
+          {PostListMock.map((post: OneScrapType) => {
+            const {
+              imgUrl,
+              scrapId,
+              scrapTitle,
+              scrapContent,
+              scrapLink,
+              folderId,
+              heartCount,
+              commentCount
+            } = post;
+            return (
+              <BasicContentCard
+                heartCount={heartCount}
+                commentCount={commentCount}
+                folderId={folderId}
+                scrapId={scrapId}
+                originLink={scrapLink}
+                originTitle={scrapLink}
+                imgUrl={imgUrl}
+                scrapTitle={scrapTitle}
+                scrapContent={scrapContent}
+                isMine={true}
+              />
+            );
+          })}
+        </S.ContentWrapper>
+      ) : (
+        <div>해당 스크랩이 없습니다.</div>
+      )}
     </S.Wrapper>
   );
 };

@@ -50,7 +50,7 @@ const Header = ({ isWriteButton = true, userInfo }: HeaderProps) => {
         <S.ProfileImgWrapper
           onClick={() => navigate(`/folder/${userInfo.nickname}`)}
         >
-          <CircleIcon size="small" imgUrl={''} />
+          <CircleIcon size="small" imgUrl={userInfo.profileImgUrl} />
         </S.ProfileImgWrapper>
       ) : (
         <BasicButton

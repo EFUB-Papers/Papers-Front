@@ -12,6 +12,7 @@ import BasicButton from '../../_common/BasicButton/BasicButton';
 import TextArea from '../../_common/TextArea/TextArea';
 import useInputs from '../../../hooks/useInputs';
 import { userModalAtom } from '../../../atom/modal';
+// import useCompressImage from '../../../hooks/useCompressImage';
 
 const UserModal = ({
   imgUrl,
@@ -23,15 +24,15 @@ const UserModal = ({
   userDetail: string;
 }) => {
   const setUserModalOpen = useSetRecoilState(userModalAtom);
-
   const { values, onChange } = useInputs({
     name: userName,
     detail: userDetail
   });
+  // const { compressImage } = useCompressImage();
 
   const { name, detail } = values;
 
-  const [profileImg, setProfileImg] = useState<string | null>();
+  const [profileImg, setProfileImg] = useState<string | null>(imgUrl);
   //두번째는 에러 메세지인지 여부
   const [message, setMessage] = useState<[string, boolean]>(['', false]);
 
@@ -52,23 +53,19 @@ const UserModal = ({
     }
   };
 
-  const onFileChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const files = e.target.files;
-    if (!files) return;
-    const file = files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const previewImgUrl: string | null = reader.result as string;
-      if (previewImgUrl) {
-        setProfileImg(previewImgUrl);
-      }
-    };
+  const onFileChanges = () => {
+    if (inputRef.current !== null && inputRef.current.files !== null) {
+      const file = inputRef.current.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setProfileImg(reader.result as string);
+      };
+    }
   };
 
   //프로필 변경 제출
-  const onSubmitProfile = (
+  const onSubmitProfile = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -78,20 +75,27 @@ const UserModal = ({
     };
     const formData = new FormData();
 
-    if (profileImg) {
-      // const fileImg = dataURItoFile(profileImg);
-      const image = new Blob([profileImg], {
-        type: 'image/jpeg'
-      });
-      formData.append('profileImg', image);
+    if (
+      inputRef.current &&
+      inputRef.current.files &&
+      inputRef.current.files[0]
+    ) {
+      formData.append('profileImg', inputRef.current.files[0]);
+    } else {
+      formData.append('profileImg', new Blob([]));
     }
+    //유저 정보 데이터 담기
+    formData.append(
+      'dto',
+      new Blob([JSON.stringify(dto)], {
+        type: 'application/json'
+      })
+    );
 
-    const userDto = new Blob([JSON.stringify(dto)], {
-      type: 'application/json'
-    });
-    formData.append('dto', userDto);
-    const data = postProfileMutate(formData);
-    console.log(data);
+    for (const x of formData.entries()) {
+      console.log(x);
+    }
+    postProfileMutate(formData);
   };
 
   return (
@@ -110,9 +114,7 @@ const UserModal = ({
               type="file"
               accept="image/*"
               style={{ display: 'none' }}
-              onChange={(e) => {
-                onFileChanges(e);
-              }}
+              onChange={onFileChanges}
               ref={inputRef}
             />
             {profileImg ? (
@@ -151,6 +153,7 @@ const UserModal = ({
                 width={80}
                 height={30}
                 fontSize={14}
+                disabled={!name.length}
               >
                 중복 확인
               </BasicButton>
@@ -176,7 +179,7 @@ const UserModal = ({
               width={70}
               height={30}
               borderRadius={5}
-              disabled={!message.length}
+              disabled={!hasSameName && !name.length && !detail.length}
               children={<div>완료</div>}
             />
           </S.UserInfo>

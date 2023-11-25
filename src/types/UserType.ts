@@ -1,5 +1,5 @@
 export type UserType = {
-  imgUrl: string;
+  profileImgUrl: string;
   nickname: string; //userName
   userDetail: string; //introduce
 };

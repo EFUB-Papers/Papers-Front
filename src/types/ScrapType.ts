@@ -1,4 +1,3 @@
-import { UserType } from './UserType';
 import { CategoryKeyType } from 'constants/Category';
 
 export type SimpleOneScrapType = {
@@ -10,8 +9,8 @@ export type SimpleOneScrapType = {
   writerNickname: string;
   writerProfile: string | null;
   CreatedAt: Date; //빠짐
-  heartCnt: number; //빠짐
-  commentCnt: number; //빠짐\
+  heartCount: number; //빠짐
+  commentCount: number; //빠짐\
   folderId: number;
 };
 

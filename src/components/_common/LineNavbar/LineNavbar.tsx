@@ -61,12 +61,11 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
         {isMine && (
           <S.EditModalButton
             onClick={() => {
-              setIsEditModalOpen({
+              setIsEditModalOpen((prev) => ({
+                ...prev,
                 option: 'edit',
-                open: true,
-                scrapId: 0,
-                folderId: -1
-              });
+                open: true
+              }));
             }}
           >
             폴더 편집
@@ -110,12 +109,11 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
               width={100}
               height={40}
               onClick={() => {
-                setIsEditModalOpen({
+                setIsEditModalOpen((prev) => ({
+                  ...prev,
                   option: 'add',
-                  open: true,
-                  scrapId: 0,
-                  folderId: -1
-                });
+                  open: true
+                }));
               }}
             >
               폴더 추가

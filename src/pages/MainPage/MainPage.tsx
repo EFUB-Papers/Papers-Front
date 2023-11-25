@@ -12,21 +12,24 @@ import {
   useRecommendUsersQuery,
   useUserInfoQuery
 } from '../../hooks/apis/member';
-import { LocalStorage } from '../../utils/localStorage';
 import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
-import UserModal from 'components/Modal/UserModal/UserModal';
+import { LocalStorage } from '../../utils/localStorage';
+import UserModal from '../../components/Modal/UserModal/UserModal';
 
 const MainPage = () => {
   const params = useParams();
   const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
+
   const userInfo = useUserInfoQuery(nickname);
+  console.log('userInfo', userInfo);
   /*추천 스크랩*/
   const scrapList = useRecommendScrapQuery();
   /*내 스크랩*/
   console.log(scrapList);
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
+  console.log('user', userList);
 
   return (
     <S.Wrapper>
@@ -67,7 +70,7 @@ const MainPage = () => {
                 imgUrl={scrap.imgUrl}
                 title={scrap.scrapTitle}
                 content={scrap.scrapContent}
-                heartCnt={10}
+                heartCount={scrap.heartCount}
                 author={scrap.writerNickname}
               />
             ))}
@@ -84,7 +87,7 @@ const MainPage = () => {
                   <UserCard
                     key={index}
                     width="31%"
-                    followProfileImg={user.imgUrl}
+                    followProfileImg={user.profileImgUrl}
                     followNickname={user.nickname}
                     followDescription={user.userDetail}
                   />

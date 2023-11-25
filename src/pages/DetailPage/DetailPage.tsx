@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CircleBox from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
 import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
@@ -7,13 +7,17 @@ import Comment from 'components/DetailPage/Comment/Comment';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import { useGetScrapDetailQuery } from 'hooks/apis/scrap';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { OneTagType } from 'types/ScrapType';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import MoreBox from 'components/_common/MoreBox/MoreBox';
 import { useDeleteScrapMutation } from './../../hooks/apis/scrap';
 import { v4 } from 'uuid';
 import { NewTagType } from 'types/TagType';
+import { CATEGORY } from '../../constants/Category';
+import { timeHelper } from '../../utils/timeHelper';
+import { useSetRecoilState } from 'recoil';
+import { folderModalAtom } from '../../atom/modal';
 
 export type PrevScrapType = {
   scrapId: number;
@@ -21,14 +25,14 @@ export type PrevScrapType = {
   scrapLink: string;
   scrapContent: string;
   category: string;
-  // folderId: number;
+  folderId: number;
   imgUrl: string;
   tags: NewTagType[];
 };
 
 const DetailPage = () => {
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
-
+  const setFolderModalState = useSetRecoilState(folderModalAtom);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -46,13 +50,18 @@ const DetailPage = () => {
       scrapContent: data?.scrapContent,
       category: data?.categoryName,
       imgUrl: data?.imgUrl,
-      // folderId: data?.folerId,
+      folderId: data?.folerId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
         return { tagId: v4(), tagName: tag.tagName };
       })
     };
     navigate('/scrap-edit', { state: prevScrap });
   };
+
+  //폴더 모달의 기본 폴더 값을 바꿔주기
+  useEffect(() => {
+    setFolderModalState((prev) => ({ ...prev, folderId: data.folderId }));
+  }, []);
 
   const onDelete = () => {
     deleteScrapMutate(data.scrapId);
@@ -62,7 +71,7 @@ const DetailPage = () => {
   return (
     <S.Wrapper>
       <S.FlexWrapper>
-        <S.Category>여행</S.Category>
+        <S.Category>{CATEGORY[data.categoryName]}</S.Category>
         <RightArrow />
       </S.FlexWrapper>
       <S.Title>{data?.scrapTitle}</S.Title>
@@ -76,7 +85,7 @@ const DetailPage = () => {
         <CircleBox imgUrl={data?.writerProfile} size={'small'} />
         <S.FlexColumnWrapper>
           <S.Name>{data?.writerNickname}</S.Name>
-          <S.DateInfo>{data?.createdAt}</S.DateInfo>
+          <S.DateInfo>{timeHelper(data?.createdAt)}</S.DateInfo>
         </S.FlexColumnWrapper>
         <S.MoreDotsWrappr>
           <MoreDots onClick={openMoreBox} />

@@ -3,9 +3,9 @@ import CircleIcon from '../CircleBox/CircleBox';
 import BasicButton from '../BasicButton/BasicButton';
 import { FollowingType } from '../../../types/FollowingType';
 import {
+  useDeleteFollowMutation,
   useGetCurrentFollowQuery,
-  usePostFollowMutation,
-  useDeleteFollowMutation
+  usePostFollowMutation
 } from 'hooks/apis/follow';
 
 type CardPropsType = {
@@ -21,6 +21,7 @@ const UserCard = ({
   const { postFollowMutate } = usePostFollowMutation();
   const { deleteFollowMutate } = useDeleteFollowMutation();
   const currentFollow = useGetCurrentFollowQuery(followNickname);
+
   return (
     <S.Wrapper $width={width}>
       <CircleIcon imgUrl={followProfileImg} size="medium" />

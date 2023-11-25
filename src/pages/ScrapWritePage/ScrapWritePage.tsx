@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { S } from './style';
 import { ReactComponent as ArrowIcon } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as LinkIcon } from 'asset/scrapWritePage/link.svg';
@@ -185,24 +185,22 @@ const ScrapWritePage = () => {
             {/*폴더 선택*/}
             <S.Button
               onClick={() => {
-                setFolderModalState({
+                setFolderModalState((prev) => ({
+                  ...prev,
                   option: 'scrapWrite',
-                  open: true,
-                  scrapId: 0,
-                  folderId: -1
-                });
+                  open: true
+                }));
               }}
             >
               폴더 선택
             </S.Button>
             <S.Button
               onClick={() => {
-                setFolderModalState({
+                setFolderModalState((prev) => ({
+                  ...prev,
                   option: 'edit',
-                  open: true,
-                  scrapId: 0,
-                  folderId: -1
-                });
+                  open: true
+                }));
               }}
             >
               폴더 편집

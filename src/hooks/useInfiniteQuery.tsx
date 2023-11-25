@@ -1,14 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useSearchScrapQuery } from './apis/scrap';
 import { SearchScrapType } from '../apis/scraps';
 
 const InfiniteScroll = (searchInfo: SearchScrapType) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const observerElem = useRef(null);
-  const navigate = useNavigate();
-  const sort = searchParams.get('sort') || 'updated_at';
 
   const fetchScraps = async (pageParams: number) => {
     const searchInfo = {
@@ -40,6 +38,8 @@ const InfiniteScroll = (searchInfo: SearchScrapType) => {
     initialPageParam: 1
   });
 
+  console.log(data);
+
   const handleObserver = useCallback(
     (entries: any) => {
       const [target] = entries;
@@ -64,13 +64,15 @@ const InfiniteScroll = (searchInfo: SearchScrapType) => {
   if (status === 'error') {
     return <h3>잘못된 데이터 입니다.</h3>;
   }
+
   return (
     <div>
       {/*{isSuccess &&*/}
       {/*  data.pages.map((page) => {*/}
-      {/*    return page.map((item) => {*/}
-      {/*      return <div>{item}</div>;*/}
-      {/*    });*/}
+      {/*    return <div>{page}</div>;*/}
+      {/*    // return page?.map((item) => {*/}
+      {/*    //   return <div>{item}</div>;*/}
+      {/*    // });*/}
       {/*  })}*/}
       <div className="loader" ref={observerElem}>
         {isFetchingNextPage && hasNextPage ? 'Loading...' : 'No search left'}

@@ -1,7 +1,6 @@
 import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { AxiosResponseType } from 'constants/Api';
 import { OneFolderType, OneFolderTypeWithoutUser } from 'types/FolderType';
-import { OneScrapType } from 'types/ScrapType';
 
 //폴더 생성
 export const postNewFolder = async (folderName: string) => {
@@ -37,10 +36,9 @@ export const getFolderList = async (nickname: string) => {
 //폴더별 스크랩 조회
 export const getFolderScrapsList = async (folderId: number) => {
   try {
-    const { data } = await axiosInstanceWithoutToken.get<OneScrapType[]>(
-      `/folders/${folderId}/scraps`
+    const { data } = await axiosInstanceWithoutToken.get<any>(
+      `/folders/${folderId}/scraps?page=1`
     );
-    console.log('scrapList', data);
     return data;
   } catch (err) {
     console.log(err);

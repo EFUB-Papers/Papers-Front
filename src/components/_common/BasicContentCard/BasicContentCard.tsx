@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useDeleteScrapMutation } from '../../../hooks/apis/scrap';
 import { folderModalAtom } from '../../../atom/modal';
+import { useNavigate } from 'react-router-dom';
 
 type BasicCardProps = {
   imgUrl: string;
@@ -17,6 +18,8 @@ type BasicCardProps = {
   scrapId: number;
   isMine: boolean;
   folderId: number;
+  heartCount: number;
+  commentCount: number;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
@@ -27,17 +30,20 @@ const BasicContentCard = (props: BasicCardProps) => {
     scrapTitle,
     originTitle,
     scrapId,
-    folderId
+    folderId,
+    heartCount,
+    commentCount
   } = props;
   const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
   const { deleteScrapMutate } = useDeleteScrapMutation(folderId);
+  const navigate = useNavigate();
 
   return (
     <S.Wrapper
       isBorderBottom={true}
       onClick={() => {
-        console.log(scrapId);
+        navigate(`/detail/${scrapId}`);
       }}
     >
       {isMine && (
@@ -51,12 +57,12 @@ const BasicContentCard = (props: BasicCardProps) => {
               {
                 name: '폴더 이동',
                 onClick: () => {
-                  setFolderModal({
+                  setFolderModal((prev) => ({
+                    ...prev,
                     option: 'select',
                     scrapId: scrapId,
-                    open: true,
-                    folderId: -1
-                  });
+                    open: true
+                  }));
                 }
               },
               {
@@ -87,11 +93,11 @@ const BasicContentCard = (props: BasicCardProps) => {
         <S.IconFlexWrapper>
           <S.IconContainer>
             <HeartIcon />
-            <S.IconText>23</S.IconText>
+            <S.IconText>{heartCount}</S.IconText>
           </S.IconContainer>
           <S.IconContainer>
             <CommentIcon />
-            <S.IconText>11</S.IconText>
+            <S.IconText>{commentCount}</S.IconText>
           </S.IconContainer>
         </S.IconFlexWrapper>
       </S.IconWrapper>

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { postScrapLike, deleteScrapLike } from '../../apis/likes';
+import { deleteScrapLike, postScrapLike } from '../../apis/likes';
 
 //좋아요 추가 mutation
 export const usePostScrapLikeMutation = () => {

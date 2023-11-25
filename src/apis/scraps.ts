@@ -76,19 +76,10 @@ export type SearchScrapType = {
 export const getSearchScrap = async (
   searchInfo: SearchScrapType
 ): Promise<any> => {
+  const { searchby, category, keyword } = searchInfo;
   try {
-    const { searchby, category, page, keyword } = searchInfo;
-    const queryParams = [];
-    if (searchby) {
-      queryParams.push(`searchby=${searchby}`);
-    }
-    if (category) {
-      queryParams.push(`category=${category}`);
-    }
-    queryParams.push(`page=${page}`);
-    const queryString = queryParams.join('&');
     const data = await axiosInstance.post(
-      `/scraps/search${queryString ? `?${queryString}` : ''}`,
+      `/scraps/search?searchby=${searchby}&category=${category}&page=1`,
       {
         query: keyword
       }
@@ -97,5 +88,14 @@ export const getSearchScrap = async (
     return data;
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const getLikeScraps = async () => {
+  try {
+    const data = await axiosInstance.get(`/scraps/liked?page=1`);
+    console.log(data);
+  } catch (err) {
+    console.log(err);
   }
 };

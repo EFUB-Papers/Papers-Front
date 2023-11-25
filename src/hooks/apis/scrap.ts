@@ -1,6 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteScrap,
+  getLikeScraps,
   getRecommendScrapList,
   getScrapDetail,
   getSearchScrap,
@@ -12,7 +13,6 @@ import {
 import { AxiosError } from 'axios';
 import { OneScrapType } from '../../types/ScrapType';
 import { AxiosResponseType } from '../../constants/Api';
-import { useQueryClient } from '@tanstack/react-query';
 
 //스크랩 생성
 export const useNewScrapMutation = () => {
@@ -80,6 +80,16 @@ export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
   const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
     queryKey: ['searchScrap'],
     queryFn: () => getSearchScrap(searchInfo)
+  });
+  console.log('aa', data);
+  return data;
+};
+
+//좋아요한 스크랩 보기
+export const useLikeScrapsQuery = () => {
+  const { data } = useQuery({
+    queryKey: ['likeScraps'],
+    queryFn: () => getLikeScraps()
   });
   return data;
 };
