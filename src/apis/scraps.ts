@@ -27,11 +27,6 @@ export const postNewScrap = async (newScrapInfo: FormData) => {
 export type PatchScrapType = {
   scrapId: number;
   scrapInfo: FormData;
-  // scrapTitle?: string;
-  // scrapLink?: string;
-  // scrapContent?: string;
-  // tags?: OneTag[];
-  // folderId: number;
 };
 
 //스크랩 수정

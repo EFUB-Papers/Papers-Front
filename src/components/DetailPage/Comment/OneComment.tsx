@@ -9,13 +9,6 @@ import MoreBox from 'components/_common/MoreBox/MoreBox';
 import { useDeleteCommentMutation } from 'hooks/apis/comment';
 
 const OneComment = ({ comment }: { comment: OneCommentType }) => {
-  // const {
-  //   commentId,
-  //   commentContent,
-  //   writerNickname,
-  //   writerProfileImgUrl,
-  //   scrapId
-  // } = comment;
   const [isSubCommentOpen, setIsSubCommentOpen] = useState(false);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
