@@ -37,6 +37,7 @@ const Wrapper = styled.div`
 
 const PreviewWrapper = styled.div`
   position: relative;
+  margin: 10px 0px;
 `;
 
 const CategoryDropdown = styled.div`
@@ -106,6 +107,7 @@ const LinkColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 8px;
+  width: 100%;
 `;
 
 const Link = styled.input`
