@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
   border: 1px solid ${({ theme }) => theme.lineForDark};
   padding: 10px;
-  margin: 10px 0px;
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
@@ -50,6 +50,13 @@ const Content = styled.div`
 const Source = styled.div`
   color: ${({ theme }) => theme.COLOR.darkGrey};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
+  width: 100%;
+
+  /* 한줄 말줄임표 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 `;
 
 const SmallWrapper = styled.div`
@@ -92,7 +99,7 @@ const SmallSource = styled.div`
 const FailText = styled.div`
   color: ${({ theme }) => theme.COLOR.error};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
-}`;
+`;
 
 const SmallContent = styled.div`
   height: 40px;

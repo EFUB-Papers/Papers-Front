@@ -35,8 +35,9 @@ const Wrapper = styled.div`
   margin-bottom: 100px;
 `;
 
-const LinkBoxWrapper = styled.div`
+const PreviewWrapper = styled.div`
   position: relative;
+  margin: 10px 0px;
 `;
 
 const CategoryDropdown = styled.div`
@@ -106,6 +107,7 @@ const LinkColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 8px;
+  width: 100%;
 `;
 
 const Link = styled.input`
@@ -133,11 +135,13 @@ const ImageText = styled.input`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
 
-const ImagePreview = styled.div<{ backgroundImage: string }>`
-  width: 400px;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
-  background-size: auto;
-  ${imageRatio};
+const ImagePreview = styled.img<{
+  $horizontal: boolean;
+}>`
+  ${({ $horizontal }) =>
+    $horizontal
+      ? { width: '400px', height: 'auto' }
+      : { width: 'auto', height: '400px' }};
 `;
 
 const Content = styled.textarea`
@@ -218,7 +222,7 @@ export const S = {
   Content,
   Footer,
   ExitButton,
-  LinkBoxWrapper,
+  PreviewWrapper,
   DeleteButton,
   Button,
   FolderButtonWrapper

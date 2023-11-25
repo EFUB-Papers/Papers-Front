@@ -61,7 +61,7 @@ export const getRecommendScrapList = async () => {
   const { data } = await axiosInstanceWithoutToken.get(
     `/scraps/recommend?page=1`
   );
-  console.log('dagta', data);
+  console.log('추천 스크랩', data);
   return data;
 };
 
