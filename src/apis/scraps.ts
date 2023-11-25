@@ -28,16 +28,17 @@ export const postNewScrap = async (newScrapInfo: FormData) => {
 
 export type PatchScrapType = {
   scrapId: number;
-  scrapTitle?: string;
-  scrapLink?: string;
-  scrapContent?: string;
-  tags?: OneTag[];
-  folderId: number;
+  scrapInfo: FormData;
+  // scrapTitle?: string;
+  // scrapLink?: string;
+  // scrapContent?: string;
+  // tags?: OneTag[];
+  // folderId: number;
 };
 
 //스크랩 수정
-export const patchScrap = async (scrapInfo: PatchScrapType) => {
-  const { scrapId } = scrapInfo;
+export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
+  // const { scrapId } = scrapInfo;
   const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, {
     ...scrapInfo
   });

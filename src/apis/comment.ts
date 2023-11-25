@@ -41,7 +41,7 @@ export const postNewReply = async (replyInfo: NewReplyType) => {
 
 //대댓글 삭제
 export const deleteReply = async (replyId: number) => {
-  const res = await axiosInstance.delete(`/replyies/${replyId}`);
+  const res = await axiosInstance.delete(`/replies/${replyId}`);
   return res;
 };
 

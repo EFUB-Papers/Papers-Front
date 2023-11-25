@@ -43,8 +43,8 @@ const BasicContentCard = (props: BasicCardProps) => {
       {isMine && (
         <S.MoreBoxWrapper>
           <MoreBox
-            isModalOpen={isMoreBoxOpen}
-            closeModal={() => {
+            isMoreBoxOpen={isMoreBoxOpen}
+            closeMoreBox={() => {
               setIsMoreBoxOpen(false);
             }}
             buttons={[

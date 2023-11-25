@@ -47,6 +47,13 @@ const NameBox = styled.div`
   font-size: 16px;
 `;
 
+const MoreDotsWrappr = styled.div`
+  margin-left: auto;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const TextAreaBox = styled.div`
   flex: 1;
   display: flex;
@@ -101,6 +108,7 @@ const ReplyContainer = styled.div`
 export const S = {
   Wrapper,
   NameBox,
+  MoreDotsWrappr,
   FlexBox,
   TextAreaBox,
   MyInfoBox,
