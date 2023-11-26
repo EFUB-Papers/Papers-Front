@@ -31,19 +31,7 @@ const AuthPage = () => {
   };
   return (
     <S.Wrapper>
-      <iframe
-        src="https://giphy.com/embed/swhRkVYLJDrCE"
-        width="480"
-        height="270"
-        frameBorder="0"
-        className="giphy-embed"
-        allowFullScreen
-      ></iframe>
-      <p>
-        <a href="https://giphy.com/gifs/google-icon-loading-swhRkVYLJDrCE">
-          via GIPHY
-        </a>
-      </p>
+      <img src={'asset/_common/circle/gif'} />
     </S.Wrapper>
   );
 };

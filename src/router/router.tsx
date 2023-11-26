@@ -19,10 +19,10 @@ const router = createBrowserRouter([
     element: <AuthPage />,
     path: '/auth'
   },
+  { element: <LoginPage />, path: '/' },
   {
     element: <PrivateRoute />,
     children: [
-      { element: <LoginPage />, path: '/' },
       {
         element: <ModalLayout />,
         children: [

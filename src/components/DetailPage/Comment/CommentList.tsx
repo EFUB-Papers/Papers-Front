@@ -1,4 +1,3 @@
-import { CommentMock } from '../../../mock/commentMock';
 import OneComment from './OneComment';
 import { OneCommentType } from '../../../types/CommentType';
 import { S } from './style';

@@ -14,6 +14,7 @@ import {
 import { AxiosError } from 'axios';
 import { AxiosResponseType } from '../../constants/Api';
 import { CategoryKeyType } from 'constants/Category';
+import { OneScrapType, ScrapDetailType } from 'types/ScrapType';
 
 //스크랩 생성
 export const useNewScrapMutation = (folderId: number) => {
@@ -75,7 +76,7 @@ export const useDeleteScrapMutation = (folderId: number) => {
 
 //스크랩 조회
 export const useGetScrapDetailQuery = (scrapId: number) => {
-  const { data } = useQuery({
+  const { data } = useQuery<ScrapDetailType>({
     queryKey: ['scrapDetail', scrapId],
     queryFn: () => getScrapDetail(scrapId)
   });

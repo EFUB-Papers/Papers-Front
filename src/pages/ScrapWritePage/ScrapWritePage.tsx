@@ -142,11 +142,11 @@ const ScrapWritePage = () => {
   };
 
   // 이미지가 가로로 긴지 여부
-  const img = new Image();
-  useEffect(() => {
-    img.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
-    setHorizontal(img.width > img.height ? true : false);
-  }, [imgUrl]);
+  // const img = new Image();
+  // useEffect(() => {
+  //   img.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
+  //   setHorizontal(img.width > img.height ? true : false);
+  // }, [imgUrl]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -280,10 +280,17 @@ const ScrapWritePage = () => {
                   setImgUrl('');
                 }}
               >
-                <S.ImagePreview
-                  $horizontal={horizontal}
-                  src={imgUrl ? imgUrl : prevScrap?.imgUrl}
-                />
+                {imgUrl ? (
+                  <S.ImagePreview $horizontal={horizontal} src={imgUrl} />
+                ) : prevScrap?.imgUrl ? (
+                  <S.ImagePreview
+                    $horizontal={horizontal}
+                    src={prevScrap?.imgUrl}
+                  />
+                ) : (
+                  <S.ImagePreview $horizontal={horizontal} src={''} />
+                )}
+
                 <S.DeleteButton>
                   <DeleteIconWhite />
                 </S.DeleteButton>

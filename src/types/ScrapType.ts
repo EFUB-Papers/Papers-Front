@@ -1,4 +1,5 @@
 import { CategoryKeyType } from 'constants/Category';
+import { NewTagType } from './TagType';
 
 export type SimpleOneScrapType = {
   imgUrl: string; //빠짐
@@ -17,6 +18,24 @@ export type SimpleOneScrapType = {
 export type OneScrapType = SimpleOneScrapType & {
   tags: OneTagType[];
   category: CategoryKeyType;
+};
+
+export type ScrapDetailType = {
+  scrapId: number;
+  folderId: number;
+  imgUrl: string | null;
+  scrapTitle: string;
+  scrapContent: string;
+  link: string;
+  writerNickname: string;
+  writerPhoto: string;
+  folderName: string;
+  categoryName: string;
+  liked: boolean;
+  likeCount: number;
+  commentCount: number;
+  tags: NewTagType[];
+  createdAt: string;
 };
 
 export type OriginPostType = {

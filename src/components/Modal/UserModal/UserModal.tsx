@@ -139,7 +139,7 @@ const UserModal = ({
             ) : (
               <CircleIcon
                 onClick={() => inputRef.current?.click()}
-                imgUrl={profileImg}
+                imgUrl={'/assets/_common/Profile.jpg'}
                 size={'big'}
               />
             )}

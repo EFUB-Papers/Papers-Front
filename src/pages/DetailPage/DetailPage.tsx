@@ -8,7 +8,6 @@ import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import TagCreator from 'components/_common/TagCreator/TagCreator';
 import { useGetScrapDetailQuery } from 'hooks/apis/scrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import { OneTagType } from 'types/ScrapType';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import MoreBox from 'components/_common/MoreBox/MoreBox';
 import { useDeleteScrapMutation } from './../../hooks/apis/scrap';
@@ -24,10 +23,9 @@ export type PrevScrapType = {
   scrapTitle: string;
   scrapLink: string;
   scrapContent: string;
-  // category: string;
   categoryName: string;
   folderId: number;
-  imgUrl: string;
+  imgUrl: string | null;
   tags: NewTagType[];
 };
 
@@ -37,7 +35,7 @@ const DetailPage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const data = useGetScrapDetailQuery(Number(params.scrapId));
+  const data = useGetScrapDetailQuery(Number(params.scrapId))!;
   const { deleteScrapMutate } = useDeleteScrapMutation(data.folderId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
@@ -50,8 +48,8 @@ const DetailPage = () => {
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
       categoryName: data?.categoryName,
-      imgUrl: data?.imgUrl,
-      folderId: data?.folerId,
+      imgUrl: data?.imgUrl || null,
+      folderId: data?.folderId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
         return { tagId: v4(), tagName: tag.tagName };
       })
@@ -78,12 +76,12 @@ const DetailPage = () => {
       <S.Title>{data?.scrapTitle}</S.Title>
       <TagCreator
         isCreator={false}
-        newTagList={data?.tags.map((tag: OneTagType) => {
+        newTagList={data?.tags.map((tag) => {
           return { tagName: tag.tagName };
         })}
       />
       <S.UserInfoWrapper>
-        <CircleBox imgUrl={data?.writerProfile} size={'small'} />
+        <CircleBox imgUrl={data?.imgUrl} size={'small'} />
         <S.FlexColumnWrapper>
           <S.Name>{data?.writerNickname}</S.Name>
           <S.DateInfo>{timeHelper(data?.createdAt)}</S.DateInfo>
@@ -108,13 +106,17 @@ const DetailPage = () => {
       </S.UserInfoWrapper>
       <S.PostWrapper>
         <LinkPreview size={'big'} url={data?.link} />
-        <S.ImgWrapper src={data?.imgUrl} />
+        {data.imgUrl ? (
+          <S.ImgWrapper src={data?.imgUrl} />
+        ) : (
+          <S.ImgWrapper src={'asset/_common/Profile.jpg'} />
+        )}
         <S.ContentWrapper>{data?.scrapContent}</S.ContentWrapper>
       </S.PostWrapper>
       <HeartAndCmtInfo
         scrapId={data?.scrapId}
         liked={data?.liked}
-        heartCount={data?.heartCount}
+        heartCount={data?.likeCount}
         commentCount={data?.commentCount}
       />
       <Comment scrapId={data.scrapId} />

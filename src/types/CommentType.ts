@@ -2,9 +2,9 @@ export type OneCommentType = {
   commentId: number;
   scrapId: number;
   commentContent: string;
-  writerNickname: '강아지';
-  writerProfileImgUrl: '';
-  createdAt: null;
+  writerNickname: string;
+  writerProfileImgUrl: string | null;
+  createdAt: string;
   commentIsMine: boolean;
 };
 
@@ -14,6 +14,6 @@ export type OneReplyType = {
   replyContent: string;
   replyWriterProfileImg: string;
   replyWriterNickname: string;
-  createdAt: null;
-  commentIsMine: boolean;
+  createdAt: string;
+  replyIsMine: boolean;
 };
