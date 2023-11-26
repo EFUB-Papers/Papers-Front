@@ -15,6 +15,7 @@ import Comment from '../../components/DetailPage/Comment/Comment';
 import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
+import { ScrapDetailType } from 'types/ScrapType';
 
 export type PrevScrapType = {
   scrapId: number;
@@ -23,6 +24,7 @@ export type PrevScrapType = {
   scrapContent: string;
   categoryName: string;
   imgUrl: string | null;
+  folderId: number;
   tags: NewTagType[];
 };
 
@@ -32,22 +34,22 @@ const DetailPage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const data = useGetScrapDetailQuery(Number(params.scrapId))!;
+  const data: ScrapDetailType = useGetScrapDetailQuery(Number(params.scrapId))!;
   const { deleteScrapMutate } = useDeleteScrapMutation();
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);
 
+  //수정 페이지로 리다이렉션
   const onEdit = () => {
     const prevScrap: PrevScrapType = {
-      // folderId: data?.folderId,
       scrapId: data?.scrapId,
       scrapTitle: data?.scrapTitle,
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
       categoryName: data?.categoryName,
       imgUrl: data?.imgUrl || null,
-      // folderId: data?.folderId,
+      folderId: data?.folderId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
         return { tagId: v4(), tagName: tag.tagName };
       })
@@ -79,7 +81,7 @@ const DetailPage = () => {
         })}
       />
       <S.UserInfoWrapper>
-        <CircleBox imgUrl={data?.imgUrl} size={'small'} />
+        <CircleBox imgUrl={data?.writerPhoto} size={'small'} />
         <S.FlexColumnWrapper>
           <S.Name>{data?.writerNickname}</S.Name>
           <S.DateInfo>{timeHelper(data?.createdAt)}</S.DateInfo>
@@ -114,7 +116,7 @@ const DetailPage = () => {
       <HeartAndCmtInfo
         scrapId={data?.scrapId}
         liked={data?.liked}
-        heartCount={data?.likeCount}
+        heartCount={data?.heartCount}
         commentCount={data?.commentCount}
       />
       <Comment scrapId={data?.scrapId} />

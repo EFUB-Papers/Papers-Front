@@ -40,7 +40,7 @@ const SearchBar = () => {
 
   //검색하는 함수
   const onSubmitSearch = () => {
-    const url = `/search?range=${searchOption[0]}&category=${searchOption[1]}&keyword=${keyword}`;
+    const url = `/search?searchby=${searchOption[0]}&category=${searchOption[1]}&keyword=${keyword}`;
     navigate(url);
   };
 
@@ -53,6 +53,7 @@ const SearchBar = () => {
   return (
     <S.Wrapper>
       <S.SelectBox>
+        {/* 검색 범위 선택 */}
         {isSelectOpen[0] ? (
           <S.SelectWrapper value={'range'}>
             <S.OptionListWrapper>
@@ -91,7 +92,7 @@ const SearchBar = () => {
             </S.IconWrapper>
           </S.SelectWrapper>
         )}
-
+        {/* 카테고리 선택 */}
         {isSelectOpen[1] ? (
           <S.SelectWrapper value={'category'}>
             <S.OptionListWrapper>
@@ -131,6 +132,7 @@ const SearchBar = () => {
           </S.SelectWrapper>
         )}
       </S.SelectBox>
+      {/* 인풋창 */}
       <S.SearchInput
         onKeyPress={handleKeyPress}
         value={keyword}
@@ -139,6 +141,7 @@ const SearchBar = () => {
         }}
         placeholder={'검색어를 입력하세요.'}
       />
+      {/* 돋보기 버튼 */}
       <S.SearchIconWrapper>
         {mode == 'light' ? (
           <SearchIcon onClick={onSubmitSearch} />

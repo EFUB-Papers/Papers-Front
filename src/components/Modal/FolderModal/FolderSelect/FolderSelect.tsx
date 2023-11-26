@@ -13,7 +13,9 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
     useRecoilState(folderModalAtom);
 
   const [selectId, setSelectId] = useState<number>(
-    folderModalState.defaultFolderId
+    folderModalState.option === 'scrapWrite'
+      ? folderModalState.folderId
+      : folderModalState.defaultFolderId
   );
   const { patchNewScrapMutate } = usePatchScrapMutation({
     scrapId: folderModalState.scrapId,
@@ -50,6 +52,8 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const onSelectFolder = (id: number) => {
     setSelectId(id);
   };
+
+  console.log(selectId);
 
   return (
     <S.ContentWrapper>

@@ -32,7 +32,7 @@ export type ScrapDetailType = {
   folderName: string;
   categoryName: string;
   liked: boolean;
-  likeCount: number;
+  heartCount: number;
   commentCount: number;
   tags: NewTagType[];
   createdAt: string;

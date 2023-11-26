@@ -10,8 +10,10 @@ import { M } from './style';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
+import { LocalStorage } from 'utils/localStorage';
 
 const MyMenu = () => {
+  const nickname = LocalStorage.getNickname();
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
 
@@ -24,21 +26,21 @@ const MyMenu = () => {
   return (
     <>
       <M.MenuWrapper>
-        <M.OneMenuWrapper onClick={() => navigate(`/folder/%{nickname}`)}>
+        <M.OneMenuWrapper onClick={() => navigate(`/folder/${nickname}`)}>
           <M.MenuIcon>
             {mode == 'light' ? <FolderIcon /> : <FolderIconWhite />}
           </M.MenuIcon>
           <M.MenuText>내 폴더</M.MenuText>
         </M.OneMenuWrapper>
 
-        <M.OneMenuWrapper onClick={() => navigate('/like')}>
+        <M.OneMenuWrapper onClick={() => navigate(`/like/${nickname}`)}>
           <M.MenuIcon>
             {mode == 'light' ? <FollowingIcon /> : <FollowingIconWhite />}
           </M.MenuIcon>
           <M.MenuText>좋아요한 스크랩</M.MenuText>
         </M.OneMenuWrapper>
 
-        <M.OneMenuWrapper onClick={() => navigate('/following')}>
+        <M.OneMenuWrapper onClick={() => navigate(`/following/${nickname}`)}>
           <M.MenuIcon>
             {mode == 'light' ? <HeartIcon /> : <HeartIconWhite />}
           </M.MenuIcon>
