@@ -11,7 +11,7 @@ import { useDeleteReplyMutation } from './../../../hooks/apis/comment';
 const ReplyList = ({ commentId }: { commentId: number }) => {
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
-  const data = useGetReplyListQuery(commentId);
+  const { data } = useGetReplyListQuery(commentId);
   const { deleteReplyAction } = useDeleteReplyMutation(commentId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);

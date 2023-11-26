@@ -5,17 +5,24 @@ import React, { useEffect, useState } from 'react';
 import ReplyList from './ReplyList';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import MoreBox from 'components/_common/MoreBox/MoreBox';
-import { useDeleteCommentMutation } from 'hooks/apis/comment';
+import {
+  useDeleteCommentMutation,
+  useGetCommentListQuery
+} from 'hooks/apis/comment';
+import { timeHelper } from 'utils/timeHelper';
 
 const OneComment = ({
   comment,
+  replyNumber,
   scrapId
 }: {
   comment: OneCommentType;
   scrapId: number;
+  replyNumber: number;
 }) => {
   const [isSubCommentOpen, setIsSubCommentOpen] = useState(false);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
+  // const { refetch } = useGetCommentListQuery(scrapId);
 
   const { deleteCommentAction } = useDeleteCommentMutation(scrapId);
 
@@ -24,11 +31,8 @@ const OneComment = ({
 
   const onDelete = () => {
     deleteCommentAction(comment.commentId);
+    // refetch();
   };
-
-  useEffect(() => {
-    console.log(isSubCommentOpen);
-  }, []);
 
   return (
     <S.OneCommentWrapper>
@@ -36,6 +40,7 @@ const OneComment = ({
         <S.UserInfoBox isSub={true}>
           <CircleIcon imgUrl={comment.writerProfileImgUrl} size={'small'} />
           <S.NameBox>{comment.writerNickname}</S.NameBox>
+          <S.Time> {timeHelper(comment.createdAt)}</S.Time>
           <S.MoreDotsWrappr>
             <MoreDots onClick={openMoreBox} />
           </S.MoreDotsWrappr>
@@ -46,12 +51,6 @@ const OneComment = ({
               {
                 name: '삭제하기',
                 onClick: onDelete
-              },
-              {
-                name: '수정하기',
-                onClick: () => {
-                  console.log('아직 댓글 수정 연결 안함');
-                }
               }
             ]}
           />
@@ -62,7 +61,7 @@ const OneComment = ({
             setIsSubCommentOpen(!isSubCommentOpen);
           }}
         >
-          대댓글 12개
+          {replyNumber && `대댓글 ${replyNumber}개`}
         </S.SubComment>
         {isSubCommentOpen && (
           <>

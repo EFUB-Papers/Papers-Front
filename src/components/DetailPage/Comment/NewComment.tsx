@@ -4,7 +4,10 @@ import TextArea from '../../_common/TextArea/TextArea';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import { S } from './style';
-import { usePostNewCommentMutation } from 'hooks/apis/comment';
+import {
+  useGetCommentListQuery,
+  usePostNewCommentMutation
+} from 'hooks/apis/comment';
 import { useParams } from 'react-router';
 import { LocalStorage } from 'utils/localStorage';
 import { useUserInfoQuery } from 'hooks/apis/member';
@@ -16,6 +19,7 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
 
   const params = useParams();
   const { postCommentAction } = usePostNewCommentMutation(scrapId);
+  const { refetch } = useGetCommentListQuery(scrapId);
 
   const onPostComment = () => {
     postCommentAction({
@@ -23,6 +27,7 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
       commentContent: values.comment
     });
     setValues({ comment: '' });
+    refetch();
   };
 
   const userInfo = useUserInfoQuery(LocalStorage.getNickname()!);

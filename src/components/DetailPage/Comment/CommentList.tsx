@@ -7,13 +7,14 @@ import { useGetCommentListQuery } from 'hooks/apis/comment';
 const CommentList = () => {
   const params = useParams();
 
-  const data = useGetCommentListQuery(Number(params.scrapId!));
+  const { data } = useGetCommentListQuery(Number(params.scrapId!));
 
   return (
     <S.ListWrapper>
       {data &&
         data.map((comment: OneCommentType) => (
           <OneComment
+            replyNumber={comment.replyCount}
             comment={comment}
             key={comment.commentId}
             scrapId={comment.scrapId}

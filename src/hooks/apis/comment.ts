@@ -46,11 +46,12 @@ export const useDeleteCommentMutation = (scrapId: number) => {
 
 //스크랩의 댓글 목록 조회 query
 export const useGetCommentListQuery = (scrapId: number) => {
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['commentList', scrapId],
-    queryFn: () => getCommentList(scrapId)
+    queryFn: () => getCommentList(scrapId),
+    staleTime: 0
   });
-  return data;
+  return { data, refetch };
 };
 
 //대댓글 작성 mutation
@@ -79,9 +80,9 @@ export const useDeleteReplyMutation = (commentId: number) => {
 
 //댓글의 대댓글 목록 조회 query
 export const useGetReplyListQuery = (commentId: number) => {
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['replyList', commentId],
     queryFn: () => getReplyList(commentId)
   });
-  return data;
+  return { data, refetch };
 };
