@@ -10,16 +10,19 @@ import ModeToggleButton from '../ModeToggleButton/ModeToggleButton';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
-import { UserInfoType } from '../../../hooks/apis/member';
+import { useUserInfoQuery } from '../../../hooks/apis/member';
+import { LocalStorage } from 'utils/localStorage';
 
 export type HeaderProps = {
   isWriteButton?: boolean;
-  userInfo: UserInfoType | undefined;
 };
 
-const Header = ({ isWriteButton = true, userInfo }: HeaderProps) => {
+const Header = ({ isWriteButton = true }: HeaderProps) => {
   const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
+
+  const nickname = LocalStorage.getNickname()!;
+  const userInfo = useUserInfoQuery(nickname);
 
   return (
     <S.Wrapper>

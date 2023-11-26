@@ -9,11 +9,9 @@ export type HeaderLayoutProps = {
   isWriteButton?: boolean;
 };
 const HeaderLayout = ({ isWriteButton = true }: HeaderLayoutProps) => {
-  const nickname = LocalStorage.getNickname()!;
-  const userInfo = useUserInfoQuery(nickname);
   return (
     <S.Wrapper>
-      <Header isWriteButton={isWriteButton} userInfo={userInfo} />
+      <Header isWriteButton={isWriteButton} />
       <S.ContentWrapper>
         <Outlet />
       </S.ContentWrapper>
