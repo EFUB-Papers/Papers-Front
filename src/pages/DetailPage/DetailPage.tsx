@@ -112,7 +112,7 @@ const DetailPage = () => {
       <HeartAndCmtInfo
         scrapId={data?.scrapId}
         liked={data?.liked}
-        heartCount={data?.likeCount}
+        heartCount={data?.heartCount}
         commentCount={data?.commentCount}
       />
       <Comment scrapId={data?.scrapId} />

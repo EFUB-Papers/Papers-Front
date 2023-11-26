@@ -32,11 +32,11 @@ const router = createBrowserRouter([
           },
           {
             element: <FollowingPage />,
-            path: '/following'
+            path: '/following/:nickname'
           },
           {
             element: <LikePage />,
-            path: '/like'
+            path: '/like/:nickname'
           }
         ]
       },
