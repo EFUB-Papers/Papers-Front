@@ -38,12 +38,6 @@ const ReplyList = ({ commentId }: { commentId: number }) => {
                 {
                   name: '삭제하기',
                   onClick: () => onDelete(reply.replyId)
-                },
-                {
-                  name: '수정하기',
-                  onClick: () => {
-                    console.log('아직 대댓글 수정 연결 안함');
-                  }
                 }
               ]}
             />

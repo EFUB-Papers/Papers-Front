@@ -48,9 +48,9 @@ export const usePostNewCommentMutation = (scrapId: number) => {
     },
     onError: () => {
       // 서버 요청이 실패한 경우 롤백
-      queryClient.setQueryData(['commentList', scrapId], (prevData: any) =>
-        prevData.slice(0, -1)
-      );
+      queryClient.setQueryData(['commentList', scrapId], (prevData: any) => [
+        ...prevData.slice(0, -1)
+      ]);
     }
   });
   return { postCommentAction };
@@ -58,7 +58,7 @@ export const usePostNewCommentMutation = (scrapId: number) => {
 
 //댓글 삭제
 export const useDeleteCommentMutation = (scrapId: number) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: deleteCommentAction } = useMutation<
     AxiosResponseType,
     AxiosError,
@@ -67,6 +67,19 @@ export const useDeleteCommentMutation = (scrapId: number) => {
     mutationFn: (commentId: number) => deleteComment(commentId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
+    },
+    onMutate: async (deletedCommentId: number) => {
+      const prevComments =
+        queryClient.getQueryData<OneCommentType[]>(['commentList', scrapId]) ||
+        [];
+      const updatedComments = prevComments.filter(
+        (comment) => comment.commentId !== deletedCommentId
+      );
+      queryClient.setQueryData(['commentList', scrapId], updatedComments);
+      return { prevComments };
+    },
+    onError: (prevComments) => {
+      queryClient.setQueryData(['commentList', scrapId], prevComments);
     }
   });
   return { deleteCommentAction };
@@ -76,8 +89,7 @@ export const useDeleteCommentMutation = (scrapId: number) => {
 export const useGetCommentListQuery = (scrapId: number) => {
   const { data, refetch } = useQuery({
     queryKey: ['commentList', scrapId],
-    queryFn: () => getCommentList(scrapId),
-    staleTime: 0
+    queryFn: () => getCommentList(scrapId)
   });
   return { data, refetch };
 };

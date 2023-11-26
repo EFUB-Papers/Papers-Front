@@ -61,7 +61,7 @@ const OneComment = ({
             setIsSubCommentOpen(!isSubCommentOpen);
           }}
         >
-          {replyNumber && `대댓글 ${replyNumber}개`}
+          {replyNumber ? `대댓글 ${replyNumber}개` : '대댓글 0개'}
         </S.SubComment>
         {isSubCommentOpen && (
           <>
