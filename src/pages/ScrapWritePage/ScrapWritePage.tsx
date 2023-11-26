@@ -141,10 +141,10 @@ const ScrapWritePage = () => {
     }
   };
 
-  // 이미지가 가로로 긴지 여부
+  //이미지가 가로로 긴지 여부
   // const img = new Image();
   // useEffect(() => {
-  //   img.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
+  //   img?.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
   //   setHorizontal(img.width > img.height ? true : false);
   // }, [imgUrl]);
 
