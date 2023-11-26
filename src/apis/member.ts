@@ -28,7 +28,7 @@ export const postNewToken = async () => {
 //닉네임 중복 조회✅
 export const postSameName = async (nickname: string) => {
   try {
-    const data = await axiosInstance.post<boolean>(
+    const { data } = await axiosInstance.post<boolean>(
       '/members/nickname/isExist',
       {
         nickname
@@ -67,7 +67,7 @@ export const postMyProfile = async (profileInfo: FormData) => {
       'Content-Type': 'multipart/form-data'
     }
   });
-  console.log('data', data);
+  console.log('프로필 설정', data);
   return data;
 };
 

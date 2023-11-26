@@ -90,6 +90,7 @@ export const useRecommendScrapQuery = () => {
     queryKey: ['recommendScrap'],
     queryFn: () => getRecommendScrapList()
   });
+  console.log('추천 스크랩', scrapList);
   return { scrapList, isLoading };
 };
 
