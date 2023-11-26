@@ -1,4 +1,11 @@
+import { S } from './style';
+
 const LoadingPage = () => {
-  return <div></div>;
+  return (
+    <S.Wrapper>
+      <div>로딩 중입니다.</div>
+      <S.Spinner />
+    </S.Wrapper>
+  );
 };
 export default LoadingPage;

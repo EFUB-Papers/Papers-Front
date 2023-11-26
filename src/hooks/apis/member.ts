@@ -39,12 +39,12 @@ export type UserInfoType = {
 
 //회원 정보 조회
 export const useUserInfoQuery = (nickname: string) => {
-  const { data: userInfo } = useQuery({
+  const { data: userInfo, isLoading } = useQuery({
     queryKey: ['userInfo', nickname],
     queryFn: () => getOtherUserInfo(nickname),
     enabled: !!nickname
   });
-  return userInfo;
+  return { userInfo, isLoading };
 };
 
 //프로필 설정

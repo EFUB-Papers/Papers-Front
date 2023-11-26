@@ -5,45 +5,50 @@ import { useParams } from 'react-router';
 import { CATEGORY, CategoryKeyType } from 'constants/Category';
 import { useCategoryScrapQuery } from '../../hooks/apis/scrap';
 import { OneScrapType } from 'types/ScrapType';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
 
-  const categoryList = useCategoryScrapQuery(categoryId!);
+  const { categoryList, isLoading } = useCategoryScrapQuery(categoryId!);
 
   return (
     <S.Wrapper>
       <S.Category>{CATEGORY[categoryId as CategoryKeyType]}</S.Category>
       <CategoryBar />
-      <S.ContentWrapper>
-        <>
-          {categoryList?.map((scrap: OneScrapType) => {
-            const {
-              scrapId,
-              scrapTitle,
-              scrapContent,
-              scrapLink,
-              imgUrl,
-              writerNickname
-            } = scrap;
-            return (
-              <>
-                <ScrapCard
-                  width={300}
-                  scrapId={scrapId}
-                  link={scrapLink}
-                  linkTitle={scrapLink}
-                  imgUrl={imgUrl}
-                  title={scrapTitle}
-                  content={scrapContent}
-                  heartCount={10}
-                  author={writerNickname}
-                />
-              </>
-            );
-          })}
-        </>
-      </S.ContentWrapper>
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <S.ContentWrapper>
+          <>
+            {categoryList?.map((scrap: OneScrapType) => {
+              const {
+                scrapId,
+                scrapTitle,
+                scrapContent,
+                scrapLink,
+                imgUrl,
+                writerNickname
+              } = scrap;
+              return (
+                <>
+                  <ScrapCard
+                    width={300}
+                    scrapId={scrapId}
+                    link={scrapLink}
+                    linkTitle={scrapLink}
+                    imgUrl={imgUrl}
+                    title={scrapTitle}
+                    content={scrapContent}
+                    heartCount={10}
+                    author={writerNickname}
+                  />
+                </>
+              );
+            })}
+          </>
+        </S.ContentWrapper>
+      )}
     </S.Wrapper>
   );
 };

@@ -62,7 +62,6 @@ export type SearchScrapType = {
   searchby?: SearchRangeKeyType;
   category?: CategoryKeyType;
   keyword?: string;
-  page: number;
 };
 
 //스크랩 검색

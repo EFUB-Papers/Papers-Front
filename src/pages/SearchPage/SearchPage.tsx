@@ -6,6 +6,7 @@ import { CategoryKeyType, SearchRangeKeyType } from '../../constants/Category';
 import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
 import { PostListMock } from '../../mock/postMock';
 import { OneScrapType } from '../../types/ScrapType';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 export type SearchScrapType = {
   searchby?: SearchRangeKeyType;
@@ -35,7 +36,7 @@ const SearchPage = () => {
   }
   console.log('searchInfo', searchInfo);
 
-  const searchList = useSearchScrapQuery({ ...searchInfo, page: 1 });
+  const { searchList, isLoading } = useSearchScrapQuery({ ...searchInfo });
   console.log('searchList', searchList);
 
   return (
@@ -43,7 +44,7 @@ const SearchPage = () => {
       <S.FlexBox>
         <SearchBar />
       </S.FlexBox>
-      {PostListMock.length ? (
+      {PostListMock.length && !isLoading ? (
         <S.ContentWrapper>
           {PostListMock.map((post: OneScrapType) => {
             const {
@@ -72,8 +73,10 @@ const SearchPage = () => {
             );
           })}
         </S.ContentWrapper>
-      ) : (
+      ) : isLoading! && !PostListMock.length ? (
         <div>해당 스크랩이 없습니다.</div>
+      ) : (
+        <LoadingPage />
       )}
     </S.Wrapper>
   );

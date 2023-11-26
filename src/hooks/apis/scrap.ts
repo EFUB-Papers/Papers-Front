@@ -14,7 +14,7 @@ import {
 import { AxiosError } from 'axios';
 import { AxiosResponseType } from '../../constants/Api';
 import { CategoryKeyType } from 'constants/Category';
-import { OneScrapType, ScrapDetailType } from 'types/ScrapType';
+import { ScrapDetailType } from 'types/ScrapType';
 
 //스크랩 생성
 export const useNewScrapMutation = (folderId: number) => {
@@ -76,7 +76,7 @@ export const useDeleteScrapMutation = (folderId: number) => {
 
 //스크랩 조회
 export const useGetScrapDetailQuery = (scrapId: number) => {
-  const { data } = useQuery<ScrapDetailType>({
+  const { data, isLoading } = useQuery<ScrapDetailType>({
     queryKey: ['scrapDetail', scrapId],
     queryFn: () => getScrapDetail(scrapId)
   });
@@ -85,20 +85,20 @@ export const useGetScrapDetailQuery = (scrapId: number) => {
 
 //내 추천 스크랩 보기
 export const useRecommendScrapQuery = () => {
-  const { data } = useQuery({
+  const { data: scrapLists, isLoading } = useQuery({
     queryKey: ['recommendScrap'],
     queryFn: () => getRecommendScrapList()
   });
-  return data;
+  return { scrapList, isLoading };
 };
 
 //스크랩 검색
 export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
-  const { data } = useQuery({
+  const { data: searchList, isLoading } = useQuery({
     queryKey: ['searchScrap', searchInfo],
     queryFn: () => getSearchScrap(searchInfo)
   });
-  return data;
+  return { searchList, isLoading };
 };
 
 //좋아요한 스크랩 보기
@@ -112,9 +112,9 @@ export const useLikeScrapsQuery = () => {
 
 //카테고리 별 스크랩 불러오기
 export const useCategoryScrapQuery = (category: CategoryKeyType) => {
-  const { data } = useQuery({
+  const { data: categoryList, isLoading } = useQuery({
     queryKey: ['categoryScraps', category],
     queryFn: () => getCategoryScrapList(category)
   });
-  return data;
+  return { categoryList, isLoading };
 };
