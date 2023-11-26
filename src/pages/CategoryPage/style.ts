@@ -3,6 +3,10 @@ import { flexCenter } from 'style/common';
 import { ReactNode } from 'react';
 
 const Wrapper = styled.div`
+  min-height: 100vh;
+`;
+
+const Box = styled.div`
   ${flexCenter};
   flex-direction: column;
   margin-top: 50px;
@@ -23,6 +27,7 @@ const ContentWrapper = styled.div<{ children: ReactNode }>`
 
 export const S = {
   Wrapper,
+  Box,
   Category,
   ContentWrapper
 };

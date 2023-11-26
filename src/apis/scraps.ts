@@ -45,7 +45,7 @@ export const deleteScrap = async (scrapId: number) => {
 
 //스크랩 디테일 조회
 export const getScrapDetail = async (scrapId: number) => {
-  const { data } = await axiosInstance.get(`/scraps/${scrapId}`);
+  const { data } = await axiosInstanceWithoutToken.get(`/scraps/${scrapId}`);
   console.log('스크랩 디테일 조회', data);
   return data;
 };
@@ -67,7 +67,7 @@ export type SearchScrapType = {
 //스크랩 검색
 export const getSearchScrap = async (searchInfo: SearchScrapType) => {
   const { searchby, category, keyword } = searchInfo;
-  const data = await axiosInstance.post(
+  const data = await axiosInstanceWithoutToken.post(
     `/scraps/search?searchby=${searchby}&category=${category}`,
     {
       query: keyword

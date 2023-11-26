@@ -25,14 +25,13 @@ const MainPage = () => {
   const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
 
-  const { userInfo, isLoading: isMyInfoLoading } = useUserInfoQuery(nickname);
+  const userInfo = useUserInfoQuery(nickname);
   console.log('userInfo', userInfo);
   /*추천 스크랩*/
   const { scrapList, isLoading: isScarpLoading } = useRecommendScrapQuery();
 
   /*추천 유저 리스트*/
-  const { userList, isLoading: isUserLoading } = useRecommendUsersQuery();
-  console.log('user', userList);
+  const userList = useRecommendUsersQuery();
 
   const setFolderModal = useSetRecoilState(folderModalAtom);
 
@@ -99,24 +98,20 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {isUserLoading ? (
-              <LoadingPage />
-            ) : (
-              <>
-                {userList?.map(
-                  (user: UserType, index: number) =>
-                    index < 3 && (
-                      <UserCard
-                        key={index}
-                        width="31%"
-                        followingProfileImg={user.profileImgUrl}
-                        followingNickname={user.nickname}
-                        followingDescription={user.introduce}
-                      />
-                    )
-                )}
-              </>
-            )}
+            <>
+              {userList?.map(
+                (user: UserType, index: number) =>
+                  index < 3 && (
+                    <UserCard
+                      key={index}
+                      width="31%"
+                      followingProfileImg={user.profileImgUrl}
+                      followingNickname={user.nickname}
+                      followingDescription={user.introduce}
+                    />
+                  )
+              )}
+            </>
           </S.CardList>
         </S.Section>
       </S.ContentWrapper>

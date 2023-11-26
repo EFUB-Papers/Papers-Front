@@ -59,33 +59,34 @@ export const usePatchScrapMutation = ({
 };
 
 //스크랩 삭제
-export const useDeleteScrapMutation = (folderId: number) => {
+export const useDeleteScrapMutation = () => {
   const queryClient = useQueryClient();
   const { mutate: deleteScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     number
   >({
-    mutationFn: (scrapId: number) => deleteScrap(scrapId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
-    }
+    mutationFn: (scrapId: number) => deleteScrap(scrapId)
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
+    // }
   });
   return { deleteScrapMutate };
 };
 
 //스크랩 조회
 export const useGetScrapDetailQuery = (scrapId: number) => {
-  const { data, isLoading } = useQuery<ScrapDetailType>({
+  const { data } = useQuery<ScrapDetailType>({
     queryKey: ['scrapDetail', scrapId],
     queryFn: () => getScrapDetail(scrapId)
   });
+  console.log('조회', data);
   return data;
 };
 
 //내 추천 스크랩 보기
 export const useRecommendScrapQuery = () => {
-  const { data: scrapLists, isLoading } = useQuery({
+  const { data: scrapList, isLoading } = useQuery({
     queryKey: ['recommendScrap'],
     queryFn: () => getRecommendScrapList()
   });

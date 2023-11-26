@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
-import CircleBox from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
-import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
-import HeartAndCmtInfo from 'components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
-import Comment from 'components/DetailPage/Comment/Comment';
-import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
-import TagCreator from 'components/_common/TagCreator/TagCreator';
 import { useGetScrapDetailQuery } from 'hooks/apis/scrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
-import MoreBox from 'components/_common/MoreBox/MoreBox';
 import { useDeleteScrapMutation } from './../../hooks/apis/scrap';
-import { v4 } from 'uuid';
 import { NewTagType } from 'types/TagType';
-import { CATEGORY } from '../../constants/Category';
-import { timeHelper } from '../../utils/timeHelper';
 import { useSetRecoilState } from 'recoil';
 import { folderModalAtom } from '../../atom/modal';
+import { v4 } from 'uuid';
+import TagCreator from '../../components/_common/TagCreator/TagCreator';
+import CircleBox from '../../components/_common/CircleBox/CircleBox';
+import { timeHelper } from '../../utils/timeHelper';
+import MoreBox from '../../components/_common/MoreBox/MoreBox';
+import Comment from '../../components/DetailPage/Comment/Comment';
+import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
+import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 
 export type PrevScrapType = {
   scrapId: number;
@@ -24,7 +21,6 @@ export type PrevScrapType = {
   scrapLink: string;
   scrapContent: string;
   categoryName: string;
-  folderId: number;
   imgUrl: string | null;
   tags: NewTagType[];
 };
@@ -36,20 +32,22 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   const data = useGetScrapDetailQuery(Number(params.scrapId))!;
-  const { deleteScrapMutate } = useDeleteScrapMutation(data.folderId);
+  const { deleteScrapMutate } = useDeleteScrapMutation();
+  console.log('data', data);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);
 
   const onEdit = () => {
     const prevScrap: PrevScrapType = {
+      // folderId: data?.folderId,
       scrapId: data?.scrapId,
       scrapTitle: data?.scrapTitle,
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
       categoryName: data?.categoryName,
       imgUrl: data?.imgUrl || null,
-      folderId: data?.folderId,
+      // folderId: data?.folderId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
         return { tagId: v4(), tagName: tag.tagName };
       })
@@ -70,8 +68,8 @@ const DetailPage = () => {
   return (
     <S.Wrapper>
       <S.FlexWrapper>
-        <S.Category>{CATEGORY[data.categoryName]}</S.Category>
-        <RightArrow />
+        <S.Category>{data?.categoryName}</S.Category>
+        {/*<RightArrow />*/}
       </S.FlexWrapper>
       <S.Title>{data?.scrapTitle}</S.Title>
       <TagCreator
@@ -87,7 +85,7 @@ const DetailPage = () => {
           <S.DateInfo>{timeHelper(data?.createdAt)}</S.DateInfo>
         </S.FlexColumnWrapper>
         <S.MoreDotsWrappr>
-          <MoreDots onClick={openMoreBox} />
+          {/*<MoreDots onClick={openMoreBox} />*/}
         </S.MoreDotsWrappr>
         <MoreBox
           isMoreBoxOpen={isMoreBoxOpen}

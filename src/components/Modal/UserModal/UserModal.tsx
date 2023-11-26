@@ -99,9 +99,6 @@ const UserModal = ({
       })
     );
 
-    for (const x of formData.entries()) {
-      console.log(x);
-    }
     postProfileMutate(formData);
   };
 

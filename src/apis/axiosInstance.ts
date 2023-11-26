@@ -56,15 +56,12 @@ axiosInstance.interceptors.response.use(
       if (!error.response || !originalRequest)
         throw new Error('에러가 발생했습니다.');
 
-      const { data, status } = error.response;
-
       if (!retry) {
         retry = true;
         const newAccessToken = await postNewToken();
         console.log('new', newAccessToken);
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         localStorage.setItem('papersToken', newAccessToken);
-
         return axiosInstance(originalRequest);
       }
     }

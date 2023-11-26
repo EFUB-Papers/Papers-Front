@@ -14,41 +14,43 @@ const CategoryPage = () => {
 
   return (
     <S.Wrapper>
-      <S.Category>{CATEGORY[categoryId as CategoryKeyType]}</S.Category>
-      <CategoryBar />
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
-        <S.ContentWrapper>
-          <>
-            {categoryList?.map((scrap: OneScrapType) => {
-              const {
-                scrapId,
-                scrapTitle,
-                scrapContent,
-                scrapLink,
-                imgUrl,
-                writerNickname
-              } = scrap;
-              return (
-                <>
-                  <ScrapCard
-                    width={300}
-                    scrapId={scrapId}
-                    link={scrapLink}
-                    linkTitle={scrapLink}
-                    imgUrl={imgUrl}
-                    title={scrapTitle}
-                    content={scrapContent}
-                    heartCount={10}
-                    author={writerNickname}
-                  />
-                </>
-              );
-            })}
-          </>
-        </S.ContentWrapper>
-      )}
+      <S.Box>
+        <S.Category>{CATEGORY[categoryId as CategoryKeyType]}</S.Category>
+        <CategoryBar />
+        {isLoading ? (
+          <LoadingPage />
+        ) : (
+          <S.ContentWrapper>
+            <>
+              {categoryList?.map((scrap: OneScrapType) => {
+                const {
+                  scrapId,
+                  scrapTitle,
+                  scrapContent,
+                  scrapLink,
+                  imgUrl,
+                  writerNickname
+                } = scrap;
+                return (
+                  <>
+                    <ScrapCard
+                      width={300}
+                      scrapId={scrapId}
+                      link={scrapLink}
+                      linkTitle={scrapLink}
+                      imgUrl={imgUrl}
+                      title={scrapTitle}
+                      content={scrapContent}
+                      heartCount={10}
+                      author={writerNickname}
+                    />
+                  </>
+                );
+              })}
+            </>
+          </S.ContentWrapper>
+        )}
+      </S.Box>
     </S.Wrapper>
   );
 };

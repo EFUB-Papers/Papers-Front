@@ -12,7 +12,6 @@ import { useGetFolderListQuery } from '../../hooks/apis/folder';
 
 const ModalLayout = () => {
   const folderModal = useRecoilValue(folderModalAtom);
-  const userModal = useRecoilState(userModalAtom);
 
   const { lockScroll, openScroll } = useBodyScrollLock();
   const params = useParams();

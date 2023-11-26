@@ -36,7 +36,7 @@ const BasicContentCard = (props: BasicCardProps) => {
   } = props;
   const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
-  const { deleteScrapMutate } = useDeleteScrapMutation(folderId);
+  const { deleteScrapMutate } = useDeleteScrapMutation();
   const navigate = useNavigate();
 
   return (
