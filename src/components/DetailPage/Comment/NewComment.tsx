@@ -7,13 +7,13 @@ import { S } from './style';
 import { usePostNewCommentMutation } from 'hooks/apis/comment';
 import { useParams } from 'react-router';
 
-const NewComment = () => {
+const NewComment = ({ scrapId }: { scrapId: number }) => {
   const { values, setValues, onChange } = useInputs({
     comment: ''
   });
 
   const params = useParams();
-  const { postCommentAction } = usePostNewCommentMutation();
+  const { postCommentAction } = usePostNewCommentMutation(scrapId);
 
   const onPostComment = () => {
     postCommentAction({

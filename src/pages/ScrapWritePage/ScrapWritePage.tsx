@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { S } from './style';
 import { ReactComponent as ArrowIcon } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as LinkIcon } from 'asset/scrapWritePage/link.svg';
@@ -31,7 +31,7 @@ const ScrapWritePage = () => {
   };
 
   const [category, setCategory] = useState<CategoryWithoutAllKeyType>(
-    prevScrap && prevScrap.category
+    prevScrap && prevScrap.categoryName
   );
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [title, setTitle] = useState(prevScrap ? prevScrap.scrapTitle : '');
@@ -54,8 +54,11 @@ const ScrapWritePage = () => {
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
 
-  const { postNewScrapMutate } = useNewScrapMutation(); //스크랩 작성 mutate
-  const { patchNewScrapMutate } = usePatchScrapMutation(); //스크랩 수정 mutate
+  const { postNewScrapMutate } = useNewScrapMutation(folderModalState.folderId); //스크랩 작성 mutate
+  const { patchNewScrapMutate } = usePatchScrapMutation({
+    scrapId: prevScrap.scrapId,
+    folderId: folderModalState.folderId
+  }); //스크랩 수정 mutate
 
   //스크랩 생성/수정 요청
   const onSubmit = () => {
@@ -138,12 +141,12 @@ const ScrapWritePage = () => {
     }
   };
 
-  // 이미지가 가로로 긴지 여부
-  const img = new Image();
-  useEffect(() => {
-    img.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
-    setHorizontal(img.width > img.height ? true : false);
-  }, [imgUrl]);
+  //이미지가 가로로 긴지 여부
+  // const img = new Image();
+  // useEffect(() => {
+  //   img?.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
+  //   setHorizontal(img.width > img.height ? true : false);
+  // }, [imgUrl]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -195,24 +198,22 @@ const ScrapWritePage = () => {
             {/*폴더 선택*/}
             <S.Button
               onClick={() => {
-                setFolderModalState({
+                setFolderModalState((prev) => ({
+                  ...prev,
                   option: 'scrapWrite',
-                  open: true,
-                  scrapId: 0,
-                  folderId: -1
-                });
+                  open: true
+                }));
               }}
             >
               폴더 선택
             </S.Button>
             <S.Button
               onClick={() => {
-                setFolderModalState({
+                setFolderModalState((prev) => ({
+                  ...prev,
                   option: 'edit',
-                  open: true,
-                  scrapId: 0,
-                  folderId: -1
-                });
+                  open: true
+                }));
               }}
             >
               폴더 편집
@@ -279,10 +280,17 @@ const ScrapWritePage = () => {
                   setImgUrl('');
                 }}
               >
-                <S.ImagePreview
-                  $horizontal={horizontal}
-                  src={imgUrl ? imgUrl : prevScrap?.imgUrl}
-                />
+                {imgUrl ? (
+                  <S.ImagePreview $horizontal={horizontal} src={imgUrl} />
+                ) : prevScrap?.imgUrl ? (
+                  <S.ImagePreview
+                    $horizontal={horizontal}
+                    src={prevScrap?.imgUrl}
+                  />
+                ) : (
+                  <S.ImagePreview $horizontal={horizontal} src={''} />
+                )}
+
                 <S.DeleteButton>
                   <DeleteIconWhite />
                 </S.DeleteButton>

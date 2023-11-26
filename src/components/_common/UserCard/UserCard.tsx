@@ -4,9 +4,9 @@ import BasicButton from '../BasicButton/BasicButton';
 import { FollowingType } from '../../../types/FollowingType';
 import { useNavigate } from 'react-router-dom';
 import {
+  useDeleteFollowMutation,
   useGetCurrentFollowQuery,
-  usePostFollowMutation,
-  useDeleteFollowMutation
+  usePostFollowMutation
 } from 'hooks/apis/follow';
 
 type CardPropsType = {
@@ -19,10 +19,11 @@ const UserCard = ({
   followingDescription,
   followingProfileImg
 }: CardPropsType) => {
-  const { postFollowMutate } = usePostFollowMutation();
-  const { deleteFollowMutate } = useDeleteFollowMutation();
-  const currentFollow = useGetCurrentFollowQuery(followingNickname);
+  const { postFollowMutate } = usePostFollowMutation(followingNickname);
+  const { deleteFollowMutate } = useDeleteFollowMutation(followingNickname);
+
   const navigate = useNavigate();
+  const currentFollow = useGetCurrentFollowQuery(followingNickname);
 
   return (
     <S.Wrapper $width={width}>

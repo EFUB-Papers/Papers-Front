@@ -23,22 +23,30 @@ const UserModal = ({
   userDetail: string;
 }) => {
   const setUserModalOpen = useSetRecoilState(userModalAtom);
-
   const { values, onChange } = useInputs({
-    name: userName,
     detail: userDetail
   });
-
-  const { name, detail } = values;
-
-  const [profileImg, setProfileImg] = useState<string | null>();
   //두번째는 에러 메세지인지 여부
   const [message, setMessage] = useState<[string, boolean]>(['', false]);
 
+  const [name, setName] = useState(userName);
+
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isValidName = /^[a-zA-Z]+$/.test(event.target.value);
+    if (isValidName) {
+      setName(event.target.value);
+    } else {
+      setMessage(['띄어쓰기 없이 영어로 입력해주세요.', true]);
+    }
+  };
+
+  const { detail } = values;
+
+  const [profileImg, setProfileImg] = useState<string | null>();
   //이름 중복 검사
   const { postSameNameAction, data: hasSameName } = useSameNameMutation();
   //프로필 정보 변경
-  const { postProfileMutate } = usePostProfile();
+  const { postProfileMutate } = usePostProfile(userName);
 
   const inputRef = useRef<HTMLInputElement>(null);
   //닉네임 중복 검사
@@ -52,23 +60,19 @@ const UserModal = ({
     }
   };
 
-  const onFileChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const files = e.target.files;
-    if (!files) return;
-    const file = files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const previewImgUrl: string | null = reader.result as string;
-      if (previewImgUrl) {
-        setProfileImg(previewImgUrl);
-      }
-    };
+  const onFileChanges = () => {
+    if (inputRef.current !== null && inputRef.current.files !== null) {
+      const file = inputRef.current.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setProfileImg(reader.result as string);
+      };
+    }
   };
 
   //프로필 변경 제출
-  const onSubmitProfile = (
+  const onSubmitProfile = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -78,20 +82,24 @@ const UserModal = ({
     };
     const formData = new FormData();
 
-    if (profileImg) {
-      // const fileImg = dataURItoFile(profileImg);
-      const image = new Blob([profileImg], {
-        type: 'image/jpeg'
-      });
-      formData.append('profileImg', image);
+    if (
+      inputRef.current &&
+      inputRef.current.files &&
+      inputRef.current.files[0]
+    ) {
+      formData.append('profileImg', inputRef.current.files[0]);
+    } else {
+      formData.append('profileImg', new Blob([]));
     }
+    //유저 정보 데이터 담기
+    formData.append(
+      'dto',
+      new Blob([JSON.stringify(dto)], {
+        type: 'application/json'
+      })
+    );
 
-    const userDto = new Blob([JSON.stringify(dto)], {
-      type: 'application/json'
-    });
-    formData.append('dto', userDto);
-    const data = postProfileMutate(formData);
-    console.log(data);
+    postProfileMutate(formData);
   };
 
   return (
@@ -110,9 +118,7 @@ const UserModal = ({
               type="file"
               accept="image/*"
               style={{ display: 'none' }}
-              onChange={(e) => {
-                onFileChanges(e);
-              }}
+              onChange={onFileChanges}
               ref={inputRef}
             />
             {profileImg ? (
@@ -121,10 +127,16 @@ const UserModal = ({
                 imgUrl={profileImg}
                 size={'big'}
               />
+            ) : imgUrl ? (
+              <CircleIcon
+                onClick={() => inputRef.current?.click()}
+                imgUrl={imgUrl}
+                size={'big'}
+              />
             ) : (
               <CircleIcon
                 onClick={() => inputRef.current?.click()}
-                imgUrl={profileImg}
+                imgUrl={'/assets/_common/Profile.jpg'}
                 size={'big'}
               />
             )}
@@ -136,7 +148,9 @@ const UserModal = ({
                 width={'200px'}
                 height={35}
                 textSize={14}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChangeName(e);
+                }}
                 borderRadius={10}
                 maxLength={15}
                 name="name"
@@ -151,6 +165,7 @@ const UserModal = ({
                 width={80}
                 height={30}
                 fontSize={14}
+                disabled={!name.length}
               >
                 중복 확인
               </BasicButton>
@@ -176,7 +191,7 @@ const UserModal = ({
               width={70}
               height={30}
               borderRadius={5}
-              disabled={!message.length}
+              disabled={!hasSameName && !name.length && !detail.length}
               children={<div>완료</div>}
             />
           </S.UserInfo>

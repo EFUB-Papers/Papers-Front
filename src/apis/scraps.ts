@@ -31,7 +31,6 @@ export type PatchScrapType = {
 
 //스크랩 수정
 export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
-  // const { scrapId } = scrapInfo;
   const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, scrapInfo, {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
@@ -40,18 +39,13 @@ export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
 
 //스크랩 삭제
 export const deleteScrap = async (scrapId: number) => {
-  console.log('scar', scrapId);
-  try {
-    const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
+  return data;
 };
 
 //스크랩 디테일 조회
 export const getScrapDetail = async (scrapId: number) => {
-  const { data } = await axiosInstance.get(`/scraps/${scrapId}`);
+  const { data } = await axiosInstanceWithoutToken.get(`/scraps/${scrapId}`);
   console.log('스크랩 디테일 조회', data);
   return data;
 };
@@ -61,7 +55,6 @@ export const getRecommendScrapList = async () => {
   const { data } = await axiosInstanceWithoutToken.get(
     `/scraps/recommend?page=1`
   );
-  console.log('추천 스크랩', data);
   return data;
 };
 
@@ -69,33 +62,29 @@ export type SearchScrapType = {
   searchby?: SearchRangeKeyType;
   category?: CategoryKeyType;
   keyword?: string;
-  page: number;
 };
 
 //스크랩 검색
-export const getSearchScrap = async (
-  searchInfo: SearchScrapType
-): Promise<any> => {
-  try {
-    const { searchby, category, page, keyword } = searchInfo;
-    const queryParams = [];
-    if (searchby) {
-      queryParams.push(`searchby=${searchby}`);
+export const getSearchScrap = async (searchInfo: SearchScrapType) => {
+  const { searchby, category, keyword } = searchInfo;
+  const data = await axiosInstanceWithoutToken.post(
+    `/scraps/search?searchby=${searchby}&category=${category}`,
+    {
+      query: keyword
     }
-    if (category) {
-      queryParams.push(`category=${category}`);
-    }
-    queryParams.push(`page=${page}`);
-    const queryString = queryParams.join('&');
-    const data = await axiosInstance.post(
-      `/scraps/search${queryString ? `?${queryString}` : ''}`,
-      {
-        query: keyword
-      }
-    );
-    console.log('data', data);
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+  );
+  return data;
+};
+
+export const getLikeScraps = async () => {
+  const { data } = await axiosInstance.get(`/scraps/liked`);
+  return data;
+};
+
+//카테고리별 스크랩 조회
+export const getCategoryScrapList = async (category: CategoryKeyType) => {
+  const { data } = await axiosInstanceWithoutToken.get(
+    `/scraps/category?category=${category}`
+  );
+  return data;
 };

@@ -1,14 +1,12 @@
 import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { AxiosResponseType } from 'constants/Api';
 import { OneFolderType, OneFolderTypeWithoutUser } from 'types/FolderType';
-import { OneScrapType } from 'types/ScrapType';
 
 //폴더 생성
 export const postNewFolder = async (folderName: string) => {
   const data = await axiosInstance.post<AxiosResponseType>('/folders', {
     folderName
   });
-  console.log('data', data);
   return data;
 };
 //폴더 삭제
@@ -36,13 +34,8 @@ export const getFolderList = async (nickname: string) => {
 
 //폴더별 스크랩 조회
 export const getFolderScrapsList = async (folderId: number) => {
-  try {
-    const { data } = await axiosInstanceWithoutToken.get<OneScrapType[]>(
-      `/folders/${folderId}/scraps`
-    );
-    console.log('scrapList', data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstanceWithoutToken.get<any>(
+    `/folders/${folderId}/scraps?page=1`
+  );
+  return data;
 };

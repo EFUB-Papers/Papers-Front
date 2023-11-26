@@ -11,7 +11,7 @@ const NewReply = ({ commentId }: { commentId: number }) => {
     comment: ''
   });
 
-  const { postNewReplyAction } = usePostNewReplyMutation();
+  const { postNewReplyAction } = usePostNewReplyMutation(commentId);
 
   const onPostReply = () => {
     postNewReplyAction({

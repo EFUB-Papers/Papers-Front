@@ -12,7 +12,6 @@ import {
   OneFolderType,
   OneFolderTypeWithoutUser
 } from '../../types/FolderType';
-import { OneScrapType } from '../../types/ScrapType';
 
 //폴더 생성: 폴더를 생성하는 mutation
 export const useCreateFolderMutation = (nickname: string) => {
@@ -79,6 +78,5 @@ export const useFolderScrapsQuery = (folderId: number) => {
     queryKey: ['folderScraps', folderId],
     queryFn: () => getFolderScrapsList(folderId)
   });
-  console.log('data', data);
   return data;
 };

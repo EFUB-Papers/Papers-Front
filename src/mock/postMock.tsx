@@ -1,5 +1,4 @@
 import { OneScrapType } from '../types/ScrapType';
-import { UserMock } from './userMock';
 
 export const OnePostMock: OneScrapType = {
   category: '여행',
@@ -35,8 +34,8 @@ export const OnePostMock: OneScrapType = {
       tagName: '장기휴가'
     }
   ],
-  heartCnt: 10,
-  commentCnt: 10,
+  heartCount: 10,
+  commentCount: 10,
   folderId: 1
 };
 

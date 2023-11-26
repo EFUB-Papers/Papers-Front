@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import {
   deleteComment,
   deleteReply,
@@ -9,24 +9,37 @@ import {
   postNewComment,
   postNewReply
 } from 'apis/comment';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponseType } from 'constants/Api';
 
 //댓글 작성 mutation
-export const usePostNewCommentMutation = () => {
+export const usePostNewCommentMutation = (scrapId: number) => {
+  const queryClient = new QueryClient();
   const { mutate: postCommentAction } = useMutation<
-    any,
+    AxiosResponseType,
     AxiosError,
     NewCommentType
   >({
-    mutationFn: (commentInfo: NewCommentType) => postNewComment(commentInfo)
+    mutationFn: (commentInfo: NewCommentType) => postNewComment(commentInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
+    }
   });
   return { postCommentAction };
 };
 
 //댓글 삭제
-export const useDeleteCommentMutation = () => {
-  const { mutate: deleteCommentAction } = useMutation<any, AxiosError, number>({
-    mutationFn: (commentId: number) => deleteComment(commentId)
+export const useDeleteCommentMutation = (scrapId: number) => {
+  const queryClient = new QueryClient();
+  const { mutate: deleteCommentAction } = useMutation<
+    AxiosResponseType,
+    AxiosError,
+    number
+  >({
+    mutationFn: (commentId: number) => deleteComment(commentId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
+    }
   });
   return { deleteCommentAction };
 };
@@ -41,17 +54,25 @@ export const useGetCommentListQuery = (scrapId: number) => {
 };
 
 //대댓글 작성 mutation
-export const usePostNewReplyMutation = () => {
+export const usePostNewReplyMutation = (commentId: number) => {
+  const queryClient = new QueryClient();
   const { mutate: postNewReplyAction } = useMutation({
-    mutationFn: (replyInfo: NewReplyType) => postNewReply(replyInfo)
+    mutationFn: (replyInfo: NewReplyType) => postNewReply(replyInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['replyList', commentId] });
+    }
   });
   return { postNewReplyAction };
 };
 
 //대댓글 삭제 mutation
-export const useDeleteReplyMutation = () => {
+export const useDeleteReplyMutation = (commentId: number) => {
+  const queryClient = new QueryClient();
   const { mutate: deleteReplyAction } = useMutation({
-    mutationFn: (replyId: number) => deleteReply(replyId)
+    mutationFn: (replyId: number) => deleteReply(replyId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['replyList', commentId] });
+    }
   });
   return { deleteReplyAction };
 };

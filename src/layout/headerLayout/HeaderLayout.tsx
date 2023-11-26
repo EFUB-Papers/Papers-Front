@@ -8,7 +8,6 @@ import Header from '../../components/Header/Header/Header';
 export type HeaderLayoutProps = {
   isWriteButton?: boolean;
 };
-
 const HeaderLayout = ({ isWriteButton = true }: HeaderLayoutProps) => {
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);

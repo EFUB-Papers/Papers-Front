@@ -22,7 +22,7 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   ${flexCenter};
 
   :disabled {
-    background-color: #0c8e9f;
+    background-color: grey;
     color: white;
   }
 `;

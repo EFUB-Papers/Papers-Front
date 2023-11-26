@@ -8,18 +8,16 @@ import { folderModalAtom } from '../../../../atom/modal';
 import { useSetRecoilState } from 'recoil';
 import { useDeleteFolderMutation } from 'hooks/apis/folder';
 import { LocalStorage } from 'utils/localStorage';
-import { usePutFolderChangeMutation } from 'hooks/apis/folder';
 
 const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
   const setFolderModalState = useSetRecoilState(folderModalAtom);
 
   const onMoveAddFolder = () => {
-    setFolderModalState({
+    setFolderModalState((prev) => ({
+      ...prev,
       option: 'add',
-      open: true,
-      scrapId: 0,
-      folderId: -1
-    });
+      open: true
+    }));
   };
   const { deleteFolderMutate } = useDeleteFolderMutation(
     LocalStorage.getNickname()!

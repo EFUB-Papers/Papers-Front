@@ -12,19 +12,35 @@ import {
   useRecommendUsersQuery,
   useUserInfoQuery
 } from '../../hooks/apis/member';
-import { LocalStorage } from '../../utils/localStorage';
 import { useRecommendScrapQuery } from '../../hooks/apis/scrap';
-import UserModal from 'components/Modal/UserModal/UserModal';
+import { LocalStorage } from '../../utils/localStorage';
+import UserModal from '../../components/Modal/UserModal/UserModal';
+import { useSetRecoilState } from 'recoil';
+import { folderModalAtom } from 'atom/modal';
+import { useEffect } from 'react';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const MainPage = () => {
   const params = useParams();
   const isFirst = params.isFirst;
   const nickname = LocalStorage.getNickname()!;
+
   const userInfo = useUserInfoQuery(nickname);
+  console.log('userInfo', userInfo);
   /*추천 스크랩*/
-  const scrapList = useRecommendScrapQuery();
+  const { scrapList, isLoading: isScarpLoading } = useRecommendScrapQuery();
+
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
+
+  const setFolderModal = useSetRecoilState(folderModalAtom);
+
+  useEffect(() => {
+    setFolderModal((prev) => ({
+      ...prev,
+      defaultFolderId: userInfo?.defaultFolderId || -1
+    }));
+  }, [userInfo]);
 
   return (
     <S.Wrapper>
@@ -55,20 +71,26 @@ const MainPage = () => {
         <S.Section>
           <S.Text>지금 뜨고 있는 글</S.Text>
           <S.CardList>
-            {scrapList?.map((scrap: OneScrapType, index: number) => (
-              <ScrapCard
-                key={index}
-                width={300}
-                scrapId={scrap.scrapId}
-                link={scrap.scrapLink}
-                linkTitle={scrap.scrapLink}
-                imgUrl={scrap.imgUrl}
-                title={scrap.scrapTitle}
-                content={scrap.scrapContent}
-                heartCnt={10}
-                author={scrap.writerNickname}
-              />
-            ))}
+            {isScarpLoading ? (
+              <LoadingPage />
+            ) : (
+              <>
+                {scrapList?.map((scrap: OneScrapType, index: number) => (
+                  <ScrapCard
+                    key={index}
+                    width={300}
+                    scrapId={scrap.scrapId}
+                    link={scrap.scrapLink}
+                    linkTitle={scrap.scrapLink}
+                    imgUrl={scrap.imgUrl}
+                    title={scrap.scrapTitle}
+                    content={scrap.scrapContent}
+                    heartCount={scrap.heartCount}
+                    author={scrap.writerNickname}
+                  />
+                ))}
+              </>
+            )}
           </S.CardList>
         </S.Section>
 
@@ -76,18 +98,20 @@ const MainPage = () => {
         <S.Section>
           <S.Text>추천 유저</S.Text>
           <S.CardList>
-            {userList?.map(
-              (user: UserType, index: number) =>
-                index < 3 && (
-                  <UserCard
-                    key={index}
-                    width="31%"
-                    followingProfileImg={user.profileImgUrl}
-                    followingNickname={user.nickname}
-                    followingDescription={user.introduce}
-                  />
-                )
-            )}
+            <>
+              {userList?.map(
+                (user: UserType, index: number) =>
+                  index < 3 && (
+                    <UserCard
+                      key={index}
+                      width="31%"
+                      followingProfileImg={user.profileImgUrl}
+                      followingNickname={user.nickname}
+                      followingDescription={user.introduce}
+                    />
+                  )
+              )}
+            </>
           </S.CardList>
         </S.Section>
       </S.ContentWrapper>

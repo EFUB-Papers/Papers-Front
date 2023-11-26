@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { postLogin } from '../../apis/member';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { flexCenter } from '../../style/common';
+import { S } from '../LoadingPage/style';
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -29,19 +28,12 @@ const AuthPage = () => {
       console.log(error);
     }
   };
-  return <S.Wrapper>로그인 중입니다.</S.Wrapper>;
+  return (
+    <S.Wrapper>
+      <div>로그인 중 입니다.</div>
+      <S.Spinner />
+    </S.Wrapper>
+  );
 };
 
 export default AuthPage;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  ${flexCenter};
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
-`;
-
-const S = {
-  Wrapper
-};

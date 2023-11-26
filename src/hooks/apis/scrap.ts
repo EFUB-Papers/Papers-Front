@@ -1,6 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteScrap,
+  getCategoryScrapList,
+  getLikeScraps,
   getRecommendScrapList,
   getScrapDetail,
   getSearchScrap,
@@ -10,76 +12,110 @@ import {
   SearchScrapType
 } from 'apis/scraps';
 import { AxiosError } from 'axios';
-import { OneScrapType } from '../../types/ScrapType';
 import { AxiosResponseType } from '../../constants/Api';
-import { useQueryClient } from '@tanstack/react-query';
+import { CategoryKeyType } from 'constants/Category';
+import { ScrapDetailType } from 'types/ScrapType';
 
 //스크랩 생성
-export const useNewScrapMutation = () => {
-  // const queryClient = useQueryClient();
+export const useNewScrapMutation = (folderId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: postNewScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     FormData
   >({
-    mutationFn: (scrapInfo: FormData) => postNewScrap(scrapInfo)
-    // onSuccess: queryClient.invalidateQueries('scrap')
+    mutationFn: (scrapInfo: FormData) => postNewScrap(scrapInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
+    }
   });
   return { postNewScrapMutate };
 };
 
 //스크랩 수정
-export const usePatchScrapMutation = () => {
+export const usePatchScrapMutation = ({
+  scrapId,
+  folderId
+}: {
+  scrapId: number;
+  folderId: number;
+}) => {
+  const queryClient = useQueryClient();
   const { mutate: patchNewScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     PatchScrapType
   >({
     mutationFn: (pathScrapInfo: PatchScrapType) =>
-      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo)
+      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['scrapDetail', scrapId] });
+      queryClient.invalidateQueries({
+        queryKey: ['folderScraps', folderId]
+      });
+    }
   });
   return { patchNewScrapMutate };
 };
 
 //스크랩 삭제
-export const useDeleteScrapMutation = (folderId?: number) => {
+export const useDeleteScrapMutation = () => {
   const queryClient = useQueryClient();
   const { mutate: deleteScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     number
   >({
-    mutationFn: (scrapId: number) => deleteScrap(scrapId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
-    }
+    mutationFn: (scrapId: number) => deleteScrap(scrapId)
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
+    // }
   });
   return { deleteScrapMutate };
 };
 
 //스크랩 조회
 export const useGetScrapDetailQuery = (scrapId: number) => {
-  const { data } = useQuery({
+  const { data } = useQuery<ScrapDetailType>({
     queryKey: ['scrapDetail', scrapId],
     queryFn: () => getScrapDetail(scrapId)
   });
+  console.log('조회', data);
   return data;
 };
 
 //내 추천 스크랩 보기
 export const useRecommendScrapQuery = () => {
-  const { data } = useQuery({
+  const { data: scrapList, isLoading } = useQuery({
     queryKey: ['recommendScrap'],
     queryFn: () => getRecommendScrapList()
   });
-  return data;
+  return { scrapList, isLoading };
 };
 
 //스크랩 검색
 export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
-  const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
-    queryKey: ['searchScrap'],
+  const { data: searchList, isLoading } = useQuery({
+    queryKey: ['searchScrap', searchInfo],
     queryFn: () => getSearchScrap(searchInfo)
   });
+  return { searchList, isLoading };
+};
+
+//좋아요한 스크랩 보기
+export const useLikeScrapsQuery = () => {
+  const { data } = useQuery({
+    queryKey: ['likeScraps'],
+    queryFn: () => getLikeScraps()
+  });
   return data;
+};
+
+//카테고리 별 스크랩 불러오기
+export const useCategoryScrapQuery = (category: CategoryKeyType) => {
+  const { data: categoryList, isLoading } = useQuery({
+    queryKey: ['categoryScraps', category],
+    queryFn: () => getCategoryScrapList(category)
+  });
+  return { categoryList, isLoading };
 };

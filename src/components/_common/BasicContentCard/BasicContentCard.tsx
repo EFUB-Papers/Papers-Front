@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useDeleteScrapMutation } from '../../../hooks/apis/scrap';
 import { folderModalAtom } from '../../../atom/modal';
+import { useNavigate } from 'react-router-dom';
 
 type BasicCardProps = {
   imgUrl: string;
@@ -17,6 +18,8 @@ type BasicCardProps = {
   scrapId: number;
   isMine: boolean;
   folderId: number;
+  heartCount: number;
+  commentCount: number;
 };
 
 const BasicContentCard = (props: BasicCardProps) => {
@@ -27,19 +30,17 @@ const BasicContentCard = (props: BasicCardProps) => {
     scrapTitle,
     originTitle,
     scrapId,
-    folderId
+    folderId,
+    heartCount,
+    commentCount
   } = props;
   const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
-  const { deleteScrapMutate } = useDeleteScrapMutation(folderId);
+  const { deleteScrapMutate } = useDeleteScrapMutation();
+  const navigate = useNavigate();
 
   return (
-    <S.Wrapper
-      isBorderBottom={true}
-      onClick={() => {
-        console.log(scrapId);
-      }}
-    >
+    <S.Wrapper isBorderBottom={true}>
       {isMine && (
         <S.MoreBoxWrapper>
           <MoreBox
@@ -51,12 +52,12 @@ const BasicContentCard = (props: BasicCardProps) => {
               {
                 name: '폴더 이동',
                 onClick: () => {
-                  setFolderModal({
+                  setFolderModal((prev) => ({
+                    ...prev,
                     option: 'select',
                     scrapId: scrapId,
-                    open: true,
-                    folderId: -1
-                  });
+                    open: true
+                  }));
                 }
               },
               {
@@ -69,10 +70,18 @@ const BasicContentCard = (props: BasicCardProps) => {
           />
         </S.MoreBoxWrapper>
       )}
+      <S.PostImg
+        imgUrl={imgUrl}
+        onClick={() => {
+          navigate(`/detail/${scrapId}`);
+        }}
+      />
 
-      <S.PostImg imgUrl={imgUrl} />
-
-      <S.PostContentWrapper>
+      <S.PostContentWrapper
+        onClick={() => {
+          navigate(`/detail/${scrapId}`);
+        }}
+      >
         <S.PostTitle>{scrapTitle}</S.PostTitle>
         <S.OriginalTitle>{originTitle}</S.OriginalTitle>
         <S.PostDetail>{scrapContent}</S.PostDetail>
@@ -87,11 +96,11 @@ const BasicContentCard = (props: BasicCardProps) => {
         <S.IconFlexWrapper>
           <S.IconContainer>
             <HeartIcon />
-            <S.IconText>23</S.IconText>
+            <S.IconText>{heartCount}</S.IconText>
           </S.IconContainer>
           <S.IconContainer>
             <CommentIcon />
-            <S.IconText>11</S.IconText>
+            <S.IconText>{commentCount}</S.IconText>
           </S.IconContainer>
         </S.IconFlexWrapper>
       </S.IconWrapper>

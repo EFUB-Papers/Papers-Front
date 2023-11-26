@@ -2,10 +2,10 @@ import NewComment from './NewComment';
 import CommentList from './CommentList';
 import { S } from './style';
 
-const Comment = () => {
+const Comment = ({ scrapId }: { scrapId: number }) => {
   return (
     <S.Wrapper>
-      <NewComment />
+      <NewComment scrapId={scrapId} />
       <CommentList />
     </S.Wrapper>
   );

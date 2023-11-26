@@ -21,7 +21,7 @@ export const axiosInstance = axios.create({
 
 //1. 요청 인터셉터
 axiosInstance.interceptors.request.use(
-  //요청 보내기 전에 수행 로직
+  //요청 보내기 전에 수행
   (config) => {
     if (config?.headers == null) {
       throw new Error(`헤더가 정의되지 않았습니다.`);
@@ -56,15 +56,12 @@ axiosInstance.interceptors.response.use(
       if (!error.response || !originalRequest)
         throw new Error('에러가 발생했습니다.');
 
-      const { data, status } = error.response;
-
-      if (status === 401 && !retry) {
+      if (!retry) {
         retry = true;
         const newAccessToken = await postNewToken();
         console.log('new', newAccessToken);
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         localStorage.setItem('papersToken', newAccessToken);
-
         return axiosInstance(originalRequest);
       }
     }

@@ -1,21 +1,30 @@
 import SelectOneFolder from './OneFoler';
 import { S } from '../style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OneFolderType } from '../../../../types/FolderType';
 import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
+import React from 'react';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
-  const [selectId, setSelectId] = useState<number | null>(null);
-  const { patchNewScrapMutate } = usePatchScrapMutation();
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
 
-  const onClickChangeFolder = () => {
+  const [selectId, setSelectId] = useState<number>(
+    folderModalState.defaultFolderId
+  );
+  const { patchNewScrapMutate } = usePatchScrapMutation({
+    scrapId: folderModalState.scrapId,
+    folderId: selectId
+  });
+
+  const onClickChangeFolder = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     if (selectId) {
-      console.log(selectId);
+      e.preventDefault();
       if (folderModalState.option === 'select') {
         const formData = new FormData();
         formData.append(
@@ -63,7 +72,9 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
           fontSize={14}
           width={70}
           height={30}
-          onClick={onClickChangeFolder}
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            onClickChangeFolder(e);
+          }}
         >
           완료
         </BasicButton>

@@ -9,7 +9,7 @@ import {
 
 import { AxiosError } from 'axios';
 
-//토큰 재발급 mutation ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
+//토큰 재발급 mutation
 export const usePostNewTokenMutation = () => {
   const { data: newTokenData, mutate: postNewTokenAction } = useMutation({
     mutationFn: () => postNewToken()
@@ -42,13 +42,14 @@ export const useUserInfoQuery = (nickname: string) => {
   const { data: userInfo } = useQuery({
     queryKey: ['userInfo', nickname],
     queryFn: () => getOtherUserInfo(nickname),
-    enabled: !!nickname
+    enabled: !!nickname,
+    staleTime: 0
   });
   return userInfo;
 };
 
 //프로필 설정
-export const usePostProfile = () => {
+export const usePostProfile = (nickname: string) => {
   const { mutate: postProfileMutate } = useMutation<
     boolean,
     AxiosError,
@@ -65,6 +66,5 @@ export const useRecommendUsersQuery = () => {
     queryKey: ['userList'],
     queryFn: () => getRecommendUsers()
   });
-
   return data;
 };

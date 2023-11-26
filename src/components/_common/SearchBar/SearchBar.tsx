@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { S } from './style';
 import { ReactComponent as SearchIcon } from 'asset/searchBar/searchIcon.svg';
+import { ReactComponent as SearchIconWhite } from 'asset/searchBar/searchIconWhite.svg';
 import {
   CATEGORY,
   CategoryKeyType,
@@ -10,10 +11,13 @@ import {
 import { ReactComponent as DownArrow } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as UpArrow } from 'asset/arrow/upArrow.svg';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { modeState } from '../../../atom/mode';
 
 const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
   const [isSelectOpen, setIsSelectOpen] = useState([false, false]);
+  const mode = useRecoilValue(modeState);
   const [searchOption, setSearchOption] = useState<
     [SearchRangeKeyType, CategoryKeyType]
   >(['all', 'all']);
@@ -136,7 +140,11 @@ const SearchBar = () => {
         placeholder={'검색어를 입력하세요.'}
       />
       <S.SearchIconWrapper>
-        <SearchIcon onClick={onSubmitSearch} />
+        {mode == 'light' ? (
+          <SearchIcon onClick={onSubmitSearch} />
+        ) : (
+          <SearchIconWhite onClick={onSubmitSearch} />
+        )}
       </S.SearchIconWrapper>
     </S.Wrapper>
   );

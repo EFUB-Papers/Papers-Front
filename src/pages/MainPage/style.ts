@@ -2,9 +2,13 @@ import { styled } from 'styled-components';
 import { flexCenter } from './../../style/common';
 
 const Wrapper = styled.div`
+  height: 100vh;
+  background-color: ${({ theme }) => theme.background};
+`;
+
+const Box = styled.div`
   ${flexCenter};
   flex-direction: column;
-  background-color: ${({ theme }) => theme.background};
 `;
 
 const Header = styled.div`

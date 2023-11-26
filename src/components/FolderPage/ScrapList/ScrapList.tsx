@@ -1,8 +1,6 @@
 import S from '../../../pages/FolderPage/style';
-import { PostListMock } from '../../../mock/postMock';
-import { OneScrapType } from '../../../types/ScrapType';
-import BasicContentCard from '../../_common/BasicContentCard/BasicContentCard';
 import { useFolderScrapsQuery } from 'hooks/apis/folder';
+import BasicContentCard from '../../_common/BasicContentCard/BasicContentCard';
 
 const ScrapList = ({
   isMine,
@@ -17,10 +15,19 @@ const ScrapList = ({
   const currentFolderId = folderId ? Number(folderId) : Number(firstFolderId);
   const folderScrapList = useFolderScrapsQuery(currentFolderId)!;
   console.log('folderScrapList', folderScrapList);
+
   return (
     <S.ContentWrapper>
-      {folderScrapList?.map((post: OneScrapType) => {
-        const { imgUrl, scrapTitle, scrapLink, scrapContent, scrapId } = post;
+      {folderScrapList?.map((post: any) => {
+        const {
+          imgUrl,
+          scrapTitle,
+          scrapLink,
+          scrapContent,
+          scrapId,
+          heartCount,
+          commentCount
+        } = post;
         return (
           <BasicContentCard
             folderId={currentFolderId}
@@ -31,6 +38,8 @@ const ScrapList = ({
             originTitle={scrapLink}
             originLink={scrapLink}
             isMine={isMine}
+            heartCount={heartCount}
+            commentCount={commentCount}
           />
         );
       })}
