@@ -89,8 +89,9 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
           {slicedMenu[currentFolderGroup]?.map((folder, index) => {
             return (
               <S.OneMenu
-                currentIdx={currentIdx}
-                index={index}
+                highlight={
+                  folder.folderId === Number(searchParams.get('folderId'))
+                }
                 onClick={() => {
                   onClickFolder(index, folder.folderId);
                 }}

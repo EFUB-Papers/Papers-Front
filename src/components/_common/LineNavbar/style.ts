@@ -34,19 +34,15 @@ const ListWrapper = styled.div`
 `;
 
 const OneMenu = styled.div<{
-  currentIdx: number;
-  index: number;
+  highlight: boolean;
   onClick: (index: number) => void;
 }>`
   width: 150px;
   height: 100%;
-  font-weight: ${({ currentIdx, index }) =>
-    currentIdx === index ? '600' : '400'};
+  font-weight: ${({ highlight }) => (highlight ? '600' : '400')};
   padding-top: 10px;
-  border-top: ${({ currentIdx, index, theme }) =>
-    currentIdx === index
-      ? `3px solid ${theme.COLOR.mint}`
-      : `2px solid ${theme.line}`};
+  border-top: ${({ highlight, theme }) =>
+    highlight ? `3px solid ${theme.COLOR.mint}` : `2px solid ${theme.line}`};
 `;
 
 const Name = styled.div<{
