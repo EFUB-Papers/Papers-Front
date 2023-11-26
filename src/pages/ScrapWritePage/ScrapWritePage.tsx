@@ -60,6 +60,13 @@ const ScrapWritePage = () => {
     folderId: folderModalState.folderId
   }); //스크랩 수정 mutate
 
+  //기존 폴더 id 유지
+  useEffect(() => {
+    setFolderModalState((prev) => {
+      return { ...prev, folderId: prevScrap?.folderId };
+    });
+  }, []);
+
   //스크랩 생성/수정 요청
   const onSubmit = () => {
     if (
