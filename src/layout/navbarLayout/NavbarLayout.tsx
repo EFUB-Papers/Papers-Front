@@ -18,14 +18,14 @@ const NavbarLayout = () => {
   console.log('userInfo', userInfo);
 
   useEffect(() => {
-    if (LocalStorage.getNickname() == params.nickname) {
+    if (LocalStorage.getNickname() === params.nickname) {
       setIsMine(true);
     }
-  }, []);
+  }, [params]);
 
   return (
     <S.Wrapper>
-      <Header userInfo={userInfo} />
+      <Header />
       <S.NavBarWrapper>
         <S.FlexWrapper>
           {/*프로필 소개글*/}
