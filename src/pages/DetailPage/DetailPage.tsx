@@ -14,6 +14,7 @@ import MoreBox from '../../components/_common/MoreBox/MoreBox';
 import Comment from '../../components/DetailPage/Comment/Comment';
 import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
+import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 
 export type PrevScrapType = {
   scrapId: number;
@@ -33,7 +34,6 @@ const DetailPage = () => {
 
   const data = useGetScrapDetailQuery(Number(params.scrapId))!;
   const { deleteScrapMutate } = useDeleteScrapMutation();
-  console.log('data', data);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);
@@ -57,7 +57,7 @@ const DetailPage = () => {
 
   //폴더 모달의 기본 폴더 값을 바꿔주기
   useEffect(() => {
-    setFolderModalState((prev) => ({ ...prev, folderId: data.folderId }));
+    setFolderModalState((prev) => ({ ...prev, folderId: data?.folderId }));
   }, []);
 
   const onDelete = () => {
@@ -85,7 +85,7 @@ const DetailPage = () => {
           <S.DateInfo>{timeHelper(data?.createdAt)}</S.DateInfo>
         </S.FlexColumnWrapper>
         <S.MoreDotsWrappr>
-          {/*<MoreDots onClick={openMoreBox} />*/}
+          <MoreDots onClick={openMoreBox} />
         </S.MoreDotsWrappr>
         <MoreBox
           isMoreBoxOpen={isMoreBoxOpen}
@@ -104,7 +104,7 @@ const DetailPage = () => {
       </S.UserInfoWrapper>
       <S.PostWrapper>
         <LinkPreview size={'big'} url={data?.link} />
-        {data.imgUrl ? (
+        {data?.imgUrl ? (
           <S.ImgWrapper src={data?.imgUrl} />
         ) : (
           <S.ImgWrapper src={'asset/_common/Profile.jpg'} />
@@ -117,7 +117,7 @@ const DetailPage = () => {
         heartCount={data?.likeCount}
         commentCount={data?.commentCount}
       />
-      <Comment scrapId={data.scrapId} />
+      <Comment scrapId={data?.scrapId} />
     </S.Wrapper>
   );
 };

@@ -3,9 +3,8 @@ import React from 'react';
 import BasicButton from '../../_common/BasicButton/BasicButton';
 import { useSetRecoilState } from 'recoil';
 import { userModalAtom } from '../../../atom/modal';
-import { LocalStorage } from '../../../utils/localStorage';
-import { useUserInfoQuery } from '../../../hooks/apis/member';
 import CircleIcon from '../../_common/CircleBox/CircleBox';
+import FollowButton from 'components/_common/FollowButton/FollowButton';
 
 export type ProfileBoxProps = {
   isMine: boolean;
@@ -32,7 +31,7 @@ const ProfileBox = ({
           <S.UserInfo>
             <S.UserName>{nickname}</S.UserName>
             <S.UserDetail>{introduce}</S.UserDetail>
-            {isMine && (
+            {isMine ? (
               <BasicButton
                 color={'blue'}
                 fontSize={14}
@@ -43,6 +42,8 @@ const ProfileBox = ({
               >
                 프로필 수정
               </BasicButton>
+            ) : (
+              <FollowButton nickname={nickname} />
             )}
           </S.UserInfo>
         </S.FlexWrapperColumn>

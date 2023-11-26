@@ -22,41 +22,50 @@ const UserModal = ({
   userName: string;
   userDetail: string;
 }) => {
-  const setUserModalOpen = useSetRecoilState(userModalAtom);
-  const { values, onChange } = useInputs({
-    detail: userDetail
-  });
-  //두번째는 에러 메세지인지 여부
-  const [message, setMessage] = useState<[string, boolean]>(['', false]);
-
   const [name, setName] = useState(userName);
-
-  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const isValidName = /^[a-zA-Z]+$/.test(event.target.value);
-    if (isValidName) {
-      setName(event.target.value);
-    } else {
-      setMessage(['띄어쓰기 없이 영어로 입력해주세요.', true]);
-    }
-  };
-
-  const { detail } = values;
-
   const [profileImg, setProfileImg] = useState<string | null>();
-  //이름 중복 검사
+  const [message, setMessage] = useState('');
+  const [isValidName, setIsValidName] = useState(true);
+  const [isUniqueName, setIsUniqueName] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const setUserModalOpen = useSetRecoilState(userModalAtom);
+  const {
+    values: { detail },
+    onChange
+  } = useInputs({ detail: userDetail });
+
+  //닉네임 중복 검사
   const { postSameNameAction, data: hasSameName } = useSameNameMutation();
+
   //프로필 정보 변경
   const { postProfileMutate } = usePostProfile(userName);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  //닉네임 수정시
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    setIsUniqueName(false);
+    postSameNameAction(event.target.value);
+    const isValid = /^[a-zA-Z0-9@.]+$/.test(event.target.value);
+    setIsValidName(isValid);
+    isValid
+      ? setMessage('')
+      : setMessage('띄어쓰기 없이 영어와 숫자만 입력해주세요.');
+  };
+
   //닉네임 중복 검사
   const onSubmitNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    postSameNameAction(name);
-    if (hasSameName) {
-      setMessage(['중복된 이름이 있습니다.', true]);
-    } else {
-      setMessage(['사용 가능한 닉네임입니다.', false]);
+    if (isValidName) {
+      postSameNameAction(name);
+
+      if (hasSameName !== 'undefined' && hasSameName) {
+        setIsUniqueName(false);
+        setMessage('중복된 이름이 있습니다.');
+      } else {
+        setIsUniqueName(true);
+        setMessage('사용 가능한 닉네임입니다.');
+      }
     }
   };
 
@@ -82,6 +91,7 @@ const UserModal = ({
     };
     const formData = new FormData();
 
+    //프로필 이미지 담기
     if (
       inputRef.current &&
       inputRef.current.files &&
@@ -91,6 +101,7 @@ const UserModal = ({
     } else {
       formData.append('profileImg', new Blob([]));
     }
+
     //유저 정보 데이터 담기
     formData.append(
       'dto',
@@ -99,7 +110,17 @@ const UserModal = ({
       })
     );
 
-    postProfileMutate(formData);
+    //에러 없으면 프로필 수정 요청 보내기
+    if (isValidName) {
+      if (isUniqueName) {
+        postProfileMutate(formData);
+        console.log('프로필 변경 제출');
+      } else {
+        !message && setMessage('중복 검사를 해주세요.');
+      }
+    } else {
+      setMessage('띄어쓰기 없이 영어와 숫자만 입력해주세요.');
+    }
   };
 
   return (
@@ -148,17 +169,17 @@ const UserModal = ({
                 width={'200px'}
                 height={35}
                 textSize={14}
-                onChange={(e) => {
-                  onChangeName(e);
-                }}
+                onChange={onChangeName}
                 borderRadius={10}
-                maxLength={15}
+                maxLength={20}
                 name="name"
                 value={name}
                 readonly={false}
                 placeholder={'닉네임을 입력해주세요.'}
               />
-              <S.Message isError={message[1]}>{message[0]}</S.Message>
+              <S.Message isError={!isValidName || !isUniqueName}>
+                {message}
+              </S.Message>
               <BasicButton
                 onClick={onSubmitNickname}
                 color={'positive'}
