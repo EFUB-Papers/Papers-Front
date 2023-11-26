@@ -4,7 +4,7 @@ import { ReactComponent as FilledHeartDark } from 'asset/detailPage/FilledHeartD
 import { ReactComponent as EmptyHeartDark } from 'asset/detailPage/EmptyHeartDark.svg';
 import { ReactComponent as CommentIconDark } from 'asset/detailPage/CommentIconDark.svg';
 import { ReactComponent as CommentIconLight } from 'asset/detailPage/CommentIconLight.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
 import { S } from './style';
@@ -32,18 +32,22 @@ const HeartAndCmtInfo = ({
   const { deleteScrapLikeAction } = useDeleteScrapLikeMutation();
 
   const onClick = () => {
-    isClickHeart
+    (isClickHeart !== undefined && isClickHeart) ||
+    (isClickHeart === undefined && liked)
       ? deleteScrapLikeAction(scrapId)
       : postScrapLikeAction(scrapId);
 
     setIsClickHeart((prev) => !prev);
   };
 
+  console.log(isClickHeart, liked);
+
   return (
     <S.Wrapper>
       <S.InfoWrapper>
         <S.HeartWrapper onClick={onClick}>
-          {isClickHeart ? (
+          {(isClickHeart !== undefined && isClickHeart) ||
+          (isClickHeart === undefined && liked) ? (
             mode == 'light' ? (
               <FilledHeartLight />
             ) : (
