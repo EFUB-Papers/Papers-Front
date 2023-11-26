@@ -19,8 +19,8 @@ const UserCard = ({
   followingDescription,
   followingProfileImg
 }: CardPropsType) => {
-  const { postFollowMutate } = usePostFollowMutation();
-  const { deleteFollowMutate } = useDeleteFollowMutation();
+  const { postFollowMutate } = usePostFollowMutation(followingNickname);
+  const { deleteFollowMutate } = useDeleteFollowMutation(followingNickname);
 
   const navigate = useNavigate();
   const currentFollow = useGetCurrentFollowQuery(followingNickname);

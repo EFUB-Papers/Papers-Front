@@ -29,7 +29,23 @@ const AuthPage = () => {
       console.log(error);
     }
   };
-  return <S.Wrapper>로그인 중입니다.</S.Wrapper>;
+  return (
+    <S.Wrapper>
+      <iframe
+        src="https://giphy.com/embed/swhRkVYLJDrCE"
+        width="480"
+        height="270"
+        frameBorder="0"
+        className="giphy-embed"
+        allowFullScreen
+      ></iframe>
+      <p>
+        <a href="https://giphy.com/gifs/google-icon-loading-swhRkVYLJDrCE">
+          via GIPHY
+        </a>
+      </p>
+    </S.Wrapper>
+  );
 };
 
 export default AuthPage;

@@ -12,39 +12,53 @@ import {
   SearchScrapType
 } from 'apis/scraps';
 import { AxiosError } from 'axios';
-import { OneScrapType } from '../../types/ScrapType';
 import { AxiosResponseType } from '../../constants/Api';
 import { CategoryKeyType } from 'constants/Category';
 
 //스크랩 생성
-export const useNewScrapMutation = () => {
-  // const queryClient = useQueryClient();
+export const useNewScrapMutation = (folderId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: postNewScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     FormData
   >({
-    mutationFn: (scrapInfo: FormData) => postNewScrap(scrapInfo)
-    // onSuccess: queryClient.invalidateQueries('scrap')
+    mutationFn: (scrapInfo: FormData) => postNewScrap(scrapInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folderScraps', folderId] });
+    }
   });
   return { postNewScrapMutate };
 };
 
 //스크랩 수정
-export const usePatchScrapMutation = () => {
+export const usePatchScrapMutation = ({
+  scrapId,
+  folderId
+}: {
+  scrapId: number;
+  folderId: number;
+}) => {
+  const queryClient = useQueryClient();
   const { mutate: patchNewScrapMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     PatchScrapType
   >({
     mutationFn: (pathScrapInfo: PatchScrapType) =>
-      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo)
+      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['scrapDetail', scrapId] });
+      queryClient.invalidateQueries({
+        queryKey: ['folderScraps', folderId]
+      });
+    }
   });
   return { patchNewScrapMutate };
 };
 
 //스크랩 삭제
-export const useDeleteScrapMutation = (folderId?: number) => {
+export const useDeleteScrapMutation = (folderId: number) => {
   const queryClient = useQueryClient();
   const { mutate: deleteScrapMutate } = useMutation<
     AxiosResponseType,
@@ -79,11 +93,10 @@ export const useRecommendScrapQuery = () => {
 
 //스크랩 검색
 export const useSearchScrapQuery = (searchInfo: SearchScrapType) => {
-  const { data } = useQuery<OneScrapType[], AxiosError, SearchScrapType>({
-    queryKey: ['searchScrap'],
+  const { data } = useQuery({
+    queryKey: ['searchScrap', searchInfo],
     queryFn: () => getSearchScrap(searchInfo)
   });
-  console.log('aa', data);
   return data;
 };
 

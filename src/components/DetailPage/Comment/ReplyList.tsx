@@ -12,7 +12,7 @@ const ReplyList = ({ commentId }: { commentId: number }) => {
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
   const data = useGetReplyListQuery(commentId);
-  const { deleteReplyAction } = useDeleteReplyMutation();
+  const { deleteReplyAction } = useDeleteReplyMutation(commentId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);

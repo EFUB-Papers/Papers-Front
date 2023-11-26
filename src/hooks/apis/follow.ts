@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import {
   deleteFollowUser,
   getCurrentFollowing,
@@ -10,25 +10,35 @@ import { AxiosResponseType } from '../../constants/Api';
 import { AxiosError } from 'axios';
 
 //팔로우 걸기
-export const usePostFollowMutation = () => {
+export const usePostFollowMutation = (nickname: string) => {
+  const queryClient = new QueryClient();
   const { mutate: postFollowMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     string
   >({
-    mutationFn: (nickname: string) => postFollowUser(nickname)
+    mutationFn: (nickname: string) => postFollowUser(nickname),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follower'] });
+      queryClient.invalidateQueries({ queryKey: ['currentFollow', nickname] });
+    }
   });
   return { postFollowMutate };
 };
 
 //팔로우 취소
-export const useDeleteFollowMutation = () => {
+export const useDeleteFollowMutation = (nickname: string) => {
+  const queryClient = new QueryClient();
   const { mutate: deleteFollowMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
     string
   >({
-    mutationFn: (nickname: string) => deleteFollowUser(nickname)
+    mutationFn: (nickname: string) => deleteFollowUser(nickname),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follower'] });
+      queryClient.invalidateQueries({ queryKey: ['currentFollow', nickname] });
+    }
   });
   return { deleteFollowMutate };
 };

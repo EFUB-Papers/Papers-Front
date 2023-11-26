@@ -58,7 +58,7 @@ axiosInstance.interceptors.response.use(
 
       const { data, status } = error.response;
 
-      if (status === 401 && !retry) {
+      if (!retry) {
         retry = true;
         const newAccessToken = await postNewToken();
         console.log('new', newAccessToken);

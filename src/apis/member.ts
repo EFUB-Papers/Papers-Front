@@ -62,25 +62,17 @@ export type ProfileType = {
 
 //프로필 설정
 export const postMyProfile = async (profileInfo: FormData) => {
-  try {
-    const { data } = await axiosInstance.post('/members/profile', profileInfo, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-    console.log('data', data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstance.post('/members/profile', profileInfo, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+  console.log('data', data);
+  return data;
 };
 
 //랜덤 회원 리스트 조회
 export const getRecommendUsers = async () => {
-  try {
-    const { data } = await axiosInstanceWithoutToken('/members/random-list');
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstanceWithoutToken('/members/random-list');
+  return data;
 };

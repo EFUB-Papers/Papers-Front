@@ -9,16 +9,16 @@ import { folderModalAtom } from '../../../../atom/modal';
 import React from 'react';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
-  const [selectId, setSelectId] = useState<number | null>(null);
-  const { patchNewScrapMutate } = usePatchScrapMutation();
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
 
-  //기본 설정한 폴더로 선택해주기
-  useEffect(() => {
-    setSelectId(folderModalState.defaultFolderId);
-    console.log('selectId', selectId);
-  }, []);
+  const [selectId, setSelectId] = useState<number>(
+    folderModalState.defaultFolderId
+  );
+  const { patchNewScrapMutate } = usePatchScrapMutation({
+    scrapId: folderModalState.scrapId,
+    folderId: selectId
+  });
 
   const onClickChangeFolder = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

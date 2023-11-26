@@ -9,7 +9,7 @@ import {
 
 import { AxiosError } from 'axios';
 
-//토큰 재발급 mutation ✅백엔드 수정 필요 (POST가 아니라 GET 메소드여야 할듯.)
+//토큰 재발급 mutation
 export const usePostNewTokenMutation = () => {
   const { data: newTokenData, mutate: postNewTokenAction } = useMutation({
     mutationFn: () => postNewToken()
@@ -57,7 +57,7 @@ export const usePostProfile = (nickname: string) => {
   >({
     mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['folder', nickname] });
+      queryClient.invalidateQueries({ queryKey: ['userInfo', nickname] });
     }
   });
 

@@ -8,11 +8,17 @@ import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import MoreBox from 'components/_common/MoreBox/MoreBox';
 import { useDeleteCommentMutation } from 'hooks/apis/comment';
 
-const OneComment = ({ comment }: { comment: OneCommentType }) => {
+const OneComment = ({
+  comment,
+  scrapId
+}: {
+  comment: OneCommentType;
+  scrapId: number;
+}) => {
   const [isSubCommentOpen, setIsSubCommentOpen] = useState(false);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
-  const { deleteCommentAction } = useDeleteCommentMutation();
+  const { deleteCommentAction } = useDeleteCommentMutation(scrapId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);

@@ -31,7 +31,6 @@ export type PatchScrapType = {
 
 //스크랩 수정
 export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
-  // const { scrapId } = scrapInfo;
   const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, scrapInfo, {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
@@ -40,13 +39,8 @@ export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
 
 //스크랩 삭제
 export const deleteScrap = async (scrapId: number) => {
-  console.log('scar', scrapId);
-  try {
-    const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstance.delete(`/scraps/${scrapId}`);
+  return data;
 };
 
 //스크랩 디테일 조회
@@ -72,41 +66,26 @@ export type SearchScrapType = {
 };
 
 //스크랩 검색
-export const getSearchScrap = async (
-  searchInfo: SearchScrapType
-): Promise<any> => {
+export const getSearchScrap = async (searchInfo: SearchScrapType) => {
   const { searchby, category, keyword } = searchInfo;
-  try {
-    const data = await axiosInstance.post(
-      `/scraps/search?searchby=${searchby}&category=${category}`,
-      {
-        query: keyword
-      }
-    );
-    console.log('data', data);
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+  const data = await axiosInstance.post(
+    `/scraps/search?searchby=${searchby}&category=${category}`,
+    {
+      query: keyword
+    }
+  );
+  return data;
 };
 
 export const getLikeScraps = async () => {
-  try {
-    const data = await axiosInstance.get(`/scraps/liked`);
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstance.get(`/scraps/liked`);
+  return data;
 };
 
 //카테고리별 스크랩 조회
 export const getCategoryScrapList = async (category: CategoryKeyType) => {
-  try {
-    const { data } = await axiosInstanceWithoutToken.get(
-      `/scraps/category?category=${category}`
-    );
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data } = await axiosInstanceWithoutToken.get(
+    `/scraps/category?category=${category}`
+  );
+  return data;
 };

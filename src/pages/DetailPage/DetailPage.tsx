@@ -38,8 +38,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   const data = useGetScrapDetailQuery(Number(params.scrapId));
-  console.log('aaa', data);
-  const { deleteScrapMutate } = useDeleteScrapMutation();
+  const { deleteScrapMutate } = useDeleteScrapMutation(data.folderId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);
@@ -50,7 +49,6 @@ const DetailPage = () => {
       scrapTitle: data?.scrapTitle,
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
-      //ategory: data?.category,
       categoryName: data?.categoryName,
       imgUrl: data?.imgUrl,
       folderId: data?.folerId,
@@ -119,7 +117,7 @@ const DetailPage = () => {
         heartCount={data?.heartCount}
         commentCount={data?.commentCount}
       />
-      <Comment />
+      <Comment scrapId={data.scrapId} />
     </S.Wrapper>
   );
 };
