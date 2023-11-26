@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { flexCenter } from './../../style/common';
 
 const Wrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.background};
 `;
 

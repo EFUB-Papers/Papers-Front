@@ -5,19 +5,26 @@ import {
   useGetCurrentFollowQuery,
   usePostFollowMutation
 } from 'hooks/apis/follow';
-
+import { useState } from 'react';
 export type FollowButtonProps = {
   nickname: string;
 };
 
 const FollowButton = ({ nickname }: FollowButtonProps) => {
   const isFollow = useGetCurrentFollowQuery(nickname);
-  const { postFollowMutate } = usePostFollowMutation(nickname);
-  const { deleteFollowMutate } = useDeleteFollowMutation(nickname);
+  const [isCurrentFollow, setIsCurrentFollow] = useState(isFollow);
+  const { postFollowMutate } = usePostFollowMutation({
+    nickname,
+    setIsFollow: setIsCurrentFollow
+  });
+  const { deleteFollowMutate } = useDeleteFollowMutation({
+    nickname,
+    setIsFollow: setIsCurrentFollow
+  });
 
   return (
     <div>
-      {isFollow ? (
+      {isCurrentFollow ? (
         <BasicButton
           color="grey"
           fontSize={16}

@@ -22,6 +22,7 @@ import { NewTagType } from 'types/TagType';
 import { LocalStorage } from 'utils/localStorage';
 import { useLocation } from 'react-router-dom';
 import { PrevScrapType } from 'pages/DetailPage/DetailPage';
+import { useGetFolderListQuery } from '../../hooks/apis/folder';
 
 const ScrapWritePage = () => {
   // 게시글 수정 시 기존 스크랩 내용
@@ -59,6 +60,15 @@ const ScrapWritePage = () => {
     scrapId: prevScrap?.scrapId,
     folderId: folderModalState.folderId
   }); //스크랩 수정 mutate
+  const folderList = useGetFolderListQuery(LocalStorage.getNickname()!);
+  const [currentFolderName, setCurrentFolderName] = useState('');
+
+  useEffect(() => {
+    const currentFolder: any = folderList?.filter(
+      (folder) => folder.folderId === folderModalState.folderId
+    );
+    setCurrentFolderName(currentFolder[0].folderName);
+  }, [folderModalState]);
 
   //스크랩 생성/수정 요청
   const onSubmit = () => {
@@ -84,8 +94,6 @@ const ScrapWritePage = () => {
           return { tagName: newTag.tagName };
         })
       };
-      console.log('스크랩 작성/수정 body의 dto', dto);
-
       // 폼데이터 가공
       const formData = new FormData();
 
@@ -196,6 +204,7 @@ const ScrapWritePage = () => {
               )}
             </S.CategoryDropdown>
             {/*폴더 선택*/}
+            <S.FolderName>{currentFolderName}</S.FolderName>
             <S.Button
               onClick={() => {
                 setFolderModalState((prev) => ({

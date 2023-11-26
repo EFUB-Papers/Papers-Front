@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { S } from './style';
 import { ReactComponent as GoogleLoginButton } from 'asset/loginPage/googleLoginButton.svg';
 import { ReactComponent as LogoImg } from 'asset/_common/logoImg.svg';
@@ -25,6 +25,11 @@ const LoginPage = () => {
   const onGoogleLogin = () => {
     window.location.href = `${process.env.REACT_APP_GOOGLE_LOGIN}`;
   };
+
+  useEffect(() => {
+    localStorage.removeItem('papersToken');
+    localStorage.removeItem('nickname');
+  }, []);
 
   return (
     <S.Wrapper>

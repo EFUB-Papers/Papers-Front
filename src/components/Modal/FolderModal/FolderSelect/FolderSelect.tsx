@@ -1,19 +1,20 @@
 import SelectOneFolder from './OneFoler';
 import { S } from '../style';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { OneFolderType } from '../../../../types/FolderType';
 import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
 import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
-import React from 'react';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
 
   const [selectId, setSelectId] = useState<number>(
-    folderModalState.defaultFolderId
+    folderModalState.folderId
+      ? folderModalState.folderId
+      : folderModalState.defaultFolderId
   );
   const { patchNewScrapMutate } = usePatchScrapMutation({
     scrapId: folderModalState.scrapId,
@@ -27,6 +28,7 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
       e.preventDefault();
       if (folderModalState.option === 'select') {
         const formData = new FormData();
+        formData.append('thumbnail', new Blob([]));
         formData.append(
           'dto',
           new Blob([JSON.stringify({ folderId: selectId })], {

@@ -16,11 +16,13 @@ import { userModalAtom } from '../../../atom/modal';
 const UserModal = ({
   imgUrl,
   userName,
-  userDetail
+  userDetail,
+  userEmail
 }: {
   imgUrl: string | null;
   userName: string;
   userDetail: string;
+  userEmail: string;
 }) => {
   const [name, setName] = useState(userName);
   const [profileImg, setProfileImg] = useState<string | null>();
@@ -114,7 +116,6 @@ const UserModal = ({
     if (isValidName) {
       if (isUniqueName) {
         postProfileMutate(formData);
-        console.log('프로필 변경 제출');
       } else {
         !message && setMessage('중복 검사를 해주세요.');
       }

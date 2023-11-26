@@ -40,14 +40,12 @@ const DetailPage = () => {
 
   const onEdit = () => {
     const prevScrap: PrevScrapType = {
-      // folderId: data?.folderId,
       scrapId: data?.scrapId,
       scrapTitle: data?.scrapTitle,
       scrapLink: data?.link,
       scrapContent: data?.scrapContent,
       categoryName: data?.categoryName,
       imgUrl: data?.imgUrl || null,
-      // folderId: data?.folderId,
       tags: data?.tags.map((tag: { tagName: string }): NewTagType => {
         return { tagId: v4(), tagName: tag.tagName };
       })

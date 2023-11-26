@@ -10,7 +10,13 @@ import { AxiosResponseType } from '../../constants/Api';
 import { AxiosError } from 'axios';
 
 //팔로우 걸기
-export const usePostFollowMutation = (nickname: string) => {
+export const usePostFollowMutation = ({
+  nickname,
+  setIsFollow
+}: {
+  nickname: string;
+  setIsFollow: any;
+}) => {
   const queryClient = new QueryClient();
   const { mutate: postFollowMutate } = useMutation<
     AxiosResponseType,
@@ -19,15 +25,23 @@ export const usePostFollowMutation = (nickname: string) => {
   >({
     mutationFn: (nickname: string) => postFollowUser(nickname),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['follower'] });
       queryClient.invalidateQueries({ queryKey: ['currentFollow', nickname] });
+    },
+    onMutate: () => {
+      setIsFollow(true);
     }
   });
   return { postFollowMutate };
 };
 
 //팔로우 취소
-export const useDeleteFollowMutation = (nickname: string) => {
+export const useDeleteFollowMutation = ({
+  nickname,
+  setIsFollow
+}: {
+  nickname: string;
+  setIsFollow: any;
+}) => {
   const queryClient = new QueryClient();
   const { mutate: deleteFollowMutate } = useMutation<
     AxiosResponseType,
@@ -36,8 +50,10 @@ export const useDeleteFollowMutation = (nickname: string) => {
   >({
     mutationFn: (nickname: string) => deleteFollowUser(nickname),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['follower'] });
       queryClient.invalidateQueries({ queryKey: ['currentFollow', nickname] });
+    },
+    onMutate: () => {
+      setIsFollow(false);
     }
   });
   return { deleteFollowMutate };
