@@ -6,6 +6,8 @@ import BasicButton from '../../_common/BasicButton/BasicButton';
 import { S } from './style';
 import { usePostNewCommentMutation } from 'hooks/apis/comment';
 import { useParams } from 'react-router';
+import { useUserInfoQuery } from 'hooks/apis/member';
+import { LocalStorage } from 'utils/localStorage';
 
 const NewComment = ({ scrapId }: { scrapId: number }) => {
   const { values, setValues, onChange } = useInputs({
@@ -13,6 +15,7 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
   });
 
   const params = useParams();
+  const userInfo = useUserInfoQuery(LocalStorage.getNickname()!);
   const { postCommentAction } = usePostNewCommentMutation(scrapId);
 
   const onPostComment = () => {
@@ -27,8 +30,8 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
     <S.NewCommentWrapper>
       <S.MyInfoBox>
         <S.FlexBox>
-          <CircleIcon imgUrl={''} size={'small'} />
-          <S.NameBox>나는 고양이다</S.NameBox>
+          <CircleIcon imgUrl={userInfo?.profileImgUrl} size={'small'} />
+          <S.NameBox>{userInfo?.nickname}</S.NameBox>
         </S.FlexBox>
         <BasicButton
           onClick={onPostComment}
