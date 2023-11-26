@@ -10,7 +10,7 @@ type ConfirmProps = {
   onConfirm: () => void;
 };
 
-const Confirm = (props: ConfirmProps) => {
+const ConfirmModal = (props: ConfirmProps) => {
   const { isModalOpen, closeModal, text, onCancel, onConfirm } = props;
   return (
     <S.ConfirmContainer>
@@ -61,4 +61,4 @@ const Confirm = (props: ConfirmProps) => {
   );
 };
 
-export default Confirm;
+export default ConfirmModal;

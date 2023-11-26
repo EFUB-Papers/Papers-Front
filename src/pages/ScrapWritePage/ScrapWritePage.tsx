@@ -56,7 +56,7 @@ const ScrapWritePage = () => {
 
   const { postNewScrapMutate } = useNewScrapMutation(folderModalState.folderId); //스크랩 작성 mutate
   const { patchNewScrapMutate } = usePatchScrapMutation({
-    scrapId: prevScrap.scrapId,
+    scrapId: prevScrap?.scrapId,
     folderId: folderModalState.folderId
   }); //스크랩 수정 mutate
 

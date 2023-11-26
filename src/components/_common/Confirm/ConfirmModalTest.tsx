@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Confirm from './Confirm';
+import ConfirmModal from './ConfirmModal';
 
 // Confirm 컴포넌트 사용 예시입니다.
 
-const ConfirmTest = () => {
+const ConfirmModalTest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -12,7 +12,7 @@ const ConfirmTest = () => {
   return (
     <div>
       <button onClick={openModal}>삭제하기</button>
-      <Confirm
+      <ConfirmModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         text="정말로 삭제하시겠습니까?"
@@ -23,4 +23,4 @@ const ConfirmTest = () => {
   );
 };
 
-export default ConfirmTest;
+export default ConfirmModalTest;
