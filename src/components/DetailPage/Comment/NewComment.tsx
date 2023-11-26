@@ -19,7 +19,7 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
 
   const params = useParams();
   const { postCommentAction } = usePostNewCommentMutation(scrapId);
-  const { refetch } = useGetCommentListQuery(scrapId);
+  const { data } = useGetCommentListQuery(scrapId);
 
   const onPostComment = () => {
     postCommentAction({
@@ -27,7 +27,6 @@ const NewComment = ({ scrapId }: { scrapId: number }) => {
       commentContent: values.comment
     });
     setValues({ comment: '' });
-    refetch();
   };
 
   const userInfo = useUserInfoQuery(LocalStorage.getNickname()!);

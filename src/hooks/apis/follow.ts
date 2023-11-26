@@ -8,7 +8,7 @@ import {
 } from 'apis/follow';
 import { AxiosResponseType } from '../../constants/Api';
 import { AxiosError } from 'axios';
-
+import { useQueryClient } from '@tanstack/react-query';
 //팔로우 걸기
 export const usePostFollowMutation = ({
   nickname,
@@ -17,7 +17,7 @@ export const usePostFollowMutation = ({
   nickname: string;
   setIsFollow: any;
 }) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: postFollowMutate } = useMutation<
     AxiosResponseType,
     AxiosError,
@@ -42,7 +42,7 @@ export const useDeleteFollowMutation = ({
   nickname: string;
   setIsFollow: any;
 }) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: deleteFollowMutate } = useMutation<
     AxiosResponseType,
     AxiosError,

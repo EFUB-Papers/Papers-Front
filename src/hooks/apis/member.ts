@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import {
   getOtherUserInfo,
   getRecommendUsers,
@@ -10,7 +10,6 @@ import { userModalAtom } from 'atom/modal';
 
 import { AxiosError } from 'axios';
 import { useSetRecoilState } from 'recoil';
-import { LocalStorage } from 'utils/localStorage';
 
 //토큰 재발급 mutation
 export const usePostNewTokenMutation = () => {
@@ -53,7 +52,7 @@ export const useUserInfoQuery = (nickname: string) => {
 
 //프로필 설정
 export const usePostProfile = (nickname: string) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const setUserModalState = useSetRecoilState(userModalAtom);
   const { mutate: postProfileMutate } = useMutation<
     boolean,

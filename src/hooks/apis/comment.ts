@@ -1,4 +1,9 @@
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient
+} from '@tanstack/react-query';
 import {
   deleteComment,
   deleteReply,
@@ -11,10 +16,12 @@ import {
 } from 'apis/comment';
 import { AxiosError, AxiosResponse } from 'axios';
 import { AxiosResponseType } from 'constants/Api';
+import { OneCommentType } from 'types/CommentType';
+import { LocalStorage } from 'utils/localStorage';
 
 //댓글 작성 mutation
 export const usePostNewCommentMutation = (scrapId: number) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: postCommentAction } = useMutation<
     AxiosResponseType,
     AxiosError,
@@ -23,6 +30,27 @@ export const usePostNewCommentMutation = (scrapId: number) => {
     mutationFn: (commentInfo: NewCommentType) => postNewComment(commentInfo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
+    },
+    onMutate: async (commentInfo: NewCommentType) => {
+      // 낙관적 업데이트: 좋아요 증가
+      queryClient.setQueryData(['commentList', scrapId], (prevData: any) => [
+        ...prevData,
+        {
+          commentContent: commentInfo.commentContent,
+          commentId: 10000,
+          commentIsMine: true,
+          createdAt: Date.now(),
+          scrapId,
+          writerNickname: LocalStorage.getNickname(),
+          writeProfileImgUrl: ''
+        }
+      ]);
+    },
+    onError: () => {
+      // 서버 요청이 실패한 경우 롤백
+      queryClient.setQueryData(['commentList', scrapId], (prevData: any) =>
+        prevData.slice(0, -1)
+      );
     }
   });
   return { postCommentAction };
@@ -56,7 +84,7 @@ export const useGetCommentListQuery = (scrapId: number) => {
 
 //대댓글 작성 mutation
 export const usePostNewReplyMutation = (commentId: number) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: postNewReplyAction } = useMutation({
     mutationFn: (replyInfo: NewReplyType) => postNewReply(replyInfo),
     onSuccess: () => {
@@ -68,7 +96,7 @@ export const usePostNewReplyMutation = (commentId: number) => {
 
 //대댓글 삭제 mutation
 export const useDeleteReplyMutation = (commentId: number) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: deleteReplyAction } = useMutation({
     mutationFn: (replyId: number) => deleteReply(replyId),
     onSuccess: () => {
