@@ -29,6 +29,7 @@ const CategoryPage = () => {
                   scrapContent,
                   scrapLink,
                   imgUrl,
+                  heartCount,
                   writerNickname
                 } = scrap;
                 return (
@@ -41,7 +42,7 @@ const CategoryPage = () => {
                       imgUrl={imgUrl}
                       title={scrapTitle}
                       content={scrapContent}
-                      heartCount={10}
+                      heartCount={heartCount}
                       author={writerNickname}
                     />
                   </>
