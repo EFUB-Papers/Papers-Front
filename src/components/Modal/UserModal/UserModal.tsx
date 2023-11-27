@@ -41,14 +41,24 @@ const UserModal = ({
   const { postSameNameAction, data: hasSameName } = useSameNameMutation();
 
   //프로필 정보 변경
-  const { postProfileMutate } = usePostProfile(userName);
+  const { postProfileMutate } = usePostProfile(name);
+
+  //이미지 url을 file로 변경하는 함수
+  const convertURLtoFile = async (url: string) => {
+    const response = await fetch(url);
+    const data = await response.blob();
+    const ext = url.split('.').pop(); // url 구조에 맞게 수정할 것
+    const filename = url.split('/').pop(); // url 구조에 맞게 수정할 것
+    const metadata = { type: `image/${ext}` };
+    return new File([data], filename!, metadata);
+  };
 
   //닉네임 수정시
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
     setIsUniqueName(false);
     postSameNameAction(event.target.value);
-    const isValid = /^[a-zA-Z0-9@.]+$/.test(event.target.value);
+    const isValid = /^[a-zA-Z0-9@._]+$/.test(event.target.value);
     setIsValidName(isValid);
     isValid
       ? setMessage('')
@@ -100,8 +110,8 @@ const UserModal = ({
       inputRef.current.files[0]
     ) {
       formData.append('profileImg', inputRef.current.files[0]);
-    } else {
-      formData.append('profileImg', new Blob([]));
+    } else if (imgUrl) {
+      formData.append('profileImg', await convertURLtoFile(imgUrl));
     }
 
     //유저 정보 데이터 담기
@@ -143,25 +153,17 @@ const UserModal = ({
               onChange={onFileChanges}
               ref={inputRef}
             />
-            {profileImg ? (
-              <CircleIcon
-                onClick={() => inputRef.current?.click()}
-                imgUrl={profileImg}
-                size={'big'}
-              />
-            ) : imgUrl ? (
-              <CircleIcon
-                onClick={() => inputRef.current?.click()}
-                imgUrl={imgUrl}
-                size={'big'}
-              />
-            ) : (
-              <CircleIcon
-                onClick={() => inputRef.current?.click()}
-                imgUrl={'/assets/_common/Profile.jpg'}
-                size={'big'}
-              />
-            )}
+            <CircleIcon
+              onClick={() => inputRef.current?.click()}
+              imgUrl={
+                profileImg
+                  ? profileImg
+                  : imgUrl
+                  ? imgUrl
+                  : '/assets/_common/Profile.jpg'
+              }
+              size={'big'}
+            />
           </S.UserProfile>
           <S.UserInfo>
             <S.UserNameBox>

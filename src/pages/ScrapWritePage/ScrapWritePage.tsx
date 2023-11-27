@@ -92,7 +92,6 @@ const ScrapWritePage = () => {
     ) {
       // dto 가공
       const dto: OneNewScrapType = {
-        writerNickname: LocalStorage.getNickname()!,
         scrapTitle: title,
         scrapLink: link,
         scrapContent: content,
@@ -124,10 +123,7 @@ const ScrapWritePage = () => {
       // 스크랩 작성/수정 api 요청
       pathname === '/scrap-write'
         ? postNewScrapMutate(formData)
-        : patchNewScrapMutate({
-            scrapId: prevScrap?.scrapId,
-            scrapInfo: formData
-          });
+        : patchNewScrapMutate({ scrapId: prevScrap?.scrapId, ...dto });
       navigate(
         `/folder/${LocalStorage.getNickname()}?folderId=${
           folderModalState.folderId

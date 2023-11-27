@@ -58,8 +58,8 @@ const Header = ({ isWriteButton = true }: HeaderProps) => {
       ) : (
         <BasicButton
           color={'grey'}
-          fontSize={12}
-          width={60}
+          fontSize={14}
+          width={68}
           height={35}
           onClick={() => {
             navigate('/');

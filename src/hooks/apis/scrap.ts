@@ -46,8 +46,7 @@ export const usePatchScrapMutation = ({
     AxiosError,
     PatchScrapType
   >({
-    mutationFn: (pathScrapInfo: PatchScrapType) =>
-      patchScrap(pathScrapInfo.scrapId, pathScrapInfo.scrapInfo),
+    mutationFn: (patchScrapInfo: PatchScrapType) => patchScrap(patchScrapInfo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['scrapDetail', scrapId] });
       queryClient.invalidateQueries({
