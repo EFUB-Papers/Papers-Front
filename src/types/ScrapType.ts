@@ -2,16 +2,16 @@ import { CategoryKeyType } from 'constants/Category';
 import { NewTagType } from './TagType';
 
 export type SimpleOneScrapType = {
-  imgUrl: string; //빠짐
+  imgUrl: string;
   scrapId: number;
   scrapTitle: string;
-  scrapContent: string; //빠짐
+  scrapContent: string;
   scrapLink: string;
   writerNickname: string;
   writerProfile: string | null;
-  CreatedAt: Date; //빠짐
-  heartCount: number; //빠짐
-  commentCount: number; //빠짐\
+  CreatedAt: Date;
+  heartCount: number;
+  commentCount: number;
   folderId: number;
 };
 

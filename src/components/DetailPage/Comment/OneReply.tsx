@@ -8,9 +8,11 @@ import { OneReplyType } from 'types/CommentType';
 
 const OneReply = ({
   reply,
-  commentId
+  commentId,
+  scrapId
 }: {
   commentId: number;
+  scrapId: number;
   reply: OneReplyType;
 }) => {
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
@@ -18,7 +20,7 @@ const OneReply = ({
   const openMoreBox = () => setIsMoreBoxOpen(true);
   const closeMoreBox = () => setIsMoreBoxOpen(false);
 
-  const { deleteReplyAction } = useDeleteReplyMutation(commentId);
+  const { deleteReplyAction } = useDeleteReplyMutation({ scrapId, commentId });
 
   const onDelete = (replyId: number) => {
     deleteReplyAction(replyId);

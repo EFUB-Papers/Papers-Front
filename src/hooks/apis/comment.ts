@@ -95,11 +95,18 @@ export const useGetCommentListQuery = (scrapId: number) => {
 };
 
 //대댓글 작성 mutation
-export const usePostNewReplyMutation = (commentId: number) => {
+export const usePostNewReplyMutation = ({
+  scrapId,
+  commentId
+}: {
+  scrapId: number;
+  commentId: number;
+}) => {
   const queryClient = useQueryClient();
   const { mutate: postNewReplyAction } = useMutation({
     mutationFn: (replyInfo: NewReplyType) => postNewReply(replyInfo),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
       queryClient.invalidateQueries({ queryKey: ['replyList', commentId] });
     }
   });
@@ -107,11 +114,18 @@ export const usePostNewReplyMutation = (commentId: number) => {
 };
 
 //대댓글 삭제 mutation
-export const useDeleteReplyMutation = (commentId: number) => {
+export const useDeleteReplyMutation = ({
+  scrapId,
+  commentId
+}: {
+  scrapId: number;
+  commentId: number;
+}) => {
   const queryClient = useQueryClient();
   const { mutate: deleteReplyAction } = useMutation({
     mutationFn: (replyId: number) => deleteReply(replyId),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['commentList', scrapId] });
       queryClient.invalidateQueries({ queryKey: ['replyList', commentId] });
     }
   });

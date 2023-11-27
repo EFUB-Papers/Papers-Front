@@ -59,7 +59,7 @@ const OneComment = ({
         </S.SubComment>
         {isSubCommentOpen && (
           <>
-            <ReplyList commentId={comment.commentId} />
+            <ReplyList commentId={comment.commentId} scrapId={scrapId} />
           </>
         )}
       </S.OneCommentBox>
