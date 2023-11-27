@@ -4,7 +4,7 @@ import { ReactComponent as FilledHeartDark } from 'asset/detailPage/FilledHeartD
 import { ReactComponent as EmptyHeartDark } from 'asset/detailPage/EmptyHeartDark.svg';
 import { ReactComponent as CommentIconDark } from 'asset/detailPage/CommentIconDark.svg';
 import { ReactComponent as CommentIconLight } from 'asset/detailPage/CommentIconLight.svg';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
 import { S } from './style';
@@ -26,21 +26,27 @@ const HeartAndCmtInfo = ({
   commentCount
 }: HeartProps) => {
   const mode = useRecoilValue(modeState);
-  const [isClickHeart, setIsClickHeart] = useState(liked);
+  const [isClickHeart, setIsClickHeart] = useState<boolean>(liked);
 
-  const { postScrapLikeAction } = usePostScrapLikeMutation();
-  const { deleteScrapLikeAction } = useDeleteScrapLikeMutation();
+  const { postScrapLikeAction } = usePostScrapLikeMutation(scrapId);
+  const { deleteScrapLikeAction } = useDeleteScrapLikeMutation(scrapId);
 
   const onClick = () => {
-    (isClickHeart !== undefined && isClickHeart) ||
-    (isClickHeart === undefined && liked)
-      ? deleteScrapLikeAction(scrapId)
-      : postScrapLikeAction(scrapId);
-
-    setIsClickHeart((prev) => !prev);
+    if (isClickHeart) {
+      deleteScrapLikeAction(scrapId);
+      setIsClickHeart(false);
+    } else {
+      postScrapLikeAction(scrapId);
+      setIsClickHeart(true);
+    }
   };
 
-  console.log(isClickHeart, liked);
+  //  (isClickHeart !== undefined && isClickHeart) ||
+  //  (isClickHeart === undefined && liked)
+  //    ? deleteScrapLikeAction(scrapId)
+  //    : postScrapLikeAction(scrapId);
+
+  // console.log(isClickHeart, liked);
 
   return (
     <S.Wrapper>

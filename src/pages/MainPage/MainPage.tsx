@@ -23,7 +23,7 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 const MainPage = () => {
   const params = useParams();
   const isFirst = params.isFirst;
-  const nickname = LocalStorage.getNickname()!;
+  const nickname = LocalStorage.getNickname() || 'guest';
 
   const userInfo = useUserInfoQuery(nickname);
   console.log('userInfo', userInfo);
@@ -46,6 +46,7 @@ const MainPage = () => {
     <S.Wrapper>
       {isFirst && userInfo && (
         <UserModal
+          userEmail={userInfo.email}
           imgUrl={userInfo.profileImgUrl}
           userName={userInfo.nickname!}
           userDetail={userInfo.introduce!}

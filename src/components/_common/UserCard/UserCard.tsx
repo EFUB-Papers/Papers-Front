@@ -3,6 +3,7 @@ import CircleIcon from '../CircleBox/CircleBox';
 import { FollowingType } from '../../../types/FollowingType';
 import { useNavigate } from 'react-router-dom';
 import FollowButton from '../FollowButton/FollowButton';
+import BasicButton from '../BasicButton/BasicButton';
 
 type CardPropsType = {
   width: string;
@@ -29,7 +30,19 @@ const UserCard = ({
         {followingNickname}
       </S.Nickname>
       <S.Introduction>{followingDescription}</S.Introduction>
-      <FollowButton nickname={followingNickname} />
+      <S.ButtonContainer>
+        {/* <BasicButton
+          color={'transparent'}
+          fontSize={17}
+          width={130}
+          height={10}
+          textColor={'#4491e3'}
+          onClick={() => navigate(`/folder/${followingNickname}`)}
+        >
+          스크랩 구경 하기
+        </BasicButton> */}
+        <FollowButton nickname={followingNickname} />
+      </S.ButtonContainer>
     </S.Wrapper>
   );
 };

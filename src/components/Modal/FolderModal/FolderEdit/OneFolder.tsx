@@ -12,11 +12,13 @@ import { LocalStorage } from 'utils/localStorage';
 const EditOneFolder = ({
   id,
   title,
-  onDeleteFolder
+  onDeleteFolder,
+  index
 }: {
   id: number;
   title: string;
   onDeleteFolder: (id: number) => void;
+  index: number;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState<string>(title);
@@ -56,7 +58,7 @@ const EditOneFolder = ({
             maxLength={10}
           />
         ) : (
-          <div>{title}</div>
+          <div>{!index ? '기본 폴더' : title}</div>
         )}
       </O.IconContainer>
       <O.IconContainer>

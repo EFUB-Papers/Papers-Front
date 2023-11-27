@@ -80,7 +80,6 @@ export const useGetScrapDetailQuery = (scrapId: number) => {
     queryKey: ['scrapDetail', scrapId],
     queryFn: () => getScrapDetail(scrapId)
   });
-  console.log('스크랩 조회', data);
   return data;
 };
 

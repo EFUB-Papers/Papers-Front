@@ -19,8 +19,10 @@ const NavbarLayout = () => {
   console.log('userInfo', userInfo);
 
   useEffect(() => {
-    if (LocalStorage.getNickname() === params.nickname) {
+    if (LocalStorage.getNickname() == params.nickname) {
       setIsMine(true);
+    } else {
+      setIsMine(false);
     }
   }, [params]);
 
@@ -39,21 +41,16 @@ const NavbarLayout = () => {
           {isMine && (
             <>
               <MyMenu />
-              <S.ScrapButtonWrapper onClick={() => navigate('/scrap-write')}>
-                <BasicButton
-                  width={150}
-                  height={50}
-                  color="positive"
-                  fontSize={22}
-                >
-                  <S.ButtonTextWrapper>
-                    <div>스크랩</div>
-                    <WriteIcon />
-                  </S.ButtonTextWrapper>
-                </BasicButton>
-              </S.ScrapButtonWrapper>
             </>
           )}
+          <S.ScrapButtonWrapper onClick={() => navigate('/scrap-write')}>
+            <BasicButton width={150} height={50} color="positive" fontSize={22}>
+              <S.ButtonTextWrapper>
+                <div>스크랩</div>
+                <WriteIcon />
+              </S.ButtonTextWrapper>
+            </BasicButton>
+          </S.ScrapButtonWrapper>
         </S.FlexWrapper>
       </S.NavBarWrapper>
 

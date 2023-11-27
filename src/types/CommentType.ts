@@ -6,6 +6,7 @@ export type OneCommentType = {
   writerProfileImgUrl: string | null;
   createdAt: string;
   commentIsMine: boolean;
+  replyCount: number;
 };
 
 export type OneReplyType = {

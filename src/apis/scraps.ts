@@ -78,7 +78,7 @@ export const getSearchScrap = async (searchInfo: SearchScrapType) => {
 };
 
 export const getLikeScraps = async () => {
-  const { data } = await axiosInstance.get(`/scraps/liked`);
+  const data = await axiosInstance.get(`/scraps/liked`);
   return data;
 };
 

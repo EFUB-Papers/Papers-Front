@@ -105,6 +105,10 @@ const ReplyContainer = styled.div`
   margin-bottom: 30px;
 `;
 
+const Time = styled.div`
+  color: ${({ theme }) => theme.COLOR.darkGrey};
+`;
+
 export const S = {
   Wrapper,
   NameBox,
@@ -119,7 +123,8 @@ export const S = {
   SubCommentWrapper,
   ListWrapper,
   UserInfoBox,
-  NewCommentWrapper
+  NewCommentWrapper,
+  Time
 };
 
 export const R = { ReplyNewContainer, ReplyContainer };

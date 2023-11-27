@@ -47,9 +47,16 @@ const Introduction = styled.div`
   color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
+const ButtonContainer = styled.div`
+  ${flexCenter};
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const S = {
   Wrapper,
   ProfileImg,
   Nickname,
-  Introduction
+  Introduction,
+  ButtonContainer
 };

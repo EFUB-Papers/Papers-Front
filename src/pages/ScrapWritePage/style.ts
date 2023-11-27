@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { flexCenter, imageRatio } from './../../style/common';
+import { flexCenter } from './../../style/common';
 
 const Root = styled.div`
   width: 100%;
@@ -203,6 +203,9 @@ const FolderButtonWrapper = styled.div`
   margin-top: 50px;
 `;
 
+const FolderName = styled.div`
+  color: ${({ theme }) => theme.COLOR.mint};
+`;
 export const S = {
   Root,
   Wrapper,
@@ -225,5 +228,6 @@ export const S = {
   PreviewWrapper,
   DeleteButton,
   Button,
-  FolderButtonWrapper
+  FolderButtonWrapper,
+  FolderName
 };

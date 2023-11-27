@@ -16,6 +16,7 @@ import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAn
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import { ScrapDetailType } from 'types/ScrapType';
+import { CATEGORY } from 'constants/Category';
 
 export type PrevScrapType = {
   scrapId: number;
@@ -66,11 +67,10 @@ const DetailPage = () => {
     deleteScrapMutate(data.scrapId);
     navigate(-1);
   };
-
   return (
     <S.Wrapper>
       <S.FlexWrapper>
-        <S.Category>{data?.categoryName}</S.Category>
+        <S.Category>{CATEGORY[data?.categoryName]}</S.Category>
         {/*<RightArrow />*/}
       </S.FlexWrapper>
       <S.Title>{data?.scrapTitle}</S.Title>

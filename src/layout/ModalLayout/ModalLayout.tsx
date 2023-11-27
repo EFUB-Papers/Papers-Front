@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Outlet, useParams } from 'react-router-dom';
 import { useBodyScrollLock } from '../../hooks/useScrollLock';
 import { useEffect } from 'react';
@@ -28,7 +28,7 @@ const ModalLayout = () => {
     }
   }, [folderModal.open]);
 
-  const [userModalState, setUserModalState] = useRecoilState(userModalAtom);
+  const userModalState = useRecoilValue(userModalAtom);
 
   const nickname = LocalStorage.getNickname()!;
   const userInfo = useUserInfoQuery(nickname);
@@ -41,6 +41,7 @@ const ModalLayout = () => {
             userName={userInfo?.nickname || ''}
             userDetail={userInfo?.introduce || ''}
             imgUrl={userInfo?.profileImgUrl || ''}
+            userEmail={userInfo?.email || ''}
           />
         )}
         {folderModal.open && <FolderModal folderList={folderList} />}

@@ -29,6 +29,7 @@ export const getFolderList = async (nickname: string) => {
   const { data } = await axiosInstanceWithoutToken.get<OneFolderType[]>(
     `/members/${nickname}/folders`
   );
+  console.log('folder', data);
   return data;
 };
 

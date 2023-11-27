@@ -1,40 +1,53 @@
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { deleteScrapLike, postScrapLike } from '../../apis/likes';
-
+import { useQueryClient } from '@tanstack/react-query';
 //좋아요 추가 mutation
-export const usePostScrapLikeMutation = () => {
-  const queryClient = new QueryClient();
+export const usePostScrapLikeMutation = (scrapId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: postScrapLikeAction } = useMutation({
     mutationFn: (scrapId: number) => postScrapLike(scrapId),
+    onMutate: async () => {
+      // 낙관적 업데이트: 좋아요 증가
+      queryClient.setQueryData(['scrapDetail', scrapId], (prevData: any) => ({
+        ...prevData,
+        heartCount: prevData.heartCount + 1
+      }));
+    },
+    onError: () => {
+      // 서버 요청이 실패한 경우 롤백
+      queryClient.setQueryData(['scrapDetail', scrapId], (prevData: any) => ({
+        ...prevData,
+        heartCount: prevData.heartCount - 1
+      }));
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['likeScraps'] });
+      queryClient.invalidateQueries({ queryKey: ['scrapDetail', scrapId] });
     }
-    // onMutate: (variables, scrapId) => {
-    //   // 낙관적 업데이트를 수행하기 전에 현재 데이터를 저장
-    //   const snapshot = queryClient.getQueryData(['scrapDetail', scrapId]);
-
-    //   // 낙관적 업데이트를 위해 새로운 댓글을 UI에 즉시 반영
-    //   queryClient.setQueryData(['scrapDetail', scrapId], (oldData) => ({
-    //     ...oldData,
-    //     comments: [
-    //       ...oldData.comments,
-    //       { id: Date.now(), content: variables.content }
-    //     ]
-    //   }));
-
-    //   return snapshot; // 나중에 사용하기 위해 이전 데이터를 반환
-    // }
   });
   return { postScrapLikeAction };
 };
 
 //좋아요 삭제 mutation
-export const useDeleteScrapLikeMutation = () => {
-  const queryClient = new QueryClient();
+export const useDeleteScrapLikeMutation = (scrapId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: deleteScrapLikeAction } = useMutation({
     mutationFn: (scrapId: number) => deleteScrapLike(scrapId),
+    onMutate: async () => {
+      // 낙관적 업데이트: 좋아요 증가
+      queryClient.setQueryData(['scrapDetail', scrapId], (prevData: any) => ({
+        ...prevData,
+        heartCount: prevData.heartCount - 1
+      }));
+    },
+    onError: () => {
+      // 서버 요청이 실패한 경우 롤백
+      queryClient.setQueryData(['scrapDetail', scrapId], (prevData: any) => ({
+        ...prevData,
+        heartCount: prevData.heartCount + 1
+      }));
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['likeScraps'] });
+      queryClient.invalidateQueries({ queryKey: ['scrapDetail', scrapId] });
     }
   });
   return { deleteScrapLikeAction };
