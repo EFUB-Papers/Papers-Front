@@ -89,14 +89,15 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
           {slicedMenu[currentFolderGroup]?.map((folder, index) => {
             return (
               <S.OneMenu
-                currentIdx={currentIdx}
-                index={index}
+                highlight={
+                  folder.folderId === Number(searchParams.get('folderId'))
+                }
                 onClick={() => {
                   onClickFolder(index, folder.folderId);
                 }}
               >
                 <S.Name currentIdx={currentIdx} index={index}>
-                  {folder.folderName}
+                  {!index ? '기본 폴더' : folder.folderName}
                 </S.Name>
               </S.OneMenu>
             );

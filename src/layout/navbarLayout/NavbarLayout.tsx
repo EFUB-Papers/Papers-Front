@@ -1,4 +1,4 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
 import { S } from './style';
@@ -13,13 +13,16 @@ const NavbarLayout = () => {
   const [isMine, setIsMine] = useState(false);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   const userInfo = useUserInfoQuery(params.nickname!);
   console.log('userInfo', userInfo);
 
   useEffect(() => {
-    if (LocalStorage.getNickname() === params.nickname) {
+    if (LocalStorage.getNickname() == params.nickname) {
       setIsMine(true);
+    } else {
+      setIsMine(false);
     }
   }, [params]);
 
@@ -38,7 +41,7 @@ const NavbarLayout = () => {
           {isMine && (
             <>
               <MyMenu />
-              <S.ScrapButtonWrapper>
+              <S.ScrapButtonWrapper onClick={() => navigate('/scrap-write')}>
                 <BasicButton
                   width={150}
                   height={50}

@@ -41,11 +41,19 @@ const HeartAndCmtInfo = ({
     }
   };
 
+  //  (isClickHeart !== undefined && isClickHeart) ||
+  //  (isClickHeart === undefined && liked)
+  //    ? deleteScrapLikeAction(scrapId)
+  //    : postScrapLikeAction(scrapId);
+
+  // console.log(isClickHeart, liked);
+
   return (
     <S.Wrapper>
       <S.InfoWrapper>
         <S.HeartWrapper onClick={onClick}>
-          {isClickHeart ? (
+          {(isClickHeart !== undefined && isClickHeart) ||
+          (isClickHeart === undefined && liked) ? (
             mode == 'light' ? (
               <FilledHeartLight />
             ) : (

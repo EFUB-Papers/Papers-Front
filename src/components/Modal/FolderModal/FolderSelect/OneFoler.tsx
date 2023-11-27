@@ -6,17 +6,19 @@ import { ReactComponent as UnselectIcon } from 'asset/_common/unselect.svg';
 const SelectOneFolder = ({
   title,
   onClick,
-  selected
+  selected,
+  index
 }: {
   title: string;
   onClick: () => void;
   selected: boolean;
+  index: number;
 }) => {
   return (
     <O.Wrapper onClick={onClick}>
       <O.IconContainer selected={selected}>
         <FolderIcon />
-        <p>{title}</p>
+        <p>{!index ? '기본폴더' : title}</p>
       </O.IconContainer>
       <O.IconContainer>
         <O.ButtonWrapper>

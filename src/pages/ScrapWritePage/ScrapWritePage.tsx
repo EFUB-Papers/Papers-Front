@@ -20,7 +20,7 @@ import { useNewScrapMutation, usePatchScrapMutation } from 'hooks/apis/scrap';
 import { OneNewScrapType } from 'apis/scraps';
 import { NewTagType } from 'types/TagType';
 import { LocalStorage } from 'utils/localStorage';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PrevScrapType } from 'pages/DetailPage/DetailPage';
 import { useGetFolderListQuery } from '../../hooks/apis/folder';
 
@@ -51,6 +51,7 @@ const ScrapWritePage = () => {
   const imgRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const navigate = useNavigate();
   const mode = useRecoilValue(modeState);
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
@@ -69,6 +70,13 @@ const ScrapWritePage = () => {
     );
     setCurrentFolderName(currentFolder[0].folderName);
   }, [folderModalState]);
+
+  //기존 폴더 id 유지
+  useEffect(() => {
+    setFolderModalState((prev) => {
+      return { ...prev, folderId: prevScrap?.folderId };
+    });
+  }, []);
 
   //스크랩 생성/수정 요청
   const onSubmit = () => {
@@ -120,6 +128,11 @@ const ScrapWritePage = () => {
             scrapId: prevScrap?.scrapId,
             scrapInfo: formData
           });
+      navigate(
+        `/folder/${LocalStorage.getNickname()}?folderId=${
+          folderModalState.folderId
+        }`
+      );
     }
   };
 
@@ -150,11 +163,11 @@ const ScrapWritePage = () => {
   };
 
   //이미지가 가로로 긴지 여부
-  // const img = new Image();
-  // useEffect(() => {
-  //   img?.src = imgUrl ? imgUrl : prevScrap?.imgUrl;
-  //   setHorizontal(img.width > img.height ? true : false);
-  // }, [imgUrl]);
+  const img = new Image();
+  useEffect(() => {
+    img.src = imgUrl ? imgUrl : (prevScrap?.imgUrl as string);
+    setHorizontal(img.width > img.height ? true : false);
+  }, [imgUrl]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);

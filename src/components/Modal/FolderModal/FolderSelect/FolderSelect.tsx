@@ -12,7 +12,7 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
     useRecoilState(folderModalAtom);
 
   const [selectId, setSelectId] = useState<number>(
-    folderModalState.folderId
+    folderModalState.option === 'scrapWrite'
       ? folderModalState.folderId
       : folderModalState.defaultFolderId
   );
@@ -53,12 +53,15 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
     setSelectId(id);
   };
 
+  console.log(selectId);
+
   return (
     <S.ContentWrapper>
       <S.FlexBox>
-        {folderList.map((folder) => {
+        {folderList.map((folder, index) => {
           return (
             <SelectOneFolder
+              index={index}
               selected={selectId === folder.folderId}
               title={folder.folderName}
               onClick={() => {

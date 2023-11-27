@@ -67,12 +67,13 @@ export type SearchScrapType = {
 //스크랩 검색
 export const getSearchScrap = async (searchInfo: SearchScrapType) => {
   const { searchby, category, keyword } = searchInfo;
-  const data = await axiosInstanceWithoutToken.post(
+  const { data } = await axiosInstanceWithoutToken.post(
     `/scraps/search?searchby=${searchby}&category=${category}`,
     {
       query: keyword
     }
   );
+  console.log('스크랩 검색', data);
   return data;
 };
 

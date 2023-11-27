@@ -1,14 +1,11 @@
 import CircleIcon from '../../_common/CircleBox/CircleBox';
 import { S } from './style';
 import { OneCommentType } from '../../../types/CommentType';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReplyList from './ReplyList';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
 import MoreBox from 'components/_common/MoreBox/MoreBox';
-import {
-  useDeleteCommentMutation,
-  useGetCommentListQuery
-} from 'hooks/apis/comment';
+import { useDeleteCommentMutation } from 'hooks/apis/comment';
 import { timeHelper } from 'utils/timeHelper';
 
 const OneComment = ({
@@ -22,8 +19,6 @@ const OneComment = ({
 }) => {
   const [isSubCommentOpen, setIsSubCommentOpen] = useState(false);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
-  // const { refetch } = useGetCommentListQuery(scrapId);
-
   const { deleteCommentAction } = useDeleteCommentMutation(scrapId);
 
   const openMoreBox = () => setIsMoreBoxOpen(true);
@@ -31,7 +26,6 @@ const OneComment = ({
 
   const onDelete = () => {
     deleteCommentAction(comment.commentId);
-    // refetch();
   };
 
   return (
@@ -61,7 +55,7 @@ const OneComment = ({
             setIsSubCommentOpen(!isSubCommentOpen);
           }}
         >
-          {replyNumber ? `대댓글 ${replyNumber}개` : '대댓글 0개'}
+          {`대댓글 ${replyNumber}개`}
         </S.SubComment>
         {isSubCommentOpen && (
           <>

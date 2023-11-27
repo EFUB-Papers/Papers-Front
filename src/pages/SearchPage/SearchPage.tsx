@@ -4,49 +4,39 @@ import { useSearchParams } from 'react-router-dom';
 import { useSearchScrapQuery } from '../../hooks/apis/scrap';
 import { CategoryKeyType, SearchRangeKeyType } from '../../constants/Category';
 import BasicContentCard from '../../components/_common/BasicContentCard/BasicContentCard';
-import { PostListMock } from '../../mock/postMock';
 import { OneScrapType } from '../../types/ScrapType';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import { SearchScrapType } from 'apis/scraps';
 
-export type SearchScrapType = {
-  searchby?: SearchRangeKeyType;
-  category?: CategoryKeyType;
+export type searchType = {
+  searchby?: string;
+  category?: string;
   keyword?: string;
-  page: number;
 };
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
-  const searchby = searchParams.get('range');
-  const category = searchParams.get('category');
+
+  const searchby = searchParams.get('searchby') as SearchRangeKeyType;
+  const category = searchParams.get('category') as CategoryKeyType;
   const keyword = searchParams.get('keyword') || '';
 
-  const searchInfo: Record<string, string> = {};
-  if (searchby && searchby !== 'all') {
-    searchInfo.searchby = searchby;
-  }
-
-  if (category && category !== 'all') {
-    searchInfo.category = category;
-  }
-
-  if (keyword) {
-    searchInfo.keyword = keyword;
-  }
-  console.log('searchInfo', searchInfo);
+  const searchInfo: SearchScrapType = {
+    searchby: searchby,
+    category: category,
+    keyword: keyword
+  };
 
   const { searchList, isLoading } = useSearchScrapQuery({ ...searchInfo });
-  console.log('searchList', searchList);
 
   return (
     <S.Wrapper>
       <S.FlexBox>
         <SearchBar />
       </S.FlexBox>
-      {PostListMock.length && !isLoading ? (
+      {searchList && searchList.length && !isLoading ? (
         <S.ContentWrapper>
-          {PostListMock.map((post: OneScrapType) => {
+          {searchList.map((post: OneScrapType) => {
             const {
               imgUrl,
               scrapId,
@@ -73,7 +63,7 @@ const SearchPage = () => {
             );
           })}
         </S.ContentWrapper>
-      ) : isLoading! && !PostListMock.length ? (
+      ) : isLoading! && !searchList ? (
         <div>해당 스크랩이 없습니다.</div>
       ) : (
         <LoadingPage />

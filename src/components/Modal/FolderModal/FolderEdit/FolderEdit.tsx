@@ -44,12 +44,13 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
             </S.FlexBoxRow>
           </BasicButton>
         </S.SelectButton>
-        {folderList.map((folder) => {
+        {folderList.map((folder, index) => {
           return (
             <EditOneFolder
               id={folder.folderId}
               title={folder.folderName}
               onDeleteFolder={onDeleteFolder}
+              index={index}
             />
           );
         })}
