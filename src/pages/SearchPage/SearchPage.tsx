@@ -53,8 +53,7 @@ const SearchPage = () => {
                 commentCount={commentCount}
                 folderId={folderId}
                 scrapId={scrapId}
-                originLink={scrapLink}
-                originTitle={scrapLink}
+                originalLink={scrapLink}
                 imgUrl={imgUrl}
                 scrapTitle={scrapTitle}
                 scrapContent={scrapContent}

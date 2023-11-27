@@ -32,6 +32,9 @@ const ModalCloseIcon = styled.div`
   top: 20px;
   right: 20px;
   z-index: 100;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const S = {

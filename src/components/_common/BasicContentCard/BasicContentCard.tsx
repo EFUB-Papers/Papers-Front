@@ -13,8 +13,7 @@ type BasicCardProps = {
   imgUrl: string;
   scrapTitle: string;
   scrapContent: string;
-  originTitle: string;
-  originLink: string;
+  originalLink: string;
   scrapId: number;
   isMine: boolean;
   folderId: number;
@@ -28,12 +27,13 @@ const BasicContentCard = (props: BasicCardProps) => {
     imgUrl,
     scrapContent,
     scrapTitle,
-    originTitle,
+    originalLink,
     scrapId,
     folderId,
     heartCount,
     commentCount
   } = props;
+
   const setFolderModal = useSetRecoilState(folderModalAtom);
   const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
   const { deleteScrapMutate } = useDeleteScrapMutation();
@@ -41,6 +41,7 @@ const BasicContentCard = (props: BasicCardProps) => {
 
   return (
     <S.Wrapper isBorderBottom={true}>
+      {/* 점 세개 버튼 클릭시 나타나는 모달 */}
       {isMine && (
         <S.MoreBoxWrapper>
           <MoreBox
@@ -70,34 +71,40 @@ const BasicContentCard = (props: BasicCardProps) => {
           />
         </S.MoreBoxWrapper>
       )}
+      {/* 이미지 */}
       <S.PostImg
         imgUrl={imgUrl}
         onClick={() => {
           navigate(`/detail/${scrapId}`);
         }}
       />
-
+      {/* 텍스트 */}
       <S.PostContentWrapper
         onClick={() => {
           navigate(`/detail/${scrapId}`);
         }}
       >
         <S.PostTitle>{scrapTitle}</S.PostTitle>
-        <S.OriginalTitle>{originTitle}</S.OriginalTitle>
+        <S.OriginalLink>{originalLink}</S.OriginalLink>
         <S.PostDetail>{scrapContent}</S.PostDetail>
       </S.PostContentWrapper>
-
+      {/* 아이콘 */}
       <S.IconWrapper>
-        <MoreDotsIcon
-          onClick={() => {
-            setIsMoreBoxOpen(true);
-          }}
-        />
+        {/* 점 세개 버튼 */}
+        <S.MoreButton>
+          <MoreDotsIcon
+            onClick={() => {
+              setIsMoreBoxOpen(true);
+            }}
+          />
+        </S.MoreButton>
         <S.IconFlexWrapper>
+          {/* 좋아요 */}
           <S.IconContainer>
             <HeartIcon />
             <S.IconText>{heartCount}</S.IconText>
           </S.IconContainer>
+          {/* 댓글 */}
           <S.IconContainer>
             <CommentIcon />
             <S.IconText>{commentCount}</S.IconText>

@@ -7,8 +7,7 @@ const Wrapper = styled.div<{
   height: 140px;
   left: 0;
   display: flex;
-  width: 850px;
-  ${flexCenter};
+  width: 100%;
   padding: 20px 0px;
   box-sizing: border-box;
   border-bottom: ${({ isBorderBottom, theme }) =>
@@ -25,16 +24,6 @@ const MoreBoxWrapper = styled.div`
   width: 100px;
 `;
 
-const PostContentWrapper = styled.div`
-  color: ${({ theme }) => theme.text};
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  margin: 0px 14px;
-`;
-
 const PostImg = styled.div<{
   imgUrl: string;
 }>`
@@ -45,6 +34,17 @@ const PostImg = styled.div<{
   background-size: cover;
 `;
 
+const PostContentWrapper = styled.div`
+  color: ${({ theme }) => theme.text};
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 14px;
+  margin-right: 24px;
+  overflow: hidden;
+`;
+
 const PostTitle = styled.div`
   color: ${({ theme }) => theme.text};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
@@ -52,6 +52,7 @@ const PostTitle = styled.div`
 `;
 
 const PostDetail = styled.div`
+  margin-top: auto;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   ${omitText};
   overflow: hidden;
@@ -63,32 +64,44 @@ const PostDetail = styled.div`
   word-break: keep-all;
 `;
 
-const OriginalTitle = styled.div`
+const OriginalLink = styled.div`
+  width: 100%;
+  display: inline-block;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
 const IconWrapper = styled.div`
+  flex: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
   height: 100%;
 `;
-const IconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 3px;
-`;
 
-const IconText = styled.div`
-  color: ${({ theme }) => theme.COLOR.darkGrey};
+const MoreButton = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const IconFlexWrapper = styled.div`
   flex: none;
   display: flex;
-  gap: 20px;
+  width: 100px;
+`;
+
+const IconContainer = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 4px;
+`;
+
+const IconText = styled.div`
+  color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
 export const S = {
@@ -97,9 +110,10 @@ export const S = {
   PostImg,
   PostTitle,
   PostDetail,
-  OriginalTitle,
+  OriginalLink,
   IconContainer,
   IconWrapper,
+  MoreButton,
   IconText,
   IconFlexWrapper,
   MoreBoxWrapper

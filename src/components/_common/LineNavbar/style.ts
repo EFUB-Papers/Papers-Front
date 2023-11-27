@@ -2,17 +2,19 @@ import { flexCenter } from 'style/common';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 900px;
+  width: 100%;
   height: 100px;
   display: flex;
   flex-direction: column;
   margin-top: 100px;
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
+  /* border: 1px solid red; */
 `;
 
 const FlexWrapper = styled.div`
   ${flexCenter};
+  /* border: 1px solid red; */
 `;
 
 const TitleWrapper = styled.div`
@@ -29,16 +31,16 @@ const Title = styled.div`
 
 const ListWrapper = styled.div`
   display: flex;
-  width: 900px;
+  width: 100%;
   overflow: hidden;
 `;
 
 const OneMenu = styled.div<{
-  highlight: boolean;
-  onClick: (index: number) => void;
+  highlight?: boolean;
 }>`
   width: 150px;
-  height: 100%;
+  height: 34px;
+  ${flexCenter};
   font-weight: ${({ highlight }) => (highlight ? '600' : '400')};
   padding-top: 10px;
   border-top: ${({ highlight, theme }) =>
@@ -49,17 +51,41 @@ const Name = styled.div<{
   currentIdx: number;
   index: number;
 }>`
+  display: inline-block;
   text-align: center;
-  padding-top: 10px;
+  padding: 0px 10px;
   color: ${({ currentIdx, index, theme }) =>
     currentIdx === index
       ? `3px solid ${theme.COLOR.mint}`
       : `2px solid ${theme.line}`};
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const AddFolderButton = styled.div`
+  width: 150px;
+  height: 34px;
+  ${flexCenter};
+  padding-top: 10px;
+  border-top: 2px solid rgba(0, 0, 0, 0);
+
+  svg {
+    width: 14px;
+    height: 14px;
+    path {
+      fill: ${({ theme }) => theme.COLOR.darkGrey};
+    }
+  }
 `;
 
 const EditModalButton = styled.div`
   color: ${({ theme }) => theme.COLOR.mint};
   font-size: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const S = {
@@ -69,6 +95,7 @@ export const S = {
   Title,
   ListWrapper,
   FlexWrapper,
+  AddFolderButton,
   EditModalButton,
   TitleWrapper
 };

@@ -9,6 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import BasicButton from '../BasicButton/BasicButton';
 import { COLOR } from '../../../style/theme';
 import { folderModalAtom } from '../../../atom/modal';
+import { ReactComponent as AddIcon } from 'asset/_common/addIcon.svg';
 
 type NavbarProps = {
   title?: string;
@@ -92,33 +93,39 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
                 highlight={
                   folder.folderId === Number(searchParams.get('folderId'))
                 }
-                onClick={() => {
-                  onClickFolder(index, folder.folderId);
-                }}
               >
-                <S.Name currentIdx={currentIdx} index={index}>
+                <S.Name
+                  currentIdx={currentIdx}
+                  index={index}
+                  onClick={() => {
+                    onClickFolder(index, folder.folderId);
+                  }}
+                >
                   {!index ? '기본 폴더' : folder?.folderName}
                 </S.Name>
               </S.OneMenu>
             );
           })}
           {isMine && (
-            <BasicButton
-              color={'transparent'}
-              textColor={COLOR.blue}
-              fontSize={15}
-              width={100}
-              height={40}
-              onClick={() => {
-                setIsEditModalOpen((prev) => ({
-                  ...prev,
-                  option: 'add',
-                  open: true
-                }));
-              }}
-            >
-              폴더 추가
-            </BasicButton>
+            <S.AddFolderButton>
+              <BasicButton
+                color={'transparent'}
+                textColor={COLOR.darkGrey}
+                fontSize={15}
+                width={80}
+                height={30}
+                onClick={() => {
+                  setIsEditModalOpen((prev) => ({
+                    ...prev,
+                    option: 'add',
+                    open: true
+                  }));
+                }}
+              >
+                폴더 추가
+              </BasicButton>
+              <AddIcon />
+            </S.AddFolderButton>
           )}
         </S.ListWrapper>
         {currentFolderGroup !== lastGroup && (

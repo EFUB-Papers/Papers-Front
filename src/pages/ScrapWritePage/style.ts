@@ -194,6 +194,9 @@ const DeleteButton = styled.div`
 
 const Button = styled.div`
   color: ${({ theme }) => theme.text};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const FolderButtonWrapper = styled.div`
