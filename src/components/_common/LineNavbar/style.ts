@@ -9,12 +9,14 @@ const Wrapper = styled.div`
   margin-top: 100px;
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
-  /* border: 1px solid red; */
+  ${flexCenter};
+  position: relative;
 `;
 
 const FlexWrapper = styled.div`
   ${flexCenter};
-  /* border: 1px solid red; */
+  width: 800px;
+  gap: 10px;
 `;
 
 const TitleWrapper = styled.div`

@@ -13,6 +13,7 @@ export type FollowButtonProps = {
 const FollowButton = ({ nickname }: FollowButtonProps) => {
   const isFollow = useGetCurrentFollowQuery(nickname);
   const [isCurrentFollow, setIsCurrentFollow] = useState(isFollow);
+
   const { postFollowMutate } = usePostFollowMutation({
     nickname,
     setIsFollow: setIsCurrentFollow

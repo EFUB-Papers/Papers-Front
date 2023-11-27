@@ -4,6 +4,7 @@ import { FollowingType } from '../../../types/FollowingType';
 import { useNavigate } from 'react-router-dom';
 import FollowButton from '../FollowButton/FollowButton';
 import BasicButton from '../BasicButton/BasicButton';
+import { LocalStorage } from 'utils/localStorage';
 
 type CardPropsType = {
   width: string;
@@ -31,16 +32,6 @@ const UserCard = ({
       </S.Nickname>
       <S.Introduction>{followingDescription}</S.Introduction>
       <S.ButtonContainer>
-        {/* <BasicButton
-          color={'transparent'}
-          fontSize={17}
-          width={130}
-          height={10}
-          textColor={'#4491e3'}
-          onClick={() => navigate(`/folder/${followingNickname}`)}
-        >
-          스크랩 구경 하기
-        </BasicButton> */}
         <FollowButton nickname={followingNickname} />
       </S.ButtonContainer>
     </S.Wrapper>

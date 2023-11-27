@@ -11,13 +11,17 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import ModalLayout from '../layout/ModalLayout/ModalLayout';
 import FollowingPage from '../pages/FollowingPage/FollowingPage';
 import LikePage from '../pages/LikePage/LikePage';
-// import PrivateRoute from './Private';
 import AuthPage from '../pages/AuthPage/AuthPage';
+import MainPageGuest from 'pages/MainPage/MainPageGuest';
 
 const router = createBrowserRouter([
   {
     element: <AuthPage />,
     path: '/auth'
+  },
+  {
+    path: '/main/guest',
+    element: <MainPageGuest />
   },
   { element: <LoginPage />, path: '/' },
   {

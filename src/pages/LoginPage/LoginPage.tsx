@@ -51,7 +51,7 @@ const LoginPage = () => {
               {/* 게스트 버튼 */}
               <S.Button
                 onClick={() => {
-                  navigate('/main');
+                  navigate('/main/guest');
                 }}
                 $color="mint"
               >
