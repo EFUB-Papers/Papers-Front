@@ -1,14 +1,15 @@
 import EditOneFolder from './OneFolder';
 import { S } from '../style';
-import { OneFolderType } from '../../../../types/FolderType';
-
 import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { ReactComponent as FolderAddIcon } from 'asset/_common/addIcon.svg';
 import { folderModalAtom } from '../../../../atom/modal';
 import { useSetRecoilState } from 'recoil';
+import { useGetFolderListQuery } from 'hooks/apis/folder';
+import { LocalStorage } from 'utils/localStorage';
 
-const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
+const FolderEdit = () => {
   const setFolderModalState = useSetRecoilState(folderModalAtom);
+  const folderList = useGetFolderListQuery(LocalStorage.getNickname()!);
 
   const onMoveAddFolder = () => {
     setFolderModalState((prev) => ({
@@ -35,7 +36,7 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
             </S.FlexBoxRow>
           </BasicButton>
         </S.SelectButton>
-        {folderList.map((folder, index) => {
+        {folderList?.map((folder, index) => {
           return (
             <EditOneFolder
               id={folder.folderId}

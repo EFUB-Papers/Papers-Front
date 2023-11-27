@@ -7,7 +7,7 @@ const Wrapper = styled.div<{
   height: 140px;
   left: 0;
   display: flex;
-  width: 100%;
+  width: 65%;
   padding: 20px 0px;
   box-sizing: border-box;
   border-bottom: ${({ isBorderBottom, theme }) =>

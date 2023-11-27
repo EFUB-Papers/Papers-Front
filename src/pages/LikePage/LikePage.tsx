@@ -7,9 +7,8 @@ const LikePage = () => {
   const likeList = useLikeScrapsQuery()!;
 
   return (
-    // Render the wrapper component
     <S.Wrapper>
-      {/* Map through the liked scraps and render BasicContentCard for each */}
+      <S.Title>좋아요한 스크랩</S.Title>
       {likeList?.data?.map((scrap: OneScrapType) => {
         const {
           imgUrl,
@@ -23,11 +22,9 @@ const LikePage = () => {
         } = scrap;
 
         return (
-          // Render BasicContentCard for each liked scrap
           <BasicContentCard
             scrapTitle={scrapTitle}
-            originLink={scrapLink}
-            originTitle={scrapLink}
+            originalLink={scrapLink}
             imgUrl={imgUrl}
             scrapContent={scrapContent}
             scrapId={scrapId}

@@ -8,8 +8,10 @@ import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
 import { PatchScrapType } from 'apis/scraps';
 import { LocalStorage } from 'utils/localStorage';
+import { useSetRecoilState } from 'recoil';
+import { useGetFolderListQuery } from 'hooks/apis/folder';
 
-const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
+const FolderSelect = () => {
   const [folderModalState, setFolderModalState] =
     useRecoilState(folderModalAtom);
 
@@ -22,6 +24,8 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
     scrapId: folderModalState.scrapId,
     folderId: selectId
   });
+
+  const folderList = useGetFolderListQuery(LocalStorage.getNickname()!);
 
   const onClickChangeFolder = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -64,7 +68,7 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   return (
     <S.ContentWrapper>
       <S.FlexBox>
-        {folderList.map((folder, index) => {
+        {folderList?.map((folder, index) => {
           return (
             <SelectOneFolder
               index={index}

@@ -30,7 +30,6 @@ const AuthPage = () => {
   };
   return (
     <S.Wrapper>
-      <div>로그인 중 입니다.</div>
       <S.Spinner />
     </S.Wrapper>
   );

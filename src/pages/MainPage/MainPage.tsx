@@ -23,13 +23,10 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 const MainPage = () => {
   const params = useParams();
   const isFirst = params.isFirst;
-  const nickname = LocalStorage.getNickname() || 'guest';
-
-  const userInfo = useUserInfoQuery(nickname);
-  console.log('userInfo', userInfo);
+  const nickname = LocalStorage.getNickname();
+  const userInfo = useUserInfoQuery(nickname!);
   /*추천 스크랩*/
   const { scrapList, isLoading: isScarpLoading } = useRecommendScrapQuery();
-  console.log('scrapList', scrapList);
 
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
