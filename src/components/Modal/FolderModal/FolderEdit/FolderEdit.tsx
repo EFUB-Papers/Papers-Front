@@ -1,13 +1,11 @@
 import EditOneFolder from './OneFolder';
 import { S } from '../style';
 import { OneFolderType } from '../../../../types/FolderType';
-import React from 'react';
+
 import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { ReactComponent as FolderAddIcon } from 'asset/_common/addIcon.svg';
 import { folderModalAtom } from '../../../../atom/modal';
 import { useSetRecoilState } from 'recoil';
-import { useDeleteFolderMutation } from 'hooks/apis/folder';
-import { LocalStorage } from 'utils/localStorage';
 
 const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
   const setFolderModalState = useSetRecoilState(folderModalAtom);
@@ -18,13 +16,6 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
       option: 'add',
       open: true
     }));
-  };
-  const { deleteFolderMutate } = useDeleteFolderMutation(
-    LocalStorage.getNickname()!
-  );
-
-  const onDeleteFolder = (id: number) => {
-    deleteFolderMutate(id);
   };
 
   return (
@@ -49,7 +40,6 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
             <EditOneFolder
               id={folder.folderId}
               title={folder.folderName}
-              onDeleteFolder={onDeleteFolder}
               index={index}
             />
           );

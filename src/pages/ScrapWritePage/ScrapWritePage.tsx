@@ -62,7 +62,8 @@ const ScrapWritePage = () => {
     folderId: folderModalState.folderId
   }); //스크랩 수정 mutate
   const folderList = useGetFolderListQuery(LocalStorage.getNickname()!);
-  const [currentFolderName, setCurrentFolderName] = useState('');
+  const [currentFolderName, setCurrentFolderName] = useState('기본 폴더');
+  console.log('currentFolderName', currentFolderName);
 
   useEffect(() => {
     const currentFolder: any = folderList?.filter(

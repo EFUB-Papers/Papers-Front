@@ -29,6 +29,7 @@ const MainPage = () => {
   console.log('userInfo', userInfo);
   /*추천 스크랩*/
   const { scrapList, isLoading: isScarpLoading } = useRecommendScrapQuery();
+  console.log('scrapList', scrapList);
 
   /*추천 유저 리스트*/
   const userList = useRecommendUsersQuery();
