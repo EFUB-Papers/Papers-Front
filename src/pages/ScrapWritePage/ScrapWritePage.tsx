@@ -68,7 +68,7 @@ const ScrapWritePage = () => {
     const currentFolder: any = folderList?.filter(
       (folder) => folder.folderId === folderModalState.folderId
     );
-    setCurrentFolderName(currentFolder[0].folderName);
+    setCurrentFolderName(currentFolder[0]?.folderName);
   }, [folderModalState]);
 
   //기존 폴더 id 유지

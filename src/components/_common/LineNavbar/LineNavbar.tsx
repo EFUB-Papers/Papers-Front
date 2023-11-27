@@ -97,7 +97,7 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
                 }}
               >
                 <S.Name currentIdx={currentIdx} index={index}>
-                  {!index ? '기본 폴더' : folder.folderName}
+                  {!index ? '기본 폴더' : folder?.folderName}
                 </S.Name>
               </S.OneMenu>
             );
