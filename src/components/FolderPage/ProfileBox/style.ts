@@ -69,7 +69,6 @@ const Message = styled.div<{ isError: boolean }>`
   color: ${({ theme, isError }) =>
     isError ? theme.COLOR.error : theme.COLOR.mint};
   font-size: 14px;
-  height: 10px;
 `;
 
 export const S = {

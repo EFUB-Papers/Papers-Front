@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 60px;
   border-bottom: 1px solid ${({ theme }) => theme.line};
   background: ${({ theme }) => theme.header};
-  z-index: 1000;
+  z-index: 999;
 `;
 
 const DWrapper = styled.div`

@@ -23,6 +23,8 @@ const NavBarWrapper = styled.div`
 const FlexWrapper = styled.div`
   ${flexCenter};
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 const ButtonTextWrapper = styled.div`
@@ -33,8 +35,8 @@ const ButtonTextWrapper = styled.div`
 `;
 
 const ScrapButtonWrapper = styled.div`
-  position: absolute;
-  bottom: 3rem;
+  /* margin-top: auto; */
+  margin-bottom: 2rem;
 `;
 
 const ContentWrapper = styled.div`

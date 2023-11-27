@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { S } from './style';
 import { ReactComponent as SearchIcon } from 'asset/searchBar/searchIcon.svg';
 import { ReactComponent as SearchIconWhite } from 'asset/searchBar/searchIconWhite.svg';
@@ -10,7 +10,7 @@ import {
 } from 'constants/Category';
 import { ReactComponent as DownArrow } from 'asset/arrow/downArrow.svg';
 import { ReactComponent as UpArrow } from 'asset/arrow/upArrow.svg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { modeState } from '../../../atom/mode';
 
@@ -21,15 +21,30 @@ const SearchBar = () => {
   const [searchOption, setSearchOption] = useState<
     [SearchRangeKeyType, CategoryKeyType]
   >(['all', 'all']);
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  //새로고침시 내용 유지
+  useEffect(() => {
+    if (location.pathname === '/search') {
+      setSearchOption([
+        searchParams.get('searchby') as SearchRangeKeyType,
+        searchParams.get('category') as CategoryKeyType
+      ]);
+      setKeyword(searchParams.get('keyword') || '');
+    }
+  }, []);
+
   const onClickSearchOption = ({
     sort,
     selectOption
   }: {
-    sort: 'range' | 'category';
+    sort: 'searchby' | 'category';
     selectOption: SearchRangeKeyType | CategoryKeyType;
   }) => {
-    if (sort === 'range') {
+    if (sort === 'searchby') {
       setSearchOption((prev) => [selectOption as SearchRangeKeyType, prev[1]]);
       setIsSelectOpen((prev) => [false, prev[1]]);
     } else {
@@ -55,14 +70,14 @@ const SearchBar = () => {
       <S.SelectBox>
         {/* 검색 범위 선택 */}
         {isSelectOpen[0] ? (
-          <S.SelectWrapper value={'range'}>
+          <S.SelectWrapper value={'searchby'}>
             <S.OptionListWrapper>
               {Object.keys(SEARCH_RANGE).map((item: string) => (
                 <S.OptionBox
                   key={item}
                   onClick={() => {
                     onClickSearchOption({
-                      sort: 'range',
+                      sort: 'searchby',
                       selectOption: String(item) as SearchRangeKeyType
                     });
                   }}
@@ -81,7 +96,7 @@ const SearchBar = () => {
           </S.SelectWrapper>
         ) : (
           <S.SelectWrapper
-            value={'range'}
+            value={'searchby'}
             onClick={() => {
               setIsSelectOpen([true, false]);
             }}

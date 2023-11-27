@@ -22,6 +22,11 @@ const FlexBoxRow = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -48,6 +53,12 @@ const IconContainer = styled.div<{ selected?: boolean }>`
   font-size: ${({ selected }) => (selected == true ? 16 : 15)}px;
   font-weight: ${({ selected }) => (selected == true ? 600 : 400)};
   transition: font-size 0.3s;
+
+  svg {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const ButtonWrapper = styled.div`

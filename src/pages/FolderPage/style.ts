@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-const ListWrapper = styled.div`
+const FolderPageWrapper = styled.div`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
+  width: 850px;
 `;
 
 const ContentWrapper = styled.div`
@@ -14,7 +15,7 @@ const ContentWrapper = styled.div`
 `;
 
 const S = {
-  ListWrapper,
+  FolderPageWrapper,
   ContentWrapper
 };
 
