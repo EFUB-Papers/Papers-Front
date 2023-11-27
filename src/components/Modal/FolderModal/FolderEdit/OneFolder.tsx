@@ -8,16 +8,16 @@ import InputBox from '../../../_common/InputBox/InputBox';
 import { usePutFolderChangeMutation } from '../../../../hooks/apis/folder';
 import { OneFolderTypeWithoutUser } from '../../../../types/FolderType';
 import { LocalStorage } from 'utils/localStorage';
+import { useDeleteFolderMutation } from '../../../../hooks/apis/folder';
+import ConfirmModal from 'components/_common/Confirm/ConfirmModal';
 
 const EditOneFolder = ({
   id,
   title,
-  onDeleteFolder,
   index
 }: {
   id: number;
   title: string;
-  onDeleteFolder: (id: number) => void;
   index: number;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -40,8 +40,33 @@ const EditOneFolder = ({
     setIsEditMode(false);
   };
 
+  const { deleteFolderMutate } = useDeleteFolderMutation(
+    LocalStorage.getNickname()!
+  );
+
+  //폴더 삭제
+  const onClickFolderDelete = () => {
+    setConfirmModalOpen(true);
+  };
+  const [confirmModalOpen, setConfirmModalOpen] = useState<boolean>(false);
+
   return (
     <O.Wrapper>
+      {confirmModalOpen && (
+        <ConfirmModal
+          text={`${title} 폴더 안에 게시물들이 모두 삭제됩니다. 삭제하시겠습니까?`}
+          isModalOpen={confirmModalOpen}
+          closeModal={() => {
+            setConfirmModalOpen(false);
+          }}
+          onCancel={() => {
+            setConfirmModalOpen(false);
+          }}
+          onConfirm={() => {
+            deleteFolderMutate(id);
+          }}
+        />
+      )}
       <O.IconContainer>
         <FolderIcon />
         {isEditMode ? (
@@ -75,12 +100,8 @@ const EditOneFolder = ({
             }}
           />
         )}
-        {!isEditMode && (
-          <DeleteIcon
-            onClick={() => {
-              onDeleteFolder(id);
-            }}
-          />
+        {!isEditMode && index !== 0 && (
+          <DeleteIcon onClick={onClickFolderDelete} />
         )}
       </O.IconContainer>
     </O.Wrapper>

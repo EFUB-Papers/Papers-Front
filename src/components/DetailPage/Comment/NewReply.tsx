@@ -8,13 +8,22 @@ import { usePostNewReplyMutation } from 'hooks/apis/comment';
 import { useUserInfoQuery } from 'hooks/apis/member';
 import { LocalStorage } from 'utils/localStorage';
 
-const NewReply = ({ commentId }: { commentId: number }) => {
+const NewReply = ({
+  commentId,
+  scrapId
+}: {
+  commentId: number;
+  scrapId: number;
+}) => {
   const { values, setValues, onChange } = useInputs({
     comment: ''
   });
 
   const userInfo = useUserInfoQuery(LocalStorage.getNickname()!);
-  const { postNewReplyAction } = usePostNewReplyMutation(commentId);
+  const { postNewReplyAction } = usePostNewReplyMutation({
+    scrapId,
+    commentId
+  });
 
   const onPostReply = () => {
     postNewReplyAction({

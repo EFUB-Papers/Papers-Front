@@ -24,9 +24,24 @@ const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const FlexBoxColumn = styled.div`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const NoContent = styled.div`
+  margin-top: 20px;
+  font-size: 20px;
+`;
 export const S = {
   Wrapper,
   Category,
   ContentWrapper,
-  FlexBox
+  FlexBox,
+  NoContent,
+  FlexBoxColumn
 };

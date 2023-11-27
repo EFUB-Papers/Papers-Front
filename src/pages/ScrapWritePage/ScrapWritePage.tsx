@@ -62,7 +62,7 @@ const ScrapWritePage = () => {
     folderId: folderModalState.folderId
   }); //스크랩 수정 mutate
   const folderList = useGetFolderListQuery(LocalStorage.getNickname()!);
-  const [currentFolderName, setCurrentFolderName] = useState('');
+  const [currentFolderName, setCurrentFolderName] = useState();
 
   useEffect(() => {
     const currentFolder: any = folderList?.filter(
@@ -213,7 +213,9 @@ const ScrapWritePage = () => {
               )}
             </S.CategoryDropdown>
             {/*폴더 선택*/}
-            <S.FolderName>{currentFolderName}</S.FolderName>
+            <S.FolderName>
+              {currentFolderName ? '기본 폴더' : currentFolderName}
+            </S.FolderName>
             <S.Button
               onClick={() => {
                 setFolderModalState((prev) => ({

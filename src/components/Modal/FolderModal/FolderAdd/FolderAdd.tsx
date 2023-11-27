@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { useCreateFolderMutation } from '../../../../hooks/apis/folder';
+import {
+  useCreateFolderMutation,
+  useGetFolderListQuery
+} from '../../../../hooks/apis/folder';
 import { S } from '../style';
 import InputBox from '../../../_common/InputBox/InputBox';
 import BasicButton from '../../../_common/BasicButton/BasicButton';

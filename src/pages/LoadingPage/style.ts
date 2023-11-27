@@ -2,20 +2,18 @@ import styled from 'styled-components';
 import { flexCenter } from '../../style/common';
 
 const Spinner = styled.div`
-  .loader {
-    color: ${({ theme }) => theme.COLOR.blue};
-    font-size: 45px;
-    text-indent: -9999em;
-    overflow: hidden;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    position: relative;
-    transform: translateZ(0);
-    animation:
-      mltShdSpin 1.7s infinite ease,
-      round 1.7s infinite ease;
-  }
+  color: skyblue;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation:
+    mltShdSpin 1.7s infinite ease,
+    round 1.7s infinite ease;
 
   @keyframes mltShdSpin {
     0% {

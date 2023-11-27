@@ -19,7 +19,7 @@ const FolderModal = ({ folderList }: { folderList: OneFolderType[] }) => {
     <BasicModal width={450} height={500} onCloseModal={onModalClose}>
       <>
         <S.Title>폴더 편집</S.Title>
-        <FolderEdit folderList={folderList} />
+        <FolderEdit />
       </>
     </BasicModal>
   ) : folderModalState.option === 'select' ? (
@@ -28,7 +28,7 @@ const FolderModal = ({ folderList }: { folderList: OneFolderType[] }) => {
         <S.EditIconWrapper>
           <S.Title>이동할 폴더 선택</S.Title>
         </S.EditIconWrapper>
-        <FolderSelect folderList={folderList} />
+        <FolderSelect />
       </>
     </BasicModal>
   ) : folderModalState.option === 'scrapWrite' ? (
@@ -37,7 +37,7 @@ const FolderModal = ({ folderList }: { folderList: OneFolderType[] }) => {
         <S.EditIconWrapper>
           <S.Title>폴더 선택</S.Title>
         </S.EditIconWrapper>
-        <FolderSelect folderList={folderList} />
+        <FolderSelect />
       </>
     </BasicModal>
   ) : (

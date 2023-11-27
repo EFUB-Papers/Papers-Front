@@ -29,7 +29,6 @@ const BasicContentCard = (props: BasicCardProps) => {
     scrapTitle,
     originalLink,
     scrapId,
-    folderId,
     heartCount,
     commentCount
   } = props;

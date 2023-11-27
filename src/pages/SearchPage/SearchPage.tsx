@@ -7,7 +7,7 @@ import BasicContentCard from '../../components/_common/BasicContentCard/BasicCon
 import { OneScrapType } from '../../types/ScrapType';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import { SearchScrapType } from 'apis/scraps';
-
+import { ReactComponent as Empty } from 'asset/_common/empty.svg';
 export type searchType = {
   searchby?: string;
   category?: string;
@@ -34,7 +34,9 @@ const SearchPage = () => {
       <S.FlexBox>
         <SearchBar />
       </S.FlexBox>
-      {searchList && searchList.length && !isLoading ? (
+      {isLoading ? (
+        <LoadingPage />
+      ) : searchList.length ? (
         <S.ContentWrapper>
           {searchList.map((post: OneScrapType) => {
             const {
@@ -62,10 +64,11 @@ const SearchPage = () => {
             );
           })}
         </S.ContentWrapper>
-      ) : isLoading! && !searchList ? (
-        <div>해당 스크랩이 없습니다.</div>
       ) : (
-        <LoadingPage />
+        <S.FlexBoxColumn>
+          <Empty />
+          <S.NoContent>해당 스크랩이 없습니다.</S.NoContent>
+        </S.FlexBoxColumn>
       )}
     </S.Wrapper>
   );
