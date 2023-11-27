@@ -9,7 +9,6 @@ import LineNavbar from '../../components/_common/LineNavbar/LineNavbar';
 const FolderPage = () => {
   const params = useParams();
   const urlNickname = params.nickname || '';
-  const myNickname = LocalStorage.getNickname();
   const [isMine, setIsMine] = useState(false);
   const folderList = useGetFolderListQuery(urlNickname)!;
 
@@ -21,14 +20,14 @@ const FolderPage = () => {
 
   return (
     folderList && (
-      <S.ListWrapper>
+      <S.FolderPageWrapper>
         <LineNavbar
           folderList={folderList}
           isMine={isMine}
           title={isMine ? '내 폴더' : `${urlNickname}님의 폴더`}
         />
         <ScrapList isMine={isMine} firstFolderId={folderList[0].folderId} />
-      </S.ListWrapper>
+      </S.FolderPageWrapper>
     )
   );
 };

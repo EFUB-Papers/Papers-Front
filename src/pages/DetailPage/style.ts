@@ -2,17 +2,25 @@ import styled from 'styled-components';
 import { flexCenter } from '../../style/common';
 
 const Wrapper = styled.div`
-  margin-top: 50px;
+  padding: 50px 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 800px;
 `;
 
-const FlexWrapper = styled.div`
+const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    width: 6px;
+    margin-top: 2px;
+  }
 `;
 
 const Category = styled.div`
@@ -25,7 +33,6 @@ const PostWrapper = styled.div`
   ${flexCenter};
   flex-direction: column;
   margin-top: 50px;
-  /* border: 1px solid red; */
 `;
 
 const Title = styled.div`
@@ -93,6 +100,6 @@ export const S = {
   ImgWrapper,
   DateInfo,
   UserInfoWrapper,
-  FlexWrapper,
+  CategoryWrapper,
   ContentWrapper
 };

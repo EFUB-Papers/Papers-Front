@@ -6,6 +6,8 @@ import BasicButton from '../../../_common/BasicButton/BasicButton';
 import { usePatchScrapMutation } from '../../../../hooks/apis/scrap';
 import { useRecoilState } from 'recoil';
 import { folderModalAtom } from '../../../../atom/modal';
+import { PatchScrapType } from 'apis/scraps';
+import { LocalStorage } from 'utils/localStorage';
 
 const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
   const [folderModalState, setFolderModalState] =
@@ -35,10 +37,14 @@ const FolderSelect = ({ folderList }: { folderList: OneFolderType[] }) => {
             type: 'application/json'
           })
         );
-        patchNewScrapMutate({
+
+        const patchScrapInfo: PatchScrapType = {
           scrapId: folderModalState.scrapId,
-          scrapInfo: formData
-        });
+          folderId: selectId
+        };
+
+        patchNewScrapMutate(patchScrapInfo);
+        location.href = `/folder/${LocalStorage.getNickname()}?folderId=${selectId}`;
       } else if (folderModalState.option === 'scrapWrite') {
         setFolderModalState((prev) => ({
           ...prev,

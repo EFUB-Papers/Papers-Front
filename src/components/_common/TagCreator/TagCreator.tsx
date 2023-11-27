@@ -77,6 +77,7 @@ const TagCreator = ({
             value={input}
             onChange={onChangeInput}
             onKeyDown={onEnter}
+            maxLength={40}
             $empty={!input}
           />
         </S.InputWrapper>

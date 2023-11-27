@@ -15,6 +15,7 @@ import Comment from '../../components/DetailPage/Comment/Comment';
 import HeartAndCmtInfo from '../../components/DetailPage/HeartAndCmtInfo/HeartAndCmtInfo';
 import LinkPreview from '../../components/_common/LinkPreview/LinkPreview';
 import { ReactComponent as MoreDots } from 'asset/_common/moreDots.svg';
+import { ReactComponent as RightArrow } from 'asset/arrow/rightArrow.svg';
 import { ScrapDetailType } from 'types/ScrapType';
 import { CATEGORY } from 'constants/Category';
 
@@ -69,10 +70,12 @@ const DetailPage = () => {
   };
   return (
     <S.Wrapper>
-      <S.FlexWrapper>
+      <S.CategoryWrapper
+        onClick={() => navigate(`/category/${data?.categoryName}`)}
+      >
         <S.Category>{CATEGORY[data?.categoryName]}</S.Category>
-        {/*<RightArrow />*/}
-      </S.FlexWrapper>
+        <RightArrow />
+      </S.CategoryWrapper>
       <S.Title>{data?.scrapTitle}</S.Title>
       <TagCreator
         isCreator={false}

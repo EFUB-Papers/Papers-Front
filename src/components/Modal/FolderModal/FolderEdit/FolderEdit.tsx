@@ -26,7 +26,7 @@ const FolderEdit = ({ folderList }: { folderList: OneFolderType[] }) => {
             color={'positive'}
             fontSize={15}
             height={30}
-            width={100}
+            width={106}
             onClick={onMoveAddFolder}
           >
             <S.FlexBoxRow>

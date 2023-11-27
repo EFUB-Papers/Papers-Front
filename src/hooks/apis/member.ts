@@ -62,9 +62,8 @@ export const usePostProfile = (nickname: string) => {
     mutationFn: (profileInfo: FormData) => postMyProfile(profileInfo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', nickname] });
-      queryClient.invalidateQueries({
-        queryKey: ['userInfo', nickname]
-      });
+      localStorage.setItem('nickname', nickname);
+      location.href = `/folder/${nickname}`;
       setUserModalState(false);
     }
   });

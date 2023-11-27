@@ -3,7 +3,6 @@ import { axiosInstance, axiosInstanceWithoutToken } from './axiosInstance';
 import { CategoryKeyType, SearchRangeKeyType } from '../constants/Category';
 
 export type OneNewScrapType = {
-  writerNickname: string;
   scrapTitle: string;
   scrapLink: string;
   scrapContent: string;
@@ -24,16 +23,18 @@ export const postNewScrap = async (newScrapInfo: FormData) => {
   return data;
 };
 
-export type PatchScrapType = {
+export type PatchScrapType = Partial<OneNewScrapType> & {
   scrapId: number;
-  scrapInfo: FormData;
 };
 
 //스크랩 수정
-export const patchScrap = async (scrapId: number, scrapInfo: FormData) => {
-  const { data } = await axiosInstance.patch(`/scraps/${scrapId}`, scrapInfo, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  });
+export const patchScrap = async (patchScrapInfo: PatchScrapType) => {
+  console.log('스크랩 수정 요청의 body', patchScrapInfo);
+
+  const { data } = await axiosInstance.post(
+    `/scraps/${patchScrapInfo.scrapId}`,
+    patchScrapInfo
+  );
   return data;
 };
 

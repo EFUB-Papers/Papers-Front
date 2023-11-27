@@ -7,7 +7,7 @@ const MenuWrapper = styled.div`
   grid-template-rows: 40px 40px 40px 40px;
   gap: 2rem;
   margin-left: 1rem;
-  margin-top: 6rem;
+  /* margin-top: 5em; */
 `;
 
 const MenuIcon = styled.div``;
@@ -15,10 +15,15 @@ const MenuIcon = styled.div``;
 const OneMenuWrapper = styled.div`
   display: flex;
   gap: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const MenuText = styled.div`
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: bold;
   padding-top: 5px;
 `;
 
