@@ -21,12 +21,14 @@ const FolderPage = () => {
   return (
     folderList && (
       <S.FolderPageWrapper>
-        <LineNavbar
-          folderList={folderList}
-          isMine={isMine}
-          title={isMine ? '내 폴더' : `${urlNickname}님의 폴더`}
-        />
-        <ScrapList isMine={isMine} firstFolderId={folderList[0].folderId} />
+        <S.Wrapper>
+          <LineNavbar
+            folderList={folderList}
+            isMine={isMine}
+            title={isMine ? '내 폴더' : `${urlNickname}님의 폴더`}
+          />
+          <ScrapList isMine={isMine} firstFolderId={folderList[0].folderId} />
+        </S.Wrapper>
       </S.FolderPageWrapper>
     )
   );

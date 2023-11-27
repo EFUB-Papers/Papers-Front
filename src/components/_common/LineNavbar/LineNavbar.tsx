@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { S } from './style';
 import { ReactComponent as NextIcon } from 'asset/navBar/nextArrow.svg';
 import { ReactComponent as PrevIcon } from 'asset/navBar/prevArrow.svg';
@@ -47,6 +47,11 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
     setCurrentIdx((currentIdx) => currentIdx - 1);
   };
 
+  useEffect(() => {
+    console.log(currentFolderGroup);
+    console.log(lastGroup);
+  }, []);
+
   const onClickFolder = (index: number, folderId: number) => {
     setCurrentIdx(index);
     searchParams.set('folderId', String(folderId));
@@ -58,20 +63,22 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
   return (
     <S.Wrapper>
       <S.TitleWrapper>
-        {title && <S.Title>{title}</S.Title>}
-        {isMine && (
-          <S.EditModalButton
-            onClick={() => {
-              setIsEditModalOpen((prev) => ({
-                ...prev,
-                option: 'edit',
-                open: true
-              }));
-            }}
-          >
-            폴더 편집
-          </S.EditModalButton>
-        )}
+        <S.FlexWrapper>
+          {title && <S.Title>{title}</S.Title>}
+          {isMine && (
+            <S.EditModalButton
+              onClick={() => {
+                setIsEditModalOpen((prev) => ({
+                  ...prev,
+                  option: 'edit',
+                  open: true
+                }));
+              }}
+            >
+              폴더 편집
+            </S.EditModalButton>
+          )}
+        </S.FlexWrapper>
       </S.TitleWrapper>
       <S.FlexWrapper>
         {currentFolderGroup !== 0 && (
@@ -80,6 +87,7 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
             onClick={onMovePrevGroup}
           />
         )}
+
         <S.ListWrapper>
           <div
             style={{
@@ -101,7 +109,9 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
                     onClickFolder(index, folder.folderId);
                   }}
                 >
-                  {!index ? '기본 폴더' : folder?.folderName}
+                  {!index && !currentFolderGroup
+                    ? '기본 폴더'
+                    : folder?.folderName}
                 </S.Name>
               </S.OneMenu>
             );

@@ -14,7 +14,6 @@ const ScrapList = ({
 
   const currentFolderId = folderId ? Number(folderId) : Number(firstFolderId);
   const folderScrapList = useFolderScrapsQuery(currentFolderId)!;
-  console.log('folderScrapList', folderScrapList);
 
   return (
     <S.ContentWrapper>
