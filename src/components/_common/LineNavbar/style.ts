@@ -40,7 +40,7 @@ const ListWrapper = styled.div`
 const OneMenu = styled.div<{
   highlight?: boolean;
 }>`
-  width: 150px;
+  width: 130px;
   height: 34px;
   ${flexCenter};
   font-weight: ${({ highlight }) => (highlight ? '600' : '400')};

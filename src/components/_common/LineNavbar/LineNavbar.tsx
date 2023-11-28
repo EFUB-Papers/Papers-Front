@@ -26,7 +26,7 @@ const LineNavbar = ({ isMine, title, folderList }: NavbarProps) => {
   //현재 선택된 폴더 그룹 인덱스
   const [currentFolderGroup, setCurrentFolderGroup] = useState(0);
 
-  const pagePerGroup = 6;
+  const pagePerGroup = 5;
 
   const totalFolderLength = folderList?.length;
 
