@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { S } from './style';
-
-export enum Category {
-  CURRENT = '시사',
-  CULTURE = '문화',
-  TRAVEL = '여행',
-  IT = 'IT',
-  LIFE = '라이프',
-  KNOWLEDGE = '지식',
-  ETC = '기타'
-}
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  CATEGORY_WITHOUT_ALL,
+  CategoryKeyType
+} from '../../../constants/Category';
 
 const CategoryBar = () => {
-  const [category, setCategory] = useState<Category>(Category.CURRENT);
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
 
   return (
     <S.Wrppaer>
-      {Object.entries(Category).map((entry, index: number) => {
+      {Object.entries(CATEGORY_WITHOUT_ALL).map((entry, index: number) => {
         return (
           <S.CategoryItem
             key={index}
-            $isSelected={category === entry[0]}
-            onClick={() => setCategory(entry[0] as Category)}
+            $isSelected={(categoryId as CategoryKeyType) === entry[0]}
+            onClick={() => navigate(`/category/${entry[0]}`)}
           >
             {entry[1]}
           </S.CategoryItem>

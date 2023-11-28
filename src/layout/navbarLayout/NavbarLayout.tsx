@@ -1,38 +1,67 @@
-import { Outlet } from 'react-router-dom';
-import { ReactComponent as Logo } from 'asset/_common/logoAndTitle.svg';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import { ReactComponent as WriteIcon } from 'asset/_common/write.svg';
 import BasicButton from 'components/_common/BasicButton/BasicButton';
-import CircleIcon from 'components/_common/CircleBox/CircleBox';
 import { S } from './style';
+import MyMenu from 'components/FolderPage/MyMenu/MyMenu';
+import Header from 'components/Header/Header/Header';
+import React, { useEffect, useState } from 'react';
+import { LocalStorage } from '../../utils/localStorage';
+import { useUserInfoQuery } from '../../hooks/apis/member';
+import ProfileBox from '../../components/FolderPage/ProfileBox/ProfileBox';
 
-import MyMenu from './MyMenu';
 const NavbarLayout = () => {
+  const [isMine, setIsMine] = useState(false);
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const userInfo = useUserInfoQuery(params.nickname!);
+  console.log('userInfo', userInfo);
+
+  useEffect(() => {
+    if (LocalStorage.getNickname() == params.nickname) {
+      setIsMine(true);
+    } else {
+      setIsMine(false);
+    }
+  }, [params]);
+
   return (
     <S.Wrapper>
+      <Header />
       <S.NavBarWrapper>
-        <Logo style={{ position: 'absolute', left: 0 }} />
-        {/*프로필 소개글*/}
-        <S.ProfileWrapper>
-          <CircleIcon size="big" imgurl="" />
-          <S.UserText>
-            <S.UserName>나는 고양이다</S.UserName>
-            <S.UserDetail>
-              이것은 소개글입니다.
-              <br /> 이것은 소개글입니다.
-            </S.UserDetail>
-          </S.UserText>
-        </S.ProfileWrapper>
-        <MyMenu />
-        <S.ScrapButtonWrapper>
-          <BasicButton width={150} height={50} color="positive" fontSize={22}>
-            <S.ButtonTextWrapper>
-              <div>스크랩</div>
-              <WriteIcon />
-            </S.ButtonTextWrapper>
-          </BasicButton>
-        </S.ScrapButtonWrapper>
+        <S.FlexWrapper>
+          {/*프로필 소개글*/}
+          <ProfileBox
+            isMine={isMine}
+            nickname={params.nickname!}
+            introduce={userInfo ? userInfo.introduce! : ''}
+            profileImgUrl={userInfo ? userInfo.profileImgUrl! : ''}
+          />
+          {isMine && (
+            <>
+              <MyMenu />
+              <S.ScrapButtonWrapper onClick={() => navigate('/scrap-write')}>
+                <BasicButton
+                  width={150}
+                  height={50}
+                  color="positive"
+                  fontSize={22}
+                >
+                  <S.ButtonTextWrapper>
+                    <div>스크랩</div>
+                    <WriteIcon />
+                  </S.ButtonTextWrapper>
+                </BasicButton>
+              </S.ScrapButtonWrapper>
+            </>
+          )}
+        </S.FlexWrapper>
       </S.NavBarWrapper>
-      <Outlet />
+
+      <S.ContentWrapper>
+        <Outlet />
+      </S.ContentWrapper>
     </S.Wrapper>
   );
 };

@@ -1,25 +1,39 @@
-import React from 'react';
 import { S } from './style';
 import CircleIcon from '../CircleBox/CircleBox';
+import { FollowingType } from '../../../types/FollowingType';
+import { useNavigate } from 'react-router-dom';
+import FollowButton from '../FollowButton/FollowButton';
 import BasicButton from '../BasicButton/BasicButton';
+import { LocalStorage } from 'utils/localStorage';
 
-export type UserCardProps = {
-  width: number;
-  userId: number;
-  imgurl: string;
-  nickname: string;
-  introduction: string;
-};
+type CardPropsType = {
+  width: string;
+} & FollowingType;
 
-const UserCard = (props: UserCardProps) => {
+const UserCard = ({
+  width,
+  followingNickname,
+  followingDescription,
+  followingProfileImg
+}: CardPropsType) => {
+  const navigate = useNavigate();
+
   return (
-    <S.Wrapper $width={props.width}>
-      <CircleIcon imgurl={props.imgurl} size="medium" />
-      <S.Nickname>{props.nickname}</S.Nickname>
-      <S.Introduction>{props.introduction}</S.Introduction>
-      <BasicButton color="positive" fontSize={16} width={100} height={35}>
-        언팔로우
-      </BasicButton>
+    <S.Wrapper $width={width}>
+      <S.ProfileImg>
+        <CircleIcon
+          onClick={() => navigate(`/folder/${followingNickname}`)}
+          imgUrl={followingProfileImg}
+          size="medium"
+        />
+      </S.ProfileImg>
+      <S.Nickname onClick={() => navigate(`/folder/${followingNickname}`)}>
+        {followingNickname}
+      </S.Nickname>
+      <S.Introduction>{followingDescription}</S.Introduction>
+      <S.ButtonContainer>
+        <FollowButton nickname={followingNickname} />
+      </S.ButtonContainer>
     </S.Wrapper>
   );
 };

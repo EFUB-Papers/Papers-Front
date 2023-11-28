@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { boxShadow, flexCenter, omitText } from 'style/common';
+import { flexCenter, omitText } from 'style/common';
 import { styled } from 'styled-components';
 
 const Wrapper = styled.div<{ $width: number }>`
@@ -14,18 +14,25 @@ const LinkBox = styled(Link)`
   border-radius: 15px;
   padding: 10px 15px;
   font-size: 17px;
-  ${boxShadow}
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
+  color: ${({ theme }) => theme.text};
+
   ${flexCenter}
   &:hover {
     cursor: pointer;
   }
+
   overflow: hidden;
+  color: black;
 `;
 
 const LinkTitle = styled.div`
   object-fit: cover;
   display: block;
   width: 100%;
+  color: ${({ theme }) => theme.text};
+
   /* 2줄 말줄임표 */
   text-overflow: ellipsis;
   overflow: hidden;
@@ -39,24 +46,34 @@ const ScrapBox = styled.div`
   aspect-ratio: 1 / 1.15;
   border-radius: 15px;
   padding: 15px;
-  ${boxShadow}
-  display:flex;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
+  display: flex;
   flex-direction: column;
+
   &:hover {
     cursor: pointer;
   }
+
   overflow: hidden;
 `;
 
 const ImageBox = styled.div`
   width: 100%;
   aspect-ratio: 5 / 3;
-  ${flexCenter}
+  ${flexCenter};
   overflow: hidden;
 `;
 
 const Img = styled.img`
   width: 100%;
+`;
+
+const TextImg = styled.div`
+  width: 100%;
+  background-color: ${({ theme }) => theme.input};
+  height: 100%;
+  padding: 10px;
 `;
 
 const Title = styled.div`
@@ -98,6 +115,7 @@ export const S = {
   ScrapBox,
   ImageBox,
   Img,
+  TextImg,
   Title,
   Content,
   Footer,

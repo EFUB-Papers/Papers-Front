@@ -1,11 +1,18 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["import", "@typescript-eslint", "prettier", "unused-imports"],
+  "plugins": [
+    "import",
+    "@typescript-eslint",
+    "prettier",
+    "unused-imports"
+  ],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "plugin:prettier/recommended", //prettier와 충돌 방지
-    "prettier" //eslint에서 prettier를 규칙 취급
+    "plugin:prettier/recommended",
+    //prettier와 충돌 방지
+    "prettier"
+    //eslint에서 prettier를 규칙 취급
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -15,12 +22,18 @@
     "browser": true,
     "node": true
   },
-  "ignorePatterns": ["node_modules/", "tsconfig.json", "dist"],
+  "ignorePatterns": [
+    "node_modules/",
+    "tsconfig.json",
+    "dist"
+  ],
   "rules": {
+    "import/no-unresolved": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-vars": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "unused-imports/no-unused-imports": "error",
     "no-console": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": [
       "error",
       {
@@ -40,7 +53,11 @@
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx", ".js"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx",
+        ".js"
+      ]
     },
     "import/resolver": {
       "typescript": "./tsconfig.json"

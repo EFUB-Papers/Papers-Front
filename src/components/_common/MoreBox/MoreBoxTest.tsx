@@ -4,17 +4,17 @@ import MoreBox from './MoreBox';
 // MoreBox 사용 예시입니다.
 
 const MoreBoxTest = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMoreBoxOpen, setIsMoreBoxOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openMoreBox = () => setIsMoreBoxOpen(true);
+  const closeMoreBox = () => setIsMoreBoxOpen(false);
 
   return (
     <div>
-      <button onClick={openModal}>모달 열기</button>
+      <button onClick={openMoreBox}>모달 열기</button>
       <MoreBox
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
+        isMoreBoxOpen={isMoreBoxOpen}
+        closeMoreBox={closeMoreBox}
         buttons={[
           {
             name: '마이페이지',

@@ -1,19 +1,23 @@
-import { boxShadow, omitText } from 'style/common';
+import { omitText } from 'style/common';
 import { styled } from 'styled-components';
 import { flexCenter } from './../../../style/common';
 
-const Wrapper = styled.div<{ $width: number }>`
-  width: ${({ $width }) => $width + 'px'};
+const Wrapper = styled.div<{ $width: string }>`
+  width: ${({ $width }) => $width};
   aspect-ratio: 1 / 1.15;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
-  ${boxShadow}
-  &:hover {
-    cursor: pointer;
-  }
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.lineForDark};
   border-radius: 15px;
   padding: 15px;
   overflow: hidden;
+`;
+
+const ProfileImg = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Nickname = styled.div`
@@ -22,6 +26,10 @@ const Nickname = styled.div`
   margin: 12px 0px;
   text-align: center;
   ${omitText}
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Introduction = styled.div`
@@ -39,8 +47,16 @@ const Introduction = styled.div`
   color: ${({ theme }) => theme.COLOR.darkGrey};
 `;
 
+const ButtonContainer = styled.div`
+  ${flexCenter};
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const S = {
   Wrapper,
+  ProfileImg,
   Nickname,
-  Introduction
+  Introduction,
+  ButtonContainer
 };

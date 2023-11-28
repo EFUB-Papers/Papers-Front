@@ -1,16 +1,17 @@
 import './App.css';
-import { RouterProvider } from 'react-router-dom';
-import router from './router/router';
-import { ThemeProvider } from 'styled-components';
-import theme from 'style/theme';
-import GlobalStyles from 'style/global';
+import { RecoilRoot } from 'recoil';
+import CombinedProvider from './CombinedProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <CombinedProvider />
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
