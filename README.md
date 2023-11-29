@@ -32,20 +32,22 @@
 - 라이트 모드 / 다크 모드
   
 - 팔로우 / 댓글 / 좋아요 기능
-
+  
 <br>
 
 <h2>😁 팀원</h2> 
 
-|Front end|Front end|
-| :-: | :-: |
-| <img src="https://github.com/KIT-Frontend-Team1/pair1-Git-Issue-Project/assets/123865139/490a8625-edaa-4c1a-afd1-966a661d7a0b" width="150"> | <img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/7c3b3b99-0fb1-4b6b-82cf-6b49d1d381b6" width="150"> |
-|[오혜린](https://github.com/ooherin)|[조정민](https://github.com/Cho-Jeongmin)|
+|Front end|Front end|Back end|Back end|
+| :-: | :-: | :-: | :-: |
+| <img src="https://github.com/KIT-Frontend-Team1/pair1-Git-Issue-Project/assets/123865139/490a8625-edaa-4c1a-afd1-966a661d7a0b" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/7c3b3b99-0fb1-4b6b-82cf-6b49d1d381b6" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/e0f08ee3-759f-40cb-95b1-92e329ec2a6c" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/23fd9814-7d1b-4907-b993-62f6f66ec1fb](https://github.com/EFUB-Papers/Papers-Front/assets/125418818/ae625af8-3672-4003-82ba-1effdd1124fd)" width="150">||
+|[오혜린](https://github.com/ooherin)|[조정민](https://github.com/Cho-Jeongmin)|[모수지](https://github.com/nammsamm)|[노하은](https://github.com/00blowup)|
 | 마이 페이지, 폴더 페이지 | 구글 로그인, 메인 페이지 |
 | 미리보기,다크 모드, 전체 모달 | 검색 페이지, 디테일 페이지 |
 
+<br/>
 모든 페이지, 기능들을 협업해 만들었습니다! 
 
+<br>
 <br>
 
 <h2>🔗 배포 링크 : vercel</h2> 
