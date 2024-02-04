@@ -3,6 +3,7 @@
 <h3>
 
 ![image](https://github.com/EFUB-Papers/Papers-Front/assets/125418818/134a7f65-fff6-4b5e-8dcc-26d9cb4535c8)
+![KakaoTalk_20231127_212136784_04](https://github.com/EFUB-Papers/Papers-Front/assets/97157930/47e98af3-6e7c-4a2e-937b-3b1cd06629ab)
 
 
 프로젝트 명 : PAPERS(페이퍼즈)
@@ -16,8 +17,11 @@
 <h2>🌈 프로젝트 소개</h2> 
 
 <h3>페이퍼즈에서 웹 문서를 쉽게 링크로 달아 스크랩을 만들고 공유해 보세요! </h3> 
+- Papers에서는 기사나 블로그 등 웹문서의 링크를 첨부한 뒤 자신의 의견을 더하여 스크랩을 작성할 수 있습니다.
+<br/>
+- 작성된 스크랩을 다른 사람들과 공유해보거나, 다른 사람들의 스크랩을 읽어보며 의견을 나눌 수도 있습니다.
 
-<br>
+<br><br>
 
 <h2>✏️ 프로젝트 기능</h2> 
 
@@ -39,10 +43,10 @@
 
 |Front end|Front end|Back end|Back end|
 | :-: | :-: | :-: | :-: |
-| <img src="https://github.com/KIT-Frontend-Team1/pair1-Git-Issue-Project/assets/123865139/490a8625-edaa-4c1a-afd1-966a661d7a0b" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/7c3b3b99-0fb1-4b6b-82cf-6b49d1d381b6" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/e0f08ee3-759f-40cb-95b1-92e329ec2a6c" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/23fd9814-7d1b-4907-b993-62f6f66ec1fb](https://github.com/EFUB-Papers/Papers-Front/assets/125418818/ae625af8-3672-4003-82ba-1effdd1124fd)" width="150">||
+| <img src="https://github.com/KIT-Frontend-Team1/pair1-Git-Issue-Project/assets/123865139/490a8625-edaa-4c1a-afd1-966a661d7a0b" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/97157930/08010562-c41b-4d2c-822e-7d9c866882a3" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/e0f08ee3-759f-40cb-95b1-92e329ec2a6c" width="150"> |<img src="https://github.com/EFUB-Papers/Papers-Front/assets/125418818/23fd9814-7d1b-4907-b993-62f6f66ec1fb](https://github.com/EFUB-Papers/Papers-Front/assets/125418818/ae625af8-3672-4003-82ba-1effdd1124fd)" width="150">||
 |[오혜린](https://github.com/ooherin)|[조정민](https://github.com/Cho-Jeongmin)|[모수지](https://github.com/nammsamm)|[노하은](https://github.com/00blowup)|
 | 마이 페이지, 폴더 페이지 | 구글 로그인, 메인 페이지 |
-| 미리보기,다크 모드, 전체 모달 | 검색 페이지, 디테일 페이지 |
+| 랑크 미리보기, 다크 모드, 전체 모달 | 스크랩 작성 페이지, 검색 페이지, 디테일 페이지 |
 
 <br/>
 모든 페이지, 기능들을 협업해 만들었습니다! 
